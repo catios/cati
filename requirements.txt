@@ -1,0 +1,4 @@
+altgraph==0.17
+pkg-resources==0.0.0
+pyinstaller==4.0
+pyinstaller-hooks-contrib==2020.8

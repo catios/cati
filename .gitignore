@@ -1,0 +1,8 @@
+/*.spec
+/dist
+/build
+__pycache__
+/env
+/venv
+/.idea
+/.vscode
