@@ -102,3 +102,19 @@ class BaseCommand:
             pr.e(msg)
         else:
             pr.p(msg)
+
+    def help_full(self):
+        help_text = self.help.__doc__
+        help_text = help_text.strip()
+        help_text_tmp = ''
+        for line in help_text.split('\n'):
+            line = line.strip()
+            help_text_tmp += line + '\n'
+
+        help_text = help_text_tmp.strip()
+
+        return help_text
+
+    def help_summary(self):
+        return self.help_full().split('\n')[0]
+

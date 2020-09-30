@@ -29,6 +29,10 @@ class HelpCommand(BaseCommand):
     def help(self):
         '''
         Help of command
+        this is a help
+        hoho
+        foo bar
+        tstststs
         '''
         pass
 
