@@ -22,6 +22,7 @@
 
 ''' Cmdline command model base '''
 
+import sys
 from cmdline import pr
 
 class BaseCommand:
@@ -31,7 +32,11 @@ class BaseCommand:
         '''
         Validate inserted arguments in command config frame
         '''
+
         command_config = self.define()
+
+        self.name = command_config['name']
+        self.cati_exec = sys.argv[0]
 
         args['arguments'].pop(0)
 
@@ -40,12 +45,12 @@ class BaseCommand:
             try:
                 option_config = command_config['options'][k]
             except:
-                pr.e('cati: ' + command_config['name'] + ': unknow option "' + k + '"')
+                self.message('unknow option "' + k + '"')
                 pr.exit(1)
 
             if option_config[1] == True:
                 if args['options'][k] == None:
-                    pr.e('cati: ' + command_config['name'] + ': option ' + k + ' requires value')
+                    self.message('option ' + k + ' requires value')
                     pr.exit(1)
 
         # check required options
@@ -54,16 +59,16 @@ class BaseCommand:
                 try:
                     args['options'][option]
                 except:
-                    pr.e('cati: ' + command_config['name'] + ': option ' + option + ' is required')
+                    self.message('option ' + option + ' is required')
                     pr.exit(1)
 
         # check arguments count
         if len(args['arguments']) > command_config['max_args_count']:
-            pr.e('cati: ' + command_config['name'] + ': this command requires less than ' + str(command_config['max_args_count']+1) + ' arguments')
+            self.message('this command requires less than ' + str(command_config['max_args_count']+1) + ' arguments')
             pr.exit(1)
 
         if len(args['arguments']) < command_config['min_args_count']:
-            pr.e('cati: ' + command_config['name'] + ': this command requires more than ' + str(command_config['min_args_count']-1) + ' arguments')
+            self.message('this command requires more than ' + str(command_config['min_args_count']-1) + ' arguments')
             pr.exit(1)
 
         # everything is ok, run command
@@ -88,3 +93,12 @@ class BaseCommand:
             return None
         
         return self.args['options'][option]
+
+    def message(self , msg , is_error=False):
+        ''' Prints a message on screen '''
+        msg = self.cati_exec + ': ' + self.name + ': ' + msg
+
+        if is_error:
+            pr.e(msg)
+        else:
+            pr.p(msg)

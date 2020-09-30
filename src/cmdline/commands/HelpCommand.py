@@ -46,4 +46,4 @@ class HelpCommand(BaseCommand):
 
     def run(self):
         ''' Run command '''
-        pr.p('hello world!')
+        self.message('Hello world!')
