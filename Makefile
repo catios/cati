@@ -11,4 +11,8 @@ headers:
 compile:
 	@$(PYINSTALLER) src/cati.py --onefile
 
+clean:
+	@rm dist/ build/ *.spec -rf
+	@echo all of build files cleared successfuly
+
 main: compile
