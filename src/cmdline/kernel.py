@@ -28,10 +28,12 @@ from cmdline import ArgParser
 from cmdline import pr
 
 from cmdline.commands.HelpCommand import HelpCommand
+from cmdline.commands.PkgCommand import PkgCommand
 
 # subcommands list
 commands = {
-    'help': HelpCommand
+    'help': HelpCommand,
+    'pkg': PkgCommand
 }
 
 def handle(argv: list):

@@ -63,13 +63,15 @@ class BaseCommand:
                     pr.exit(1)
 
         # check arguments count
-        if len(args['arguments']) > command_config['max_args_count']:
-            self.message('this command requires less than ' + str(command_config['max_args_count']+1) + ' arguments')
-            pr.exit(1)
+        if command_config['max_args_count'] != None:
+            if len(args['arguments']) > command_config['max_args_count']:
+                self.message('this command requires less than ' + str(command_config['max_args_count']+1) + ' arguments')
+                pr.exit(1)
 
-        if len(args['arguments']) < command_config['min_args_count']:
-            self.message('this command requires more than ' + str(command_config['min_args_count']-1) + ' arguments')
-            pr.exit(1)
+        if command_config['min_args_count'] != None:
+            if len(args['arguments']) < command_config['min_args_count']:
+                self.message('this command requires more than ' + str(command_config['min_args_count']-1) + ' arguments')
+                pr.exit(1)
 
         # everything is ok, run command
         self.args = args
