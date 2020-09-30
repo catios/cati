@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
 #
-# cati.py
+# ArgParser.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -21,10 +20,32 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Cati main cli entry point '''
+''' Cli argument parser '''
 
-from cmdline import kernel
-import sys
+def parse(args: list) -> dict:
+    ''' Gets a list from program arguments and returns parsed args '''
 
-# handle cli
-kernel.handle(sys.argv[:])
+    args.pop(0)
+
+    tmp_options = []
+    arguments = []
+
+    # split options & arguments
+    for arg in args:
+        if arg[0] == '-':
+            tmp_options.append(arg)
+        else:
+            arguments.append(arg)
+
+    options = {}
+    for option in tmp_options:
+        op_parts = option.split('=' , 1)
+        if len(op_parts) == 1:
+            options[option] = None
+        else:
+            options[op_parts[0]] = op_parts[1]
+
+    return {
+        'options': options,
+        'arguments': arguments
+    }

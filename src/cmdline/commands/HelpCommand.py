@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
 #
-# cati.py
+# HelpCommand.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -21,10 +20,30 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Cati main cli entry point '''
+''' Help command '''
 
-from cmdline import kernel
-import sys
+from cmdline.BaseCommand import BaseCommand
+from cmdline import pr
 
-# handle cli
-kernel.handle(sys.argv[:])
+class HelpCommand(BaseCommand):
+    def help(self):
+        '''
+        Help of command
+        '''
+        pass
+
+    def define(self) -> dict:
+        ''' Define and config this command '''
+        return {
+            'name': 'help',
+            'options': {
+                '-v': [False , False], # [is-required , can-get-value]
+                '--version': [False , False]
+            },
+            'max_args_count': 1,
+            'min_args_count': 0,
+        }
+
+    def run(self):
+        ''' Run command '''
+        pr.p('hello world!')

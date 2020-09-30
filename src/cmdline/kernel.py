@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
 #
-# cati.py
+# kernel.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -21,10 +20,35 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Cati main cli entry point '''
+''' Kernel of cli handler '''
 
-from cmdline import kernel
 import sys
 
-# handle cli
-kernel.handle(sys.argv[:])
+from cmdline import ArgParser
+from cmdline import pr
+
+from cmdline.commands.HelpCommand import HelpCommand
+
+# subcommands list
+commands = {
+    'help': HelpCommand
+}
+
+def handle(argv: list):
+    ''' Kernel of cli handler '''
+    # parse inserted arguments
+    parsed_args = ArgParser.parse(argv)
+
+    # find called subcommand by args
+    if len(parsed_args['arguments']) == 0:
+        # no subcommand called
+        return
+    
+    try:
+        command = commands[parsed_args['arguments'][0]]
+        cmdobj = command()
+        sys.exit(cmdobj.handle(parsed_args))
+    except:
+        raise
+        pr.e('cati: unknow command "' + parsed_args['arguments'][0] + '"')
+        pr.exit(1)

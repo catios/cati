@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
 #
-# cati.py
+# pr.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -21,10 +20,18 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Cati main cli entry point '''
+''' Print handling in cli '''
 
-from cmdline import kernel
 import sys
 
-# handle cli
-kernel.handle(sys.argv[:])
+def p(value , end='\n'):
+    ''' Print on stdout '''
+    return print(value , end=end , flush=True)
+
+def e(value , end='\n'):
+    ''' Print on stderr '''
+    return print(value , end=end , flush=True , file=sys.stderr)
+
+def exit(code=0):
+    ''' Exits program with exit code '''
+    sys.exit(code)
