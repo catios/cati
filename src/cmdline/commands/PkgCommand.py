@@ -28,6 +28,8 @@ from cmdline import pr
 from cmdline import tcolor
 from dotcati.Builder import Builder
 from dotcati.exceptions.InvalidPackageDirException import InvalidPackageDirException
+from dotcati.exceptions.InvalidPackageFileException import InvalidPackageFileException
+from dotcati.ArchiveModel import ArchiveModel
 
 class PkgCommand(BaseCommand):
     def help(self):
@@ -76,7 +78,25 @@ class PkgCommand(BaseCommand):
             i += 1
 
     def sub_show(self):
-        pr.p('Pkg Show')
+        if len(self.arguments) <= 1:
+            self.message('argument package file(s) required')
+            return 1
+        
+        i = 1
+        while i < len(self.arguments):
+            try:
+                pkg = ArchiveModel(self.arguments[i] , 'r')
+                pkg.read()
+                
+                print(pkg.data) # TODO : better print
+
+                pkg.close()
+            except FileNotFoundError as ex:
+                self.message('file "' + self.arguments[i] + '" not found' + tcolor.ENDC , before=tcolor.FAIL)
+            except:
+                self.message('cannot open "' + self.arguments[i] + '": file is corrupt' + tcolor.ENDC , before=tcolor.FAIL)
+
+            i += 1
 
     def sub_install(self):
         pr.p('Pkg Install')

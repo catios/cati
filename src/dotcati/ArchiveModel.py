@@ -22,7 +22,7 @@
 
 ''' .cati package file model '''
 
-import tarfile
+import tarfile, json
 
 class ArchiveModel:
     ''' .cati package file model '''
@@ -36,4 +36,21 @@ class ArchiveModel:
     def close(self):
         ''' Close package archive '''
         return self.tar.close()
+
+    def members(self):
+        files = []
+        for member in self.tar.getmembers():
+            if member.path != '':
+                files.append(member.path)
+
+        return files
+
+    def read(self):
+        self.data = self.info()
+
+    def info(self):
+        for member in self.tar.getmembers():
+            if member.path == 'data.json':
+                f = self.tar.extractfile(member)
+                return json.loads(f.read())
 

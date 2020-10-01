@@ -101,5 +101,5 @@ class Builder:
         except:
             raise InvalidPackageDirException('file "' + output + '" for output of package not found')
         
-        pkg.add(dirpath, arcname=os.path.basename(dirpath))
+        pkg.add(dirpath , arcname='/')
         pkg.close()
