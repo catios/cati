@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := main
-.PHONY := headers
+.PHONY := headers compile clean main
 
 PY = python3
 MANAGE = $(PY) ./manage.py
