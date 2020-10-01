@@ -75,6 +75,7 @@ class BaseCommand:
 
         # everything is ok, run command
         self.args = args
+        self.arguments = self.args['arguments']
 
     def handle(self , args: dict):
         ''' Handle run the command '''
@@ -96,9 +97,9 @@ class BaseCommand:
         
         return self.args['options'][option]
 
-    def message(self , msg , is_error=False):
+    def message(self , msg , is_error=False , before=''):
         ''' Prints a message on screen '''
-        msg = self.cati_exec + ': ' + self.name + ': ' + msg
+        msg = before + self.cati_exec + ': ' + self.name + ': ' + msg
 
         if is_error:
             pr.e(msg)

@@ -25,6 +25,9 @@
 
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr
+from cmdline import tcolor
+from dotcati.Builder import Builder
+from dotcati.exceptions.InvalidPackageDirException import InvalidPackageDirException
 
 class PkgCommand(BaseCommand):
     def help(self):
@@ -41,15 +44,36 @@ class PkgCommand(BaseCommand):
     def define(self) -> dict:
         ''' Define and config this command '''
         return {
-            'name': 'help',
+            'name': 'pkg',
             'options': {
+                '--output': [False , True],
+                '-o': [False , True]
             },
             'max_args_count': None,
             'min_args_count': 1,
         }
 
     def sub_build(self):
-        pr.p('Pkg Build')
+        if len(self.arguments) <= 1:
+            self.message('argument package directory(s) required')
+            return 1
+        
+        i = 1
+        while i < len(self.arguments):
+            try:
+                output = self.option_value('--output')
+                if output == None:
+                    output = self.option_value('-o')
+                builder = Builder()
+                output_package = builder.build(self.arguments[i] , output)
+
+                pr.p(tcolor.OKGREEN + 'Package ' + self.arguments[i] + ' created successfuly in ' + output_package + tcolor.ENDC)
+            except FileNotFoundError as ex:
+                self.message('directory "' + self.arguments[i] + '" not found' + tcolor.ENDC , before=tcolor.FAIL)
+            except InvalidPackageDirException as ex:
+                self.message('cannot build "' + self.arguments[i] + '": ' + str(ex) + tcolor.ENDC , before=tcolor.FAIL)
+
+            i += 1
 
     def sub_show(self):
         pr.p('Pkg Show')
