@@ -23,6 +23,7 @@
 ''' .cati package file model '''
 
 import tarfile, json
+from dotcati.PackageJsonValidator import PackageJsonValidator
 
 class ArchiveModel:
     ''' .cati package file model '''
@@ -47,6 +48,8 @@ class ArchiveModel:
 
     def read(self):
         self.data = self.info()
+        if not PackageJsonValidator.validate(self.data):
+            raise
 
     def info(self):
         for member in self.tar.getmembers():

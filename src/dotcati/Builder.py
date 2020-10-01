@@ -25,26 +25,14 @@
 import os, json, tarfile
 from dotcati.exceptions.InvalidPackageDirException import InvalidPackageDirException
 from dotcati.ArchiveModel import ArchiveModel
+from dotcati.PackageJsonValidator import PackageJsonValidator
 
 class Builder:
     ''' Cati package builder '''
 
-    def json_fields_are_valid(self , data: dict):
-        '''
-        This function gets a json object and checks that fields and value of them where
-        are required for a valid package data.json and says this data
-        is valid or not
-        '''
-
-        try:
-            # TODO : check more fields
-            assert type(data['name']) == str
-            assert type(data['version']) == str
-            assert type(data['arch']) == str
-
-            return True
-        except:
-            return False
+    @staticmethod
+    def json_fields_are_valid(data: dict):
+        return PackageJsonValidator.validate(data)
 
     def build(self , dirpath: str , output=None):
         '''

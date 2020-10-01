@@ -49,7 +49,9 @@ class PkgCommand(BaseCommand):
             'name': 'pkg',
             'options': {
                 '--output': [False , True],
-                '-o': [False , True]
+                '-o': [False , True],
+                '--files': [False , False],
+                '-f': [False , False],
             },
             'max_args_count': None,
             'min_args_count': 1,
@@ -77,6 +79,19 @@ class PkgCommand(BaseCommand):
 
             i += 1
 
+    def show_once(self , pkg: ArchiveModel):
+        # TODO : print more fields
+        output = ''
+        output += 'Name: ' + pkg.data['name'] + '\n'
+        output += 'Version: ' + pkg.data['version'] + '\n'
+        output += 'Arch: ' + pkg.data['arch']
+        pr.p(output)
+        if self.has_option('--files') or self.has_option('-f'):
+            pr.p('Files:')
+            pkg.tar.list()
+        if len(self.arguments) > 2:
+            pr.p('='*50)
+
     def sub_show(self):
         if len(self.arguments) <= 1:
             self.message('argument package file(s) required')
@@ -87,9 +102,7 @@ class PkgCommand(BaseCommand):
             try:
                 pkg = ArchiveModel(self.arguments[i] , 'r')
                 pkg.read()
-                
-                print(pkg.data) # TODO : better print
-
+                self.show_once(pkg)
                 pkg.close()
             except FileNotFoundError as ex:
                 self.message('file "' + self.arguments[i] + '" not found' + tcolor.ENDC , before=tcolor.FAIL)
