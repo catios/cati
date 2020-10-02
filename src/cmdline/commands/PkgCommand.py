@@ -27,9 +27,11 @@ from cmdline.BaseCommand import BaseCommand
 from cmdline import pr
 from cmdline import tcolor
 from dotcati.Builder import Builder
+from dotcati.Installer import Installer
 from dotcati.exceptions.InvalidPackageDirException import InvalidPackageDirException
 from dotcati.exceptions.InvalidPackageFileException import InvalidPackageFileException
 from dotcati.ArchiveModel import ArchiveModel
+from frontend.RootRequired import require_root_permission
 
 class PkgCommand(BaseCommand):
     def help(self):
@@ -111,8 +113,43 @@ class PkgCommand(BaseCommand):
 
             i += 1
 
+    def cannot_read_file_event(self , path):
+        self.message('error while reading file "' + path + '". ignored...' + tcolor.ENDC , before=tcolor.FAIL)
+    
+    def invalid_json_data_event(self , path):
+        self.message('invalid json data in "' + path + '". ignored...' + tcolor.ENDC , before=tcolor.FAIL)
+
+    def install_once(self , pkg: ArchiveModel):
+        installer = Installer()
+
+        try:
+            installer.install(pkg , {
+                'cannot_read_file': self.cannot_read_file_event,
+                'invalid_json_data': self.invalid_json_data_event,
+            })
+        except:
+            raise
+
     def sub_install(self):
-        pr.p('Pkg Install')
+        if len(self.arguments) <= 1:
+            self.message('argument package file(s) required')
+            return 1
+
+        require_root_permission()
+
+        i = 1
+        while i < len(self.arguments):
+            try:
+                pkg = ArchiveModel(self.arguments[i] , 'r')
+                pkg.read()
+                self.install_once(pkg)
+                pkg.close()
+            except FileNotFoundError as ex:
+                self.message('file "' + self.arguments[i] + '" not found' + tcolor.ENDC , before=tcolor.FAIL)
+            except:
+                self.message('cannot open "' + self.arguments[i] + '": file is corrupt' + tcolor.ENDC , before=tcolor.FAIL)
+
+            i += 1
 
     def run(self):
         ''' Run command '''
