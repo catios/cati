@@ -37,9 +37,9 @@ class PkgCommand(BaseCommand):
         work with .cati packages
         
         Subcommands:
-        -   build:      build .cati package from directory(s)
-        -   show:       show content of .cati package(s)
-        -   install:    install a .cati package on system
+        - build:      build .cati package from directory(s)
+        - show:       show content of .cati package(s)
+        - install:    install a .cati package on system
         '''
         pass
 
@@ -54,7 +54,7 @@ class PkgCommand(BaseCommand):
                 '-f': [False , False],
             },
             'max_args_count': None,
-            'min_args_count': 1,
+            'min_args_count': None,
         }
 
     def sub_build(self):
@@ -116,12 +116,17 @@ class PkgCommand(BaseCommand):
 
     def run(self):
         ''' Run command '''
-        if self.args['arguments'][0] == 'build':
+
+        if len(self.arguments) <= 0:
+            pr.p(self.help_full())
+            return 0
+        
+        if self.arguments[0] == 'build':
             return self.sub_build()
-        elif self.args['arguments'][0] == 'show':
+        elif self.arguments[0] == 'show':
             return self.sub_show()
-        elif self.args['arguments'][0] == 'install':
+        elif self.arguments[0] == 'install':
             return self.sub_install()
         else:
-            self.message('unknow subcommand "' + self.args['arguments'][0] + '"' , True)
+            self.message('unknow subcommand "' + self.arguments[0] + '"' , True)
             return 1
