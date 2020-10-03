@@ -33,6 +33,10 @@ class Pkg:
 
     def __init__(self , data: dict):
         self.data = data
+        try:
+            self.data['repo']
+        except:
+            self.data['repo'] = 'Local'
 
     def installed(self):
         if not Pkg.is_installed(self.data['name']):

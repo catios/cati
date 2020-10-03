@@ -50,6 +50,7 @@ class ListCommand(BaseCommand):
         output = package.data['name'] + '/' + package.data['version']
         if package.installed():
             output += '/Installed:' + package.installed()
+        output += '/Repo:' + package.data['repo']
         
         pr.p(output)
 

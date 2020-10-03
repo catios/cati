@@ -44,7 +44,17 @@ class Installer:
             os.mkdir(Env.packages_lists('/' + pkg.data['name']))
         
         lists_path = Env.packages_lists('/' + pkg.data['name'] + '/' + pkg.data['version'] + '-' + pkg.data['arch'])
+
+        try:
+            lists_f = open(lists_path , 'r')
+            old_repo = json.loads(lists_f.read())['repo']
+            lists_f.close()
+        except:
+            old_repo = 'Local'
+            pass
+
         lists_f = open(lists_path , 'w')
+        pkg.data['repo'] = old_repo
         lists_f.write(json.dumps(pkg.data))
         lists_f.close()
 
