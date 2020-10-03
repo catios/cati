@@ -1,3 +1,5 @@
+SHELL = bash
+
 .DEFAULT_GOAL := main
 .PHONY := headers compile clean main
 
@@ -16,3 +18,5 @@ clean:
 	@echo all of build files cleared successfuly
 
 main: compile
+
+all: headers
