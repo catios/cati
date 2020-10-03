@@ -1,5 +1,5 @@
 #
-# Env.py
+# CannotReadFileException.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -20,13 +20,5 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Handle environment file paths '''
-
-def base_path(path=''):
-    return path
-
-def packages_lists(path=''):
-    return base_path('/var/lib/cati/lists' + path)
-
-def installed_lists(path=''):
-    return base_path('/var/lib/cati/installed' + path)
+class CannotReadFileException(Exception):
+    pass

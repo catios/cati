@@ -32,6 +32,7 @@ from dotcati.exceptions.InvalidPackageDirException import InvalidPackageDirExcep
 from dotcati.exceptions.InvalidPackageFileException import InvalidPackageFileException
 from dotcati.ArchiveModel import ArchiveModel
 from frontend.RootRequired import require_root_permission
+from package.exceptions.CannotReadFileException import CannotReadFileException
 
 class PkgCommand(BaseCommand):
     def help(self):
@@ -119,6 +120,12 @@ class PkgCommand(BaseCommand):
     def invalid_json_data_event(self , path):
         self.message('invalid json data in "' + path + '". ignored...' + tcolor.ENDC , before=tcolor.FAIL)
 
+    def package_currently_installed_event(self , package: ArchiveModel , current_version: str):
+        pr.p('Installing ' + package.data['name'] + ':' + package.data['version'] + ' over ' + current_version)
+
+    def package_new_installs_event(self , package: ArchiveModel):
+        pr.p('Installing ' + package.data['name'] + ':' + package.data['version'])
+
     def install_once(self , pkg: ArchiveModel):
         installer = Installer()
 
@@ -126,7 +133,13 @@ class PkgCommand(BaseCommand):
             installer.install(pkg , {
                 'cannot_read_file': self.cannot_read_file_event,
                 'invalid_json_data': self.invalid_json_data_event,
+            },
+            {
+                'package_currently_installed': self.package_currently_installed_event,
+                'package_new_installs': self.package_new_installs_event,
             })
+        except CannotReadFileException as ex:
+            self.message(tcolor.FAIL + str(ex) , True , before=tcolor.ENDC)
         except:
             raise
 

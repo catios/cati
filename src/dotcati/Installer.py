@@ -22,15 +22,22 @@
 
 ''' Dotcati package installer '''
 
-import os, json
+import os, json, time
 from dotcati.ArchiveModel import ArchiveModel
 from frontend import Env
 from dotcati import ListUpdater
+from package.Pkg import Pkg
 
 class Installer:
     ''' Dotcati package installer '''        
-    def install(self , pkg: ArchiveModel , index_updater_events: dict):
-        ''' Install .cati package '''
+    def install(self , pkg: ArchiveModel , index_updater_events: dict , installer_events: dict):
+        '''
+        Install .cati package
+
+        installer_events:
+        - package_currently_install: gets a current installed version
+        - package_new_installs: gets package archive
+        '''
 
         # add package data to lists
         if not os.path.isdir(Env.packages_lists('/' + pkg.data['name'])):
@@ -43,4 +50,25 @@ class Installer:
 
         ListUpdater.update_indexes(index_updater_events)
 
+        # install package
+        if Pkg.is_installed(pkg.data['name']):
+            installer_events['package_currently_installed'](pkg , Pkg.installed_version(pkg.data['name']))
+        else:
+            installer_events['package_new_installs'](pkg)
 
+        # TODO : copy package files on system
+
+        # set install configuration
+        if not os.path.isdir(Env.installed_lists('/' + pkg.data['name'])):
+            os.mkdir(Env.installed_lists('/' + pkg.data['name']))
+        f_ver = open(Env.installed_lists('/' + pkg.data['name'] + '/ver') , 'w')
+        f_ver.write(pkg.data['version'])
+        f_ver.close()
+
+        f_files = open(Env.installed_lists('/' + pkg.data['name'] + '/files') , 'w')
+        f_files.write('')
+        f_files.close()
+
+        f_installed_at = open(Env.installed_lists('/' + pkg.data['name'] + '/installed_at') , 'w')
+        f_installed_at.write(str(time.time()))
+        f_installed_at.close()
