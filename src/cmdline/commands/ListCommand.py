@@ -24,7 +24,7 @@
 
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr
-from cmdline import tcolor
+from cmdline import ansi
 from package.Pkg import Pkg
 
 class ListCommand(BaseCommand):
@@ -47,18 +47,18 @@ class ListCommand(BaseCommand):
         }
 
     def show_once(self , package: Pkg):
-        output = package.data['name'] + '/' + package.data['version']
+        output = ansi.green + package.data['name'] + ansi.reset + '/' +  ansi.yellow + package.data['version'] + ansi.reset
         if package.installed():
-            output += '/Installed:' + package.installed()
-        output += '/Repo:' + package.data['repo']
+            output += '/Installed:' + ansi.blue + package.installed() + ansi.reset
+        output += '/[' + package.data['repo'] + ']'
         
         pr.p(output)
 
     def run(self):
         ''' Run command '''
         
-        pr.p('Loading package list...')
-        pr.p('=======================')
+        pr.p('Loading packages list...')
+        pr.p('========================')
         # load list of packages
         if self.has_option('--installed'):
             # just list installed packages
@@ -67,7 +67,7 @@ class ListCommand(BaseCommand):
             packages = Pkg.all_list()
 
         for error in packages['errors']:
-            self.message(tcolor.FAIL + error , True , before=tcolor.ENDC)
+            self.message(ansi.red + error , True , before=ansi.reset)
 
         for package in packages['list']:
             self.show_once(package)

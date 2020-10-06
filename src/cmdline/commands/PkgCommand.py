@@ -25,7 +25,7 @@
 
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr
-from cmdline import tcolor
+from cmdline import ansi
 from dotcati.Builder import Builder
 from dotcati.Installer import Installer
 from dotcati.exceptions.InvalidPackageDirException import InvalidPackageDirException
@@ -74,11 +74,11 @@ class PkgCommand(BaseCommand):
                 builder = Builder()
                 output_package = builder.build(self.arguments[i] , output)
 
-                pr.p(tcolor.OKGREEN + 'Package ' + self.arguments[i] + ' created successfuly in ' + output_package + tcolor.ENDC)
+                pr.p(ansi.OKGREEN + 'Package ' + self.arguments[i] + ' created successfuly in ' + output_package + ansi.reset)
             except FileNotFoundError as ex:
-                self.message('directory "' + self.arguments[i] + '" not found' + tcolor.ENDC , before=tcolor.FAIL)
+                self.message('directory "' + self.arguments[i] + '" not found' + ansi.reset , before=ansi.red)
             except InvalidPackageDirException as ex:
-                self.message('cannot build "' + self.arguments[i] + '": ' + str(ex) + tcolor.ENDC , before=tcolor.FAIL)
+                self.message('cannot build "' + self.arguments[i] + '": ' + str(ex) + ansi.reset , before=ansi.red)
 
             i += 1
 
@@ -108,17 +108,17 @@ class PkgCommand(BaseCommand):
                 self.show_once(pkg)
                 pkg.close()
             except FileNotFoundError as ex:
-                self.message('file "' + self.arguments[i] + '" not found' + tcolor.ENDC , before=tcolor.FAIL)
+                self.message('file "' + self.arguments[i] + '" not found' + ansi.reset , before=ansi.red)
             except:
-                self.message('cannot open "' + self.arguments[i] + '": file is corrupt' + tcolor.ENDC , before=tcolor.FAIL)
+                self.message('cannot open "' + self.arguments[i] + '": file is corrupt' + ansi.reset , before=ansi.red)
 
             i += 1
 
     def cannot_read_file_event(self , path):
-        self.message('error while reading file "' + path + '". ignored...' + tcolor.ENDC , before=tcolor.FAIL)
+        self.message('error while reading file "' + path + '". ignored...' + ansi.reset , before=ansi.red)
     
     def invalid_json_data_event(self , path):
-        self.message('invalid json data in "' + path + '". ignored...' + tcolor.ENDC , before=tcolor.FAIL)
+        self.message('invalid json data in "' + path + '". ignored...' + ansi.reset , before=ansi.red)
 
     def package_currently_installed_event(self , package: ArchiveModel , current_version: str):
         pr.p('Installing ' + package.data['name'] + ':' + package.data['version'] + ' over ' + current_version)
@@ -139,7 +139,7 @@ class PkgCommand(BaseCommand):
                 'package_new_installs': self.package_new_installs_event,
             })
         except CannotReadFileException as ex:
-            self.message(tcolor.FAIL + str(ex) , True , before=tcolor.ENDC)
+            self.message(ansi.red + str(ex) , True , before=ansi.reset)
         except:
             raise
 
@@ -158,9 +158,9 @@ class PkgCommand(BaseCommand):
                 self.install_once(pkg)
                 pkg.close()
             except FileNotFoundError as ex:
-                self.message('file "' + self.arguments[i] + '" not found' + tcolor.ENDC , before=tcolor.FAIL)
+                self.message('file "' + self.arguments[i] + '" not found' + ansi.reset , before=ansi.red)
             except:
-                self.message('cannot open "' + self.arguments[i] + '": file is corrupt' + tcolor.ENDC , before=tcolor.FAIL)
+                self.message('cannot open "' + self.arguments[i] + '": file is corrupt' + ansi.reset , before=ansi.red)
 
             i += 1
 

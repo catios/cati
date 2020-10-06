@@ -1,5 +1,5 @@
 #
-# tcolor.py
+# ansi.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -22,22 +22,22 @@
 
 ''' ANSI terminal colors '''
 
-HEADER = '\033[95m'
-OKBLUE = '\033[94m'
-OKGREEN = '\033[92m'
-WARNING = '\033[93m'
-FAIL = '\033[91m'
-ENDC = '\033[0m'
-BOLD = '\033[1m'
-UNDERLINE = '\033[4m'
+header = '\033[95m'
+blue = '\033[94m'
+green = '\033[92m'
+yellow = '\033[93m'
+red = '\033[91m'
+reset = '\033[0m'
+bold = '\033[1m'
+underline = '\033[4m'
 
 def disable():
-    from cmdline import tcolor
-    tcolor.HEADER = ''
-    tcolor.OKBLUE = ''
-    tcolor.OKGREEN = ''
-    tcolor.WARNING = ''
-    tcolor.FAIL = ''
-    tcolor.ENDC = ''
-    tcolor.BOLD = ''
-    tcolor.UNDERLINE = ''
+    from cmdline import ansi
+    ansi.header = ''
+    ansi.blue = ''
+    ansi.green = ''
+    ansi.yellow = ''
+    ansi.red = ''
+    ansi.reset = ''
+    ansi.bold = ''
+    ansi.underline = ''

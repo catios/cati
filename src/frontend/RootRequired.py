@@ -24,7 +24,7 @@
 
 import os, sys
 from cmdline import pr
-from cmdline import tcolor
+from cmdline import ansi
 
 def require_root_permission(is_cli=True , die_action=None):
     '''
@@ -35,7 +35,7 @@ def require_root_permission(is_cli=True , die_action=None):
 
     if os.getuid() != 0:
         if is_cli:
-            pr.e(tcolor.FAIL + sys.argv[0] + ': permission is denied' + tcolor.ENDC)
+            pr.e(ansi.red + sys.argv[0] + ': permission is denied' + ansi.reset)
             pr.exit(1)
         else:
             die_action()
