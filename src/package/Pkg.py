@@ -140,8 +140,12 @@ class Pkg:
             arch = sys_arch()
             versions = index_json[arch]
         except:
-            arch = list(index_json.keys())[0]
-            versions = index_json[arch]
+            try:
+                arch = 'all'
+                versions = index_json[arch]
+            except:
+                arch = list(index_json.keys())[0]
+                versions = index_json[arch]
 
         # load latest version
         ver = Pkg.get_last_version(versions)
