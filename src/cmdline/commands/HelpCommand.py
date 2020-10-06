@@ -70,8 +70,8 @@ class HelpCommand(BaseCommand):
         pr.p('Subcommand:')
         for cmd in commands:
             obj = commands[cmd]()
-            pr.p('\t' + cmd + ' - ' + obj.help_summary())
+            pr.p('\t' + ansi.green + cmd + ansi.reset + '\t' + obj.help_summary())
 
-        pr.p('\nfor see detailed help about commands, run: "' + self.cati_exec + ' help [command-name]"')
+        pr.p('\nfor see detailed help about commands, run: "' + ansi.yellow + self.cati_exec + ' help [command-name]' + ansi.reset + '"')
 
         return 0

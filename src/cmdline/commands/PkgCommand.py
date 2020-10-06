@@ -40,7 +40,7 @@ class PkgCommand(BaseCommand):
         work with .cati packages
         Subcommands:
         - build:      build .cati package from directory(s)
-        - show:       show content of .cati package(s)
+        - show:       show content of .cati package(s). options: --files: show package files
         - install:    install a .cati package on system
         '''
         pass
@@ -84,9 +84,9 @@ class PkgCommand(BaseCommand):
     def show_once(self , pkg: ArchiveModel):
         # TODO : print more fields
         output = ''
-        output += 'Name: ' + pkg.data['name'] + '\n'
-        output += 'Version: ' + pkg.data['version'] + '\n'
-        output += 'Arch: ' + pkg.data['arch']
+        output += 'Name: ' + ansi.green + pkg.data['name'] + ansi.reset + '\n'
+        output += 'Version: ' + ansi.blue + pkg.data['version'] + ansi.reset + '\n'
+        output += 'Arch: ' + ansi.yellow + pkg.data['arch'] + ansi.reset
         pr.p(output)
         if self.has_option('--files') or self.has_option('-f'):
             pr.p('Files:')
