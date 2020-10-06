@@ -29,7 +29,12 @@ from dotcati import ListUpdater
 from package.Pkg import Pkg
 
 class Installer:
-    ''' Dotcati package installer '''        
+    ''' Dotcati package installer '''
+
+    def copy_files(self , pkg: ArchiveModel) -> list:
+        # TODO : copy package files on system
+        return []
+
     def install(self , pkg: ArchiveModel , index_updater_events: dict , installer_events: dict):
         '''
         Install .cati package
@@ -67,21 +72,24 @@ class Installer:
         else:
             installer_events['package_new_installs'](pkg)
 
-        # TODO : copy package files on system
+        copied_files = self.copy_files(pkg)
 
         # set install configuration
         if not os.path.isdir(Env.installed_lists('/' + pkg.data['name'])):
             os.mkdir(Env.installed_lists('/' + pkg.data['name']))
         f_ver = open(Env.installed_lists('/' + pkg.data['name'] + '/ver') , 'w')
-        f_ver.write(pkg.data['version'])
+        f_ver.write(pkg.data['version']) # write installed version
         f_ver.close()
 
         f_files = open(Env.installed_lists('/' + pkg.data['name'] + '/files') , 'w')
-        f_files.write('')
+        copied_files_str = ''
+        for copied_file in copied_files:
+            copied_files_str += copied_file + '\n'
+        f_files.write(copied_files_str.strip()) # write copied files
         f_files.close()
 
         f_installed_at = open(Env.installed_lists('/' + pkg.data['name'] + '/installed_at') , 'w')
-        f_installed_at.write(str(time.time()))
+        f_installed_at.write(str(time.time())) # write time (installed at)
         f_installed_at.close()
 
         # call package installed event
