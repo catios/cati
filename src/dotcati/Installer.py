@@ -37,6 +37,7 @@ class Installer:
         installer_events:
         - package_currently_install: gets a current installed version
         - package_new_installs: gets package archive
+        - package_installed: will call after package installation
         '''
 
         # add package data to lists
@@ -82,3 +83,7 @@ class Installer:
         f_installed_at = open(Env.installed_lists('/' + pkg.data['name'] + '/installed_at') , 'w')
         f_installed_at.write(str(time.time()))
         f_installed_at.close()
+
+        # call package installed event
+        installer_events['package_installed'](pkg)
+

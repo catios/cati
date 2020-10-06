@@ -121,10 +121,13 @@ class PkgCommand(BaseCommand):
         self.message('invalid json data in "' + path + '". ignored...' + ansi.reset , before=ansi.red)
 
     def package_currently_installed_event(self , package: ArchiveModel , current_version: str):
-        pr.p('Installing ' + package.data['name'] + ':' + package.data['version'] + ' over ' + current_version)
+        pr.p('Installing ' + ansi.yellow + package.data['name'] + ':' + package.data['version'] + ansi.reset + ' (over ' + ansi.yellow + current_version + ansi.reset + ')...' , end=' ')
 
     def package_new_installs_event(self , package: ArchiveModel):
-        pr.p('Installing ' + package.data['name'] + ':' + package.data['version'])
+        pr.p('Installing ' + ansi.yellow + package.data['name'] + ':' + package.data['version'] + ansi.reset + '...' , end=' ')
+
+    def package_installed_event(self , package: ArchiveModel):
+        pr.p(ansi.green + 'OK' + ansi.reset)
 
     def install_once(self , pkg: ArchiveModel):
         installer = Installer()
@@ -137,6 +140,7 @@ class PkgCommand(BaseCommand):
             {
                 'package_currently_installed': self.package_currently_installed_event,
                 'package_new_installs': self.package_new_installs_event,
+                'package_installed': self.package_installed_event
             })
         except CannotReadFileException as ex:
             self.message(ansi.red + str(ex) , True , before=ansi.reset)
