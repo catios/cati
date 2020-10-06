@@ -68,6 +68,20 @@ class Pkg:
         return version
 
     @staticmethod
+    def installed_list():
+        ''' Returns list of only installed packages '''
+        all_packages = Pkg.all_list()
+        installed_packages = {
+            'errors': all_packages['errors'],
+            'list': [],
+        }
+        for pkg in all_packages['list']:
+            if pkg.installed():
+                installed_packages['list'].append(pkg)
+
+        return installed_packages
+
+    @staticmethod
     def all_list():
         ''' Returns list of packages '''
 

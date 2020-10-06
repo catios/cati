@@ -41,6 +41,7 @@ class ListCommand(BaseCommand):
         return {
             'name': 'list',
             'options': {
+                '--installed': [False , False],
             },
             'max_args_count': 0,
             'min_args_count': 0,
