@@ -31,8 +31,8 @@ class ListCommand(BaseCommand):
     def help(self):
         '''
         shows list of packages
-
-        this command shows list of available packages
+        Options:
+        --installed: show only installed packages
         '''
         pass
 

@@ -34,6 +34,7 @@ class BaseCommand:
         '''
 
         command_config = self.define()
+        command_config['options']['--help'] = [False , False]
 
         self.name = command_config['name']
         self.cati_exec = sys.argv[0]
@@ -80,6 +81,12 @@ class BaseCommand:
     def handle(self , args: dict):
         ''' Handle run the command '''
         self.validate(args)
+
+        # handle --help option
+        if self.has_option('--help'):
+            pr.p(self.help_full())
+            return 0
+        
         return self.run()
 
     def has_option(self , option: str):
@@ -106,7 +113,12 @@ class BaseCommand:
         else:
             pr.p(msg)
 
-    def help_full(self):
+    def general_help(self):
+        return '''Cati package manager
+    Copyright 2020 parsa mpsh - GPL-3
+Usage: cati [command] [options] [args]'''
+
+    def help_full(self , with_general_help=True):
         help_text = self.help.__doc__
         help_text = help_text.strip()
         help_text_tmp = ''
@@ -116,8 +128,11 @@ class BaseCommand:
 
         help_text = help_text_tmp.strip()
 
+        if with_general_help:
+            help_text = self.general_help() + '\n\n' + help_text
+
         return help_text
 
     def help_summary(self):
-        return self.help_full().split('\n')[0]
+        return self.help_full(False).split('\n')[0]
 

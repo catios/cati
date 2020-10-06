@@ -38,7 +38,6 @@ class PkgCommand(BaseCommand):
     def help(self):
         '''
         work with .cati packages
-        
         Subcommands:
         - build:      build .cati package from directory(s)
         - show:       show content of .cati package(s)

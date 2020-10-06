@@ -24,15 +24,13 @@
 
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr
+from cmdline import kernel
+from cmdline import ansi
 
 class HelpCommand(BaseCommand):
     def help(self):
         '''
-        Help of command
-        this is a help
-        hoho
-        foo bar
-        tstststs
+        shows this help
         '''
         pass
 
@@ -50,4 +48,30 @@ class HelpCommand(BaseCommand):
 
     def run(self):
         ''' Run command '''
-        self.message('Hello world!')
+        # show general help
+        pr.p(self.general_help())
+        pr.p('')
+
+        commands = kernel.commands
+
+        # check arguments
+        if len(self.arguments) >= 1:
+            # a command inserted. show detail of that command
+            try:
+                cmd = commands[self.arguments[0]]
+                obj = cmd()
+                pr.p(obj.help_full(False))
+                return 0
+            except:
+                self.message('unknow command "' + self.arguments[0] + '"' + ansi.reset , True , before=ansi.red)
+                return 1
+
+        # show summary help of command
+        pr.p('Subcommand:')
+        for cmd in commands:
+            obj = commands[cmd]()
+            pr.p('\t' + cmd + ' - ' + obj.help_summary())
+
+        pr.p('\nfor see detailed help about commands, run: "' + self.cati_exec + ' help [command-name]"')
+
+        return 0
