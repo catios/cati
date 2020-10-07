@@ -73,7 +73,7 @@ class PkgCommand(BaseCommand):
                 builder = Builder()
                 output_package = builder.build(self.arguments[i] , output)
 
-                pr.p(ansi.OKGREEN + 'Package ' + self.arguments[i] + ' created successfuly in ' + output_package + ansi.reset)
+                pr.p(ansi.green + 'Package ' + self.arguments[i] + ' created successfuly in ' + output_package + ansi.reset)
             except FileNotFoundError as ex:
                 self.message('directory "' + self.arguments[i] + '" not found' + ansi.reset , before=ansi.red)
             except InvalidPackageDirException as ex:
@@ -128,6 +128,9 @@ class PkgCommand(BaseCommand):
     def package_installed_event(self , package: ArchiveModel):
         pr.p(ansi.green + 'OK' + ansi.reset)
 
+    def directory_not_empty_event(self , package: ArchiveModel , dirpath: str):
+        pr.e(ansi.yellow + 'warning: directory "' + dirpath + '" is not empty and will not be deleted' + ansi.reset)
+
     def install_once(self , pkg: ArchiveModel):
         installer = Installer()
 
@@ -139,7 +142,8 @@ class PkgCommand(BaseCommand):
             {
                 'package_currently_installed': self.package_currently_installed_event,
                 'package_new_installs': self.package_new_installs_event,
-                'package_installed': self.package_installed_event
+                'package_installed': self.package_installed_event,
+                'directory_not_empty': self.directory_not_empty_event,
             })
         except CannotReadFileException as ex:
             self.message(ansi.red + str(ex) , True , before=ansi.reset)

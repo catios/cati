@@ -39,6 +39,7 @@ class ArchiveModel:
         return self.tar.close()
 
     def members(self):
+        ''' Returns members of the archive '''
         files = []
         for member in self.tar.getmembers():
             if member.path != '':
@@ -47,13 +48,18 @@ class ArchiveModel:
         return files
 
     def read(self):
+        ''' Load package information on object '''
         self.data = self.info()
         if not PackageJsonValidator.validate(self.data):
             raise
 
+    def extractall(self , path):
+        ''' Extract all of package files to `path` '''
+        return self.tar.extractall(path)
+
     def info(self):
+        ''' Returns package data.json information '''
         for member in self.tar.getmembers():
             if member.path == 'data.json':
                 f = self.tar.extractfile(member)
                 return json.loads(f.read())
-

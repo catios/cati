@@ -25,15 +25,84 @@
 import os, json, time
 from dotcati.ArchiveModel import ArchiveModel
 from frontend import Env
+from frontend import Temp
 from dotcati import ListUpdater
 from package.Pkg import Pkg
 
 class Installer:
     ''' Dotcati package installer '''
 
-    def copy_files(self , pkg: ArchiveModel) -> list:
-        # TODO : copy package files on system
-        return []
+    def load_files(self , path: str , base_temp_path: str):
+        ''' Loads list of package files from extracted temp dir '''
+
+        for item in os.listdir(path):
+            if os.path.isfile(path + '/' + item):
+                self.loaded_files.append([(path + '/' + item)[len(base_temp_path):] , path + '/' + item])
+            else:
+                self.loaded_files.append([(path + '/' + item)[len(base_temp_path):] , path + '/' + item])
+                self.load_files(path + '/' + item , base_temp_path)
+
+    def copy_once_file(self , paths):
+        if os.path.isfile(paths[1]):
+            os.system('cp "' + paths[1] + '" "' + Env.base_path(paths[0]) + '"')
+            self.copied_files.append('f:' + paths[0])
+        else:
+            os.mkdir(Env.base_path(paths[0]))
+            self.copied_files.append('d:' + paths[0])
+
+    def copy_files(self , pkg: ArchiveModel , directory_not_empty_event) -> list:
+        ''' Copy package files on system '''
+        # load package old files list
+        old_files = []
+        if os.path.isfile(Env.installed_lists('/' + pkg.data['name'] + '/files')):
+            try:
+                f = open(Env.installed_lists('/' + pkg.data['name'] + '/files') , 'r')
+                for line in f.read().strip().split('\n'):
+                    if line != '':
+                        old_files.append(line.strip())
+            except:
+                pass
+        old_files = list(reversed(old_files))
+        
+        # extract package in a temp place
+        temp_dir = Temp.make_dir()
+        pkg.extractall(temp_dir)
+
+        # load files list from `files` directory of package
+        self.loaded_files = []
+        self.load_files(temp_dir + '/files' , temp_dir + '/files')
+
+        # copy loaded files
+        self.copied_files = []
+        for f in self.loaded_files:
+            if os.path.exists(Env.base_path(f[0])):
+                if os.path.isfile(Env.base_path(f[0])):
+                    if ('f:' + f[0]) in old_files:
+                        self.copy_once_file(f)
+                        old_files.pop(old_files.index(('f:' + f[0])))
+                else:
+                    if ('d:' + f[0]) in old_files:
+                        self.copied_files.append('d:' + f[0])
+                        old_files.pop(old_files.index(('d:' + f[0])))
+            else:
+                self.copy_once_file(f)
+
+        # delete not wanted old files
+        for item in old_files:
+            parts = item.strip().split(':' , 1)
+            if parts[0] == 'cf' or parts[0] == 'cd':
+                pass
+            else:
+                if os.path.isfile(parts[1]):
+                    os.remove(parts[1])
+                else:
+                    try:
+                        os.rmdir(parts[1])
+                    except:
+                        # directory is not emptyr
+                        directory_not_empty_event(pkg , parts[1])
+
+        return self.copied_files
 
     def install(self , pkg: ArchiveModel , index_updater_events: dict , installer_events: dict):
         '''
@@ -72,7 +141,7 @@ class Installer:
         else:
             installer_events['package_new_installs'](pkg)
 
-        copied_files = self.copy_files(pkg)
+        copied_files = self.copy_files(pkg , installer_events['directory_not_empty'])
 
         # set install configuration
         if not os.path.isdir(Env.installed_lists('/' + pkg.data['name'])):
