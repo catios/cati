@@ -90,8 +90,6 @@ if sys.argv[1] == 'update-headers':
     files_list = SetHeaders('src/').files_list
     for f in files_list:
         SetHeaders.set_once_file_header(f)
-
-    print('Headers updated successfully')
     sys.exit()
 
 print('Unknow command "' + sys.argv[1] + '"')
