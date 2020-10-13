@@ -28,11 +28,11 @@ from cmdline import pr
 from cmdline import ansi
 from dotcati.Builder import Builder
 from dotcati.Installer import Installer
-from dotcati.exceptions.InvalidPackageDirException import InvalidPackageDirException
-from dotcati.exceptions.InvalidPackageFileException import InvalidPackageFileException
+from dotcati.exceptions import InvalidPackageDirException
+from dotcati.exceptions import InvalidPackageFileException
 from dotcati.ArchiveModel import ArchiveModel
 from frontend.RootRequired import require_root_permission
-from package.exceptions.CannotReadFileException import CannotReadFileException
+from package.exceptions import CannotReadFileException
 
 class PkgCommand(BaseCommand):
     def help(self):
@@ -50,10 +50,10 @@ class PkgCommand(BaseCommand):
         return {
             'name': 'pkg',
             'options': {
-                '--output': [False , True],
-                '-o': [False , True],
-                '--files': [False , False],
-                '-f': [False , False],
+                '--output': [False, True],
+                '-o': [False, True],
+                '--files': [False, False],
+                '-f': [False, False],
             },
             'max_args_count': None,
             'min_args_count': None,
@@ -71,17 +71,17 @@ class PkgCommand(BaseCommand):
                 if output == None:
                     output = self.option_value('-o')
                 builder = Builder()
-                output_package = builder.build(self.arguments[i] , output)
+                output_package = builder.build(self.arguments[i], output)
 
                 pr.p(ansi.green + 'Package ' + self.arguments[i] + ' created successfuly in ' + output_package + ansi.reset)
             except FileNotFoundError as ex:
-                self.message('directory "' + self.arguments[i] + '" not found' + ansi.reset , before=ansi.red)
+                self.message('directory "' + self.arguments[i] + '" not found' + ansi.reset, before=ansi.red)
             except InvalidPackageDirException as ex:
-                self.message('cannot build "' + self.arguments[i] + '": ' + str(ex) + ansi.reset , before=ansi.red)
+                self.message('cannot build "' + self.arguments[i] + '": ' + str(ex) + ansi.reset, before=ansi.red)
 
             i += 1
 
-    def show_once(self , pkg: ArchiveModel):
+    def show_once(self, pkg: ArchiveModel):
         # TODO : print more fields
         output = ''
         output += 'Name: ' + ansi.green + pkg.data['name'] + ansi.reset + '\n'
@@ -102,40 +102,40 @@ class PkgCommand(BaseCommand):
         i = 1
         while i < len(self.arguments):
             try:
-                pkg = ArchiveModel(self.arguments[i] , 'r')
+                pkg = ArchiveModel(self.arguments[i], 'r')
                 pkg.read()
                 self.show_once(pkg)
                 pkg.close()
             except FileNotFoundError as ex:
-                self.message('file "' + self.arguments[i] + '" not found' + ansi.reset , before=ansi.red)
+                self.message('file "' + self.arguments[i] + '" not found' + ansi.reset, before=ansi.red)
             except:
-                self.message('cannot open "' + self.arguments[i] + '": file is corrupt' + ansi.reset , before=ansi.red)
+                self.message('cannot open "' + self.arguments[i] + '": file is corrupt' + ansi.reset, before=ansi.red)
 
             i += 1
 
-    def cannot_read_file_event(self , path):
-        self.message('error while reading file "' + path + '". ignored...' + ansi.reset , before=ansi.red)
+    def cannot_read_file_event(self, path):
+        self.message('error while reading file "' + path + '". ignored...' + ansi.reset, before=ansi.red)
     
-    def invalid_json_data_event(self , path):
-        self.message('invalid json data in "' + path + '". ignored...' + ansi.reset , before=ansi.red)
+    def invalid_json_data_event(self, path):
+        self.message('invalid json data in "' + path + '". ignored...' + ansi.reset, before=ansi.red)
 
-    def package_currently_installed_event(self , package: ArchiveModel , current_version: str):
-        pr.p('Installing ' + ansi.yellow + package.data['name'] + ':' + package.data['version'] + ansi.reset + ' (over ' + ansi.yellow + current_version + ansi.reset + ')...' , end=' ')
+    def package_currently_installed_event(self, package: ArchiveModel, current_version: str):
+        pr.p('Installing ' + ansi.yellow + package.data['name'] + ':' + package.data['version'] + ansi.reset + ' (over ' + ansi.yellow + current_version + ansi.reset + ')...', end=' ')
 
-    def package_new_installs_event(self , package: ArchiveModel):
-        pr.p('Installing ' + ansi.yellow + package.data['name'] + ':' + package.data['version'] + ansi.reset + '...' , end=' ')
+    def package_new_installs_event(self, package: ArchiveModel):
+        pr.p('Installing ' + ansi.yellow + package.data['name'] + ':' + package.data['version'] + ansi.reset + '...', end=' ')
 
-    def package_installed_event(self , package: ArchiveModel):
+    def package_installed_event(self, package: ArchiveModel):
         pr.p(ansi.green + 'OK' + ansi.reset)
 
-    def directory_not_empty_event(self , package: ArchiveModel , dirpath: str):
+    def directory_not_empty_event(self, package: ArchiveModel, dirpath: str):
         pr.e(ansi.yellow + 'warning: directory "' + dirpath + '" is not empty and will not be deleted' + ansi.reset)
 
-    def install_once(self , pkg: ArchiveModel):
+    def install_once(self, pkg: ArchiveModel):
         installer = Installer()
 
         try:
-            installer.install(pkg , {
+            installer.install(pkg, {
                 'cannot_read_file': self.cannot_read_file_event,
                 'invalid_json_data': self.invalid_json_data_event,
             },
@@ -146,7 +146,7 @@ class PkgCommand(BaseCommand):
                 'directory_not_empty': self.directory_not_empty_event,
             })
         except CannotReadFileException as ex:
-            self.message(ansi.red + str(ex) , True , before=ansi.reset)
+            self.message(ansi.red + str(ex), True, before=ansi.reset)
         except:
             raise
 
@@ -160,14 +160,14 @@ class PkgCommand(BaseCommand):
         i = 1
         while i < len(self.arguments):
             try:
-                pkg = ArchiveModel(self.arguments[i] , 'r')
+                pkg = ArchiveModel(self.arguments[i], 'r')
                 pkg.read()
                 self.install_once(pkg)
                 pkg.close()
             except FileNotFoundError as ex:
-                self.message('file "' + self.arguments[i] + '" not found' + ansi.reset , before=ansi.red)
+                self.message('file "' + self.arguments[i] + '" not found' + ansi.reset, before=ansi.red)
             except:
-                self.message('cannot open "' + self.arguments[i] + '": file is corrupt' + ansi.reset , before=ansi.red)
+                self.message('cannot open "' + self.arguments[i] + '": file is corrupt' + ansi.reset, before=ansi.red)
 
             i += 1
 
@@ -185,5 +185,5 @@ class PkgCommand(BaseCommand):
         elif self.arguments[0] == 'install':
             return self.sub_install()
         else:
-            self.message('unknow subcommand "' + self.arguments[0] + '"' , True)
+            self.message('unknow subcommand "' + self.arguments[0] + '"', True)
             return 1

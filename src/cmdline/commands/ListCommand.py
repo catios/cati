@@ -41,13 +41,13 @@ class ListCommand(BaseCommand):
         return {
             'name': 'list',
             'options': {
-                '--installed': [False , False],
+                '--installed': [False, False],
             },
             'max_args_count': 0,
             'min_args_count': 0,
         }
 
-    def show_once(self , package: Pkg):
+    def show_once(self, package: Pkg):
         output = ansi.green + package.data['name'] + ansi.reset + '/' +  ansi.yellow + package.data['version'] + ansi.reset
         if package.installed():
             output += '/Installed:' + ansi.blue + package.installed() + ansi.reset
@@ -68,7 +68,7 @@ class ListCommand(BaseCommand):
             packages = Pkg.all_list()
 
         for error in packages['errors']:
-            self.message(ansi.red + error , True , before=ansi.reset)
+            self.message(ansi.red + error, True, before=ansi.reset)
 
         for package in packages['list']:
             self.show_once(package)

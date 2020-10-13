@@ -1,5 +1,5 @@
 #
-# CannotReadFileException.py
+# exceptions.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -19,6 +19,8 @@
 # You should have received a copy of the GNU General Public License
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
+
+''' Package Exceptions '''
 
 class CannotReadFileException(Exception):
     pass

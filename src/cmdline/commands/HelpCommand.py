@@ -39,8 +39,8 @@ class HelpCommand(BaseCommand):
         return {
             'name': 'help',
             'options': {
-                '-v': [False , False], # [is-required , can-get-value]
-                '--version': [False , False]
+                '-v': [False, False], # [is-required, can-get-value]
+                '--version': [False, False]
             },
             'max_args_count': 1,
             'min_args_count': 0,
@@ -63,7 +63,7 @@ class HelpCommand(BaseCommand):
                 pr.p(obj.help_full(False))
                 return 0
             except:
-                self.message('unknow command "' + self.arguments[0] + '"' + ansi.reset , True , before=ansi.red)
+                self.message('unknow command "' + self.arguments[0] + '"' + ansi.reset, True, before=ansi.red)
                 return 1
 
         # show summary help of command

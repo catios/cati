@@ -28,13 +28,13 @@ from cmdline import pr
 class BaseCommand:
     ''' Cmdline command model base '''
 
-    def validate(self , args: dict):
+    def validate(self, args: dict):
         '''
         Validate inserted arguments in command config frame
         '''
 
         command_config = self.define()
-        command_config['options']['--help'] = [False , False]
+        command_config['options']['--help'] = [False, False]
 
         self.name = command_config['name']
         self.cati_exec = sys.argv[0]
@@ -78,7 +78,7 @@ class BaseCommand:
         self.args = args
         self.arguments = self.args['arguments']
 
-    def handle(self , args: dict):
+    def handle(self, args: dict):
         ''' Handle run the command '''
         self.validate(args)
 
@@ -89,7 +89,7 @@ class BaseCommand:
         
         return self.run()
 
-    def has_option(self , option: str):
+    def has_option(self, option: str):
         ''' Checks the option is inserted '''
         try:
             self.args['options'][option]
@@ -97,14 +97,14 @@ class BaseCommand:
         except:
             return False
 
-    def option_value(self , option: str):
+    def option_value(self, option: str):
         ''' Returns value of option '''
         if not self.has_option(option):
             return None
         
         return self.args['options'][option]
 
-    def message(self , msg , is_error=False , before=''):
+    def message(self, msg, is_error=False, before=''):
         ''' Prints a message on screen '''
         msg = before + self.cati_exec + ': ' + self.name + ': ' + msg
 
@@ -118,7 +118,7 @@ class BaseCommand:
     Copyright 2020 parsa mpsh - GPL-3
 Usage: cati [command] [options] [args]'''
 
-    def help_full(self , with_general_help=True):
+    def help_full(self, with_general_help=True):
         help_text = self.help.__doc__
         help_text = help_text.strip()
         help_text_tmp = ''

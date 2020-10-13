@@ -1,7 +1,7 @@
 SHELL = bash
 
 .DEFAULT_GOAL := main
-.PHONY := headers compile clean main all
+.PHONY := headers compile clean pylint main all
 
 PY = python3
 MANAGE = $(PY) ./manage.py
@@ -10,6 +10,16 @@ PYINSTALLER = $(PY) $(shell which pyinstaller)
 PYINSTALLER_IS_INSTALLED = 0
 ifneq (,$(shell command -v pyinstaller))
 PYINSTALLER_IS_INSTALLED = 1
+endif
+
+GIT_IS_INSTALLED = 0
+ifneq (,$(shell command -v git))
+GIT_IS_INSTALLED = 1
+endif
+
+PYLINT_IS_INSTALLED = 0
+ifneq (,$(shell command -v pylint3))
+PYLINT_IS_INSTALLED = 1
 endif
 
 headers:
@@ -29,4 +39,14 @@ clean:
 
 main: compile
 
+pylint:
+ifeq (1,$(PYLINT_IS_INSTALLED))
+	-@pylint3 $(shell find src -type f -name "*.py") | grep -v "(invalid-name)" > pylint.out
+else
+	@echo -e "\033[32mpylint3 is not installed\033[0m"
+endif
+
 all: headers
+ifeq (1,$(GIT_IS_INSTALLED))
+	-@git status
+endif

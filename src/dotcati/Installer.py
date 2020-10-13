@@ -22,27 +22,29 @@
 
 ''' Dotcati package installer '''
 
-import os, json, time
+import os
+import json
+import time
 from dotcati.ArchiveModel import ArchiveModel
-from frontend import Env
-from frontend import Temp
+from frontend import Env, Temp
 from dotcati import ListUpdater
 from package.Pkg import Pkg
 
 class Installer:
     ''' Dotcati package installer '''
 
-    def load_files(self , path: str , base_temp_path: str):
+    def load_files(self, path: str, base_temp_path: str):
         ''' Loads list of package files from extracted temp dir '''
 
         for item in os.listdir(path):
             if os.path.isfile(path + '/' + item):
-                self.loaded_files.append([(path + '/' + item)[len(base_temp_path):] , path + '/' + item])
+                self.loaded_files.append([(path + '/' + item)[len(base_temp_path):], path + '/' + item])
             else:
-                self.loaded_files.append([(path + '/' + item)[len(base_temp_path):] , path + '/' + item])
-                self.load_files(path + '/' + item , base_temp_path)
+                self.loaded_files.append([(path + '/' + item)[len(base_temp_path):], path + '/' + item])
+                self.load_files(path + '/' + item, base_temp_path)
 
-    def copy_once_file(self , paths):
+    def copy_once_file(self, paths):
+        ''' Copy one of package files '''
         if os.path.isfile(paths[1]):
             os.system('cp "' + paths[1] + '" "' + Env.base_path(paths[0]) + '"')
             self.copied_files.append('f:' + paths[0])
@@ -50,13 +52,13 @@ class Installer:
             os.mkdir(Env.base_path(paths[0]))
             self.copied_files.append('d:' + paths[0])
 
-    def copy_files(self , pkg: ArchiveModel , directory_not_empty_event) -> list:
+    def copy_files(self, pkg: ArchiveModel, directory_not_empty_event) -> list:
         ''' Copy package files on system '''
         # load package old files list
         old_files = []
         if os.path.isfile(Env.installed_lists('/' + pkg.data['name'] + '/files')):
             try:
-                f = open(Env.installed_lists('/' + pkg.data['name'] + '/files') , 'r')
+                f = open(Env.installed_lists('/' + pkg.data['name'] + '/files'), 'r')
                 for line in f.read().strip().split('\n'):
                     if line != '':
                         old_files.append(line.strip())
@@ -70,7 +72,7 @@ class Installer:
 
         # load files list from `files` directory of package
         self.loaded_files = []
-        self.load_files(temp_dir + '/files' , temp_dir + '/files')
+        self.load_files(temp_dir + '/files', temp_dir + '/files')
 
         # copy loaded files
         self.copied_files = []
@@ -89,7 +91,7 @@ class Installer:
 
         # delete not wanted old files
         for item in old_files:
-            parts = item.strip().split(':' , 1)
+            parts = item.strip().split(':', 1)
             if parts[0] == 'cf' or parts[0] == 'cd':
                 pass
             else:
@@ -100,11 +102,11 @@ class Installer:
                         os.rmdir(parts[1])
                     except:
                         # directory is not emptyr
-                        directory_not_empty_event(pkg , parts[1])
+                        directory_not_empty_event(pkg, parts[1])
 
         return self.copied_files
 
-    def install(self , pkg: ArchiveModel , index_updater_events: dict , installer_events: dict):
+    def install(self, pkg: ArchiveModel, index_updater_events: dict, installer_events: dict):
         '''
         Install .cati package
 
@@ -121,14 +123,14 @@ class Installer:
         lists_path = Env.packages_lists('/' + pkg.data['name'] + '/' + pkg.data['version'] + '-' + pkg.data['arch'])
 
         try:
-            lists_f = open(lists_path , 'r')
+            lists_f = open(lists_path, 'r')
             old_repo = json.loads(lists_f.read())['repo']
             lists_f.close()
         except:
             old_repo = 'Local'
             pass
 
-        lists_f = open(lists_path , 'w')
+        lists_f = open(lists_path, 'w')
         pkg.data['repo'] = old_repo
         lists_f.write(json.dumps(pkg.data))
         lists_f.close()
@@ -137,30 +139,29 @@ class Installer:
 
         # install package
         if Pkg.is_installed(pkg.data['name']):
-            installer_events['package_currently_installed'](pkg , Pkg.installed_version(pkg.data['name']))
+            installer_events['package_currently_installed'](pkg, Pkg.installed_version(pkg.data['name']))
         else:
             installer_events['package_new_installs'](pkg)
 
-        copied_files = self.copy_files(pkg , installer_events['directory_not_empty'])
+        copied_files = self.copy_files(pkg, installer_events['directory_not_empty'])
 
         # set install configuration
         if not os.path.isdir(Env.installed_lists('/' + pkg.data['name'])):
             os.mkdir(Env.installed_lists('/' + pkg.data['name']))
-        f_ver = open(Env.installed_lists('/' + pkg.data['name'] + '/ver') , 'w')
+        f_ver = open(Env.installed_lists('/' + pkg.data['name'] + '/ver'), 'w')
         f_ver.write(pkg.data['version']) # write installed version
         f_ver.close()
 
-        f_files = open(Env.installed_lists('/' + pkg.data['name'] + '/files') , 'w')
+        f_files = open(Env.installed_lists('/' + pkg.data['name'] + '/files'), 'w')
         copied_files_str = ''
         for copied_file in copied_files:
             copied_files_str += copied_file + '\n'
         f_files.write(copied_files_str.strip()) # write copied files
         f_files.close()
 
-        f_installed_at = open(Env.installed_lists('/' + pkg.data['name'] + '/installed_at') , 'w')
+        f_installed_at = open(Env.installed_lists('/' + pkg.data['name'] + '/installed_at'), 'w')
         f_installed_at.write(str(time.time())) # write time (installed at)
         f_installed_at.close()
 
         # call package installed event
         installer_events['package_installed'](pkg)
-

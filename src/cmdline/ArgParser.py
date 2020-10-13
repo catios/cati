@@ -39,7 +39,7 @@ def parse(args: list) -> dict:
 
     options = {}
     for option in tmp_options:
-        op_parts = option.split('=' , 1)
+        op_parts = option.split('=', 1)
         if len(op_parts) == 1:
             options[option] = None
         else:

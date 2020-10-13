@@ -47,7 +47,7 @@ def make_file():
     if os.path.exists(path):
         return make_file()
 
-    f = open(path , 'w')
+    f = open(path, 'w')
     f.write('')
     f.close()
     created_temp_dirs.append(path)

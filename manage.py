@@ -36,11 +36,11 @@ if len(sys.argv) <= 1:
 class SetHeaders:
     ''' Loads all of .py scripts and sets copyright header of them '''
 
-    def __init__(self , path: str):
+    def __init__(self, path: str):
         self.files_list = []
         self.get(path)
     
-    def get(self , path: str):
+    def get(self, path: str):
         ''' Load all of .py files from path '''
         for f in os.listdir(path):
             if os.path.isdir(path + '/' + f):
@@ -48,11 +48,11 @@ class SetHeaders:
             elif os.path.isfile(path + '/' + f):
                 self.add_once(path + '/' + f)
 
-    def add_once(self , f: str):
+    def add_once(self, f: str):
         ''' Checks a file path and if that file is .py file, add it to the list '''
         if f[len(f)-3:] == '.py':
             # replace // with /
-            f = f.replace('//' , '/')
+            f = f.replace('//', '/')
             self.files_list.append(f)
     
     @staticmethod
@@ -62,7 +62,7 @@ class SetHeaders:
         spliter = ('#' * 50) + '\n\n'
     
         # open file and add header
-        content = open(fname , 'r').read()
+        content = open(fname, 'r').read()
         new_content = ''
 
         parts = content.split(spliter)
@@ -81,7 +81,7 @@ class SetHeaders:
         if fname == 'src/cati.py':
             new_content = '#!/usr/bin/env python3\n' + new_content
 
-        f = open(fname , 'w')
+        f = open(fname, 'w')
         f.write(new_content)
         f.close()
 

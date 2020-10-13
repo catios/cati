@@ -22,15 +22,16 @@
 
 ''' .cati package file model '''
 
-import tarfile, json
+import tarfile
+import json
 from dotcati.PackageJsonValidator import PackageJsonValidator
 
 class ArchiveModel:
     ''' .cati package file model '''
-    def __init__(self , file_path: str , type_str: str):
-        self.tar = tarfile.open(file_path , type_str)
+    def __init__(self, file_path: str, type_str: str):
+        self.tar = tarfile.open(file_path, type_str)
     
-    def add(self , path , arcname=None):
+    def add(self, path, arcname=None):
         ''' Add a file to package archive '''
         return self.tar.add(path, arcname=arcname)
 
@@ -53,7 +54,7 @@ class ArchiveModel:
         if not PackageJsonValidator.validate(self.data):
             raise
 
-    def extractall(self , path):
+    def extractall(self, path):
         ''' Extract all of package files to `path` '''
         return self.tar.extractall(path)
 

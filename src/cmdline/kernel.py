@@ -23,10 +23,7 @@
 ''' Kernel of cli handler '''
 
 import sys
-
-from cmdline import ArgParser
-from cmdline import pr
-
+from cmdline import ArgParser, pr
 from cmdline.commands.HelpCommand import HelpCommand
 from cmdline.commands.PkgCommand import PkgCommand
 from cmdline.commands.ListCommand import ListCommand

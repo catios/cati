@@ -22,11 +22,11 @@
 
 ''' A tool to check program permission and if it haven't root permission, die the program '''
 
-import os, sys
-from cmdline import pr
-from cmdline import ansi
+import os
+import sys
+from cmdline import pr, ansi
 
-def require_root_permission(is_cli=True , die_action=None):
+def require_root_permission(is_cli=True, die_action=None):
     '''
     If `is_cli` argument is True, when user have not root permission,
     error will print on terminal. but if is False,

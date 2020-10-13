@@ -22,4 +22,4 @@
 
 def sys_arch():
     ''' Returns system architecture '''
-    return 'i386'
+    return 'i386' # TODO : return real arch

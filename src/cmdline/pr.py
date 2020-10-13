@@ -24,13 +24,13 @@
 
 import sys
 
-def p(value , end='\n'):
+def p(value, end='\n'):
     ''' Print on stdout '''
-    return print(value , end=end , flush=True)
+    return print(value, end=end, flush=True)
 
-def e(value , end='\n'):
+def e(value, end='\n'):
     ''' Print on stderr '''
-    return print(value , end=end , flush=True , file=sys.stderr)
+    return print(value, end=end, flush=True, file=sys.stderr)
 
 def exit(code=0):
     ''' Exits program with exit code '''

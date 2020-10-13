@@ -50,7 +50,7 @@ def update_indexes(events: dict):
                     if os.path.isfile(Env.packages_lists('/' + pkg + '/' + version)):
                         content = None
                         try:
-                            f = open(Env.packages_lists('/' + pkg + '/' + version) , 'r')
+                            f = open(Env.packages_lists('/' + pkg + '/' + version), 'r')
                             content = f.read()
                         except:
                             events['cannot_read_file'](Env.packages_lists('/' + pkg + '/' + version))
@@ -65,12 +65,8 @@ def update_indexes(events: dict):
                                     pkg_index[content_json['arch']] = []
                                 pkg_index[content_json['arch']].append(content_json['version'])
                             except:
-                                events['invalid_json_data'](Env.packages_lists('/' + pkg + '/' + version) , content)
+                                events['invalid_json_data'](Env.packages_lists('/' + pkg + '/' + version), content)
         # write generated index to index file
-        f_index = open(Env.packages_lists('/' + pkg + '/index') , 'w')
+        f_index = open(Env.packages_lists('/' + pkg + '/index'), 'w')
         f_index.write(json.dumps(pkg_index))
         f_index.close()
-
-
-
-

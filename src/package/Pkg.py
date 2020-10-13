@@ -25,13 +25,13 @@
 import os, json
 from frontend import Env
 from frontend.SysArch import sys_arch
-from package.exceptions.CannotReadFileException import CannotReadFileException
+from package.exceptions import CannotReadFileException
 from packaging import version
 
 class Pkg:
     ''' Package model '''
 
-    def __init__(self , data: dict):
+    def __init__(self, data: dict):
         self.data = data
         try:
             self.data['repo']
@@ -39,6 +39,7 @@ class Pkg:
             self.data['repo'] = 'Local'
 
     def installed(self):
+        ''' Checks current package is installed '''
         if not Pkg.is_installed(self.data['name']):
             return False
         
@@ -46,6 +47,7 @@ class Pkg:
     
     @staticmethod
     def is_installed(package_name: str):
+        ''' Gets a package name and checks is installed or not '''
         try:
             assert os.path.isdir(Env.installed_lists('/' + package_name))
             assert os.path.isfile(Env.installed_lists('/' + package_name + '/ver'))
@@ -60,7 +62,7 @@ class Pkg:
     def installed_version(package_name: str):
         ''' Gets name of package and returns installed version of that '''
         try:
-            f = open(Env.installed_lists('/' + package_name + '/ver') , 'r')
+            f = open(Env.installed_lists('/' + package_name + '/ver'), 'r')
             version = f.read()
             f.close()
         except:
@@ -90,13 +92,13 @@ class Pkg:
 
         for item in os.listdir(Env.packages_lists()):
             if os.path.isfile(Env.packages_lists('/' + item + '/index')):
-                f_index = open(Env.packages_lists('/' + item + '/index') , 'r')
+                f_index = open(Env.packages_lists('/' + item + '/index'), 'r')
                 try:
                     index_content = f_index.read()
                     try:
                         index_json = json.loads(index_content)
                         try:
-                            pkg = Pkg.load_from_index(index_json , item)
+                            pkg = Pkg.load_from_index(index_json, item)
                             packages.append(pkg)
                         except:
                             errors.append('faild to load package "' + item + '"')    
@@ -107,10 +109,16 @@ class Pkg:
             else:
                 errors.append(f'package "{item}" has not index file in lists ({Env.packages_lists("/" + item + "/index")} not found)')
 
-        return {'list': packages , 'errors': errors}
+        return {'list': packages, 'errors': errors}
 
     @staticmethod
-    def compare_version(a , b):
+    def compare_version(a, b):
+        '''
+        Compares two versions
+        if 1 is returned means a is upper than b
+        if 0 is returned means a equals b
+        if -1 is returned means a is less than b
+        '''
         a = version.parse(a)
         b = version.parse(b)
 
@@ -128,13 +136,13 @@ class Pkg:
         ''' Gets a list from versions and returns latest version in that list '''
         max_ver = ''
         for version in versions:
-            if Pkg.compare_version(version , max_ver) == 1:
+            if Pkg.compare_version(version, max_ver) == 1:
                 max_ver = version
 
         return max_ver
 
     @staticmethod
-    def load_from_index(index_json: dict , package_name: str):
+    def load_from_index(index_json: dict, package_name: str):
         ''' Loads package data from index file '''
         try:
             arch = sys_arch()
@@ -150,7 +158,7 @@ class Pkg:
         # load latest version
         ver = Pkg.get_last_version(versions)
 
-        f = open(Env.packages_lists('/' + package_name + '/' + ver + '-' + arch) , 'r')
+        f = open(Env.packages_lists('/' + package_name + '/' + ver + '-' + arch), 'r')
         content = f.read()
         f.close()
 

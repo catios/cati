@@ -22,8 +22,10 @@
 
 ''' Cati package builder '''
 
-import os, json, tarfile
-from dotcati.exceptions.InvalidPackageDirException import InvalidPackageDirException
+import os
+import json
+import tarfile
+from dotcati.exceptions import InvalidPackageDirException
 from dotcati.ArchiveModel import ArchiveModel
 from dotcati.PackageJsonValidator import PackageJsonValidator
 
@@ -34,7 +36,7 @@ class Builder:
     def json_fields_are_valid(data: dict):
         return PackageJsonValidator.validate(data)
 
-    def build(self , dirpath: str , output=None):
+    def build(self, dirpath: str, output=None):
         '''
         This function gets a directory and builds a .cati package from that
         the output is optional parameter. this argument can be used
@@ -49,7 +51,7 @@ class Builder:
 
         # validate data.json content
         try:
-            data_json_content = open(dirpath + '/data.json' , 'r').read()
+            data_json_content = open(dirpath + '/data.json', 'r').read()
         except:
             raise InvalidPackageDirException('cannot read data.json')
 
@@ -75,11 +77,11 @@ class Builder:
             
             output += '.cati'
 
-        self.compress(dirpath , output)
+        self.compress(dirpath, output)
 
         return output
 
-    def compress(self , dirpath: str , output: str):
+    def compress(self, dirpath: str, output: str):
         '''
         This function compresses content of target directory and build package
         in output file
@@ -89,5 +91,5 @@ class Builder:
         except:
             raise InvalidPackageDirException('file "' + output + '" for output of package not found')
         
-        pkg.add(dirpath , arcname='/')
+        pkg.add(dirpath, arcname='/')
         pkg.close()
