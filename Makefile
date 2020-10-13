@@ -1,7 +1,7 @@
 SHELL = bash
 
 .DEFAULT_GOAL := main
-.PHONY := headers compile clean pylint main all
+.PHONY := headers compile clean pylint test main all
 
 PY = python3
 MANAGE = $(PY) ./manage.py
@@ -46,7 +46,10 @@ else
 	@echo -e "\033[32mpylint3 is not installed\033[0m"
 endif
 
-all: headers
+test:
+	$(PY) tests/run.py
+
+all: headers test
 ifeq (1,$(GIT_IS_INSTALLED))
 	-@git status
 endif

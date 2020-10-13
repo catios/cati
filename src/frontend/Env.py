@@ -22,8 +22,10 @@
 
 ''' Handle environment file paths '''
 
+base_path_dir = ''
+
 def base_path(path=''):
-    return path
+    return base_path_dir + path
 
 def packages_lists(path=''):
     return base_path('/var/lib/cati/lists' + path)

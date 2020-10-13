@@ -1,5 +1,6 @@
+#!/usr/bin/env python3
 #
-# RootRequired.py
+# make_test.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -20,27 +21,26 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' A tool to check program permission and if it haven't root permission, die the program '''
+''' Test maker '''
 
-import os
 import sys
-from cmdline import pr, ansi
+import os
 
-is_testing = False
+test_template = '''from TestCore import TestCore
 
-def require_root_permission(is_cli=True, die_action=None):
-    '''
-    If `is_cli` argument is True, when user have not root permission,
-    error will print on terminal. but if is False,
-    the `die_action` will run as a function
-    '''
+class <testname>(TestCore):
+    def run(self):
+        self.assert_true(True)
+'''
 
-    if is_testing:
-        return
+if __name__ == '__main__':
+    if len(sys.argv) <= 1:
+        print('Please enter name of test as argument')
+        sys.exit(1)
+    
+    # create test
+    f = open('tests/items/' + sys.argv[1] + '.py', 'w')
+    f.write(test_template.replace('<testname>', sys.argv[1]))
+    f.close()
 
-    if os.getuid() != 0:
-        if is_cli:
-            pr.e(ansi.red + sys.argv[0] + ': permission is denied' + ansi.reset)
-            pr.exit(1)
-        else:
-            die_action()
+    print('Test was created successfuly')

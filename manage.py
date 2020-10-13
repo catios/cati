@@ -78,7 +78,7 @@ class SetHeaders:
         only_file_name = fname.split('/')[-1]
         new_content = '#\n# ' + only_file_name + '\n' + new_content
 
-        if fname == 'src/cati.py':
+        if fname == 'src/cati.py' or fname == 'tests/run.py' or fname == 'tests/make_test.py':
             new_content = '#!/usr/bin/env python3\n' + new_content
 
         f = open(fname, 'w')
@@ -90,6 +90,12 @@ if sys.argv[1] == 'update-headers':
     files_list = SetHeaders('src/').files_list
     for f in files_list:
         SetHeaders.set_once_file_header(f)
+
+    # get files list in tests/ folder and set header of them
+    files_list = SetHeaders('tests/').files_list
+    for f in files_list:
+        SetHeaders.set_once_file_header(f)
+
     sys.exit()
 
 print('Unknow command "' + sys.argv[1] + '"')

@@ -1,5 +1,5 @@
 #
-# RootRequired.py
+# TestCore.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -20,27 +20,21 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' A tool to check program permission and if it haven't root permission, die the program '''
+''' Testing system core '''
 
-import os
-import sys
-from cmdline import pr, ansi
+class TestCore:
+    ''' Testing system core '''
 
-is_testing = False
+    def get_name(self):
+        ''' Returns test name '''
+        str_type = str(type(self))
+        str_type = str_type[14:]
+        str_type = str_type[:len(str_type)-2]
+        str_type = str_type[:int(len(str_type)/2)]
+        return str_type
 
-def require_root_permission(is_cli=True, die_action=None):
-    '''
-    If `is_cli` argument is True, when user have not root permission,
-    error will print on terminal. but if is False,
-    the `die_action` will run as a function
-    '''
+    def do_assert(self, value):
+        assert value
 
-    if is_testing:
-        return
-
-    if os.getuid() != 0:
-        if is_cli:
-            pr.e(ansi.red + sys.argv[0] + ': permission is denied' + ansi.reset)
-            pr.exit(1)
-        else:
-            die_action()
+    def assert_true(self, value):
+        self.do_assert(value)

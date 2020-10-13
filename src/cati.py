@@ -23,8 +23,18 @@
 
 ''' Cati main cli entry point '''
 
-from cmdline import kernel
 import sys
+from cmdline import kernel, pr, ansi
+from frontend import HealthChecker
+
+# check cati installation health
+def cati_installation_is_corrupt(filepath: str, filetype: str):
+    pr.e(ansi.red + 'Cati installation is corrupt. to repair it, just run cati with root access' + ansi.reset)
+    pr.exit(1)
+
+HealthChecker.check({
+    'failed_to_repair': cati_installation_is_corrupt,
+})
 
 # handle cli
 kernel.handle(sys.argv[:])
