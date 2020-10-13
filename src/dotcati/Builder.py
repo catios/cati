@@ -74,7 +74,7 @@ class Builder:
                 output = dirpath[:-1]
             else:
                 output = dirpath
-            
+
             output += '.cati'
 
         self.compress(dirpath, output)
@@ -90,6 +90,6 @@ class Builder:
             pkg = ArchiveModel(output, "w:gz")
         except:
             raise InvalidPackageDirException('file "' + output + '" for output of package not found')
-        
+
         pkg.add(dirpath, arcname='/')
         pkg.close()

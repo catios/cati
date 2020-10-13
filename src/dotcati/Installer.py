@@ -65,7 +65,7 @@ class Installer:
             except:
                 pass
         old_files = list(reversed(old_files))
-        
+
         # extract package in a temp place
         temp_dir = Temp.make_dir()
         pkg.extractall(temp_dir)
@@ -119,7 +119,7 @@ class Installer:
         # add package data to lists
         if not os.path.isdir(Env.packages_lists('/' + pkg.data['name'])):
             os.mkdir(Env.packages_lists('/' + pkg.data['name']))
-        
+
         lists_path = Env.packages_lists('/' + pkg.data['name'] + '/' + pkg.data['version'] + '-' + pkg.data['arch'])
 
         try:

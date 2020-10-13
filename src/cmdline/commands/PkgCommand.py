@@ -63,7 +63,7 @@ class PkgCommand(BaseCommand):
         if len(self.arguments) <= 1:
             self.message('argument package directory(s) required')
             return 1
-        
+
         i = 1
         while i < len(self.arguments):
             try:
@@ -98,7 +98,7 @@ class PkgCommand(BaseCommand):
         if len(self.arguments) <= 1:
             self.message('argument package file(s) required')
             return 1
-        
+
         i = 1
         while i < len(self.arguments):
             try:
@@ -115,7 +115,7 @@ class PkgCommand(BaseCommand):
 
     def cannot_read_file_event(self, path):
         self.message('error while reading file "' + path + '". ignored...' + ansi.reset, before=ansi.red)
-    
+
     def invalid_json_data_event(self, path):
         self.message('invalid json data in "' + path + '". ignored...' + ansi.reset, before=ansi.red)
 
@@ -135,16 +135,18 @@ class PkgCommand(BaseCommand):
         installer = Installer()
 
         try:
-            installer.install(pkg, {
-                'cannot_read_file': self.cannot_read_file_event,
-                'invalid_json_data': self.invalid_json_data_event,
-            },
-            {
-                'package_currently_installed': self.package_currently_installed_event,
-                'package_new_installs': self.package_new_installs_event,
-                'package_installed': self.package_installed_event,
-                'directory_not_empty': self.directory_not_empty_event,
-            })
+            installer.install(pkg,
+                {
+                    'cannot_read_file': self.cannot_read_file_event,
+                    'invalid_json_data': self.invalid_json_data_event,
+                },
+                {
+                    'package_currently_installed': self.package_currently_installed_event,
+                    'package_new_installs': self.package_new_installs_event,
+                    'package_installed': self.package_installed_event,
+                    'directory_not_empty': self.directory_not_empty_event,
+                }
+            )
         except CannotReadFileException as ex:
             self.message(ansi.red + str(ex), True, before=ansi.reset)
         except:

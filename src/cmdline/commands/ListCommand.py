@@ -52,12 +52,12 @@ class ListCommand(BaseCommand):
         if package.installed():
             output += '/Installed:' + ansi.blue + package.installed() + ansi.reset
         output += '/[' + package.data['repo'] + ']'
-        
+
         pr.p(output)
 
     def run(self):
         ''' Run command '''
-        
+
         pr.p('Loading packages list...')
         pr.p('========================')
         # load list of packages

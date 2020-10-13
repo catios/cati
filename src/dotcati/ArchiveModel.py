@@ -30,7 +30,7 @@ class ArchiveModel:
     ''' .cati package file model '''
     def __init__(self, file_path: str, type_str: str):
         self.tar = tarfile.open(file_path, type_str)
-    
+
     def add(self, path, arcname=None):
         ''' Add a file to package archive '''
         return self.tar.add(path, arcname=arcname)

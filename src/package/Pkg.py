@@ -42,9 +42,9 @@ class Pkg:
         ''' Checks current package is installed '''
         if not Pkg.is_installed(self.data['name']):
             return False
-        
+
         return Pkg.installed_version(self.data['name'])
-    
+
     @staticmethod
     def is_installed(package_name: str):
         ''' Gets a package name and checks is installed or not '''
@@ -101,7 +101,7 @@ class Pkg:
                             pkg = Pkg.load_from_index(index_json, item)
                             packages.append(pkg)
                         except:
-                            errors.append('faild to load package "' + item + '"')    
+                            errors.append('faild to load package "' + item + '"')
                     except:
                         errors.append('invalid json content in "' + Env.packages_lists('/' + item + '/index') + '"')
                 except:
