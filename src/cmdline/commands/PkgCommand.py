@@ -20,7 +20,6 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-
 ''' Pkg command to work with .cati archives '''
 
 from cmdline.BaseCommand import BaseCommand
@@ -76,6 +75,7 @@ class PkgCommand(BaseCommand):
                 pr.p(ansi.green + 'Package ' + self.arguments[i] + ' created successfuly in ' + output_package + ansi.reset)
             except FileNotFoundError as ex:
                 self.message('directory "' + self.arguments[i] + '" not found' + ansi.reset, before=ansi.red)
+                return 1
             except InvalidPackageDirException as ex:
                 self.message('cannot build "' + self.arguments[i] + '": ' + str(ex) + ansi.reset, before=ansi.red)
 

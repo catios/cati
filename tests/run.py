@@ -30,7 +30,7 @@ import subprocess
 # add `src` directory to python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/src')
 
-from cmdline import ansi
+from cmdline import ansi, pr
 from frontend import RootRequired, Env, HealthChecker
 
 # keep testing start time
@@ -50,10 +50,14 @@ def load_test_env():
 print('Starting test system...')
 print('=======================')
 
+# load test environment
 print('Loading test environment...', end=' ')
 load_test_env()
 print(ansi.green + 'created in ' + Env.base_path() + ansi.reset)
 print()
+
+# disable printing
+pr.is_testing = True
 
 # load tests list
 tests_list = os.listdir('tests/items')

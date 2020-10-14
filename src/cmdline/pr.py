@@ -23,15 +23,28 @@
 ''' Print handling in cli '''
 
 import sys
+from frontend import Temp
+
+# a variable to enable/disable printing (used in test system)
+is_testing = False
 
 def p(value, end='\n'):
     ''' Print on stdout '''
+    if is_testing:
+    	return
     return print(value, end=end, flush=True)
 
 def e(value, end='\n'):
     ''' Print on stderr '''
+    if is_testing:
+    	return
     return print(value, end=end, flush=True, file=sys.stderr)
 
 def exit(code=0):
     ''' Exits program with exit code '''
+    if is_testing:
+    	return
+    # delete temp files before exit
+    Temp.clean()
+    # exit
     sys.exit(code)

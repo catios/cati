@@ -22,6 +22,9 @@
 
 ''' Testing system core '''
 
+from cmdline.kernel import commands
+from cmdline import ArgParser
+
 class TestCore:
     ''' Testing system core '''
 
@@ -33,8 +36,29 @@ class TestCore:
         str_type = str_type[:int(len(str_type)/2)]
         return str_type
 
-    def do_assert(self, value):
-        assert value
+    def do_assert(self, value, error_msg=''):
+        try:
+            assert value
+        except:
+            print('Assertion Error: ' + error_msg)
+            raise
 
     def assert_true(self, value):
-        self.do_assert(value)
+        ''' Assert True '''
+        self.do_assert(value, 'asserting that false is true')
+
+    def run_command(self, command_name: str, arguments=[]):
+        ''' Runs cmdline command '''
+        arguments.insert(0, 'cati')
+        arguments.insert(1, command_name)
+        cmd = commands[command_name]()
+        out = cmd.handle(ArgParser.parse(arguments))
+        if out == None:
+            out = 0
+        return int(out)
+
+    def assert_equals(self, first_value, last_value):
+        self.do_assert(
+            first_value == last_value,
+            'asserting "' + str(first_value) + '" equals "' + str(last_value) + '"'
+        )

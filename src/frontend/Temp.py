@@ -22,7 +22,9 @@
 
 ''' Handle temp files '''
 
-import random, os, shutil
+import random
+import os
+import shutil
 
 created_temp_dirs = []
 created_temp_files = []
@@ -59,11 +61,17 @@ def clean():
 
     for f in created_temp_files:
         if os.path.isfile(f):
-            os.remove(f)
+            try:
+                os.remove(f)
+            except:
+                pass
 
     for d in created_temp_dirs:
         if os.path.isdir(d):
-            shutil.rmtree(d)
+            try:
+                shutil.rmtree(d)
+            except:
+                pass
 
     created_temp_dirs = []
     created_temp_files = []
