@@ -48,10 +48,12 @@ def load_test_env():
     HealthChecker.check({}) # run health checker to create needed files in test environment
 
 print('Starting test system...')
+print('=======================')
 
-print('Loading test environment...', end='')
+print('Loading test environment...', end=' ')
 load_test_env()
-print('created in ' + Env.base_path())
+print(ansi.green + 'created in ' + Env.base_path() + ansi.reset)
+print()
 
 # load tests list
 tests_list = os.listdir('tests/items')
@@ -69,10 +71,10 @@ for test in orig_tests:
     test_name = test.get_name()
     print('\t' + test_name.replace('_', ' ') + ': ', end='', flush=True)
     test.run()
-    print('\033[32mPASS\033[0m')
+    print(ansi.green + 'PASS' + ansi.reset)
     count += 1
 
-print('\033[32mAll ' + str(count) + ' tests passed successfuly\033[0m')
-
-print('Cleaning up...')
+print()
+print(ansi.green + 'All ' + str(count) + ' tests passed successfuly')
+print('Cleaning up...' + ansi.reset)
 shutil.rmtree(Env.base_path_dir)

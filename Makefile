@@ -47,7 +47,9 @@ else
 endif
 
 test:
-	$(PY) tests/run.py
+	@echo ''
+	@$(PY) tests/run.py
+	@echo ''
 
 all: headers test
 ifeq (1,$(GIT_IS_INSTALLED))
