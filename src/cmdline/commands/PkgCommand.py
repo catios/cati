@@ -78,6 +78,7 @@ class PkgCommand(BaseCommand):
                 return 1
             except InvalidPackageDirException as ex:
                 self.message('cannot build "' + self.arguments[i] + '": ' + str(ex) + ansi.reset, before=ansi.red)
+                return 1
 
             i += 1
 

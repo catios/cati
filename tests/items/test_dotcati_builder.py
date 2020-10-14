@@ -25,6 +25,7 @@
 from TestCore import TestCore
 
 import os
+from dotcati.ArchiveModel import ArchiveModel
 
 class test_dotcati_builder(TestCore):
     """ Test test_dotcati_builder """
@@ -41,6 +42,15 @@ class test_dotcati_builder(TestCore):
         ), 1)
 
         self.assert_equals(self.run_command(
+            'pkg',
+            [
+                'build',
+                'repository/test-packages/build/testpkga/1.0',
+                '--output=repository/test-packages/output/notfound/test'
+            ]
+        ), 1)
+
+        self.assert_equals(self.run_command(
         	'pkg',
         	[
         		'build',
@@ -52,3 +62,22 @@ class test_dotcati_builder(TestCore):
         self.assert_true(
         	os.path.isfile('repository/test-packages/output/testpkga-1.0.cati')
         )
+
+        try:
+            pkg = ArchiveModel('repository/test-packages/output/testpkga-1.0.cati', 'r')
+            pkg.read()
+            self.assert_equals(pkg.data['name'], 'testpkga')
+            self.assert_equals(pkg.data['version'], '1.0')
+            self.assert_equals(pkg.data['arch'], 'i386')
+        except:
+            # created file is corrupt
+            self.assert_true(False)
+
+        self.assert_equals(self.run_command(
+            'pkg',
+            [
+                'build',
+                'repository/test-packages/build/testpkga/1.1-corrupt',
+                '--output=repository/test-packages/output/testpkga-1.0.cati'
+            ]
+        ), 1)
