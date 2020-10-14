@@ -58,9 +58,20 @@ class ArchiveModel:
         ''' Extract all of package files to `path` '''
         return self.tar.extractall(path)
 
-    def info(self):
+    def info(self) -> dict:
         ''' Returns package data.json information '''
         for member in self.tar.getmembers():
             if member.path == 'data.json':
                 f = self.tar.extractfile(member)
                 return json.loads(f.read())
+
+    def pkg_version(self) -> str:
+        ''' Returns dotcati package strcuture version '''
+        for member in self.tar.getmembers():
+            if member.path == 'cati-version':
+                # load dotcati package version
+                f = self.tar.extractfile(member)
+                return f.read().strip()
+
+        # default version
+        return '1.0'

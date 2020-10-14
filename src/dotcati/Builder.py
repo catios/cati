@@ -28,6 +28,7 @@ import tarfile
 from dotcati.exceptions import InvalidPackageDirException
 from dotcati.ArchiveModel import ArchiveModel
 from dotcati.PackageJsonValidator import PackageJsonValidator
+from frontend import Temp
 
 class Builder:
     ''' Cati package builder '''
@@ -92,4 +93,10 @@ class Builder:
             raise InvalidPackageDirException('file "' + output + '" for output of package not found')
 
         pkg.add(dirpath, arcname='/')
+        # add `cati-version` file
+        cati_version_tmp_f = Temp.make_file()
+        tmp_f = open(cati_version_tmp_f, 'w')
+        tmp_f.write('1.0')
+        tmp_f.close()
+        pkg.add(cati_version_tmp_f, arcname='/')
         pkg.close()
