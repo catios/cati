@@ -20,8 +20,12 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
+""" Test test_example """
+
 from TestCore import TestCore
 
 class test_example(TestCore):
+    """ Test test_example """
     def run(self):
+        """ Run test """
         self.assert_true(True)

@@ -26,10 +26,14 @@
 import sys
 import os
 
-test_template = '''from TestCore import TestCore
+test_template = '''""" Test <testname> """
+
+from TestCore import TestCore
 
 class <testname>(TestCore):
+    """ Test <testname> """
     def run(self):
+        """ Run test """
         self.assert_true(True)
 '''
 
