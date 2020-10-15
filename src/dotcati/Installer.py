@@ -68,7 +68,11 @@ class Installer:
 
         # extract package in a temp place
         temp_dir = Temp.make_dir()
-        pkg.extractall(temp_dir)
+        os.rmdir(temp_dir)
+        try:
+            pkg.extractall(temp_dir)
+        except IsADirectoryError:
+            pass
 
         # load files list from `files` directory of package
         self.loaded_files = []

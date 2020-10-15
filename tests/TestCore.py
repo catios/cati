@@ -22,8 +22,11 @@
 
 ''' Testing system core '''
 
+import os
+import shutil
 from cmdline.kernel import commands
 from cmdline import ArgParser
+from frontend import Env, HealthChecker
 
 class TestCore:
     ''' Testing system core '''
@@ -62,3 +65,17 @@ class TestCore:
             first_value == last_value,
             'asserting "' + str(first_value) + '" equals "' + str(last_value) + '"'
         )
+
+    def env(self, path=''):
+        return Env.base_path(path)
+
+    def refresh_env(self):
+        ''' Clear all of effects on testing environment '''
+        for item in os.listdir(self.env()):
+            if os.path.isfile(self.env('/' + item)):
+                os.remove(self.env('/' + item))
+            else:
+                shutil.rmtree(self.env('/' + item))
+
+        # repair cati installation
+        HealthChecker.check({})

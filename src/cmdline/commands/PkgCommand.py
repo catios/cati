@@ -170,6 +170,7 @@ class PkgCommand(BaseCommand):
             except FileNotFoundError as ex:
                 self.message('file "' + self.arguments[i] + '" not found' + ansi.reset, before=ansi.red)
             except:
+                raise
                 self.message('cannot open "' + self.arguments[i] + '": file is corrupt' + ansi.reset, before=ansi.red)
 
             i += 1
