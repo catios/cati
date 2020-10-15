@@ -131,7 +131,7 @@ class Installer:
                 raise DependencyError(dep)
 
         for conflict in conflicts:
-            if not Pkg.check_state(conflict):
+            if Pkg.check_state(conflict):
                 raise ConflictError(conflict)
 
     def install(self, pkg: ArchiveModel, index_updater_events: dict, installer_events: dict):
