@@ -68,7 +68,7 @@ class ListCommand(BaseCommand):
             packages = Pkg.all_list()
 
         for error in packages['errors']:
-            self.message(ansi.red + error, True, before=ansi.reset)
+            self.message(error + ansi.reset, True, before=ansi.red)
 
         for package in packages['list']:
             self.show_once(package)
