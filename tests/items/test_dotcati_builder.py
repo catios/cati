@@ -69,6 +69,13 @@ class test_dotcati_builder(TestCore):
             self.assert_equals(pkg.data['name'], 'testpkga')
             self.assert_equals(pkg.data['version'], '1.0')
             self.assert_equals(pkg.data['arch'], 'i386')
+            self.assert_equals(pkg.members(), [
+                'files',
+                'files/usr',
+                'files/usr/bin',
+                'files/usr/bin/cati-testpkga',
+                'data.json',
+            ])
         except:
             # created file is corrupt
             self.assert_true(False)
