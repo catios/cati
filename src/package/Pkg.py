@@ -165,3 +165,84 @@ class Pkg:
         content_json = json.loads(content)
 
         return Pkg(content_json)
+
+    def check_state(query_string: str) -> bool:
+        '''
+        Checks package state by query string
+
+        For examples:
+        "somepackage >= 1.5"
+        "somepackage"
+        "somepackage = 2.0"
+        "somepackage < 1.7"
+        "pkga | pkgb >= 1.0"
+        "pkga | pkgb | pkgc"
+        "pkga | pkgb & pkgc = 1.0"
+        '''
+
+        # parse query string
+        parts = query_string.strip().split('|')
+        orig_parts = []
+        for part in parts:
+            tmp = part.strip().split('&')
+            orig_parts.append(tmp)
+        
+        # parse once query
+        i = 0
+        while i < len(orig_parts):
+            j = 0
+            while j < len(orig_parts[i]):
+                orig_parts[i][j] = orig_parts[i][j].strip()
+                spliter = '='
+                if '>=' in orig_parts[i][j]:
+                    spliter = '>='
+                elif '>=' in orig_parts[i][j]:
+                    spliter = '<='
+                elif '>' in orig_parts[i][j]:
+                    spliter = '>'
+                elif '<' in orig_parts[i][j]:
+                    spliter = '<'
+                elif '=' in orig_parts[i][j]:
+                    spliter = '='
+                orig_parts[i][j] = orig_parts[i][j].split(spliter)
+                z = 0
+                while z < len(orig_parts[i][j]):
+                    orig_parts[i][j][z] = orig_parts[i][j][z].strip()
+                    z += 1
+                j += 1
+            i += 1
+
+        # check query
+        for tmp in orig_parts:
+            ands_ok = True
+            for p in tmp:
+                if len(p) == 1:
+                    if not Pkg.is_installed(p[0]):
+                        ands_ok = False
+                elif len(p) == 3:
+                    if not Pkg.is_installed(p[0]):
+                        ands_ok = False
+                    elif not Pkg.is_installed(p[2]):
+                        ands_ok = False
+                    else:
+                        a_ver = Pkg.installed_version(p[0])
+                        b_ver = Pkg.installed_version(p[2])
+                        if p[1] == '=':
+                            if Pkg.compare_version(a_ver, b_ver) != 0:
+                                ands_ok = False
+                        elif p[1] == '>':
+                            if Pkg.compare_version(a_ver, b_ver) != 1:
+                                ands_ok = False
+                        elif p[1] == '<':
+                            if Pkg.compare_version(a_ver, b_ver) != -1:
+                                ands_ok = False
+                        elif p[1] == '<=':
+                            if Pkg.compare_version(a_ver, b_ver) != -1 and Pkg.compare_version(a_ver, b_ver) != 0:
+                                ands_ok = False
+                        elif p[1] == '>=':
+                            if Pkg.compare_version(a_ver, b_ver) != 1 and Pkg.compare_version(a_ver, b_ver) != 0:
+                                ands_ok = False
+            if ands_ok:
+                return True
+
+        return False

@@ -27,8 +27,7 @@ from cmdline import pr
 from cmdline import ansi
 from dotcati.Builder import Builder
 from dotcati.Installer import Installer
-from dotcati.exceptions import InvalidPackageDirException
-from dotcati.exceptions import InvalidPackageFileException
+from dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError
 from dotcati.ArchiveModel import ArchiveModel
 from frontend.RootRequired import require_root_permission
 from package.exceptions import CannotReadFileException
@@ -132,11 +131,25 @@ class PkgCommand(BaseCommand):
     def directory_not_empty_event(self, package: ArchiveModel, dirpath: str):
         pr.e(ansi.yellow + 'warning: directory "' + dirpath + '" is not empty and will not be deleted' + ansi.reset)
 
+    def dep_and_conflict_error_event(self, pkg: ArchiveModel, ex: Exception):
+        pr.e(
+            ansi.red +\
+            'Error while installing ' + pkg.data['name'] + ' (' + pkg.data['version'] + '):',
+        )
+        if isinstance(ex, DependencyError):
+            pr.e('\tdependency error:')
+        elif isinstance(ex, ConflictError):
+            pr.e('\tconflict error:')
+        pr.e('\t\t' + str(ex))
+        pr.e(ansi.reset)
+
+        return 1
+
     def install_once(self, pkg: ArchiveModel):
         installer = Installer()
 
         try:
-            installer.install(pkg,
+            out = installer.install(pkg,
                 {
                     'cannot_read_file': self.cannot_read_file_event,
                     'invalid_json_data': self.invalid_json_data_event,
@@ -146,8 +159,12 @@ class PkgCommand(BaseCommand):
                     'package_new_installs': self.package_new_installs_event,
                     'package_installed': self.package_installed_event,
                     'directory_not_empty': self.directory_not_empty_event,
+                    'dep_and_conflict_error': self.dep_and_conflict_error_event,
                 }
             )
+
+            if type(out) == int:
+                return out
         except CannotReadFileException as ex:
             self.message(ansi.red + str(ex), True, before=ansi.reset)
         except:
@@ -165,7 +182,9 @@ class PkgCommand(BaseCommand):
             try:
                 pkg = ArchiveModel(self.arguments[i], 'r')
                 pkg.read()
-                self.install_once(pkg)
+                tmp = self.install_once(pkg)
+                if type(tmp) == int and tmp != 0:
+                    return tmp
                 pkg.close()
             except FileNotFoundError as ex:
                 self.message('file "' + self.arguments[i] + '" not found' + ansi.reset, before=ansi.red)

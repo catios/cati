@@ -1,5 +1,5 @@
 #
-# exceptions.py
+# test_depends_and_conflicts.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -20,16 +20,17 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Dotcati section exceptions '''
+""" Test test_depends_and_conflicts """
 
-class InvalidPackageDirException(Exception):
-    pass
+from TestCore import TestCore
 
-class InvalidPackageFileException(Exception):
-    pass
+class test_depends_and_conflicts(TestCore):
+    """ Test test_depends_and_conflicts """
+    def run(self):
+        """ Run test """
+        self.refresh_env()
 
-class DependencyError(Exception):
-    pass
-
-class ConflictError(Exception):
-    pass
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'repository/test-packages/packages/testpkgb-1.0.cati'
+        ]), 1)

@@ -29,6 +29,7 @@ from dotcati.ArchiveModel import ArchiveModel
 from frontend import Env, Temp
 from dotcati import ListUpdater
 from package.Pkg import Pkg
+from dotcati.exceptions import DependencyError, ConflictError
 
 class Installer:
     ''' Dotcati package installer '''
@@ -110,6 +111,29 @@ class Installer:
 
         return self.copied_files
 
+    def check_dep_and_conf(self, pkg: ArchiveModel):
+        ''' Checks package dependencies and conflicts '''
+
+        # load package dependencies
+        try:
+            depends = pkg.data['depends']
+        except:
+            depends = []
+
+        # load package conflicts
+        try:
+            conflicts = pkg.data['conflicts']
+        except:
+            conflicts = []
+
+        for dep in depends:
+            if not Pkg.check_state(dep):
+                raise DependencyError(dep)
+
+        for conflict in conflicts:
+            if not Pkg.check_state(conflict):
+                raise ConflictError(conflict)
+
     def install(self, pkg: ArchiveModel, index_updater_events: dict, installer_events: dict):
         '''
         Install .cati package
@@ -118,7 +142,16 @@ class Installer:
         - package_currently_install: gets a current installed version
         - package_new_installs: gets package archive
         - package_installed: will call after package installation
+        - dep_and_conflict_error
         '''
+
+        # check package dependencies and conflicts
+        try:
+            self.check_dep_and_conf(pkg)
+        except DependencyError as ex:
+            return installer_events['dep_and_conflict_error'](pkg, ex)
+        except ConflictError as ex:
+            return installer_events['dep_and_conflict_error'](pkg, ex)
 
         # add package data to lists
         if not os.path.isdir(Env.packages_lists('/' + pkg.data['name'])):
