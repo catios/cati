@@ -31,7 +31,7 @@ import subprocess
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/src')
 
 from cmdline import ansi, pr
-from frontend import RootRequired, Env, HealthChecker
+from frontend import RootRequired, Env, HealthChecker, Temp
 
 # keep testing start time
 testing_start_time = time.time()
@@ -82,3 +82,4 @@ print()
 print(ansi.green + 'All ' + str(count) + ' tests passed successfuly')
 print('Cleaning up...' + ansi.reset)
 shutil.rmtree(Env.base_path_dir)
+Temp.clean()
