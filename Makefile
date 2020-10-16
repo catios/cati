@@ -59,7 +59,7 @@ test:
 ### help		shows this help
 help:
 	@echo 'Makefile commands:'
-	@cat Makefile | grep '###' | grep -v '@cat'
+	@cat $(shell pwd)/Makefile | grep '###' | grep -v '@cat'
 
 ### all			do all of actions
 all: headers test
