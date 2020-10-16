@@ -63,20 +63,20 @@ class BaseCommand:
                     self.message('option ' + option + ' is required')
                     pr.exit(1)
 
-        # check arguments count
-        if command_config['max_args_count'] != None:
-            if len(args['arguments']) > command_config['max_args_count']:
-                self.message('this command requires less than ' + str(command_config['max_args_count']+1) + ' arguments')
-                pr.exit(1)
-
-        if command_config['min_args_count'] != None:
-            if len(args['arguments']) < command_config['min_args_count']:
-                self.message('this command requires more than ' + str(command_config['min_args_count']-1) + ' arguments')
-                pr.exit(1)
-
-        # everything is ok, run command
         self.args = args
         self.arguments = self.args['arguments']
+
+        # check arguments count
+        if not self.has_option('--help'):
+            if command_config['max_args_count'] != None:
+                if len(args['arguments']) > command_config['max_args_count']:
+                    self.message('this command requires less than ' + str(command_config['max_args_count']+1) + ' arguments')
+                    pr.exit(1)
+
+            if command_config['min_args_count'] != None:
+                if len(args['arguments']) < command_config['min_args_count']:
+                    self.message('this command requires more than ' + str(command_config['min_args_count']-1) + ' arguments')
+                    pr.exit(1)
 
     def handle(self, args: dict):
         ''' Handle run the command '''

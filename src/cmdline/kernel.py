@@ -27,12 +27,14 @@ from cmdline import ArgParser, pr
 from cmdline.commands.HelpCommand import HelpCommand
 from cmdline.commands.PkgCommand import PkgCommand
 from cmdline.commands.ListCommand import ListCommand
+from cmdline.commands.RemoveCommand import RemoveCommand
 
 # subcommands list
 commands = {
     'help': HelpCommand,
     'pkg': PkgCommand,
     'list': ListCommand,
+    'remove': RemoveCommand,
 }
 
 def handle(argv: list):
@@ -44,7 +46,7 @@ def handle(argv: list):
     if len(parsed_args['arguments']) == 0:
         # no subcommand called
         return
-    
+
     try:
         command = commands[parsed_args['arguments'][0]]
     except:

@@ -45,6 +45,38 @@ class Pkg:
 
         return Pkg.installed_version(self.data['name'])
 
+    def get_depends(self):
+        ''' Returns package dependencies list '''
+        try:
+            return self.data['depends']
+        except:
+            return []
+
+    def get_conflicts(self):
+        ''' Returns package conflicts list '''
+        try:
+            return self.data['conflicts']
+        except:
+            return []
+
+    def get_reverse_depends(self) -> list:
+        ''' Returns list of packages has dependency to this package '''
+        reverse_depends = []
+        for pkg in self.all_list()['list']:
+            for dep in pkg.get_depends():
+                if dep.strip().split(' ')[0] == self.data['name']:
+                    reverse_depends.append(pkg)
+        return reverse_depends
+
+    @staticmethod
+    def load_last(pkg_name: str):
+        ''' Load last version of package by name '''
+        pkgs_list = Pkg.all_list()
+        for item in pkgs_list['list']:
+            if item.data['name'] == pkg_name:
+                return item
+        return False
+
     @staticmethod
     def is_installed(package_name: str):
         ''' Gets a package name and checks is installed or not '''
