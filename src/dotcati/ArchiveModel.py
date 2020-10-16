@@ -25,6 +25,7 @@
 import tarfile
 import json
 from dotcati.PackageJsonValidator import PackageJsonValidator
+from package.Pkg import Pkg
 
 class ArchiveModel:
     ''' .cati package file model '''
@@ -53,6 +54,8 @@ class ArchiveModel:
         self.data = self.info()
         if not PackageJsonValidator.validate(self.data):
             raise
+        # try to compare version for version validation
+        Pkg.compare_version(self.data['version'], '0.0.0')
 
     def extractall(self, path):
         ''' Extract all of package files to `path` '''
