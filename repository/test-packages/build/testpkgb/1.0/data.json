@@ -1,8 +1,0 @@
-{
-    "name": "testpkgb",
-    "version": "1.0",
-    "arch": "all",
-    "depends": [
-        "testpkgc"
-    ]
-}
