@@ -193,7 +193,7 @@ class Pkg:
             j = 0
             while j < len(orig_parts[i]):
                 orig_parts[i][j] = orig_parts[i][j].strip()
-                spliter = '='
+                spliter = None
                 if '>=' in orig_parts[i][j]:
                     spliter = '>='
                 elif '>=' in orig_parts[i][j]:
@@ -204,7 +204,11 @@ class Pkg:
                     spliter = '<'
                 elif '=' in orig_parts[i][j]:
                     spliter = '='
-                orig_parts[i][j] = orig_parts[i][j].split(spliter)
+                if spliter != None:
+                    orig_parts[i][j] = orig_parts[i][j].split(spliter)
+                    orig_parts[i][j].insert(1, spliter)
+                else:
+                    orig_parts[i][j] = [orig_parts[i][j]]
                 z = 0
                 while z < len(orig_parts[i][j]):
                     orig_parts[i][j][z] = orig_parts[i][j][z].strip()
@@ -222,11 +226,9 @@ class Pkg:
                 elif len(p) == 3:
                     if not Pkg.is_installed(p[0]):
                         ands_ok = False
-                    elif not Pkg.is_installed(p[2]):
-                        ands_ok = False
                     else:
                         a_ver = Pkg.installed_version(p[0])
-                        b_ver = Pkg.installed_version(p[2])
+                        b_ver = p[2]
                         if p[1] == '=':
                             if Pkg.compare_version(a_ver, b_ver) != 0:
                                 ands_ok = False
@@ -242,6 +244,8 @@ class Pkg:
                         elif p[1] == '>=':
                             if Pkg.compare_version(a_ver, b_ver) != 1 and Pkg.compare_version(a_ver, b_ver) != 0:
                                 ands_ok = False
+                        else:
+                            ands_ok = False
             if ands_ok:
                 return True
 
