@@ -86,7 +86,18 @@ class PkgCommand(BaseCommand):
         output = ''
         output += 'Name: ' + ansi.green + pkg.data['name'] + ansi.reset + '\n'
         output += 'Version: ' + ansi.blue + pkg.data['version'] + ansi.reset + '\n'
-        output += 'Arch: ' + ansi.yellow + pkg.data['arch'] + ansi.reset
+        output += 'Arch: ' + ansi.yellow + pkg.data['arch'] + ansi.reset + '\n'
+        if pkg.get_depends():
+            output += 'Depends: '
+            for dep in pkg.get_depends():
+                output += dep + ', '
+            output = output[:len(output)-2]
+            output += '\n'
+        if pkg.get_conflicts():
+            output += 'Conflicts: '
+            for conflict in pkg.get_conflicts():
+                output += conflict + ', '
+            output = output[:len(output)-2]
         pr.p(output)
         if self.has_option('--files') or self.has_option('-f'):
             pr.p('Files:')
@@ -188,6 +199,7 @@ class PkgCommand(BaseCommand):
                 pkg.close()
             except FileNotFoundError as ex:
                 self.message('file "' + self.arguments[i] + '" not found' + ansi.reset, before=ansi.red)
+                return 1
             except:
                 raise
                 self.message('cannot open "' + self.arguments[i] + '": file is corrupt' + ansi.reset, before=ansi.red)

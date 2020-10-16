@@ -65,6 +65,20 @@ class ArchiveModel:
                 f = self.tar.extractfile(member)
                 return json.loads(f.read())
 
+    def get_depends(self):
+        ''' Returns package dependencies list '''
+        try:
+            return self.data['depends']
+        except:
+            return []
+
+    def get_conflicts(self):
+        ''' Returns package conflicts list '''
+        try:
+            return self.data['conflicts']
+        except:
+            return []
+
     def pkg_version(self) -> str:
         ''' Returns dotcati package strcuture version '''
         for member in self.tar.getmembers():
