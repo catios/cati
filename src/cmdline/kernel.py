@@ -50,7 +50,7 @@ def handle(argv: list):
     try:
         command = commands[parsed_args['arguments'][0]]
     except:
-        pr.e('cati: unknow command "' + parsed_args['arguments'][0] + '"')
+        pr.e(sys.argv[0] + ': unknow command "' + parsed_args['arguments'][0] + '"')
         pr.exit(1)
 
     cmdobj = command()
