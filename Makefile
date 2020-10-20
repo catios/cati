@@ -7,19 +7,9 @@ PY = python3
 MANAGE = $(PY) ./manage.py
 PYINSTALLER = $(PY) $(shell which pyinstaller)
 
-PYINSTALLER_IS_INSTALLED = 0
-ifneq (,$(shell command -v pyinstaller))
-PYINSTALLER_IS_INSTALLED = 1
-endif
-
 GIT_IS_INSTALLED = 0
 ifneq (,$(shell command -v git))
 GIT_IS_INSTALLED = 1
-endif
-
-PYLINT_IS_INSTALLED = 0
-ifneq (,$(shell command -v pylint3))
-PYLINT_IS_INSTALLED = 1
 endif
 
 ### headers		update codes copyright headers
@@ -29,11 +19,7 @@ headers:
 
 ### compile		compile program with pyinstaller
 compile:
-ifeq (1,$(PYINSTALLER_IS_INSTALLED))
-	@$(PYINSTALLER) src/cati.py --onefile
-else
-	@echo -e "\033[31mPyinstaller is not installed\033[0m"
-endif
+	@$(PY) -m PyInstaller src/cati.py --onefile
 
 ### clean		clear build files
 clean:
@@ -44,11 +30,7 @@ main: compile
 
 ### pylint		check code with pylint
 pylint:
-ifeq (1,$(PYLINT_IS_INSTALLED))
-	-@pylint3 $(shell find src -type f -name "*.py") | grep -v "(invalid-name)" > pylint.out
-else
-	@echo -e "\033[32mpylint3 is not installed\033[0m"
-endif
+	@$(PY) -m pylint $(shell find src -type f -name "*.py") | grep -v "(invalid-name)" > pylint.out
 
 ### test		run tests
 test:
