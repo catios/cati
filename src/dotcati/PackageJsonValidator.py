@@ -20,7 +20,10 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
+''' Package information json validator '''
+
 class PackageJsonValidator:
+    ''' Package information json validator '''
     @staticmethod
     def validate(data: dict):
         '''

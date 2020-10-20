@@ -20,6 +20,8 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
+''' Handle system architecture '''
+
 def sys_arch():
     ''' Returns system architecture '''
     return 'i386' # TODO : return real arch

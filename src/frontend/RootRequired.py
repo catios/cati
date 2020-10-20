@@ -31,10 +31,11 @@ is_testing = False
 def require_root_permission(is_cli=True, die_action=None):
     '''
     If `is_cli` argument is True, when user have not root permission,
-    error will print on terminal. but if is False,
+    error will print in terminal. but if is False,
     the `die_action` will run as a function
     '''
 
+    # if program is in testing mode don't check permission
     if is_testing:
         return
 

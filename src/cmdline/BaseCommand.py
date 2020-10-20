@@ -119,6 +119,10 @@ class BaseCommand:
 Usage: cati [command] [options] [args]'''
 
     def help_full(self, with_general_help=True):
+        '''
+        Returns full help of command
+        the `with_general_help` argument used to include/exclude general help of cati
+        '''
         help_text = self.help.__doc__
         help_text = help_text.strip()
         help_text_tmp = ''
@@ -134,5 +138,5 @@ Usage: cati [command] [options] [args]'''
         return help_text
 
     def help_summary(self):
+        ''' Returns summary of help (first line only) '''
         return self.help_full(False).split('\n')[0]
-

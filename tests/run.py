@@ -21,6 +21,8 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
+''' Test runner '''
+
 import os
 import sys
 import time

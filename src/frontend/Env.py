@@ -25,10 +25,13 @@
 base_path_dir = ''
 
 def base_path(path=''):
+    ''' Returns environment base path '''
     return base_path_dir + path
 
 def packages_lists(path=''):
+    ''' Packages list directory '''
     return base_path('/var/lib/cati/lists' + path)
 
 def installed_lists(path=''):
+    ''' Installed packages list directory '''
     return base_path('/var/lib/cati/installed' + path)
