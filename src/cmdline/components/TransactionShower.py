@@ -1,5 +1,5 @@
 #
-# Remove.py
+# TransactionShower.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -20,18 +20,14 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Remove transaction '''
+''' CLI transactions list shower '''
 
-from transaction.BaseTransaction import BaseTransaction
-from package.Pkg import Pkg
+from transaction.Calculator import Calculator
+from cmdline import ansi, pr
 
-class Remove(BaseTransaction):
-    ''' Remove transaction '''
-    @staticmethod
-    def run(pkg: Pkg, events: dict):
-        ''' Remove pkg '''
-        events['removing_package'](pkg)
-
-        # remove package
-
-        events['package_remove_finished'](pkg)
+def show(calc: Calculator):
+    ''' Show transactions from calc '''
+    if calc.to_remove:
+        pr.p('The following packages will be remove:')
+        for pkg in calc.to_remove:
+            pr.p('- ' + ansi.red + pkg.data['name'] + ansi.reset)
