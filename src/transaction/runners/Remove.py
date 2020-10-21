@@ -30,8 +30,12 @@ class Remove(BaseTransaction):
     @staticmethod
     def run(pkg: Pkg, events: dict):
         ''' Remove pkg '''
+        BaseTransaction.handle_state('remove', pkg)
+
         events['removing_package'](pkg)
 
         # remove package
 
         events['package_remove_finished'](pkg)
+
+        BaseTransaction.finish_last_state()

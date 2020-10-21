@@ -28,6 +28,7 @@ from cmdline.components import TransactionShower
 from package.Pkg import Pkg
 from transaction.Calculator import Calculator
 from transaction.runners.Remove import Remove
+from transaction.BaseTransaction import BaseTransaction
 
 class RemoveCommand(BaseCommand):
     def help(self):
@@ -95,3 +96,5 @@ class RemoveCommand(BaseCommand):
                     'package_remove_finished': self.package_remove_finished_event,
                 }
             )
+
+        BaseTransaction.finish_all_state()

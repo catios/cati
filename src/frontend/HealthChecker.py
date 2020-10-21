@@ -51,6 +51,7 @@ def check(events: dict):
     '''
 
     required_files = [
+        '/var/lib/cati/state.f'
     ]
 
     required_dirs = [
@@ -63,7 +64,7 @@ def check(events: dict):
 
     for f in required_files:
         if not os.path.isfile(Env.base_path('/' + f)):
-            repair_once_file(f)
+            repair_once_file(f, events)
 
     for d in required_dirs:
         if not os.path.isdir(Env.base_path('/' + d)):

@@ -22,6 +22,37 @@
 
 ''' Transaction base model '''
 
+from package.Pkg import Pkg
+from frontend import Env
+
 class BaseTransaction:
     ''' Transaction base model '''
-    pass
+    @staticmethod
+    def handle_state(section: str, pkg: Pkg):
+        """ add new item to state """
+        f = open(Env.state_file(), 'r')
+        current_content = f.read()
+        current_content += section + '%' + pkg.data['name'] + '%' + pkg.data['version'] + '%' + pkg.data['arch'] + '\n'
+        f.close()
+        f = open(Env.state_file(), 'w')
+        f.write(current_content)
+        f.close()
+
+    @staticmethod
+    def finish_last_state():
+        """ set last item in state to finished """
+        f = open(Env.state_file(), 'r')
+        current_content = f.read()
+        current_content = current_content[:len(current_content)-1]
+        current_content += '@\n'
+        f.close()
+        f = open(Env.state_file(), 'w')
+        f.write(current_content)
+        f.close()
+
+    @staticmethod
+    def finish_all_state():
+        """ clear all of states """
+        f = open(Env.state_file(), 'w')
+        f.write('')
+        f.close()

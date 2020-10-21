@@ -35,3 +35,6 @@ def packages_lists(path=''):
 def installed_lists(path=''):
     ''' Installed packages list directory '''
     return base_path('/var/lib/cati/installed' + path)
+
+def state_file():
+    return base_path('/var/lib/cati/state.f')
