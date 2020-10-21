@@ -58,6 +58,9 @@ class RemoveCommand(BaseCommand):
     def package_remove_finished_event(self, pkg: Pkg):
         pr.p(ansi.green + 'OK' + ansi.reset)
 
+    def dir_is_not_empty_event(self, pkg: Pkg, f: str):
+        self.message('warning: directory "' + f.split(':', 1)[1] + '" is not emptry and will not be delete' + ansi.yellow, before=ansi.reset)
+
     def run(self):
         ''' Run command '''
 
@@ -70,7 +73,10 @@ class RemoveCommand(BaseCommand):
             if pkg == False:
                 self.message('unknow package "' + arg + '"' + ansi.reset, before=ansi.red)
             else:
-                packages.append(pkg)
+                if pkg.installed():
+                    packages.append(pkg)
+                else:
+                    self.message('package "' + pkg.data['name'] + '" is not installed' + ansi.reset, before=ansi.red)
 
         # start removing loaded packages
         calc = Calculator()
@@ -78,6 +84,9 @@ class RemoveCommand(BaseCommand):
 
         # show transactions
         TransactionShower.show(calc)
+
+        if not calc.has_any_thing():
+            return
 
         # check user confirmation
         if not self.has_option('-y') and not self.has_option('--yes'):
@@ -94,6 +103,7 @@ class RemoveCommand(BaseCommand):
                 {
                     'removing_package': self.removing_package_event,
                     'package_remove_finished': self.package_remove_finished_event,
+                    'dir_is_not_emptry': self.dir_is_not_empty_event,
                 }
             )
 

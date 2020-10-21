@@ -22,8 +22,12 @@
 
 ''' Remove transaction '''
 
+import os
+import shutil
 from transaction.BaseTransaction import BaseTransaction
 from package.Pkg import Pkg
+from frontend import Env
+from cmdline import pr
 
 class Remove(BaseTransaction):
     ''' Remove transaction '''
@@ -35,6 +39,27 @@ class Remove(BaseTransaction):
         events['removing_package'](pkg)
 
         # remove package
+        installed_files = open(Env.installed_lists('/' + pkg.data['name'] + '/files'), 'r').read()
+        installed_files = installed_files.strip().split('\n')
+        for f in installed_files:
+            if f != '':
+                f_type = f.strip().split(':', 1)[0]
+                f_path = f.strip().split(':', 1)[1]
+                if f_type == 'f':
+                    if os.path.isfile(f_path):
+                        os.remove(f_path)
+                elif f_type == 'd':
+                    try:
+                        os.rmdir(f_path)
+                    except:
+                        events['dir_is_not_empty'](pkg, f)
+                elif f_type == 'cf':
+                    pass # TODO : handle conffiles
+                elif f_type == 'cd':
+                    pass
+
+        # remove installation config
+        shutil.rmtree(Env.installed_lists('/' + pkg.data['name']))
 
         events['package_remove_finished'](pkg)
 

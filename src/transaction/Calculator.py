@@ -58,3 +58,6 @@ class Calculator:
             if pkg.installed():
                 self.to_remove.append(pkg)
         self.refresh_lists()
+
+    def has_any_thing(self):
+        return self.to_remove
