@@ -28,10 +28,11 @@ from frontend import Env
 def repair_once_file(filepath: str, events: dict):
     ''' Repairs once file '''
     try:
-        f = open(Env.base_path('/' + filepath), 'w')
+        f = open(Env.base_path('/' + filepath).replace('//', '/'), 'w')
         f.write('')
         f.close()
     except:
+        raise
         events['failed_to_repair']('/' + filepath, 'file')
 
 def repair_once_dir(dirpath: str, events: dict):
@@ -62,10 +63,10 @@ def check(events: dict):
         '/var/lib/cati/installed',
     ]
 
-    for f in required_files:
-        if not os.path.isfile(Env.base_path('/' + f)):
-            repair_once_file(f, events)
-
     for d in required_dirs:
         if not os.path.isdir(Env.base_path('/' + d)):
             repair_once_dir(d, events)
+
+    for f in required_files:
+        if not os.path.isfile(Env.base_path('/' + f)):
+            repair_once_file(f, events)
