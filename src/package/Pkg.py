@@ -22,7 +22,8 @@
 
 ''' Package model '''
 
-import os, json
+import os
+import json
 from frontend import Env
 from frontend.SysArch import sys_arch
 from package.exceptions import CannotReadFileException

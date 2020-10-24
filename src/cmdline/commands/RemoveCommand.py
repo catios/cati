@@ -68,7 +68,7 @@ class RemoveCommand(BaseCommand):
         require_root_permission()
 
         pr.p('Loading packages list...')
-        print('=======================')
+        pr.p('=======================')
         # load list of packages
         packages = []
         for arg in self.arguments:
