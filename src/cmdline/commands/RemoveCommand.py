@@ -99,6 +99,9 @@ class RemoveCommand(BaseCommand):
                 pr.p(ansi.yellow + 'Abort.' + ansi.reset)
                 pr.exit(1)
 
+        # add packages to state
+        BaseTransaction.add_to_state(calc)
+
         # run transactions
         for pkg in calc.to_remove:
             Remove.run(
@@ -109,5 +112,6 @@ class RemoveCommand(BaseCommand):
                     'dir_is_not_emptry': self.dir_is_not_empty_event,
                 }
             )
+            BaseTransaction.pop_state()
 
         BaseTransaction.finish_all_state()

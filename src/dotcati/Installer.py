@@ -30,6 +30,7 @@ from frontend import Env, Temp
 from dotcati import ListUpdater
 from package.Pkg import Pkg
 from dotcati.exceptions import DependencyError, ConflictError
+from transaction.BaseTransaction import BaseTransaction
 
 class Installer:
     ''' Dotcati package installer '''
@@ -153,6 +154,11 @@ class Installer:
         except ConflictError as ex:
             return installer_events['dep_and_conflict_error'](pkg, ex)
 
+        # add package to state
+        state_f = open(Env.state_file(), 'w')
+        state_f.write('install%' + pkg.data['name'] + '%' + pkg.data['version'] + '%' + pkg.data['arch'] + '\n')
+        state_f.close()
+
         # add package data to lists
         if not os.path.isdir(Env.packages_lists('/' + pkg.data['name'])):
             os.mkdir(Env.packages_lists('/' + pkg.data['name']))
@@ -199,6 +205,9 @@ class Installer:
         f_installed_at = open(Env.installed_lists('/' + pkg.data['name'] + '/installed_at'), 'w')
         f_installed_at.write(str(time.time())) # write time (installed at)
         f_installed_at.close()
+
+        # pop package from state
+        BaseTransaction.pop_state()
 
         # call package installed event
         installer_events['package_installed'](pkg)

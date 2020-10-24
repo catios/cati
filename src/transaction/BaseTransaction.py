@@ -24,6 +24,7 @@
 
 from package.Pkg import Pkg
 from frontend import Env
+from transaction.Calculator import Calculator
 
 class BaseTransaction:
     ''' Transaction base model '''
@@ -55,4 +56,31 @@ class BaseTransaction:
         """ clear all of states """
         f = open(Env.state_file(), 'w')
         f.write('')
+        f.close()
+
+    @staticmethod
+    def add_to_state(calc: Calculator):
+        """ add new item to state """
+        content = ''
+        for item in calc.get_sorted_list():
+            content += item['action'] + '%' + item['pkg'].data['name'] + '%' + item['pkg'].data['version'] + '%' + item['pkg'].data['arch'] + '\n'
+        f = open(Env.state_file(), 'w')
+        f.write(content)
+        f.close()
+
+    @staticmethod
+    def pop_state():
+        """ add new item to state """
+        f = open(Env.state_file(), 'r')
+        content = f.read()
+        f.close()
+        content = content.strip()
+        lines = content.split('\n')
+        if lines:
+            lines.pop(0)
+        new_content = ''
+        for line in lines:
+            new_content += line + '\n'
+        f = open(Env.state_file(), 'w')
+        f.write(new_content)
         f.close()

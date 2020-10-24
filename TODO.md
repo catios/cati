@@ -2,9 +2,6 @@
 # TODO
 
 ### current todos
-- fix calculator remove bug
-- some changes in state system
-- write tests for remove system and another things
 - create show command
 
 ### for later

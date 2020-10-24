@@ -62,3 +62,17 @@ class Calculator:
 
     def has_any_thing(self):
         return self.to_remove
+
+    def get_sorted_list(self):
+        """ returns sorted list of all of packages """
+        # TODO : change it
+        new_list = []
+        for item in self.to_remove:
+            new_list.append(
+                {
+                    "action": "remove",
+                    "pkg": item
+                }
+            )
+
+        return new_list

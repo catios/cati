@@ -188,22 +188,33 @@ class PkgCommand(BaseCommand):
 
         require_root_permission()
 
+        packages_to_install = []
         i = 1
         while i < len(self.arguments):
             try:
                 pkg = ArchiveModel(self.arguments[i], 'r')
                 pkg.read()
-                tmp = self.install_once(pkg)
-                if type(tmp) == int and tmp != 0:
-                    return tmp
-                pkg.close()
+                packages_to_install.append(pkg)
             except FileNotFoundError as ex:
                 self.message('file "' + self.arguments[i] + '" not found' + ansi.reset, before=ansi.red)
                 return 1
             except:
-                raise
                 self.message('cannot open "' + self.arguments[i] + '": file is corrupt' + ansi.reset, before=ansi.red)
+                return 1
 
+            i += 1
+
+        i = 0
+        while i < len(packages_to_install):
+            try:
+                pkg = packages_to_install[i]
+                tmp = self.install_once(pkg)
+                if type(tmp) == int and tmp != 0:
+                    return tmp
+                pkg.close()
+            except:
+                self.message('cannot install "' + packages_to_install[i].data['name'] + ansi.reset, before=ansi.red)
+                return 1
             i += 1
 
     def run(self):
