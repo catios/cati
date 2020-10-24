@@ -48,7 +48,8 @@ class Calculator:
             # load reverse dependnecy of current package and add them to list
             reverse_depends = item.get_reverse_depends()
             for rd in reverse_depends:
-                new_to_remove.append(rd)
+                if not rd.data['name'] in [tmp.data['name'] for tmp in self.to_remove]:
+                    new_to_remove.append(rd)
         if new_to_remove:
             self.remove(new_to_remove)
 

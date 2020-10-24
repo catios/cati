@@ -29,6 +29,7 @@ from package.Pkg import Pkg
 from transaction.Calculator import Calculator
 from transaction.runners.Remove import Remove
 from transaction.BaseTransaction import BaseTransaction
+from frontend.RootRequired import require_root_permission
 
 class RemoveCommand(BaseCommand):
     def help(self):
@@ -64,6 +65,8 @@ class RemoveCommand(BaseCommand):
     def run(self):
         ''' Run command '''
 
+        require_root_permission()
+
         pr.p('Loading packages list...')
         print('=======================')
         # load list of packages
@@ -97,7 +100,7 @@ class RemoveCommand(BaseCommand):
                 pr.exit(1)
 
         # run transactions
-        for pkg in packages:
+        for pkg in calc.to_remove:
             Remove.run(
                 pkg,
                 {
