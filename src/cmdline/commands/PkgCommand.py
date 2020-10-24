@@ -31,6 +31,7 @@ from dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileExc
 from dotcati.ArchiveModel import ArchiveModel
 from frontend.RootRequired import require_root_permission
 from package.exceptions import CannotReadFileException
+from cmdline.components import PackageShower
 
 class PkgCommand(BaseCommand):
     def help(self):
@@ -83,22 +84,7 @@ class PkgCommand(BaseCommand):
 
     def show_once(self, pkg: ArchiveModel):
         # TODO : print more fields
-        output = ''
-        output += 'Name: ' + ansi.green + pkg.data['name'] + ansi.reset + '\n'
-        output += 'Version: ' + ansi.blue + pkg.data['version'] + ansi.reset + '\n'
-        output += 'Arch: ' + ansi.yellow + pkg.data['arch'] + ansi.reset + '\n'
-        if pkg.get_depends():
-            output += 'Depends: '
-            for dep in pkg.get_depends():
-                output += dep + ', '
-            output = output[:len(output)-2]
-            output += '\n'
-        if pkg.get_conflicts():
-            output += 'Conflicts: '
-            for conflict in pkg.get_conflicts():
-                output += conflict + ', '
-            output = output[:len(output)-2]
-        pr.p(output)
+        PackageShower.show(pkg.data)
         if self.has_option('--files') or self.has_option('-f'):
             pr.p('Files:')
             pkg.tar.list()
