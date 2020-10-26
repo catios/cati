@@ -169,3 +169,33 @@ class SomeCommand(BaseCommand):
 - `option_value('--some-option') -> string` | returns assigned value to a option. for example: `cati somecommand --some-option='some value'`
 - `help_summary() -> string` | returns command help summary (first line of help docstring is `help` function)
 - `help_full(with_general_help=True) -> string` | returns full help of command. if `with_general_help` argument be True, general help for cati commands will include in output but if be False, just help of command will return
+
+### Ansi
+
+to print colored texts, you can use `cmdline.ansi` module.
+
+for example:
+
+```python
+# ...
+
+from cmdline import ansi
+
+pr.p(ansi.green + 'hello' + ansi.reset) # output is an green `hello`
+
+# ...
+```
+
+you have to write your text after `ansi.<somecolor>`, and next to finish colored text write `ansi.reset`.
+
+#### another ansi items
+
+- `ansi.header`
+- `ansi.blue`
+- `ansi.green`
+- `ansi.yellow`
+- `ansi.red`
+- `ansi.bold`
+- `ansi.underline`
+
+also there is a `ansi.disable()` function. this function disable all of ansi items (means all of program output will not has any ansi).
