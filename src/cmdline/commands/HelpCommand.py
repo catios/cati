@@ -50,15 +50,15 @@ class HelpCommand(BaseCommand):
         ''' Run command '''
         # show general help
 
-        print(ansi.cyan + "  ______               __      __ ")
-        print(ansi.cyan + " /      \             /  |    /  |")
-        print(ansi.cyan + "//" + ansi.yellow + "$$$$$$" +ansi.cyan + "  |  ______   _" + ansi.yellow + "$$" + ansi.cyan + " |_   " + ansi.yellow + "$$"+ansi.cyan +"/ ")
-        print(ansi.yellow + "$$" + ansi.cyan + " |  " + ansi.yellow + "$$"  + ansi.cyan + "/  /      \ / " + ansi.yellow + "$$" + ansi.cyan + "   |  /  |")
-        print(ansi.yellow + "$$" + ansi.cyan + " |       " + ansi.yellow + "$$$$$$" + ansi.cyan + "  |" + ansi.yellow + "$$$$$$"   + ansi.cyan + "/   " + ansi.yellow + "$$"  + ansi.cyan +" |")
-        print(ansi.yellow + "$$" + ansi.cyan + " |   __  /    " + ansi.yellow +  "$$" + ansi.cyan + " |  " + ansi.yellow +  "$$" + ansi.cyan + " | __ "  + ansi.yellow +  "$$" + ansi.cyan + " |")
-        print(ansi.yellow + "$$" + ansi.cyan + " \__/  |/" + ansi.yellow + "$$$$$$$" + ansi.cyan + " |  " + ansi.yellow + "$$" + ansi.cyan + " |/  |" + ansi.yellow + "$$" + ansi.cyan + " | Cati Package manager [V0.1]")
-        print(ansi.yellow + "$$    $$" + ansi.cyan + "/" +ansi.yellow+ " $$    $$ " + ansi.cyan + "|" + ansi.yellow + "  $$  $$" + ansi.cyan + "/"+ansi.yellow+" $$" + ansi.cyan + " | Copyright 2020 parsa mpsh - GPL-3")
-        print(ansi.yellow + " $$$$$$" + ansi.cyan + "/" + ansi.yellow + "   $$$$$$$" + ansi.cyan +"/" + ansi.yellow + "    $$$$" + ansi.cyan + "/" + ansi.yellow + "  $$" + ansi.cyan + "/ " + ansi.white_kam + " Usage: cati [command] [options] [args]")
+        pr.p(ansi.cyan + "  ______               __      __ ")
+        pr.p(ansi.cyan + " /      \             /  |    /  |")
+        pr.p(ansi.cyan + "//" + ansi.yellow + "$$$$$$" +ansi.cyan + "  |  ______   _" + ansi.yellow + "$$" + ansi.cyan + " |_   " + ansi.yellow + "$$"+ansi.cyan +"/ ")
+        pr.p(ansi.yellow + "$$" + ansi.cyan + " |  " + ansi.yellow + "$$"  + ansi.cyan + "/  /      \ / " + ansi.yellow + "$$" + ansi.cyan + "   |  /  |")
+        pr.p(ansi.yellow + "$$" + ansi.cyan + " |       " + ansi.yellow + "$$$$$$" + ansi.cyan + "  |" + ansi.yellow + "$$$$$$"   + ansi.cyan + "/   " + ansi.yellow + "$$"  + ansi.cyan +" |")
+        pr.p(ansi.yellow + "$$" + ansi.cyan + " |   __  /    " + ansi.yellow +  "$$" + ansi.cyan + " |  " + ansi.yellow +  "$$" + ansi.cyan + " | __ "  + ansi.yellow +  "$$" + ansi.cyan + " |")
+        pr.p(ansi.yellow + "$$" + ansi.cyan + " \__/  |/" + ansi.yellow + "$$$$$$$" + ansi.cyan + " |  " + ansi.yellow + "$$" + ansi.cyan + " |/  |" + ansi.yellow + "$$" + ansi.cyan + " | Cati Package manager [V0.1]")
+        pr.p(ansi.yellow + "$$    $$" + ansi.cyan + "/" +ansi.yellow+ " $$    $$ " + ansi.cyan + "|" + ansi.yellow + "  $$  $$" + ansi.cyan + "/"+ansi.yellow+" $$" + ansi.cyan + " | Copyright 2020 parsa mpsh - GPL-3")
+        pr.p(ansi.yellow + " $$$$$$" + ansi.cyan + "/" + ansi.yellow + "   $$$$$$$" + ansi.cyan +"/" + ansi.yellow + "    $$$$" + ansi.cyan + "/" + ansi.yellow + "  $$" + ansi.cyan + "/ " + ansi.white_kam + " Usage: cati [command] [options] [args]")
 
         pr.p('')
 
