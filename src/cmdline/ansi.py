@@ -30,6 +30,7 @@ red = '\033[91m'
 reset = '\033[0m'
 bold = '\033[1m'
 underline = '\033[4m'
+cyan = '\033[96m'
 
 def disable():
     from cmdline import ansi
@@ -41,3 +42,4 @@ def disable():
     ansi.reset = ''
     ansi.bold = ''
     ansi.underline = ''
+    ansi.cyan = ''
