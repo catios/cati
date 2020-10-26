@@ -113,10 +113,10 @@ class BaseCommand:
         else:
             pr.p(msg)
 
-    #def general_help(self):
-        #return '''Cati package manager
-    #Copyright 2020 parsa mpsh - GPL-3
- #Usage: cati [command] [options] [args]'''
+    def general_help(self):
+        return '''Cati package manager
+    Copyright 2020 parsa mpsh - GPL-3
+Usage: cati [command] [options] [args]'''
 
     def help_full(self, with_general_help=True):
         '''
