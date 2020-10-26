@@ -21,10 +21,12 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python }}
-    - name: Run tests
+    - name: Install dependencies
       run: |
-        pip3 install -r requirements.txt
-        make all
+        cat requirements.txt | grep -v 'pkg-resources==0.0.0' > tmp-requirements.txt
+        pip3 install -r tmp-requirements.txt
+    - name: Run tests
+      run: make all
 
     name: Python ${{ matrix.python }}
 
@@ -42,9 +44,12 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python }}
+    - name: Install dependencies
+      run: |
+        cat requirements.txt | grep -v 'pkg-resources==0.0.0' > tmp-requirements.txt
+        pip3 install -r tmp-requirements.txt
     - name: Build
       run: |
-        pip3 install -r requirements.txt
         make all
         make
         ./dist/cati
