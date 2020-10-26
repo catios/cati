@@ -165,7 +165,7 @@ class SomeCommand(BaseCommand):
 
 #### another helper functions
 
-- has_option('--some-option') -> Boolean | checks an option is inserted or not
-- option_value('--some-option') -> string | returns assigned value to a option. for example: `cati somecommand --some-option='some value'`
-- help_summary() -> string | returns command help summary (first line of help docstring is `help` function)
-- help_full(with_general_help=True) -> string | returns full help of command. if `with_general_help` argument be True, general help for cati commands will include in output but if be False, just help of command will return
+- `has_option('--some-option') -> Boolean` | checks an option is inserted or not
+- `option_value('--some-option') -> string` | returns assigned value to a option. for example: `cati somecommand --some-option='some value'`
+- `help_summary() -> string` | returns command help summary (first line of help docstring is `help` function)
+- `help_full(with_general_help=True) -> string` | returns full help of command. if `with_general_help` argument be True, general help for cati commands will include in output but if be False, just help of command will return
