@@ -52,6 +52,6 @@ jobs:
       run: |
         make all
         make
-        ./dist/cati
+        sudo ./dist/cati
 
     name: Build Python ${{ matrix.python }}
