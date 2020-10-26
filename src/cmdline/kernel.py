@@ -45,7 +45,8 @@ def handle(argv: list):
     # find called subcommand by args
     if len(parsed_args['arguments']) == 0:
         # no subcommand called
-        return
+        # call help command as default
+        parsed_args['arguments'].append('help')
 
     try:
         command = commands[parsed_args['arguments'][0]]
