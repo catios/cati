@@ -1,0 +1,52 @@
+name: tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  linux_tests:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python: [3.6, 3.7, 3.8]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python }}
+    - name: Run tests
+      run: |
+        pip3 install -r requirements.txt
+        make all
+
+    name: Python ${{ matrix.python }}
+
+  linux_build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python: [3.6, 3.7, 3.8]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python }}
+    - name: Build
+      run: |
+        pip3 install -r requirements.txt
+        make all
+        make
+        ./dist/cati
+
+    name: Build Python ${{ matrix.python }}
