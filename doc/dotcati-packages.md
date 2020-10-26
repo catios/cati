@@ -14,8 +14,8 @@ an example for this file:
 
 ```json
 {
-	"name": "nameofpackage(required)",
-	"version": "version.of.package(required)",
+    "name": "nameofpackage(required)",
+    "version": "version.of.package(required)",
     "arch": "architecture-of-package(required, `all` arch means this package is for all of architectures)",
     "depends": [
         "(depends propertry is optional)",
@@ -26,7 +26,7 @@ an example for this file:
         "..."
     ],
     "conflicts": [
-        "conflicts propertry is optional"
+        "(conflicts propertry is optional)"
         "pkga",
         "pkga >= 1.7.13",
         "pkgb | pkgc <= 1.0",
