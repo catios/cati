@@ -62,6 +62,8 @@ class HelpCommand(BaseCommand):
 
         pr.p('')
 
+        pr.p(self.general_help())
+
         commands = kernel.commands
 
         # check arguments
