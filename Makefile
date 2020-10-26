@@ -5,7 +5,6 @@ SHELL = bash
 
 PY = python3
 MANAGE = $(PY) ./manage.py
-PYINSTALLER = $(PY) $(shell which pyinstaller)
 
 GIT_IS_INSTALLED = 0
 ifneq (,$(shell command -v git))
