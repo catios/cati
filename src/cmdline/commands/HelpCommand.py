@@ -49,8 +49,20 @@ class HelpCommand(BaseCommand):
     def run(self):
         ''' Run command '''
         # show general help
-        pr.p(self.general_help())
+
+        pr.p(ansi.cyan + "  ______               __      __ ")
+        pr.p(ansi.cyan + " /      \             /  |    /  |")
+        pr.p(ansi.cyan + "//" + ansi.yellow + "$$$$$$" +ansi.cyan + "  |  ______   _" + ansi.yellow + "$$" + ansi.cyan + " |_   " + ansi.yellow + "$$"+ansi.cyan +"/ ")
+        pr.p(ansi.yellow + "$$" + ansi.cyan + " |  " + ansi.yellow + "$$"  + ansi.cyan + "/  /      \ / " + ansi.yellow + "$$" + ansi.cyan + "   |  /  |")
+        pr.p(ansi.yellow + "$$" + ansi.cyan + " |       " + ansi.yellow + "$$$$$$" + ansi.cyan + "  |" + ansi.yellow + "$$$$$$"   + ansi.cyan + "/   " + ansi.yellow + "$$"  + ansi.cyan +" |")
+        pr.p(ansi.yellow + "$$" + ansi.cyan + " |   __  /    " + ansi.yellow +  "$$" + ansi.cyan + " |  " + ansi.yellow +  "$$" + ansi.cyan + " | __ "  + ansi.yellow +  "$$" + ansi.cyan + " |")
+        pr.p(ansi.yellow + "$$" + ansi.cyan + " \__/  |/" + ansi.yellow + "$$$$$$$" + ansi.cyan + " |  " + ansi.yellow + "$$" + ansi.cyan + " |/  |" + ansi.yellow + "$$" + ansi.cyan + " | Cati Package manager [V0.1]")
+        pr.p(ansi.yellow + "$$    $$" + ansi.cyan + "/" +ansi.yellow+ " $$    $$ " + ansi.cyan + "|" + ansi.yellow + "  $$  $$" + ansi.cyan + "/"+ansi.yellow+" $$" + ansi.cyan + " | Copyright 2020 parsa mpsh - GPL-3")
+        pr.p(ansi.yellow + " $$$$$$" + ansi.cyan + "/" + ansi.yellow + "   $$$$$$$" + ansi.cyan +"/" + ansi.yellow + "    $$$$" + ansi.cyan + "/" + ansi.yellow + "  $$" + ansi.cyan + "/ " + ansi.white_kam + " Usage: cati [command] [options] [args]")
+
         pr.p('')
+
+        pr.p(self.general_help())
 
         commands = kernel.commands
 
@@ -58,6 +70,7 @@ class HelpCommand(BaseCommand):
         if len(self.arguments) >= 1:
             # a command inserted. show detail of that command
             try:
+
                 cmd = commands[self.arguments[0]]
                 obj = cmd()
                 pr.p(obj.help_full(False))
