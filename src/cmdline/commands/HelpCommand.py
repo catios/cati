@@ -78,7 +78,7 @@ class HelpCommand(BaseCommand):
                 return 1
 
         # show summary help of command
-        pr.p('Subcommand:')
+        pr.p('Subcommands:')
         for cmd in commands:
             obj = commands[cmd]()
             pr.p('\t' + ansi.green + cmd + ansi.reset + '\t' + obj.help_summary())
