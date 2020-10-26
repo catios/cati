@@ -51,3 +51,7 @@ if you are adding/changing a feature, sync test of that feature with your change
 
 ## always run `make all`
 always run `make all` command after your changes.
+
+## idea
+if you don't have any idea and want to contribute, best way to find tasks is that to check [issues](https://github.com/parsampsh/cati/issues) and [todo](/TODO.md) file.
+
