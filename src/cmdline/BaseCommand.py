@@ -25,6 +25,8 @@
 import sys
 from cmdline import pr
 
+cati_version = 'v0.1'
+
 class BaseCommand:
     ''' Cmdline command model base '''
 
@@ -114,8 +116,8 @@ class BaseCommand:
             pr.p(msg)
 
     def general_help(self):
-        return '''Cati package manager
-    Copyright 2020 parsa mpsh - GPL-3
+        return '''Cati package manager [''' + cati_version + ''']
+Copyright 2020 parsa mpsh - GPL-3
 Usage: cati [command] [options] [args]'''
 
     def help_full(self, with_general_help=True):
