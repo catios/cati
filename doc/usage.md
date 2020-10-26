@@ -1,5 +1,5 @@
 # Cati usage
-to learn cati cli usage, read this file.
+to learn cati usage, read this file.
 
 ## help command
 this command shows help:
@@ -27,7 +27,7 @@ cati pkg show pkg1.cati /path/to/pkg2.cati # ...
 ```
 
 Options:
-- --files|-f: shows list of package files
+- `--files|-f`: shows list of package files
 
 #### pkg build
 ```bash
@@ -37,7 +37,7 @@ cati pkg build package-dir1/ package-dir2/ # ...
 ```
 
 Options:
-- --output|-o: set package package output path
+- `--output|-o`: set package package output path
 
 #### pkg install
 ```bash
@@ -54,7 +54,7 @@ cati list
 ```
 
 Options:
-- --installed: only show installed packages list
+- `--installed`: only show installed packages list
 
 ## remove command
 this command remove packages
