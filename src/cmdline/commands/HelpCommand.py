@@ -49,7 +49,17 @@ class HelpCommand(BaseCommand):
     def run(self):
         ''' Run command '''
         # show general help
-        pr.p(self.general_help())
+
+        print(ansi.cyan + "  ______               __      __ ")
+        print(ansi.cyan + " /      \             /  |    /  |")
+        print(ansi.cyan + "//" + ansi.yellow + "$$$$$$" +ansi.cyan + "  |  ______   _" + ansi.yellow + "$$" + ansi.cyan + " |_   " + ansi.yellow + "$$"+ansi.cyan +"/ ")
+        print(ansi.yellow + "$$" + ansi.cyan + " |  " + ansi.yellow + "$$"  + ansi.cyan + "/  /      \ / " + ansi.yellow + "$$" + ansi.cyan + "   |  /  |")
+        print(ansi.yellow + "$$" + ansi.cyan + " |       " + ansi.yellow + "$$$$$$" + ansi.cyan + "  |" + ansi.yellow + "$$$$$$"   + ansi.cyan + "/   " + ansi.yellow + "$$"  + ansi.cyan +" |")
+        print(ansi.yellow + "$$" + ansi.cyan + " |   __  /    " + ansi.yellow +  "$$" + ansi.cyan + " |  " + ansi.yellow +  "$$" + ansi.cyan + " | __ "  + ansi.yellow +  "$$" + ansi.cyan + " |")
+        print(ansi.yellow + "$$" + ansi.cyan + " \__/  |/" + ansi.yellow + "$$$$$$$" + ansi.cyan + " |  " + ansi.yellow + "$$" + ansi.cyan + " |/  |" + ansi.yellow + "$$" + ansi.cyan + " | Cati Package manager [V0.1]")
+        print(ansi.yellow + "$$    $$" + ansi.cyan + "/" +ansi.yellow+ " $$    $$ " + ansi.cyan + "|" + ansi.yellow + "  $$  $$" + ansi.cyan + "/"+ansi.yellow+" $$" + ansi.cyan + " | Copyright 2020 parsa mpsh - GPL-3")
+        print(ansi.yellow + " $$$$$$" + ansi.cyan + "/" + ansi.yellow + "   $$$$$$$" + ansi.cyan +"/" + ansi.yellow + "    $$$$" + ansi.cyan + "/" + ansi.yellow + "  $$" + ansi.cyan + "/ " + ansi.white_kam + " Usage: cati [command] [options] [args]")
+
         pr.p('')
 
         commands = kernel.commands
@@ -58,6 +68,7 @@ class HelpCommand(BaseCommand):
         if len(self.arguments) >= 1:
             # a command inserted. show detail of that command
             try:
+
                 cmd = commands[self.arguments[0]]
                 obj = cmd()
                 pr.p(obj.help_full(False))
