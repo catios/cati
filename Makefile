@@ -17,8 +17,14 @@ headers:
 	@echo -e "\033[32mCode copyright headers updated successfuly\033[0m"
 
 ### compile		compile program with pyinstaller
-compile:
+compile: all
 	@$(PY) -m PyInstaller src/cati.py --onefile
+
+### install		installs program on system
+install: ./dist/cati
+	@cp ./dist/cati /usr/bin/cati
+	@echo -e "\033[32mCati installed successfuly\033[0m"
+	@cati
 
 ### clean		clear build files
 clean:

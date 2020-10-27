@@ -11,7 +11,7 @@ RUN pip3 install -r tmp-requirements.txt
 # compile and install
 RUN make all
 RUN make
-RUN cp ./dist/cati /usr/bin/cati
+RUN make install
 
 # run cati
 RUN cati

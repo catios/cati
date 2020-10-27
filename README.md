@@ -12,3 +12,20 @@ you can read full documentation of cati in [doc folder](/doc)
 
 ## Contributing
 if you want to contribute to cati project, read [contributing guide](/CONTRIBUTING.md)
+
+## installation
+to compile and install cati on your system, do the following steps:
+
+```bash
+cp /path/to/cati
+
+make
+sudo make install
+```
+
+now you can run cati in termianl:
+
+```bash
+cati
+```
+
