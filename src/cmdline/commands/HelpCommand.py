@@ -66,6 +66,7 @@ class HelpCommand(BaseCommand):
         pr.p('\nOptions:')
         pr.p('\t-v|--version: shows cati version')
         pr.p('\t--no-ansi: disable terminal ansi colors')
+        pr.p('\t--help: pass it to commands to show help of that command')
 
         pr.p()
 
