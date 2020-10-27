@@ -28,13 +28,13 @@ from frontend import Temp
 # a variable to enable/disable printing (used in test system)
 is_testing = False
 
-def p(value, end='\n'):
+def p(value='', end='\n'):
     ''' Print on stdout '''
     if is_testing:
     	return
     return print(value, end=end, flush=True)
 
-def e(value, end='\n'):
+def e(value='', end='\n'):
     ''' Print on stderr '''
     if is_testing:
     	return
