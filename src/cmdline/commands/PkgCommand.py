@@ -23,8 +23,7 @@
 ''' Pkg command to work with .cati archives '''
 
 from cmdline.BaseCommand import BaseCommand
-from cmdline import pr
-from cmdline import ansi
+from cmdline import pr, ansi
 from dotcati.Builder import Builder
 from dotcati.Installer import Installer
 from dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError

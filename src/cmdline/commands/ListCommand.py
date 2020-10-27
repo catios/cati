@@ -23,8 +23,7 @@
 ''' List command '''
 
 from cmdline.BaseCommand import BaseCommand
-from cmdline import pr
-from cmdline import ansi
+from cmdline import pr, ansi
 from package.Pkg import Pkg
 
 class ListCommand(BaseCommand):
