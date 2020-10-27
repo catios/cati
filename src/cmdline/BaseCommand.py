@@ -24,8 +24,7 @@
 
 import sys
 from cmdline import pr
-
-cati_version = 'v0.1'
+from frontend.Version import version as cati_version
 
 class BaseCommand:
     ''' Cmdline command model base '''

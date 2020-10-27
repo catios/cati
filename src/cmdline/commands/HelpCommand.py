@@ -23,9 +23,8 @@
 ''' Help command '''
 
 from cmdline.BaseCommand import BaseCommand
-from cmdline import pr
-from cmdline import kernel
-from cmdline import ansi
+from cmdline import kernel, ansi, pr
+from frontend.Version import version as cati_version
 
 class HelpCommand(BaseCommand):
     def help(self):
@@ -48,7 +47,11 @@ class HelpCommand(BaseCommand):
 
     def run(self):
         ''' Run command '''
-        # show general help
+
+        # check -v|--version options
+        if self.has_option('--version') or self.has_option('-v'):
+            pr.p(cati_version)
+            return
 
         pr.p(ansi.cyan + "  ______               __      __ ")
         pr.p(ansi.cyan + " /      \             /  |    /  |")
@@ -60,7 +63,10 @@ class HelpCommand(BaseCommand):
         pr.p(ansi.yellow + "$$    $$" + ansi.cyan + "/" +ansi.yellow+ " $$    $$ " + ansi.cyan + "|" + ansi.yellow + "  $$  $$" + ansi.cyan + "/"+ansi.yellow+" $$" + ansi.cyan + " | " + self.general_help().split('\n')[1])
         pr.p(ansi.yellow + " $$$$$$" + ansi.cyan + "/" + ansi.yellow + "   $$$$$$$" + ansi.cyan +"/" + ansi.yellow + "    $$$$" + ansi.cyan + "/" + ansi.yellow + "  $$" + ansi.cyan + "/ " + ansi.cyan + " " + self.general_help().split('\n')[2] + ansi.reset)
 
-        pr.p('')
+        pr.p('\nOptions:')
+        pr.p('\t-v|--version: shows cati version')
+
+        pr.p()
 
         commands = kernel.commands
 

@@ -125,3 +125,6 @@ Temp.clean()
 
 # ...
 ```
+
+## Version
+the `src/frontend/Version.py` file keeps cati installation version in `version` variable.

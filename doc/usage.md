@@ -1,6 +1,9 @@
 # Cati usage
 to learn cati usage, read this file.
 
+## Options
+- `-v|--version`: shows cati version
+
 ## help command
 this command shows help:
 
