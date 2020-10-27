@@ -3,6 +3,7 @@ to learn cati usage, read this file.
 
 ## Options
 - `-v|--version`: shows cati version
+- `--no-ansi`: disable terminal ansi colors
 
 ## help command
 this command shows help:

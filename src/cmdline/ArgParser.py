@@ -22,6 +22,8 @@
 
 ''' Cli argument parser '''
 
+from cmdline import ansi
+
 def parse(args: list) -> dict:
     ''' Gets a list from program arguments and returns parsed args '''
 
@@ -44,6 +46,15 @@ def parse(args: list) -> dict:
             options[option] = None
         else:
             options[op_parts[0]] = op_parts[1]
+
+    # check for --no-ansi
+    i = 0
+    for k in options:
+        if k == '--no-ansi':
+            del options[k]
+            # disable ansi
+            ansi.disable()
+            break
 
     return {
         'options': options,
