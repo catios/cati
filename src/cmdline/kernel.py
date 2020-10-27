@@ -28,6 +28,7 @@ from cmdline.commands.HelpCommand import HelpCommand
 from cmdline.commands.PkgCommand import PkgCommand
 from cmdline.commands.ListCommand import ListCommand
 from cmdline.commands.RemoveCommand import RemoveCommand
+from cmdline.commands.ShowCommand import ShowCommand
 
 # subcommands list
 commands = {
@@ -35,6 +36,7 @@ commands = {
     'pkg': PkgCommand,
     'list': ListCommand,
     'remove': RemoveCommand,
+    'show': ShowCommand,
 }
 
 def handle(argv: list):
