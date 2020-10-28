@@ -82,7 +82,6 @@ class PkgCommand(BaseCommand):
             i += 1
 
     def show_once(self, pkg: ArchiveModel):
-        # TODO : print more fields
         PackageShower.show(pkg.data)
         if self.has_option('--files') or self.has_option('-f'):
             pr.p('Files:')

@@ -17,8 +17,16 @@ an example for this file:
     "name": "nameofpackage(required)",
     "version": "version.of.package(required)",
     "arch": "architecture-of-package(required, `all` arch means this package is for all of architectures)",
+
+    "__comment__": "the following fields are optional",
+
+    "author": "the main developer of program",
+    "maintainer": "maintainer of this package",
+    "description": "description of this package",
+    "channel": "channel of this version",
+
+    "category": ["list", "of", "categories"],
     "depends": [
-        "(depends propertry is optional)",
         "pkga",
         "pkga >= 1.7.13",
         "pkgb | pkgc <= 1.0",
@@ -26,7 +34,6 @@ an example for this file:
         "..."
     ],
     "conflicts": [
-        "(conflicts propertry is optional)"
         "pkga",
         "pkga >= 1.7.13",
         "pkgb | pkgc <= 1.0",
