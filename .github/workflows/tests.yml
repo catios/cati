@@ -55,19 +55,3 @@ jobs:
         sudo ./dist/cati
 
     name: Build Python ${{ matrix.python }}
-
-  dockerfile:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - uses: docker-practice/actions-setup-docker@master
-      with:
-        docker_channel: nightly
-        docker_nightly_version: snapshot-20201008
-    - name: Build Image
-      run: |
-        docker build -t cati .
-
-    name: Dockerfile
