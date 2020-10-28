@@ -23,9 +23,9 @@
 ''' Show command '''
 
 from cmdline.BaseCommand import BaseCommand
-from cmdline import pr
-from cmdline import ansi
+from cmdline import pr, ansi
 from package.Pkg import Pkg
+from cmdline.components import PackageShower
 
 class ShowCommand(BaseCommand):
     def help(self):
@@ -50,5 +50,25 @@ class ShowCommand(BaseCommand):
         pr.p('Loading packages list...')
         pr.p('========================')
 
+        loaded_packages = []
+
         for argument in self.arguments:
-            pr.p(argument)
+            arg_parts = argument.split('=')
+            if len(arg_parts) == 1:
+                pkg = Pkg.load_last(argument)
+            else:
+                # TODO : load specify version
+                pkg = False
+            if pkg:
+                loaded_packages.append(pkg)
+            else:
+                self.message('unknow package "' + argument + '"' + ansi.reset, before=ansi.red)
+
+        if not loaded_packages:
+            return 1
+
+        # show loaded packages
+        for pkg in loaded_packages:
+            PackageShower.show(pkg.data)
+            if len(loaded_packages) > 1:
+                pr.p('---------------------')
