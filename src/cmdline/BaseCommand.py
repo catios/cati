@@ -34,7 +34,7 @@ class BaseCommand:
         Validate inserted arguments in command config frame
         '''
 
-        command_config = self.define()
+        command_config = self.config()
         command_config['options']['--help'] = [False, False]
 
         self.name = command_config['name']
