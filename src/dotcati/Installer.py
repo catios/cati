@@ -26,7 +26,7 @@ import os
 import json
 import time
 from dotcati.ArchiveModel import ArchiveModel
-from frontend import Env, Temp
+from frontend import Env, Temp, SysArch
 from dotcati import ListUpdater
 from package.Pkg import Pkg
 from dotcati.exceptions import DependencyError, ConflictError
@@ -143,8 +143,14 @@ class Installer:
         - package_currently_install: gets a current installed version
         - package_new_installs: gets package archive
         - package_installed: will call after package installation
-        - dep_and_conflict_error
+        - dep_and_conflict_error: will run when there is depends or conflict error
+        - arch_error: will run when package arch is not sync with sys arch
         '''
+
+        # check package architecture
+        if pkg.data['arch'] != 'all':
+            if SysArch.sys_arch() != pkg.data['arch']:
+                return installer_events['arch_error'](pkg)
 
         # check package dependencies and conflicts
         try:

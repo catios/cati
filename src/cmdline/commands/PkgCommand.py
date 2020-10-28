@@ -140,6 +140,10 @@ class PkgCommand(BaseCommand):
 
         return 1
 
+    def arch_error_event(self, pkg: ArchiveModel):
+        pr.e(ansi.red + 'Architecture error while installing "' + pkg.data['name'] + '": your system does not support "' + pkg.data['arch'] + '" packages.' + ansi.reset)
+        return 1
+
     def install_once(self, pkg: ArchiveModel):
         installer = Installer()
 
@@ -155,6 +159,7 @@ class PkgCommand(BaseCommand):
                     'package_installed': self.package_installed_event,
                     'directory_not_empty': self.directory_not_empty_event,
                     'dep_and_conflict_error': self.dep_and_conflict_error_event,
+                    'arch_error': self.arch_error_event,
                 }
             )
 

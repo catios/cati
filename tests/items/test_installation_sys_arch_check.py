@@ -1,5 +1,5 @@
 #
-# SysArch.py
+# test_installation_sys_arch_check.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -20,13 +20,15 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Handle system architecture '''
+""" Test test_installation_sys_arch_check """
 
-is_testing = False
+from TestCore import TestCore
 
-def sys_arch():
-    ''' Returns system architecture '''
-    if is_testing:
-        return 'i386'
-    else:
-        return 'i386' # TODO : return real arch
+class test_installation_sys_arch_check(TestCore):
+    """ Test test_installation_sys_arch_check """
+    def run(self):
+        """ Run test """
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'repository/test-packages/packages/invalid-arch.cati'
+        ]), 1)
