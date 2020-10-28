@@ -22,7 +22,7 @@ class SomeCommand(BaseCommand):
         '''
         pass
 
-    def define(self) -> dict:
+    def config(self) -> dict:
         ''' Define and config this command '''
         return {
             'name': 'somename', # name of the command
@@ -125,7 +125,7 @@ class SomeCommand(BaseCommand):
         '''
         pass
 
-    def define(self) -> dict:
+    def config(self) -> dict:
         ''' Define and config this command '''
         return {
             'name': 'somename', # name of the command
