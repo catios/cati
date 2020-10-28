@@ -64,9 +64,9 @@ class HelpCommand(BaseCommand):
         pr.p(ansi.yellow + " $$$$$$" + ansi.cyan + "/" + ansi.yellow + "   $$$$$$$" + ansi.cyan +"/" + ansi.yellow + "    $$$$" + ansi.cyan + "/" + ansi.yellow + "  $$" + ansi.cyan + "/ " + ansi.cyan + " " + self.general_help().split('\n')[2] + ansi.reset)
 
         pr.p('\nOptions:')
-        pr.p('\t-v|--version: shows cati version')
-        pr.p('\t--no-ansi: disable terminal ansi colors')
-        pr.p('\t--help: pass it to commands to show help of that command')
+        pr.p(ansi.header + '\t-v|--version' + ansi.reset + ': shows cati version')
+        pr.p(ansi.header + '\t--no-ansi' + ansi.reset + ': disable terminal ansi colors')
+        pr.p(ansi.header + '\t--help' + ansi.reset + ': pass it to commands to show help of that command')
 
         pr.p()
 
