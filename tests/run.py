@@ -33,7 +33,7 @@ import subprocess
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/src')
 
 from cmdline import ansi, pr
-from frontend import RootRequired, Env, HealthChecker, Temp
+from frontend import RootRequired, Env, HealthChecker, Temp, SysArch
 
 # keep testing start time
 testing_start_time = time.time()
@@ -58,8 +58,9 @@ load_test_env()
 print(ansi.green + 'created in ' + Env.base_path() + ansi.reset)
 print()
 
-# disable printing
+# enable testing mode
 pr.is_testing = True
+SysArch.is_testing = True
 
 # load tests list
 tests_list = os.listdir('tests/items')
