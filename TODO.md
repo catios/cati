@@ -2,7 +2,7 @@
 # TODO
 
 - [x] create show command
-- [ ] add new fields to packages
+- [x] add new fields to packages
 - [ ] handle manual/auto package installation types
 - [ ] handle package architecture in installation process
 - [ ] add new options to list command for filtering the list
