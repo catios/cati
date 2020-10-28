@@ -42,7 +42,7 @@ cati pkg build package-dir1/ package-dir2/ # ...
 ```
 
 Options:
-- `--output|-o`: set package package output path
+- `--output|-o`: set package package output path. for example `cati pkg build pkg/ --output=package.cati`
 
 #### pkg install
 ```bash
