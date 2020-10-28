@@ -68,3 +68,11 @@ this command remove packages
 cati remove pkg1
 cati remove pkg1 pkg2 # ...
 ```
+
+## show command
+this command shows packages details
+
+```bash
+cati show somepackage
+cati show pkg1 pkg2 # ...
+```
