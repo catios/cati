@@ -62,7 +62,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup Docker
     - uses: docker-practice/actions-setup-docker@master
       with:
         docker_channel: nightly
