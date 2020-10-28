@@ -3,6 +3,7 @@
 
 - [x] create show command
 - [ ] add new fields to packages
+- [ ] handle manual/auto package installation types
 - [ ] add new options to list command for filtering the list
 - [ ] create search command
 - [ ] create another commands
