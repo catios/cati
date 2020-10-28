@@ -38,6 +38,71 @@ class PackageJsonValidator:
             assert type(data['version']) == str
             assert type(data['arch']) == str
 
+            try:
+                tmp = data['depends']
+                try:
+                    assert type(data['depends']) == list
+                except:
+                    raise
+            except:
+                pass
+
+            try:
+                tmp = data['conflicts']
+                try:
+                    assert type(data['conflicts']) == list
+                except:
+                    raise
+            except:
+                pass
+
+            try:
+                tmp = data['description']
+                try:
+                    assert type(data['description']) == str
+                except:
+                    raise
+            except:
+                pass
+
+            try:
+                tmp = data['author']
+                try:
+                    assert type(data['author']) == str
+                    assert not '|' in data['author']
+                except:
+                    raise
+            except:
+                pass
+
+            try:
+                tmp = data['maintainer']
+                try:
+                    assert type(data['maintainer']) == str
+                    assert not '|' in data['maintainer']
+                except:
+                    raise
+            except:
+                pass
+
+            try:
+                tmp = data['category']
+                try:
+                    assert type(data['category']) == list
+                except:
+                    raise
+            except:
+                pass
+
+            try:
+                tmp = data['channel']
+                try:
+                    assert type(data['channel']) == str
+                except:
+                    raise
+            except:
+                pass
+
             return True
         except:
             return False

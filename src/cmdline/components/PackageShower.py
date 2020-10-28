@@ -29,13 +29,46 @@ def show(data: dict):
     output += 'Version: ' + ansi.blue + data['version'] + ansi.reset + '\n'
     output += 'Arch: ' + ansi.yellow + data['arch'] + ansi.reset + '\n'
     try:
+        author = data['author']
+        output += 'Author: ' + ansi.header + author + ansi.reset + '\n'
+    except:
+        pass
+    try:
+        maintainer = data['maintainer']
+        output += 'Maintainer: ' + ansi.cyan + maintainer + ansi.reset + '\n'
+    except:
+        pass
+    try:
+        channel = data['channel']
+        output += 'Channel: ' + ansi.red + channel + ansi.reset + '\n'
+    except:
+        pass
+    try:
+        category = data['category']
+        if category:
+            output += 'Categories: '
+            i = 0
+            while i < len(category):
+                output += ansi.bold + category[i] + ansi.reset
+                if i < len(category)-1:
+                    output += ', '
+                i += 1
+            output += '\n'
+    except:
+        pass
+    try:
+        description = data['description']
+        output += 'Description: ' + description + '\n'
+    except:
+        pass
+    try:
     	depends = data['depends']
     except:
     	depends = []
     if depends:
         output += 'Depends: '
         for dep in depends:
-            output += dep + ', '
+            output += ansi.bold + dep + ansi.reset + ', '
         output = output[:len(output)-2]
         output += '\n'
     try:
@@ -45,6 +78,6 @@ def show(data: dict):
     if conflicts:
         output += 'Conflicts: '
         for conflict in conflicts:
-            output += conflict + ', '
+            output += ansi.bold + conflict + ansi.reset + ', '
         output = output[:len(output)-2]
     pr.p(output)
