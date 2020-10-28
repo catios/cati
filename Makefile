@@ -5,6 +5,7 @@ SHELL = bash
 
 PY = python3
 MANAGE = $(PY) ./manage.py
+INSTALLATION_PATH = /usr/bin/cati
 
 GIT_IS_INSTALLED = 0
 ifneq (,$(shell command -v git))
@@ -22,9 +23,9 @@ compile: all
 
 ### install		installs program on system
 install: ./dist/cati
-	@cp ./dist/cati /usr/bin/cati
+	@cp ./dist/cati $(INSTALLATION_PATH)
 	@echo -e "\033[32mCati installed successfuly\033[0m"
-	@cati
+	@$(INSTALLATION_PATH)
 
 ### clean		clear build files
 clean:
