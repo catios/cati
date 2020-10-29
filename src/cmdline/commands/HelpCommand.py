@@ -53,15 +53,14 @@ class HelpCommand(BaseCommand):
             pr.p(cati_version)
             return
 
-        pr.p(ansi.cyan + "  ______               __      __ ")
-        pr.p(ansi.cyan + " /      \             /  |    /  |")
-        pr.p(ansi.cyan + "//" + ansi.yellow + "$$$$$$" +ansi.cyan + "  |  ______   _" + ansi.yellow + "$$" + ansi.cyan + " |_   " + ansi.yellow + "$$"+ansi.cyan +"/ ")
-        pr.p(ansi.yellow + "$$" + ansi.cyan + " |  " + ansi.yellow + "$$"  + ansi.cyan + "/  /      \ / " + ansi.yellow + "$$" + ansi.cyan + "   |  /  |")
-        pr.p(ansi.yellow + "$$" + ansi.cyan + " |       " + ansi.yellow + "$$$$$$" + ansi.cyan + "  |" + ansi.yellow + "$$$$$$"   + ansi.cyan + "/   " + ansi.yellow + "$$"  + ansi.cyan +" |")
-        pr.p(ansi.yellow + "$$" + ansi.cyan + " |   __  /    " + ansi.yellow +  "$$" + ansi.cyan + " |  " + ansi.yellow +  "$$" + ansi.cyan + " | __ "  + ansi.yellow +  "$$" + ansi.cyan + " |")
-        pr.p(ansi.yellow + "$$" + ansi.cyan + " \__/  |/" + ansi.yellow + "$$$$$$$" + ansi.cyan + " |  " + ansi.yellow + "$$" + ansi.cyan + " |/  |" + ansi.yellow + "$$" + ansi.cyan + " | " + self.general_help().split('\n')[0])
-        pr.p(ansi.yellow + "$$    $$" + ansi.cyan + "/" +ansi.yellow+ " $$    $$ " + ansi.cyan + "|" + ansi.yellow + "  $$  $$" + ansi.cyan + "/"+ansi.yellow+" $$" + ansi.cyan + " | " + self.general_help().split('\n')[1])
-        pr.p(ansi.yellow + " $$$$$$" + ansi.cyan + "/" + ansi.yellow + "   $$$$$$$" + ansi.cyan +"/" + ansi.yellow + "    $$$$" + ansi.cyan + "/" + ansi.yellow + "  $$" + ansi.cyan + "/ " + ansi.cyan + " " + self.general_help().split('\n')[2] + ansi.reset)
+        pr.p()
+        pr.p(" " + ansi.yellow + "$$$$$$                $$     $$" + ansi.reset)
+        pr.p(ansi.yellow + "$$    $$              $$" + ansi.reset)
+        pr.p(ansi.yellow + "$$         $$$$$$   $$$$$$    $$" + ansi.reset)
+        pr.p(ansi.yellow + "$$              $$    $$      $$" + ansi.reset)
+        pr.p(ansi.yellow + "$$         $$$$$$$    $$      $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[0])
+        pr.p(ansi.yellow + "$$    $$  $$    $$    $$  $$  $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[1])
+        pr.p(ansi.yellow + " $$$$$$    $$$$$$$     $$$$   $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[2] + ansi.reset)
 
         pr.p('\nOptions:')
         pr.p(ansi.header + '\t-v|--version' + ansi.reset + ': shows cati version')
