@@ -4,7 +4,7 @@
 - [x] create show command
 - [x] add new fields to packages
 - [x] handle package architecture in installation process
-- [ ] handle manual/auto package installation types
+- [x] handle manual/auto package installation types
 - [ ] add new options to list command for filtering the list
 - [ ] create search command
 - [ ] create another commands

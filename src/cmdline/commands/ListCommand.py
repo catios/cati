@@ -32,6 +32,7 @@ class ListCommand(BaseCommand):
         shows list of packages
         Options:
         --installed: show only installed packages
+        --installed-manual: show only manual installed packages
         '''
         pass
 
