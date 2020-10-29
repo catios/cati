@@ -54,13 +54,13 @@ class HelpCommand(BaseCommand):
             return
 
         pr.p()
-        pr.p(" " + ansi.yellow + "$$$$$$                $$     $$" + ansi.reset)
-        pr.p(ansi.yellow + "$$    $$              $$" + ansi.reset)
-        pr.p(ansi.yellow + "$$         $$$$$$   $$$$$$    $$" + ansi.reset)
-        pr.p(ansi.yellow + "$$              $$    $$      $$" + ansi.reset)
-        pr.p(ansi.yellow + "$$         $$$$$$$    $$      $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[0] + ansi.reset)
-        pr.p(ansi.yellow + "$$    $$  $$    $$    $$  $$  $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[1] + ansi.reset)
-        pr.p(ansi.yellow + " $$$$$$    $$$$$$$     $$$$   $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[2] + ansi.reset)
+        pr.p(ansi.yellow + "  $$$$$$                $$     $$" + ansi.reset)
+        pr.p(ansi.yellow + " $$    $$              $$" + ansi.reset)
+        pr.p(ansi.yellow + " $$         $$$$$$   $$$$$$    $$" + ansi.reset)
+        pr.p(ansi.yellow + " $$              $$    $$      $$" + ansi.reset)
+        pr.p(ansi.yellow + " $$         $$$$$$$    $$      $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[0] + ansi.reset)
+        pr.p(ansi.yellow + " $$    $$  $$    $$    $$  $$  $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[1] + ansi.reset)
+        pr.p(ansi.yellow + "  $$$$$$    $$$$$$$     $$$$   $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[2] + ansi.reset)
 
         pr.p('\nOptions:')
         pr.p(ansi.header + '\t-v|--version' + ansi.reset + ': shows cati version')
