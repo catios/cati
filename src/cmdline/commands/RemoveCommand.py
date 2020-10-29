@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Remove command '''
+""" Remove command """
 
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
@@ -33,13 +33,13 @@ from frontend.RootRequired import require_root_permission
 
 class RemoveCommand(BaseCommand):
     def help(self):
-        '''
+        """
         remove packages
-        '''
+        """
         pass
 
     def config(self) -> dict:
-        ''' Define and config this command '''
+        """ Define and config this command """
         return {
             'name': 'remove',
             'options': {
@@ -63,7 +63,7 @@ class RemoveCommand(BaseCommand):
         self.message('warning: directory "' + f.split(':', 1)[1] + '" is not emptry and will not be delete' + ansi.yellow, before=ansi.reset)
 
     def run(self):
-        ''' Run command '''
+        """ Run command """
 
         require_root_permission()
 

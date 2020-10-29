@@ -21,7 +21,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Cati main cli entry point '''
+""" Cati main cli entry point """
 
 import sys
 from cmdline import kernel, pr, ansi
@@ -29,7 +29,7 @@ from frontend import HealthChecker
 
 # check cati installation health
 def cati_installation_is_corrupt(filepath: str, filetype: str):
-    ''' Will run when cati installation is corrupt '''
+    """ Will run when cati installation is corrupt """
     pr.e(ansi.red + 'Cati installation is corrupt. to repair it, just run cati with root access' + ansi.reset)
     pr.exit(1)
 

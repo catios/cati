@@ -20,14 +20,14 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Transaction base model '''
+""" Transaction base model """
 
 from package.Pkg import Pkg
 from frontend import Env
 from transaction.Calculator import Calculator
 
 class BaseTransaction:
-    ''' Transaction base model '''
+    """ Transaction base model """
     @staticmethod
     def handle_state(section: str, pkg: Pkg):
         """ add new item to state """

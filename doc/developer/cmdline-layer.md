@@ -9,7 +9,7 @@ command template:
 
 ```python
 
-''' Some command '''
+""" Some command """
 
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
@@ -17,13 +17,13 @@ from cmdline import pr, ansi
 # commands should be a class and extends from BaseCommand
 class SomeCommand(BaseCommand):
     def help(self):
-        '''
+        """
         help of command as docstring
-        '''
+        """
         pass
 
     def config(self) -> dict:
-        ''' Define and config this command '''
+        """ Define and config this command """
         return {
             'name': 'somename', # name of the command
             'options': {
@@ -47,7 +47,7 @@ class SomeCommand(BaseCommand):
         }
 
     def run(self):
-        ''' Run command '''
+        """ Run command """
         # main function to run command
         pr.p('hello world')
 
@@ -112,7 +112,7 @@ for example:
 ```python
 
 
-''' Some command '''
+""" Some command """
 
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
@@ -120,13 +120,13 @@ from cmdline import pr, ansi
 # commands should be a class and extends from BaseCommand
 class SomeCommand(BaseCommand):
     def help(self):
-        '''
+        """
         help of command as docstring
-        '''
+        """
         pass
 
     def config(self) -> dict:
-        ''' Define and config this command '''
+        """ Define and config this command """
         return {
             'name': 'somename', # name of the command
             'options': {
@@ -150,7 +150,7 @@ class SomeCommand(BaseCommand):
         }
 
     def run(self):
-        ''' Run command '''
+        """ Run command """
         # example for `message` helper function
         self.message('hello world') # output: cati: somecmd: hello world
 

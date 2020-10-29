@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Remove transaction '''
+""" Remove transaction """
 
 import os
 import shutil
@@ -29,10 +29,10 @@ from package.Pkg import Pkg
 from frontend import Env
 
 class Remove(BaseTransaction):
-    ''' Remove transaction '''
+    """ Remove transaction """
     @staticmethod
     def run(pkg: Pkg, events: dict):
-        ''' Remove pkg '''
+        """ Remove pkg """
         events['removing_package'](pkg)
 
         # remove package

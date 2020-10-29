@@ -20,20 +20,20 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Handle environment file paths '''
+""" Handle environment file paths """
 
 base_path_dir = ''
 
 def base_path(path=''):
-    ''' Returns environment base path '''
+    """ Returns environment base path """
     return base_path_dir + path
 
 def packages_lists(path=''):
-    ''' Packages list directory '''
+    """ Packages list directory """
     return base_path('/var/lib/cati/lists' + path)
 
 def installed_lists(path=''):
-    ''' Installed packages list directory '''
+    """ Installed packages list directory """
     return base_path('/var/lib/cati/installed' + path)
 
 def state_file():

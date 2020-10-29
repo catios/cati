@@ -20,13 +20,13 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' CLI transactions list shower '''
+""" CLI transactions list shower """
 
 from transaction.Calculator import Calculator
 from cmdline import ansi, pr
 
 def show(calc: Calculator):
-    ''' Show transactions from calc '''
+    """ Show transactions from calc """
     if calc.to_remove:
         pr.p('The following packages will be remove:')
         for pkg in calc.to_remove:

@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' ANSI terminal colors '''
+""" ANSI terminal colors """
 
 header = '\033[95m'
 blue = '\033[94m'

@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' A tool to check program permission and if it haven't root permission, die the program '''
+""" A tool to check program permission and if it haven't root permission, die the program """
 
 import os
 import sys
@@ -29,11 +29,11 @@ from cmdline import pr, ansi
 is_testing = False
 
 def require_root_permission(is_cli=True, die_action=None):
-    '''
+    """
     If `is_cli` argument is True, when user have not root permission,
     error will print in terminal. but if is False,
     the `die_action` will run as a function
-    '''
+    """
 
     # if program is in testing mode don't check permission
     if is_testing:

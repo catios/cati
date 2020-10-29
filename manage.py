@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 
-help_msg = '''
+help_msg = """
 this is a script to manage cati project
 
 Commands:
     update-headers  update files copyright headers
-'''
+"""
 
-header_text = '''#
+header_text = """#
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
 #
@@ -25,7 +25,7 @@ header_text = '''#
 #
 # You should have received a copy of the GNU General Public License
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
-'''
+"""
 
 import sys, os
 
@@ -34,14 +34,14 @@ if len(sys.argv) <= 1:
     sys.exit()
 
 class SetHeaders:
-    ''' Loads all of .py scripts and sets copyright header of them '''
+    """ Loads all of .py scripts and sets copyright header of them """
 
     def __init__(self, path: str):
         self.files_list = []
         self.get(path)
     
     def get(self, path: str):
-        ''' Load all of .py files from path '''
+        """ Load all of .py files from path """
         for f in os.listdir(path):
             if os.path.isdir(path + '/' + f):
                 self.get(path + '/' + f + '/')
@@ -49,7 +49,7 @@ class SetHeaders:
                 self.add_once(path + '/' + f)
 
     def add_once(self, f: str):
-        ''' Checks a file path and if that file is .py file, add it to the list '''
+        """ Checks a file path and if that file is .py file, add it to the list """
         if f[len(f)-3:] == '.py':
             # replace // with /
             f = f.replace('//', '/')
@@ -57,7 +57,7 @@ class SetHeaders:
     
     @staticmethod
     def set_once_file_header(fname: str):
-        ''' Sets once file copyright header '''
+        """ Sets once file copyright header """
         global header_text
         spliter = ('#' * 50) + '\n\n'
     

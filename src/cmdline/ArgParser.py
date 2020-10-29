@@ -20,12 +20,12 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Cli argument parser '''
+""" Cli argument parser """
 
 from cmdline import ansi
 
 def parse(args: list) -> dict:
-    ''' Gets a list from program arguments and returns parsed args '''
+    """ Gets a list from program arguments and returns parsed args """
 
     args.pop(0)
 

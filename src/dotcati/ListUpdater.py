@@ -20,14 +20,14 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Packages list updater '''
+""" Packages list updater """
 
 import os, json
 from frontend.RootRequired import require_root_permission
 from frontend import Env
 
 def update_indexes(events: dict):
-    '''
+    """
     This function loads available versions of a package and index them in index file
     and do this action for all of packages in lists
 
@@ -38,7 +38,7 @@ def update_indexes(events: dict):
     events:
     - cannot_read_file: if in this process, an error happened while reading a file, this will run with file path arg
     - invalid_json_data: if json content of a file is curropt, this will run with file path and content args
-    '''
+    """
 
     require_root_permission()
 

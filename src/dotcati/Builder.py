@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Cati package builder '''
+""" Cati package builder """
 
 import os
 import json
@@ -31,18 +31,18 @@ from dotcati.PackageJsonValidator import PackageJsonValidator
 from frontend import Temp
 
 class Builder:
-    ''' Cati package builder '''
+    """ Cati package builder """
 
     @staticmethod
     def json_fields_are_valid(data: dict):
         return PackageJsonValidator.validate(data)
 
     def build(self, dirpath: str, output=None):
-        '''
+        """
         This function gets a directory and builds a .cati package from that
         the output is optional parameter. this argument can be used
         to set package output file.
-        '''
+        """
 
         if not os.path.isdir(dirpath):
             raise FileNotFoundError
@@ -83,10 +83,10 @@ class Builder:
         return output
 
     def compress(self, dirpath: str, output: str):
-        '''
+        """
         This function compresses content of target directory and build package
         in output file
-        '''
+        """
         try:
             pkg = ArchiveModel(output, "w:gz")
         except:

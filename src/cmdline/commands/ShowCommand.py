@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Show command '''
+""" Show command """
 
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
@@ -29,16 +29,16 @@ from cmdline.components import PackageShower
 
 class ShowCommand(BaseCommand):
     def help(self):
-        '''
+        """
         shows details of packages
 
         Options:
         --versions: shows versions list of packages
-        '''
+        """
         pass
 
     def config(self) -> dict:
-        ''' Define and config this command '''
+        """ Define and config this command """
         return {
             'name': 'show',
             'options': {
@@ -49,7 +49,7 @@ class ShowCommand(BaseCommand):
         }
 
     def run(self):
-        ''' Run command '''
+        """ Run command """
 
         pr.p('Loading packages list...')
         pr.p('========================')

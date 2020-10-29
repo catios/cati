@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Print handling in cli '''
+""" Print handling in cli """
 
 import sys
 from frontend import Temp
@@ -29,19 +29,19 @@ from frontend import Temp
 is_testing = False
 
 def p(value='', end='\n'):
-    ''' Print on stdout '''
+    """ Print on stdout """
     if is_testing:
     	return
     return print(value, end=end, flush=True)
 
 def e(value='', end='\n'):
-    ''' Print on stderr '''
+    """ Print on stderr """
     if is_testing:
     	return
     return print(value, end=end, flush=True, file=sys.stderr)
 
 def exit(code=0):
-    ''' Exits program with exit code '''
+    """ Exits program with exit code """
     if is_testing:
     	return
     # delete temp files before exit

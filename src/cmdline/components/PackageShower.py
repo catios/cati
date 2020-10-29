@@ -24,7 +24,7 @@ from cmdline import ansi, pr
 from package.Pkg import Pkg
 
 def show(data: dict):
-    ''' Show transactions from calc '''
+    """ Show transactions from calc """
     output = ''
     output += 'Name: ' + ansi.green + data['name'] + ansi.reset + '\n'
     output += 'Version: ' + ansi.blue + data['version'] + ansi.reset + '\n'

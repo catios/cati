@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Kernel of cli handler '''
+""" Kernel of cli handler """
 
 import sys
 from cmdline import ArgParser, pr
@@ -40,7 +40,7 @@ commands = {
 }
 
 def handle(argv: list):
-    ''' Kernel of cli handler '''
+    """ Kernel of cli handler """
     # parse inserted arguments
     parsed_args = ArgParser.parse(argv)
 

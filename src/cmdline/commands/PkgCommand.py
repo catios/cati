@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Pkg command to work with .cati archives '''
+""" Pkg command to work with .cati archives """
 
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
@@ -34,17 +34,17 @@ from cmdline.components import PackageShower
 
 class PkgCommand(BaseCommand):
     def help(self):
-        '''
+        """
         work with .cati packages
         Subcommands:
         - build:      build .cati package from directory(s)
         - show:       show content of .cati package(s). options: --files: show package files
         - install:    install a .cati package on system
-        '''
+        """
         pass
 
     def config(self) -> dict:
-        ''' Define and config this command '''
+        """ Define and config this command """
         return {
             'name': 'pkg',
             'options': {
@@ -209,7 +209,7 @@ class PkgCommand(BaseCommand):
             i += 1
 
     def run(self):
-        ''' Run command '''
+        """ Run command """
 
         if len(self.arguments) <= 0:
             pr.p(self.help_full())

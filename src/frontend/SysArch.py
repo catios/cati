@@ -20,12 +20,12 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Handle system architecture '''
+""" Handle system architecture """
 
 is_testing = False
 
 def sys_arch():
-    ''' Returns system architecture '''
+    """ Returns system architecture """
     if is_testing:
         return 'i386'
     else:

@@ -20,19 +20,19 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Cmdline command model base '''
+""" Cmdline command model base """
 
 import sys
 from cmdline import pr
 from frontend.Version import version as cati_version
 
 class BaseCommand:
-    ''' Cmdline command model base '''
+    """ Cmdline command model base """
 
     def validate(self, args: dict):
-        '''
+        """
         Validate inserted arguments in command config frame
-        '''
+        """
 
         command_config = self.config()
         command_config['options']['--help'] = [False, False]
@@ -80,7 +80,7 @@ class BaseCommand:
                     pr.exit(1)
 
     def handle(self, args: dict):
-        ''' Handle run the command '''
+        """ Handle run the command """
         self.validate(args)
 
         # handle --help option
@@ -91,7 +91,7 @@ class BaseCommand:
         return self.run()
 
     def has_option(self, option: str):
-        ''' Checks the option is inserted '''
+        """ Checks the option is inserted """
         try:
             self.args['options'][option]
             return True
@@ -99,14 +99,14 @@ class BaseCommand:
             return False
 
     def option_value(self, option: str):
-        ''' Returns value of option '''
+        """ Returns value of option """
         if not self.has_option(option):
             return None
         
         return self.args['options'][option]
 
     def message(self, msg, is_error=False, before=''):
-        ''' Prints a message on screen '''
+        """ Prints a message on screen """
         msg = before + self.cati_exec + ': ' + self.name + ': ' + msg
 
         if is_error:
@@ -115,15 +115,15 @@ class BaseCommand:
             pr.p(msg)
 
     def general_help(self):
-        return '''Cati package manager [''' + cati_version + ''']
+        return """Cati package manager [""" + cati_version + """]
 Copyright 2020 parsa mpsh - GPL-3
-Usage: cati [command] [options] [args]'''
+Usage: cati [command] [options] [args]"""
 
     def help_full(self, with_general_help=True):
-        '''
+        """
         Returns full help of command
         the `with_general_help` argument used to include/exclude general help of cati
-        '''
+        """
         help_text = self.help.__doc__
         help_text = help_text.strip()
         help_text_tmp = ''
@@ -139,5 +139,5 @@ Usage: cati [command] [options] [args]'''
         return help_text
 
     def help_summary(self):
-        ''' Returns summary of help (first line only) '''
+        """ Returns summary of help (first line only) """
         return self.help_full(False).split('\n')[0]

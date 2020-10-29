@@ -21,7 +21,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Test runner '''
+""" Test runner """
 
 import os
 import sys
@@ -39,7 +39,7 @@ from frontend import RootRequired, Env, HealthChecker, Temp, SysArch
 testing_start_time = time.time()
 
 def load_test_env():
-    ''' Loads a test environment directory '''
+    """ Loads a test environment directory """
     # make environment directory
     env_dir = '/tmp/catitestenv.' + str(time.time())
     os.mkdir(env_dir)

@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' List command '''
+""" List command """
 
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
@@ -28,16 +28,16 @@ from package.Pkg import Pkg
 
 class ListCommand(BaseCommand):
     def help(self):
-        '''
+        """
         shows list of packages
         Options:
         --installed: show only installed packages
         --installed-manual: show only manual installed packages
-        '''
+        """
         pass
 
     def config(self) -> dict:
-        ''' Define and config this command '''
+        """ Define and config this command """
         return {
             'name': 'list',
             'options': {
@@ -60,7 +60,7 @@ class ListCommand(BaseCommand):
         pr.p(output)
 
     def run(self):
-        ''' Run command '''
+        """ Run command """
 
         pr.p('Loading packages list...')
         pr.p('========================')

@@ -20,17 +20,17 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Package information json validator '''
+""" Package information json validator """
 
 class PackageJsonValidator:
-    ''' Package information json validator '''
+    """ Package information json validator """
     @staticmethod
     def validate(data: dict):
-        '''
+        """
         This function gets a json object and checks that fields and value of them where
         are required for a valid package data.json and says this data
         is valid or not
-        '''
+        """
 
         try:
             # TODO : check more fields

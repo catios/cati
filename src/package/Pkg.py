@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Package model '''
+""" Package model """
 
 import os
 import json
@@ -30,7 +30,7 @@ from package.exceptions import CannotReadFileException
 from packaging import version
 
 class Pkg:
-    ''' Package model '''
+    """ Package model """
 
     def __init__(self, data: dict):
         self.data = data
@@ -40,28 +40,28 @@ class Pkg:
             self.data['repo'] = 'Local'
 
     def installed(self):
-        ''' Checks current package is installed '''
+        """ Checks current package is installed """
         if not Pkg.is_installed(self.data['name']):
             return False
 
         return Pkg.installed_version(self.data['name'])
 
     def get_depends(self):
-        ''' Returns package dependencies list '''
+        """ Returns package dependencies list """
         try:
             return self.data['depends']
         except:
             return []
 
     def get_conflicts(self):
-        ''' Returns package conflicts list '''
+        """ Returns package conflicts list """
         try:
             return self.data['conflicts']
         except:
             return []
 
     def get_reverse_depends(self) -> list:
-        ''' Returns list of packages has dependency to this package '''
+        """ Returns list of packages has dependency to this package """
         reverse_depends = []
         for pkg in self.all_list()['list']:
             for dep in pkg.get_depends():
@@ -92,7 +92,7 @@ class Pkg:
 
     @staticmethod
     def load_last(pkg_name: str):
-        ''' Load last version of package by name '''
+        """ Load last version of package by name """
         pkgs_list = Pkg.all_list()
         for item in pkgs_list['list']:
             if item.data['name'] == pkg_name:
@@ -101,7 +101,7 @@ class Pkg:
 
     @staticmethod
     def is_installed(package_name: str):
-        ''' Gets a package name and checks is installed or not '''
+        """ Gets a package name and checks is installed or not """
         try:
             assert os.path.isdir(Env.installed_lists('/' + package_name))
             assert os.path.isfile(Env.installed_lists('/' + package_name + '/ver'))
@@ -169,7 +169,7 @@ class Pkg:
 
     @staticmethod
     def installed_version(package_name: str):
-        ''' Gets name of package and returns installed version of that '''
+        """ Gets name of package and returns installed version of that """
         try:
             f = open(Env.installed_lists('/' + package_name + '/ver'), 'r')
             version = f.read()
@@ -180,7 +180,7 @@ class Pkg:
 
     @staticmethod
     def installed_list():
-        ''' Returns list of only installed packages '''
+        """ Returns list of only installed packages """
         all_packages = Pkg.all_list()
         installed_packages = {
             'errors': all_packages['errors'],
@@ -194,7 +194,7 @@ class Pkg:
 
     @staticmethod
     def all_list():
-        ''' Returns list of packages '''
+        """ Returns list of packages """
 
         errors = []
         packages = []
@@ -222,12 +222,12 @@ class Pkg:
 
     @staticmethod
     def compare_version(a, b):
-        '''
+        """
         Compares two versions
         if 1 is returned means a is upper than b
         if 0 is returned means a equals b
         if -1 is returned means a is less than b
-        '''
+        """
         a = version.parse(a)
         b = version.parse(b)
 
@@ -242,7 +242,7 @@ class Pkg:
 
     @staticmethod
     def get_last_version(versions: list):
-        ''' Gets a list from versions and returns latest version in that list '''
+        """ Gets a list from versions and returns latest version in that list """
         max_ver = ''
         for version in versions:
             if Pkg.compare_version(version, max_ver) == 1:
@@ -252,7 +252,7 @@ class Pkg:
 
     @staticmethod
     def load_from_index(index_json: dict, package_name: str):
-        ''' Loads package data from index file '''
+        """ Loads package data from index file """
         try:
             arch = sys_arch()
             versions = index_json[arch]
@@ -276,7 +276,7 @@ class Pkg:
         return Pkg(content_json)
 
     def check_state(query_string: str) -> bool:
-        '''
+        """
         Checks package state by query string
 
         For examples:
@@ -287,7 +287,7 @@ class Pkg:
         "pkga | pkgb >= 1.0"
         "pkga | pkgb | pkgc"
         "pkga | pkgb & pkgc = 1.0"
-        '''
+        """
 
         # parse query string
         parts = query_string.strip().split('|')

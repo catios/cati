@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Dotcati package installer '''
+""" Dotcati package installer """
 
 import os
 import json
@@ -33,10 +33,10 @@ from dotcati.exceptions import DependencyError, ConflictError
 from transaction.BaseTransaction import BaseTransaction
 
 class Installer:
-    ''' Dotcati package installer '''
+    """ Dotcati package installer """
 
     def load_files(self, path: str, base_temp_path: str):
-        ''' Loads list of package files from extracted temp dir '''
+        """ Loads list of package files from extracted temp dir """
 
         for item in os.listdir(path):
             if os.path.isfile(path + '/' + item):
@@ -46,7 +46,7 @@ class Installer:
                 self.load_files(path + '/' + item, base_temp_path)
 
     def copy_once_file(self, paths):
-        ''' Copy one of package files '''
+        """ Copy one of package files """
         if os.path.isfile(paths[1]):
             os.system('cp "' + paths[1] + '" "' + Env.base_path(paths[0]) + '"')
             self.copied_files.append('f:' + paths[0])
@@ -55,7 +55,7 @@ class Installer:
             self.copied_files.append('d:' + paths[0])
 
     def copy_files(self, pkg: ArchiveModel, directory_not_empty_event) -> list:
-        ''' Copy package files on system '''
+        """ Copy package files on system """
         # load package old files list
         old_files = []
         if os.path.isfile(Env.installed_lists('/' + pkg.data['name'] + '/files')):
@@ -113,7 +113,7 @@ class Installer:
         return self.copied_files
 
     def check_dep_and_conf(self, pkg: ArchiveModel):
-        ''' Checks package dependencies and conflicts '''
+        """ Checks package dependencies and conflicts """
 
         # load package dependencies
         try:
@@ -136,7 +136,7 @@ class Installer:
                 raise ConflictError(conflict)
 
     def install(self, pkg: ArchiveModel, index_updater_events: dict, installer_events: dict, is_manual=True):
-        '''
+        """
         Install .cati package
 
         installer_events:
@@ -145,7 +145,7 @@ class Installer:
         - package_installed: will call after package installation
         - dep_and_conflict_error: will run when there is depends or conflict error
         - arch_error: will run when package arch is not sync with sys arch
-        '''
+        """
 
         # check package architecture
         if pkg.data['arch'] != 'all':

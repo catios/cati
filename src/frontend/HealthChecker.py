@@ -20,13 +20,13 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Checks cati installation health and repair '''
+""" Checks cati installation health and repair """
 
 import os
 from frontend import Env
 
 def repair_once_file(filepath: str, events: dict):
-    ''' Repairs once file '''
+    """ Repairs once file """
     try:
         f = open(Env.base_path('/' + filepath).replace('//', '/'), 'w')
         f.write('')
@@ -36,20 +36,20 @@ def repair_once_file(filepath: str, events: dict):
         events['failed_to_repair']('/' + filepath, 'file')
 
 def repair_once_dir(dirpath: str, events: dict):
-    ''' Repairs once dir '''
+    """ Repairs once dir """
     try:
         os.mkdir(Env.base_path('/' + dirpath))
     except:
         events['failed_to_repair']('/' + dirpath, 'dir')
 
 def check(events: dict):
-    '''
+    """
     Check all of needed files and dirs for cati installation
 
     events:
     - failed_to_repair: will run when cati installation is corrupt and user has not root permission
     to repair it and passes filepath and type of that to function
-    '''
+    """
 
     required_files = [
         '/var/lib/cati/state.f'

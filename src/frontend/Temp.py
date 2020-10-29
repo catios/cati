@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Handle temp files '''
+""" Handle temp files """
 
 import random
 import os
@@ -30,7 +30,7 @@ created_temp_dirs = []
 created_temp_files = []
 
 def make_dir():
-    ''' Makes a temp directory and returns path of that directory '''
+    """ Makes a temp directory and returns path of that directory """
     global created_temp_dirs
     path = '/tmp/' + 'cati-temp-' + str(random.random())
 
@@ -42,7 +42,7 @@ def make_dir():
     return path
 
 def make_file():
-    ''' Makes a temp file and returns path of that file '''
+    """ Makes a temp file and returns path of that file """
     global created_temp_files
     path = '/tmp/' + 'cati-temp-' + str(random.random())
 
@@ -56,7 +56,7 @@ def make_file():
     return path
 
 def clean():
-    ''' Clear all of created temp files by program '''
+    """ Clear all of created temp files by program """
     global created_temp_dirs, created_temp_files
 
     for f in created_temp_files:

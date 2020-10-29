@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' .cati package file model '''
+""" .cati package file model """
 
 import tarfile
 import json
@@ -28,20 +28,20 @@ from dotcati.PackageJsonValidator import PackageJsonValidator
 from package.Pkg import Pkg
 
 class ArchiveModel:
-    ''' .cati package file model '''
+    """ .cati package file model """
     def __init__(self, file_path: str, type_str: str):
         self.tar = tarfile.open(file_path, type_str)
 
     def add(self, path, arcname=None):
-        ''' Add a file to package archive '''
+        """ Add a file to package archive """
         return self.tar.add(path, arcname=arcname)
 
     def close(self):
-        ''' Close package archive '''
+        """ Close package archive """
         return self.tar.close()
 
     def members(self):
-        ''' Returns members of the archive '''
+        """ Returns members of the archive """
         files = []
         for member in self.tar.getmembers():
             if member.path != '':
@@ -50,7 +50,7 @@ class ArchiveModel:
         return files
 
     def read(self):
-        ''' Load package information on object '''
+        """ Load package information on object """
         self.data = self.info()
         if not PackageJsonValidator.validate(self.data):
             raise
@@ -58,32 +58,32 @@ class ArchiveModel:
         Pkg.compare_version(self.data['version'], '0.0.0')
 
     def extractall(self, path):
-        ''' Extract all of package files to `path` '''
+        """ Extract all of package files to `path` """
         return self.tar.extractall(path)
 
     def info(self) -> dict:
-        ''' Returns package data.json information '''
+        """ Returns package data.json information """
         for member in self.tar.getmembers():
             if member.path == 'data.json':
                 f = self.tar.extractfile(member)
                 return json.loads(f.read())
 
     def get_depends(self):
-        ''' Returns package dependencies list '''
+        """ Returns package dependencies list """
         try:
             return self.data['depends']
         except:
             return []
 
     def get_conflicts(self):
-        ''' Returns package conflicts list '''
+        """ Returns package conflicts list """
         try:
             return self.data['conflicts']
         except:
             return []
 
     def pkg_version(self) -> str:
-        ''' Returns dotcati package strcuture version '''
+        """ Returns dotcati package strcuture version """
         for member in self.tar.getmembers():
             if member.path == 'cati-version':
                 # load dotcati package version

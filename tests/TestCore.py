@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Testing system core '''
+""" Testing system core """
 
 import os
 import shutil
@@ -29,10 +29,10 @@ from cmdline import ArgParser
 from frontend import Env, HealthChecker
 
 class TestCore:
-    ''' Testing system core '''
+    """ Testing system core """
 
     def get_name(self):
-        ''' Returns test name '''
+        """ Returns test name """
         str_type = str(type(self))
         str_type = str_type[14:]
         str_type = str_type[:len(str_type)-2]
@@ -47,11 +47,11 @@ class TestCore:
             raise
 
     def assert_true(self, value):
-        ''' Assert True '''
+        """ Assert True """
         self.do_assert(value, 'asserting that false is true')
 
     def run_command(self, command_name: str, arguments=[]):
-        ''' Runs cmdline command '''
+        """ Runs cmdline command """
         arguments.insert(0, 'cati')
         arguments.insert(1, command_name)
         cmd = commands[command_name]()
@@ -70,7 +70,7 @@ class TestCore:
         return Env.base_path(path)
 
     def refresh_env(self):
-        ''' Clear all of effects on testing environment '''
+        """ Clear all of effects on testing environment """
         for item in os.listdir(self.env()):
             if os.path.isfile(self.env('/' + item)):
                 os.remove(self.env('/' + item))

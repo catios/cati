@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Help command '''
+""" Help command """
 
 from cmdline.BaseCommand import BaseCommand
 from cmdline import kernel, ansi, pr
@@ -28,13 +28,13 @@ from frontend.Version import version as cati_version
 
 class HelpCommand(BaseCommand):
     def help(self):
-        '''
+        """
         shows this help
-        '''
+        """
         pass
 
     def config(self) -> dict:
-        ''' Define and config this command '''
+        """ Define and config this command """
         return {
             'name': 'help',
             'options': {
@@ -46,7 +46,7 @@ class HelpCommand(BaseCommand):
         }
 
     def run(self):
-        ''' Run command '''
+        """ Run command """
 
         # check -v|--version options
         if self.has_option('--version') or self.has_option('-v'):

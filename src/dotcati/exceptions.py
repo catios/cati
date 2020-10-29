@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Dotcati section exceptions '''
+""" Dotcati section exceptions """
 
 class InvalidPackageDirException(Exception):
     pass

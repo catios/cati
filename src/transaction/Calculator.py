@@ -20,15 +20,15 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Transaction calculator '''
+""" Transaction calculator """
 
 class Calculator:
-    ''' Transaction calculator '''
+    """ Transaction calculator """
     def __init__(self):
         self.to_remove = []
 
     def refresh_lists(self):
-        ''' Refresh packages list and sync them with depends and conflicts '''
+        """ Refresh packages list and sync them with depends and conflicts """
         # remove repeated lists in to_remove list
         a = 0
         while a < len(self.to_remove):
@@ -55,7 +55,7 @@ class Calculator:
             self.remove(new_to_remove)
 
     def remove(self, pkgs: list):
-        ''' Add packages to remove '''
+        """ Add packages to remove """
         for pkg in pkgs:
             if pkg.installed():
                 self.to_remove.append(pkg)
