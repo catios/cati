@@ -27,7 +27,6 @@ import shutil
 from transaction.BaseTransaction import BaseTransaction
 from package.Pkg import Pkg
 from frontend import Env
-from cmdline import pr
 
 class Remove(BaseTransaction):
     ''' Remove transaction '''
