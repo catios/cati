@@ -135,7 +135,7 @@ class Installer:
             if Pkg.check_state(conflict):
                 raise ConflictError(conflict)
 
-    def install(self, pkg: ArchiveModel, index_updater_events: dict, installer_events: dict):
+    def install(self, pkg: ArchiveModel, index_updater_events: dict, installer_events: dict, is_manual=True):
         '''
         Install .cati package
 
@@ -211,6 +211,11 @@ class Installer:
         f_installed_at = open(Env.installed_lists('/' + pkg.data['name'] + '/installed_at'), 'w')
         f_installed_at.write(str(time.time())) # write time (installed at)
         f_installed_at.close()
+
+        if is_manual:
+            f_manual = open(Env.installed_lists('/' + pkg.data['name'] + '/manual'), 'w')
+            f_manual.write('')
+            f_manual.close()
 
         # pop package from state
         BaseTransaction.pop_state()

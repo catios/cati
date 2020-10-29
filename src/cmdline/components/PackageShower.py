@@ -21,6 +21,7 @@
 ##################################################
 
 from cmdline import ansi, pr
+from package.Pkg import Pkg
 
 def show(data: dict):
     ''' Show transactions from calc '''
@@ -80,4 +81,10 @@ def show(data: dict):
         for conflict in conflicts:
             output += ansi.bold + conflict + ansi.reset + ', '
         output = output[:len(output)-2]
+    if Pkg.is_installed(data['name']):
+        installed_version = Pkg.installed_version(data['name'])
+        if Pkg.is_installed_manual(data['name']):
+            output += 'Installed-Manual: ' + installed_version + '\n'
+        else:
+            output += 'Installed: ' + installed_version + '\n'
     pr.p(output)

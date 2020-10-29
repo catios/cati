@@ -60,6 +60,7 @@ cati list
 
 Options:
 - `--installed`: only show installed packages list
+- `--installed-manual`: only show manual installed packages list
 
 ## remove command
 this command remove packages

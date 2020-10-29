@@ -41,6 +41,7 @@ class ListCommand(BaseCommand):
             'name': 'list',
             'options': {
                 '--installed': [False, False],
+                '--installed-manual': [False, False],
             },
             'max_args_count': 0,
             'min_args_count': 0,
@@ -49,7 +50,10 @@ class ListCommand(BaseCommand):
     def show_once(self, package: Pkg):
         output = ansi.green + package.data['name'] + ansi.reset + '/' +  ansi.yellow + package.data['version'] + ansi.reset
         if package.installed():
-            output += '/Installed:' + ansi.blue + package.installed() + ansi.reset
+            if package.is_installed_manual(package.data['name']):
+                output += '/Installed-Manual:' + ansi.blue + package.installed() + ansi.reset
+            else:
+                output += '/Installed:' + ansi.blue + package.installed() + ansi.reset
         output += '/[' + package.data['repo'] + ']'
 
         pr.p(output)
@@ -63,6 +67,10 @@ class ListCommand(BaseCommand):
         if self.has_option('--installed'):
             # just list installed packages
             packages = Pkg.installed_list()
+        elif self.has_option('--installed-manual'):
+            packages = Pkg.installed_list()
+            packages_list = [tmp_pkg for tmp_pkg in packages['list'] if Pkg.is_installed_manual(tmp_pkg.data['name'])]
+            packages['list'] = packages_list
         else:
             packages = Pkg.all_list()
 

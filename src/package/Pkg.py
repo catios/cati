@@ -92,6 +92,12 @@ class Pkg:
             return False
 
     @staticmethod
+    def is_installed_manual(package_name):
+        if not Pkg.is_installed(package_name):
+            return False
+        return os.path.isfile(Env.installed_lists('/' + package_name + '/manual'))
+
+    @staticmethod
     def installed_version(package_name: str):
         ''' Gets name of package and returns installed version of that '''
         try:

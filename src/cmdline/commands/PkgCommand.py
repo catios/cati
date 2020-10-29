@@ -52,6 +52,7 @@ class PkgCommand(BaseCommand):
                 '-o': [False, True],
                 '--files': [False, False],
                 '-f': [False, False],
+                '--auto': [False, False],
             },
             'max_args_count': None,
             'min_args_count': None,
@@ -160,7 +161,8 @@ class PkgCommand(BaseCommand):
                     'directory_not_empty': self.directory_not_empty_event,
                     'dep_and_conflict_error': self.dep_and_conflict_error_event,
                     'arch_error': self.arch_error_event,
-                }
+                },
+                (not self.has_option('--auto'))
             )
 
             if type(out) == int:
