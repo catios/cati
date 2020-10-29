@@ -92,10 +92,59 @@ class Pkg:
             return False
 
     @staticmethod
-    def is_installed_manual(package_name):
+    def is_installed_manual(package_name: str):
         if not Pkg.is_installed(package_name):
             return False
         return os.path.isfile(Env.installed_lists('/' + package_name + '/manual'))
+
+    @staticmethod
+    def load_version(pkg_name: str, version: str):
+        """
+        loads a specify version of a package
+        Outputs:
+        - 1: package not found
+        - 2: package found, but version not found
+        - Pkg object: package and version found and returned
+        """
+        if not os.path.isfile(Env.packages_lists('/' + pkg_name + '/index')):
+            return 1
+
+        # load package index file
+        f_index = open(Env.packages_lists('/' + pkg_name + '/index'), 'r')
+        index_content = f_index.read()
+        f_index.close()
+
+        try:
+            # load json
+            index = json.loads(index_content)
+        except:
+            return 1
+
+        # load package versions list
+        versions = []
+        arch = ''
+        try:
+            versions = index[SysArch.sys_arch()]
+            arch = SysArch.sys_arch()
+        except:
+            try:
+                versions = index['all']
+                arch = 'all'
+            except:
+                versions = index[list(index.keys())[0]]
+                arch = list(index.keys())[0]
+
+        for ver in versions:
+            if ver == version:
+                # load this version data
+                try:
+                    f_ver = open(Env.packages_lists('/' + pkg_name + '/' + ver + '-' + arch), 'r')
+                    f_ver_content = f_ver.read()
+                    ver_data = json.loads(f_ver_content)
+                    return Pkg(ver_data)
+                except:
+                    return 2
+        return 2
 
     @staticmethod
     def installed_version(package_name: str):

@@ -31,7 +31,7 @@ Classes
     `is_installed(package_name: str)`
     :   Gets a package name and checks is installed or not
 
-    `is_installed_manual(package_name)`
+    `is_installed_manual(package_name: str)`
     :
 
     `load_from_index(index_json: dict, package_name: str)`
@@ -39,6 +39,13 @@ Classes
 
     `load_last(pkg_name: str)`
     :   Load last version of package by name
+
+    `load_version(pkg_name: str, version: str)`
+    :   loads a specify version of a package
+        Outputs:
+        - 1: package not found
+        - 2: package found, but version not found
+        - Pkg object: package and version found and returned
 
     ### Methods
 

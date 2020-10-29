@@ -55,10 +55,16 @@ class ShowCommand(BaseCommand):
         for argument in self.arguments:
             arg_parts = argument.split('=')
             if len(arg_parts) == 1:
+                # load last version as default
                 pkg = Pkg.load_last(argument)
             else:
-                # TODO : load specify version
-                pkg = False
+                # load specify version
+                pkg = Pkg.load_version(arg_parts[0], arg_parts[1])
+                if pkg == 1:
+                    pkg = False
+                elif pkg == 2:
+                    self.message('package "' + arg_parts[0] + '" has not version "' + arg_parts[1] + '"' + ansi.reset, before=ansi.red)
+                    continue
             if pkg:
                 loaded_packages.append(pkg)
             else:
