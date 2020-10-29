@@ -8,6 +8,9 @@ updates codes header copyright.
 ### make compile (as default target)
 compiles program with `pyinstaller`.
 
+### make install
+install program.
+
 ### make clean
 clears build files.
 
