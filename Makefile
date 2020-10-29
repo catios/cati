@@ -19,7 +19,7 @@ headers:
 
 ### compile		compile program with pyinstaller
 compile: all
-	@$(PY) -m PyInstaller src/cati.py --onefile
+	@PYTHONPATH='$(shell pwd)/src' $(PY) -m PyInstaller src/cati.py --onefile
 
 ### install		installs program on system
 install: ./dist/cati
