@@ -58,8 +58,8 @@ class HelpCommand(BaseCommand):
         pr.p(ansi.yellow + "$$    $$              $$" + ansi.reset)
         pr.p(ansi.yellow + "$$         $$$$$$   $$$$$$    $$" + ansi.reset)
         pr.p(ansi.yellow + "$$              $$    $$      $$" + ansi.reset)
-        pr.p(ansi.yellow + "$$         $$$$$$$    $$      $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[0])
-        pr.p(ansi.yellow + "$$    $$  $$    $$    $$  $$  $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[1])
+        pr.p(ansi.yellow + "$$         $$$$$$$    $$      $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[0] + ansi.reset)
+        pr.p(ansi.yellow + "$$    $$  $$    $$    $$  $$  $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[1] + ansi.reset)
         pr.p(ansi.yellow + " $$$$$$    $$$$$$$     $$$$   $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[2] + ansi.reset)
 
         pr.p('\nOptions:')
