@@ -17,6 +17,7 @@
 - [ ] create repository system
 - [ ] some changes in transaction calculator
 - [ ] create install/upgrade/downgrade transactions system and optimize remove
+- [ ] some clean ups in code and documentation
 - [ ] create shell completion scripts
 - [ ] create graphical interface base
 - [ ] clean up
