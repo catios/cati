@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.1" />
+<title>dotcati.Installer API documentation</title>
+<meta name="description" content="Dotcati package installer" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>dotcati.Installer</code></h1>
+</header>
+<section id="section-intro">
+<p>Dotcati package installer</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#
+# Installer.py
+#
+# the cati project
+# Copyright 2020 parsa mpsh &lt;parsampsh@gmail.com&gt;
+#
+# This file is part of cati.
+#
+# cati is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# cati is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with cati.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+##################################################
+
+&#39;&#39;&#39; Dotcati package installer &#39;&#39;&#39;
+
+import os
+import json
+import time
+from dotcati.ArchiveModel import ArchiveModel
+from frontend import Env, Temp, SysArch
+from dotcati import ListUpdater
+from package.Pkg import Pkg
+from dotcati.exceptions import DependencyError, ConflictError
+from transaction.BaseTransaction import BaseTransaction
+
+class Installer:
+    &#39;&#39;&#39; Dotcati package installer &#39;&#39;&#39;
+
+    def load_files(self, path: str, base_temp_path: str):
+        &#39;&#39;&#39; Loads list of package files from extracted temp dir &#39;&#39;&#39;
+
+        for item in os.listdir(path):
+            if os.path.isfile(path + &#39;/&#39; + item):
+                self.loaded_files.append([(path + &#39;/&#39; + item)[len(base_temp_path):], path + &#39;/&#39; + item])
+            else:
+                self.loaded_files.append([(path + &#39;/&#39; + item)[len(base_temp_path):], path + &#39;/&#39; + item])
+                self.load_files(path + &#39;/&#39; + item, base_temp_path)
+
+    def copy_once_file(self, paths):
+        &#39;&#39;&#39; Copy one of package files &#39;&#39;&#39;
+        if os.path.isfile(paths[1]):
+            os.system(&#39;cp &#34;&#39; + paths[1] + &#39;&#34; &#34;&#39; + Env.base_path(paths[0]) + &#39;&#34;&#39;)
+            self.copied_files.append(&#39;f:&#39; + paths[0])
+        else:
+            os.mkdir(Env.base_path(paths[0]))
+            self.copied_files.append(&#39;d:&#39; + paths[0])
+
+    def copy_files(self, pkg: ArchiveModel, directory_not_empty_event) -&gt; list:
+        &#39;&#39;&#39; Copy package files on system &#39;&#39;&#39;
+        # load package old files list
+        old_files = []
+        if os.path.isfile(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/files&#39;)):
+            try:
+                f = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/files&#39;), &#39;r&#39;)
+                for line in f.read().strip().split(&#39;\n&#39;):
+                    if line != &#39;&#39;:
+                        old_files.append(line.strip())
+            except:
+                pass
+        old_files = list(reversed(old_files))
+
+        # extract package in a temp place
+        temp_dir = Temp.make_dir()
+        os.rmdir(temp_dir)
+        try:
+            pkg.extractall(temp_dir)
+        except IsADirectoryError:
+            pass
+
+        # load files list from `files` directory of package
+        self.loaded_files = []
+        self.load_files(temp_dir + &#39;/files&#39;, temp_dir + &#39;/files&#39;)
+
+        # copy loaded files
+        self.copied_files = []
+        for f in self.loaded_files:
+            if os.path.exists(Env.base_path(f[0])):
+                if os.path.isfile(Env.base_path(f[0])):
+                    if (&#39;f:&#39; + f[0]) in old_files:
+                        self.copy_once_file(f)
+                        old_files.pop(old_files.index((&#39;f:&#39; + f[0])))
+                else:
+                    if (&#39;d:&#39; + f[0]) in old_files:
+                        self.copied_files.append(&#39;d:&#39; + f[0])
+                        old_files.pop(old_files.index((&#39;d:&#39; + f[0])))
+            else:
+                self.copy_once_file(f)
+
+        # delete not wanted old files
+        for item in old_files:
+            parts = item.strip().split(&#39;:&#39;, 1)
+            if parts[0] == &#39;cf&#39; or parts[0] == &#39;cd&#39;:
+                pass
+            else:
+                if os.path.isfile(parts[1]):
+                    os.remove(parts[1])
+                else:
+                    try:
+                        os.rmdir(parts[1])
+                    except:
+                        # directory is not emptyr
+                        directory_not_empty_event(pkg, parts[1])
+
+        return self.copied_files
+
+    def check_dep_and_conf(self, pkg: ArchiveModel):
+        &#39;&#39;&#39; Checks package dependencies and conflicts &#39;&#39;&#39;
+
+        # load package dependencies
+        try:
+            depends = pkg.data[&#39;depends&#39;]
+        except:
+            depends = []
+
+        # load package conflicts
+        try:
+            conflicts = pkg.data[&#39;conflicts&#39;]
+        except:
+            conflicts = []
+
+        for dep in depends:
+            if not Pkg.check_state(dep):
+                raise DependencyError(dep)
+
+        for conflict in conflicts:
+            if Pkg.check_state(conflict):
+                raise ConflictError(conflict)
+
+    def install(self, pkg: ArchiveModel, index_updater_events: dict, installer_events: dict, is_manual=True):
+        &#39;&#39;&#39;
+        Install .cati package
+
+        installer_events:
+        - package_currently_install: gets a current installed version
+        - package_new_installs: gets package archive
+        - package_installed: will call after package installation
+        - dep_and_conflict_error: will run when there is depends or conflict error
+        - arch_error: will run when package arch is not sync with sys arch
+        &#39;&#39;&#39;
+
+        # check package architecture
+        if pkg.data[&#39;arch&#39;] != &#39;all&#39;:
+            if SysArch.sys_arch() != pkg.data[&#39;arch&#39;]:
+                return installer_events[&#39;arch_error&#39;](pkg)
+
+        # check package dependencies and conflicts
+        try:
+            self.check_dep_and_conf(pkg)
+        except DependencyError as ex:
+            return installer_events[&#39;dep_and_conflict_error&#39;](pkg, ex)
+        except ConflictError as ex:
+            return installer_events[&#39;dep_and_conflict_error&#39;](pkg, ex)
+
+        # add package to state
+        state_f = open(Env.state_file(), &#39;w&#39;)
+        state_f.write(&#39;install%&#39; + pkg.data[&#39;name&#39;] + &#39;%&#39; + pkg.data[&#39;version&#39;] + &#39;%&#39; + pkg.data[&#39;arch&#39;] + &#39;\n&#39;)
+        state_f.close()
+
+        # add package data to lists
+        if not os.path.isdir(Env.packages_lists(&#39;/&#39; + pkg.data[&#39;name&#39;])):
+            os.mkdir(Env.packages_lists(&#39;/&#39; + pkg.data[&#39;name&#39;]))
+
+        lists_path = Env.packages_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/&#39; + pkg.data[&#39;version&#39;] + &#39;-&#39; + pkg.data[&#39;arch&#39;])
+
+        try:
+            lists_f = open(lists_path, &#39;r&#39;)
+            old_repo = json.loads(lists_f.read())[&#39;repo&#39;]
+            lists_f.close()
+        except:
+            old_repo = &#39;Local&#39;
+            pass
+
+        lists_f = open(lists_path, &#39;w&#39;)
+        pkg.data[&#39;repo&#39;] = old_repo
+        lists_f.write(json.dumps(pkg.data))
+        lists_f.close()
+
+        ListUpdater.update_indexes(index_updater_events)
+
+        # install package
+        if Pkg.is_installed(pkg.data[&#39;name&#39;]):
+            installer_events[&#39;package_currently_installed&#39;](pkg, Pkg.installed_version(pkg.data[&#39;name&#39;]))
+        else:
+            installer_events[&#39;package_new_installs&#39;](pkg)
+
+        copied_files = self.copy_files(pkg, installer_events[&#39;directory_not_empty&#39;])
+
+        # set install configuration
+        if not os.path.isdir(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;])):
+            os.mkdir(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;]))
+        f_ver = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/ver&#39;), &#39;w&#39;)
+        f_ver.write(pkg.data[&#39;version&#39;]) # write installed version
+        f_ver.close()
+
+        f_files = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/files&#39;), &#39;w&#39;)
+        copied_files_str = &#39;&#39;
+        for copied_file in copied_files:
+            copied_files_str += copied_file + &#39;\n&#39;
+        f_files.write(copied_files_str.strip()) # write copied files
+        f_files.close()
+
+        f_installed_at = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/installed_at&#39;), &#39;w&#39;)
+        f_installed_at.write(str(time.time())) # write time (installed at)
+        f_installed_at.close()
+
+        if is_manual:
+            f_manual = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/manual&#39;), &#39;w&#39;)
+            f_manual.write(&#39;&#39;)
+            f_manual.close()
+
+        # pop package from state
+        BaseTransaction.pop_state()
+
+        # call package installed event
+        installer_events[&#39;package_installed&#39;](pkg)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="dotcati.Installer.Installer"><code class="flex name class">
+<span>class <span class="ident">Installer</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dotcati package installer</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Installer:
+    &#39;&#39;&#39; Dotcati package installer &#39;&#39;&#39;
+
+    def load_files(self, path: str, base_temp_path: str):
+        &#39;&#39;&#39; Loads list of package files from extracted temp dir &#39;&#39;&#39;
+
+        for item in os.listdir(path):
+            if os.path.isfile(path + &#39;/&#39; + item):
+                self.loaded_files.append([(path + &#39;/&#39; + item)[len(base_temp_path):], path + &#39;/&#39; + item])
+            else:
+                self.loaded_files.append([(path + &#39;/&#39; + item)[len(base_temp_path):], path + &#39;/&#39; + item])
+                self.load_files(path + &#39;/&#39; + item, base_temp_path)
+
+    def copy_once_file(self, paths):
+        &#39;&#39;&#39; Copy one of package files &#39;&#39;&#39;
+        if os.path.isfile(paths[1]):
+            os.system(&#39;cp &#34;&#39; + paths[1] + &#39;&#34; &#34;&#39; + Env.base_path(paths[0]) + &#39;&#34;&#39;)
+            self.copied_files.append(&#39;f:&#39; + paths[0])
+        else:
+            os.mkdir(Env.base_path(paths[0]))
+            self.copied_files.append(&#39;d:&#39; + paths[0])
+
+    def copy_files(self, pkg: ArchiveModel, directory_not_empty_event) -&gt; list:
+        &#39;&#39;&#39; Copy package files on system &#39;&#39;&#39;
+        # load package old files list
+        old_files = []
+        if os.path.isfile(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/files&#39;)):
+            try:
+                f = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/files&#39;), &#39;r&#39;)
+                for line in f.read().strip().split(&#39;\n&#39;):
+                    if line != &#39;&#39;:
+                        old_files.append(line.strip())
+            except:
+                pass
+        old_files = list(reversed(old_files))
+
+        # extract package in a temp place
+        temp_dir = Temp.make_dir()
+        os.rmdir(temp_dir)
+        try:
+            pkg.extractall(temp_dir)
+        except IsADirectoryError:
+            pass
+
+        # load files list from `files` directory of package
+        self.loaded_files = []
+        self.load_files(temp_dir + &#39;/files&#39;, temp_dir + &#39;/files&#39;)
+
+        # copy loaded files
+        self.copied_files = []
+        for f in self.loaded_files:
+            if os.path.exists(Env.base_path(f[0])):
+                if os.path.isfile(Env.base_path(f[0])):
+                    if (&#39;f:&#39; + f[0]) in old_files:
+                        self.copy_once_file(f)
+                        old_files.pop(old_files.index((&#39;f:&#39; + f[0])))
+                else:
+                    if (&#39;d:&#39; + f[0]) in old_files:
+                        self.copied_files.append(&#39;d:&#39; + f[0])
+                        old_files.pop(old_files.index((&#39;d:&#39; + f[0])))
+            else:
+                self.copy_once_file(f)
+
+        # delete not wanted old files
+        for item in old_files:
+            parts = item.strip().split(&#39;:&#39;, 1)
+            if parts[0] == &#39;cf&#39; or parts[0] == &#39;cd&#39;:
+                pass
+            else:
+                if os.path.isfile(parts[1]):
+                    os.remove(parts[1])
+                else:
+                    try:
+                        os.rmdir(parts[1])
+                    except:
+                        # directory is not emptyr
+                        directory_not_empty_event(pkg, parts[1])
+
+        return self.copied_files
+
+    def check_dep_and_conf(self, pkg: ArchiveModel):
+        &#39;&#39;&#39; Checks package dependencies and conflicts &#39;&#39;&#39;
+
+        # load package dependencies
+        try:
+            depends = pkg.data[&#39;depends&#39;]
+        except:
+            depends = []
+
+        # load package conflicts
+        try:
+            conflicts = pkg.data[&#39;conflicts&#39;]
+        except:
+            conflicts = []
+
+        for dep in depends:
+            if not Pkg.check_state(dep):
+                raise DependencyError(dep)
+
+        for conflict in conflicts:
+            if Pkg.check_state(conflict):
+                raise ConflictError(conflict)
+
+    def install(self, pkg: ArchiveModel, index_updater_events: dict, installer_events: dict, is_manual=True):
+        &#39;&#39;&#39;
+        Install .cati package
+
+        installer_events:
+        - package_currently_install: gets a current installed version
+        - package_new_installs: gets package archive
+        - package_installed: will call after package installation
+        - dep_and_conflict_error: will run when there is depends or conflict error
+        - arch_error: will run when package arch is not sync with sys arch
+        &#39;&#39;&#39;
+
+        # check package architecture
+        if pkg.data[&#39;arch&#39;] != &#39;all&#39;:
+            if SysArch.sys_arch() != pkg.data[&#39;arch&#39;]:
+                return installer_events[&#39;arch_error&#39;](pkg)
+
+        # check package dependencies and conflicts
+        try:
+            self.check_dep_and_conf(pkg)
+        except DependencyError as ex:
+            return installer_events[&#39;dep_and_conflict_error&#39;](pkg, ex)
+        except ConflictError as ex:
+            return installer_events[&#39;dep_and_conflict_error&#39;](pkg, ex)
+
+        # add package to state
+        state_f = open(Env.state_file(), &#39;w&#39;)
+        state_f.write(&#39;install%&#39; + pkg.data[&#39;name&#39;] + &#39;%&#39; + pkg.data[&#39;version&#39;] + &#39;%&#39; + pkg.data[&#39;arch&#39;] + &#39;\n&#39;)
+        state_f.close()
+
+        # add package data to lists
+        if not os.path.isdir(Env.packages_lists(&#39;/&#39; + pkg.data[&#39;name&#39;])):
+            os.mkdir(Env.packages_lists(&#39;/&#39; + pkg.data[&#39;name&#39;]))
+
+        lists_path = Env.packages_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/&#39; + pkg.data[&#39;version&#39;] + &#39;-&#39; + pkg.data[&#39;arch&#39;])
+
+        try:
+            lists_f = open(lists_path, &#39;r&#39;)
+            old_repo = json.loads(lists_f.read())[&#39;repo&#39;]
+            lists_f.close()
+        except:
+            old_repo = &#39;Local&#39;
+            pass
+
+        lists_f = open(lists_path, &#39;w&#39;)
+        pkg.data[&#39;repo&#39;] = old_repo
+        lists_f.write(json.dumps(pkg.data))
+        lists_f.close()
+
+        ListUpdater.update_indexes(index_updater_events)
+
+        # install package
+        if Pkg.is_installed(pkg.data[&#39;name&#39;]):
+            installer_events[&#39;package_currently_installed&#39;](pkg, Pkg.installed_version(pkg.data[&#39;name&#39;]))
+        else:
+            installer_events[&#39;package_new_installs&#39;](pkg)
+
+        copied_files = self.copy_files(pkg, installer_events[&#39;directory_not_empty&#39;])
+
+        # set install configuration
+        if not os.path.isdir(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;])):
+            os.mkdir(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;]))
+        f_ver = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/ver&#39;), &#39;w&#39;)
+        f_ver.write(pkg.data[&#39;version&#39;]) # write installed version
+        f_ver.close()
+
+        f_files = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/files&#39;), &#39;w&#39;)
+        copied_files_str = &#39;&#39;
+        for copied_file in copied_files:
+            copied_files_str += copied_file + &#39;\n&#39;
+        f_files.write(copied_files_str.strip()) # write copied files
+        f_files.close()
+
+        f_installed_at = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/installed_at&#39;), &#39;w&#39;)
+        f_installed_at.write(str(time.time())) # write time (installed at)
+        f_installed_at.close()
+
+        if is_manual:
+            f_manual = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/manual&#39;), &#39;w&#39;)
+            f_manual.write(&#39;&#39;)
+            f_manual.close()
+
+        # pop package from state
+        BaseTransaction.pop_state()
+
+        # call package installed event
+        installer_events[&#39;package_installed&#39;](pkg)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="dotcati.Installer.Installer.check_dep_and_conf"><code class="name flex">
+<span>def <span class="ident">check_dep_and_conf</span></span>(<span>self, pkg: <a title="dotcati.ArchiveModel.ArchiveModel" href="ArchiveModel.html#dotcati.ArchiveModel.ArchiveModel">ArchiveModel</a>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks package dependencies and conflicts</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_dep_and_conf(self, pkg: ArchiveModel):
+    &#39;&#39;&#39; Checks package dependencies and conflicts &#39;&#39;&#39;
+
+    # load package dependencies
+    try:
+        depends = pkg.data[&#39;depends&#39;]
+    except:
+        depends = []
+
+    # load package conflicts
+    try:
+        conflicts = pkg.data[&#39;conflicts&#39;]
+    except:
+        conflicts = []
+
+    for dep in depends:
+        if not Pkg.check_state(dep):
+            raise DependencyError(dep)
+
+    for conflict in conflicts:
+        if Pkg.check_state(conflict):
+            raise ConflictError(conflict)</code></pre>
+</details>
+</dd>
+<dt id="dotcati.Installer.Installer.copy_files"><code class="name flex">
+<span>def <span class="ident">copy_files</span></span>(<span>self, pkg: <a title="dotcati.ArchiveModel.ArchiveModel" href="ArchiveModel.html#dotcati.ArchiveModel.ArchiveModel">ArchiveModel</a>, directory_not_empty_event) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Copy package files on system</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def copy_files(self, pkg: ArchiveModel, directory_not_empty_event) -&gt; list:
+    &#39;&#39;&#39; Copy package files on system &#39;&#39;&#39;
+    # load package old files list
+    old_files = []
+    if os.path.isfile(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/files&#39;)):
+        try:
+            f = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/files&#39;), &#39;r&#39;)
+            for line in f.read().strip().split(&#39;\n&#39;):
+                if line != &#39;&#39;:
+                    old_files.append(line.strip())
+        except:
+            pass
+    old_files = list(reversed(old_files))
+
+    # extract package in a temp place
+    temp_dir = Temp.make_dir()
+    os.rmdir(temp_dir)
+    try:
+        pkg.extractall(temp_dir)
+    except IsADirectoryError:
+        pass
+
+    # load files list from `files` directory of package
+    self.loaded_files = []
+    self.load_files(temp_dir + &#39;/files&#39;, temp_dir + &#39;/files&#39;)
+
+    # copy loaded files
+    self.copied_files = []
+    for f in self.loaded_files:
+        if os.path.exists(Env.base_path(f[0])):
+            if os.path.isfile(Env.base_path(f[0])):
+                if (&#39;f:&#39; + f[0]) in old_files:
+                    self.copy_once_file(f)
+                    old_files.pop(old_files.index((&#39;f:&#39; + f[0])))
+            else:
+                if (&#39;d:&#39; + f[0]) in old_files:
+                    self.copied_files.append(&#39;d:&#39; + f[0])
+                    old_files.pop(old_files.index((&#39;d:&#39; + f[0])))
+        else:
+            self.copy_once_file(f)
+
+    # delete not wanted old files
+    for item in old_files:
+        parts = item.strip().split(&#39;:&#39;, 1)
+        if parts[0] == &#39;cf&#39; or parts[0] == &#39;cd&#39;:
+            pass
+        else:
+            if os.path.isfile(parts[1]):
+                os.remove(parts[1])
+            else:
+                try:
+                    os.rmdir(parts[1])
+                except:
+                    # directory is not emptyr
+                    directory_not_empty_event(pkg, parts[1])
+
+    return self.copied_files</code></pre>
+</details>
+</dd>
+<dt id="dotcati.Installer.Installer.copy_once_file"><code class="name flex">
+<span>def <span class="ident">copy_once_file</span></span>(<span>self, paths)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Copy one of package files</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def copy_once_file(self, paths):
+    &#39;&#39;&#39; Copy one of package files &#39;&#39;&#39;
+    if os.path.isfile(paths[1]):
+        os.system(&#39;cp &#34;&#39; + paths[1] + &#39;&#34; &#34;&#39; + Env.base_path(paths[0]) + &#39;&#34;&#39;)
+        self.copied_files.append(&#39;f:&#39; + paths[0])
+    else:
+        os.mkdir(Env.base_path(paths[0]))
+        self.copied_files.append(&#39;d:&#39; + paths[0])</code></pre>
+</details>
+</dd>
+<dt id="dotcati.Installer.Installer.install"><code class="name flex">
+<span>def <span class="ident">install</span></span>(<span>self, pkg: <a title="dotcati.ArchiveModel.ArchiveModel" href="ArchiveModel.html#dotcati.ArchiveModel.ArchiveModel">ArchiveModel</a>, index_updater_events: dict, installer_events: dict, is_manual=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Install .cati package</p>
+<p>installer_events:
+- package_currently_install: gets a current installed version
+- package_new_installs: gets package archive
+- package_installed: will call after package installation
+- dep_and_conflict_error: will run when there is depends or conflict error
+- arch_error: will run when package arch is not sync with sys arch</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def install(self, pkg: ArchiveModel, index_updater_events: dict, installer_events: dict, is_manual=True):
+    &#39;&#39;&#39;
+    Install .cati package
+
+    installer_events:
+    - package_currently_install: gets a current installed version
+    - package_new_installs: gets package archive
+    - package_installed: will call after package installation
+    - dep_and_conflict_error: will run when there is depends or conflict error
+    - arch_error: will run when package arch is not sync with sys arch
+    &#39;&#39;&#39;
+
+    # check package architecture
+    if pkg.data[&#39;arch&#39;] != &#39;all&#39;:
+        if SysArch.sys_arch() != pkg.data[&#39;arch&#39;]:
+            return installer_events[&#39;arch_error&#39;](pkg)
+
+    # check package dependencies and conflicts
+    try:
+        self.check_dep_and_conf(pkg)
+    except DependencyError as ex:
+        return installer_events[&#39;dep_and_conflict_error&#39;](pkg, ex)
+    except ConflictError as ex:
+        return installer_events[&#39;dep_and_conflict_error&#39;](pkg, ex)
+
+    # add package to state
+    state_f = open(Env.state_file(), &#39;w&#39;)
+    state_f.write(&#39;install%&#39; + pkg.data[&#39;name&#39;] + &#39;%&#39; + pkg.data[&#39;version&#39;] + &#39;%&#39; + pkg.data[&#39;arch&#39;] + &#39;\n&#39;)
+    state_f.close()
+
+    # add package data to lists
+    if not os.path.isdir(Env.packages_lists(&#39;/&#39; + pkg.data[&#39;name&#39;])):
+        os.mkdir(Env.packages_lists(&#39;/&#39; + pkg.data[&#39;name&#39;]))
+
+    lists_path = Env.packages_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/&#39; + pkg.data[&#39;version&#39;] + &#39;-&#39; + pkg.data[&#39;arch&#39;])
+
+    try:
+        lists_f = open(lists_path, &#39;r&#39;)
+        old_repo = json.loads(lists_f.read())[&#39;repo&#39;]
+        lists_f.close()
+    except:
+        old_repo = &#39;Local&#39;
+        pass
+
+    lists_f = open(lists_path, &#39;w&#39;)
+    pkg.data[&#39;repo&#39;] = old_repo
+    lists_f.write(json.dumps(pkg.data))
+    lists_f.close()
+
+    ListUpdater.update_indexes(index_updater_events)
+
+    # install package
+    if Pkg.is_installed(pkg.data[&#39;name&#39;]):
+        installer_events[&#39;package_currently_installed&#39;](pkg, Pkg.installed_version(pkg.data[&#39;name&#39;]))
+    else:
+        installer_events[&#39;package_new_installs&#39;](pkg)
+
+    copied_files = self.copy_files(pkg, installer_events[&#39;directory_not_empty&#39;])
+
+    # set install configuration
+    if not os.path.isdir(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;])):
+        os.mkdir(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;]))
+    f_ver = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/ver&#39;), &#39;w&#39;)
+    f_ver.write(pkg.data[&#39;version&#39;]) # write installed version
+    f_ver.close()
+
+    f_files = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/files&#39;), &#39;w&#39;)
+    copied_files_str = &#39;&#39;
+    for copied_file in copied_files:
+        copied_files_str += copied_file + &#39;\n&#39;
+    f_files.write(copied_files_str.strip()) # write copied files
+    f_files.close()
+
+    f_installed_at = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/installed_at&#39;), &#39;w&#39;)
+    f_installed_at.write(str(time.time())) # write time (installed at)
+    f_installed_at.close()
+
+    if is_manual:
+        f_manual = open(Env.installed_lists(&#39;/&#39; + pkg.data[&#39;name&#39;] + &#39;/manual&#39;), &#39;w&#39;)
+        f_manual.write(&#39;&#39;)
+        f_manual.close()
+
+    # pop package from state
+    BaseTransaction.pop_state()
+
+    # call package installed event
+    installer_events[&#39;package_installed&#39;](pkg)</code></pre>
+</details>
+</dd>
+<dt id="dotcati.Installer.Installer.load_files"><code class="name flex">
+<span>def <span class="ident">load_files</span></span>(<span>self, path: str, base_temp_path: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Loads list of package files from extracted temp dir</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_files(self, path: str, base_temp_path: str):
+    &#39;&#39;&#39; Loads list of package files from extracted temp dir &#39;&#39;&#39;
+
+    for item in os.listdir(path):
+        if os.path.isfile(path + &#39;/&#39; + item):
+            self.loaded_files.append([(path + &#39;/&#39; + item)[len(base_temp_path):], path + &#39;/&#39; + item])
+        else:
+            self.loaded_files.append([(path + &#39;/&#39; + item)[len(base_temp_path):], path + &#39;/&#39; + item])
+            self.load_files(path + &#39;/&#39; + item, base_temp_path)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="dotcati" href="index.html">dotcati</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="dotcati.Installer.Installer" href="#dotcati.Installer.Installer">Installer</a></code></h4>
+<ul class="">
+<li><code><a title="dotcati.Installer.Installer.check_dep_and_conf" href="#dotcati.Installer.Installer.check_dep_and_conf">check_dep_and_conf</a></code></li>
+<li><code><a title="dotcati.Installer.Installer.copy_files" href="#dotcati.Installer.Installer.copy_files">copy_files</a></code></li>
+<li><code><a title="dotcati.Installer.Installer.copy_once_file" href="#dotcati.Installer.Installer.copy_once_file">copy_once_file</a></code></li>
+<li><code><a title="dotcati.Installer.Installer.install" href="#dotcati.Installer.Installer.install">install</a></code></li>
+<li><code><a title="dotcati.Installer.Installer.load_files" href="#dotcati.Installer.Installer.load_files">load_files</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+</footer>
+</body>
+</html>
