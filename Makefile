@@ -1,7 +1,7 @@
 SHELL = bash
 
 .DEFAULT_GOAL := main
-.PHONY := headers compile clean pylint test main all
+.PHONY := headers compile install main clean pylint test all docs help
 
 PY = python3
 MANAGE = $(PY) ./manage.py
