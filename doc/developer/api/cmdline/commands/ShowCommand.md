@@ -19,6 +19,9 @@ Classes
 
     `help(self)`
     :   shows details of packages
+        
+        Options:
+        --versions: shows versions list of packages
 
     `run(self)`
     :   Run command

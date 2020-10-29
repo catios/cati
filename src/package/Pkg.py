@@ -69,6 +69,27 @@ class Pkg:
                     reverse_depends.append(pkg)
         return reverse_depends
 
+    def get_versions_list(self):
+        """
+        returns versions list of the package
+        Output structure: list [ [<version>, <arch>] ]
+        """
+        try:
+            f_index = open(Env.packages_lists('/' + self.data['name'] + '/index'), 'r')
+            index_json = json.loads(f_index.read())
+            f_index.close()
+        except:
+            return []
+        
+        try:
+            versions = []
+            for k in index_json:
+                for ver in index_json[k]:
+                    versions.append([ver, k])
+            return versions
+        except:
+            return []
+
     @staticmethod
     def load_last(pkg_name: str):
         ''' Load last version of package by name '''

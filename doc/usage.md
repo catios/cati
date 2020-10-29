@@ -77,3 +77,6 @@ this command shows packages details
 cati show somepackage
 cati show pkg1 pkg2 # ...
 ```
+
+Options:
+- `--versions`: shows versions list of packages

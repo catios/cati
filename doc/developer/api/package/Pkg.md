@@ -70,5 +70,9 @@ Classes
     `get_reverse_depends(self) ‑> list`
     :   Returns list of packages has dependency to this package
 
+    `get_versions_list(self)`
+    :   returns versions list of the package
+        Output structure: list [ [<version>, <arch>] ]
+
     `installed(self)`
     :   Checks current package is installed

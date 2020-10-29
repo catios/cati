@@ -31,6 +31,9 @@ class ShowCommand(BaseCommand):
     def help(self):
         '''
         shows details of packages
+
+        Options:
+        --versions: shows versions list of packages
         '''
         pass
 
@@ -39,6 +42,7 @@ class ShowCommand(BaseCommand):
         return {
             'name': 'show',
             'options': {
+                '--versions': [False, False],
             },
             'max_args_count': None,
             'min_args_count': 1,
@@ -75,6 +79,12 @@ class ShowCommand(BaseCommand):
 
         # show loaded packages
         for pkg in loaded_packages:
-            PackageShower.show(pkg.data)
+            if self.has_option('--versions'):
+                versions_list = pkg.get_versions_list()
+                pr.p(pkg.data['name'] + ':')
+                for ver in versions_list:
+                    pr.p(' ' + ver[0] + ':' + ver[1])
+            else:
+                PackageShower.show(pkg.data)
             if len(loaded_packages) > 1:
                 pr.p('---------------------')
