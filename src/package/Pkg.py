@@ -223,10 +223,10 @@ class Pkg:
     @staticmethod
     def compare_version(a, b):
         """
-        Compares two versions
-        if 1 is returned means a is upper than b
-        if 0 is returned means a equals b
-        if -1 is returned means a is less than b
+        Compares two versions.
+        if 1 is returned means a is upper than b.
+        if 0 is returned means a equals b.
+        if -1 is returned means a is less than b.
         """
         a = version.parse(a)
         b = version.parse(b)
@@ -277,16 +277,16 @@ class Pkg:
 
     def check_state(query_string: str) -> bool:
         """
-        Checks package state by query string
+        Checks package state by query string.
 
         For examples:
-        "somepackage >= 1.5"
-        "somepackage"
-        "somepackage = 2.0"
-        "somepackage < 1.7"
-        "pkga | pkgb >= 1.0"
-        "pkga | pkgb | pkgc"
-        "pkga | pkgb & pkgc = 1.0"
+        "somepackage >= 1.5",
+        "somepackage",
+        "somepackage = 2.0",
+        "somepackage < 1.7",
+        "pkga | pkgb >= 1.0",
+        "pkga | pkgb | pkgc",
+        "pkga | pkgb & pkgc = 1.0",
         """
 
         # parse query string

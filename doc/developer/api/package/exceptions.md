@@ -1,6 +1,6 @@
 Module package.exceptions
 =========================
-Package Exceptions
+Package section exceptions
 
 Classes
 -------

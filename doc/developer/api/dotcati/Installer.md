@@ -11,7 +11,11 @@ Classes
     ### Methods
 
     `check_dep_and_conf(self, pkg: dotcati.ArchiveModel.ArchiveModel)`
-    :   Checks package dependencies and conflicts
+    :   Checks package dependencies and conflicts.
+        
+        raises DependencyError when a dependency is not installed.
+        
+        raises ConflictError when a conflict is installed.
 
     `copy_files(self, pkg: dotcati.ArchiveModel.ArchiveModel, directory_not_empty_event) ‑> list`
     :   Copy package files on system

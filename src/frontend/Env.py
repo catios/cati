@@ -20,9 +20,20 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-""" Handle environment file paths """
+"""
+Handle environment file paths.
+
+in cati, we do not write config, database and... file paths directly in everywhere.
+we get that paths from this module.
+also testing system changes base environment path in `base_path_dir` variable
+to isolate program environemnt while running tests
+"""
 
 base_path_dir = ''
+"""
+base path of the cati files environment.
+(will get another path in testing environment to isolate testing environment with real environment)
+"""
 
 def base_path(path=''):
     """ Returns environment base path """
@@ -37,4 +48,5 @@ def installed_lists(path=''):
     return base_path('/var/lib/cati/installed' + path)
 
 def state_file():
+    """ State file (read state system documentation) """
     return base_path('/var/lib/cati/state.f')

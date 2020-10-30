@@ -14,10 +14,10 @@ Classes
     :   Returns list of packages
 
     `compare_version(a, b)`
-    :   Compares two versions
-        if 1 is returned means a is upper than b
-        if 0 is returned means a equals b
-        if -1 is returned means a is less than b
+    :   Compares two versions.
+        if 1 is returned means a is upper than b.
+        if 0 is returned means a equals b.
+        if -1 is returned means a is less than b.
 
     `get_last_version(versions: list)`
     :   Gets a list from versions and returns latest version in that list
@@ -50,16 +50,16 @@ Classes
     ### Methods
 
     `check_state(query_string: str) ‑> bool`
-    :   Checks package state by query string
+    :   Checks package state by query string.
         
         For examples:
-        "somepackage >= 1.5"
-        "somepackage"
-        "somepackage = 2.0"
-        "somepackage < 1.7"
-        "pkga | pkgb >= 1.0"
-        "pkga | pkgb | pkgc"
-        "pkga | pkgb & pkgc = 1.0"
+        "somepackage >= 1.5",
+        "somepackage",
+        "somepackage = 2.0",
+        "somepackage < 1.7",
+        "pkga | pkgb >= 1.0",
+        "pkga | pkgb | pkgc",
+        "pkga | pkgb & pkgc = 1.0",
 
     `get_conflicts(self)`
     :   Returns package conflicts list

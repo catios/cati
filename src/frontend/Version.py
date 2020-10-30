@@ -23,3 +23,6 @@
 """ This file keeps cati version """
 
 version = 'v0.1-dev'
+"""
+cati version
+"""

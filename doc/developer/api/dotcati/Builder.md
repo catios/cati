@@ -19,6 +19,8 @@ Classes
     :   This function gets a directory and builds a .cati package from that
         the output is optional parameter. this argument can be used
         to set package output file.
+        
+        will raise InvalidPackageDirException when there is an probelm in package directory (problem will put as exception message)
 
     `compress(self, dirpath: str, output: str)`
     :   This function compresses content of target directory and build package

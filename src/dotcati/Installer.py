@@ -113,7 +113,13 @@ class Installer:
         return self.copied_files
 
     def check_dep_and_conf(self, pkg: ArchiveModel):
-        """ Checks package dependencies and conflicts """
+        """
+        Checks package dependencies and conflicts.
+
+        raises DependencyError when a dependency is not installed.
+
+        raises ConflictError when a conflict is installed.
+        """
 
         # load package dependencies
         try:
