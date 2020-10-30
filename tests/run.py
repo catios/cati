@@ -49,40 +49,45 @@ def load_test_env():
 
     HealthChecker.check({}) # run health checker to create needed files in test environment
 
-print('Starting test system...')
-print('=======================')
+def run():
+    """ start running tests """
+    print('Starting test system...')
+    print('=======================')
+    
+    # load test environment
+    print('Loading test environment...', end=' ')
+    load_test_env()
+    print(ansi.green + 'created in ' + Env.base_path() + ansi.reset)
+    print()
+    
+    # enable testing mode
+    pr.is_testing = True
+    SysArch.is_testing = True
+    
+    # load tests list
+    tests_list = os.listdir('tests/items')
+    
+    # clean up tests list
+    orig_tests = []
+    for test in tests_list:
+        if test[len(test)-3:] == '.py':
+            exec('from items.' + test[:len(test)-3] + ' import ' + test[:len(test)-3])
+            exec("orig_tests.append(" + test[:len(test)-3] + "())")
+    
+    # start running tests
+    count = 0
+    for test in orig_tests:
+        test_name = test.get_name()
+        print('\t' + test_name.replace('_', ' ') + ': ', end='', flush=True)
+        test.run()
+        print(ansi.green + 'PASS' + ansi.reset)
+        count += 1
+    
+    print()
+    print(ansi.green + 'All ' + str(count) + ' tests passed successfuly')
+    print('Cleaning up...' + ansi.reset)
+    shutil.rmtree(Env.base_path_dir)
+    Temp.clean()
 
-# load test environment
-print('Loading test environment...', end=' ')
-load_test_env()
-print(ansi.green + 'created in ' + Env.base_path() + ansi.reset)
-print()
-
-# enable testing mode
-pr.is_testing = True
-SysArch.is_testing = True
-
-# load tests list
-tests_list = os.listdir('tests/items')
-
-# clean up tests list
-orig_tests = []
-for test in tests_list:
-    if test[len(test)-3:] == '.py':
-        exec('from items.' + test[:len(test)-3] + ' import ' + test[:len(test)-3])
-        exec("orig_tests.append(" + test[:len(test)-3] + "())")
-
-# start running tests
-count = 0
-for test in orig_tests:
-    test_name = test.get_name()
-    print('\t' + test_name.replace('_', ' ') + ': ', end='', flush=True)
-    test.run()
-    print(ansi.green + 'PASS' + ansi.reset)
-    count += 1
-
-print()
-print(ansi.green + 'All ' + str(count) + ' tests passed successfuly')
-print('Cleaning up...' + ansi.reset)
-shutil.rmtree(Env.base_path_dir)
-Temp.clean()
+if __name__ == '__main__':
+    run()

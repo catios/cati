@@ -36,9 +36,9 @@ def cati_installation_is_corrupt(filepath: str, filetype: str):
     pr.e(ansi.red + 'Cati installation is corrupt. to repair it, just run cati with root access' + ansi.reset)
     pr.exit(1)
 
-HealthChecker.check({
-    'failed_to_repair': cati_installation_is_corrupt,
-})
-
-# handle cli
-kernel.handle(sys.argv[:])
+if __name__ == '__main__':
+    HealthChecker.check({
+        'failed_to_repair': cati_installation_is_corrupt,
+    })
+    # handle cli
+    kernel.handle(sys.argv[:])
