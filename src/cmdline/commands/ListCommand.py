@@ -33,6 +33,7 @@ class ListCommand(BaseCommand):
         Options:
         --installed: show only installed packages
         --installed-manual: show only manual installed packages
+        -q|--quiet: quiet output, only show package names
         """
         pass
 
@@ -43,12 +44,17 @@ class ListCommand(BaseCommand):
             'options': {
                 '--installed': [False, False],
                 '--installed-manual': [False, False],
+                '--quiet': [False, False],
+                '-q': [False, False],
             },
             'max_args_count': 0,
             'min_args_count': 0,
         }
 
     def show_once(self, package: Pkg):
+        if self.has_option('-q') or self.has_option('--quiet'):
+            pr.p(package.data['name'])
+            return
         output = ansi.green + package.data['name'] + ansi.reset + '/' +  ansi.yellow + package.data['version'] + ansi.reset
         if package.installed():
             if package.is_installed_manual(package.data['name']):
@@ -62,8 +68,9 @@ class ListCommand(BaseCommand):
     def run(self):
         """ Run command """
 
-        pr.p('Loading packages list...')
-        pr.p('========================')
+        if not self.has_option('-q') and not self.has_option('--quiet'):
+            pr.p('Loading packages list...')
+            pr.p('========================')
         # load list of packages
         if self.has_option('--installed'):
             # just list installed packages

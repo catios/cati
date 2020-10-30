@@ -22,6 +22,7 @@ Classes
         Options:
         --installed: show only installed packages
         --installed-manual: show only manual installed packages
+        -q|--quiet: quiet output, only show package names
 
     `run(self)`
     :   Run command
