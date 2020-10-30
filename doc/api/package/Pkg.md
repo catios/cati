@@ -32,7 +32,7 @@ Classes
     :   Gets a package name and checks is installed or not
 
     `is_installed_manual(package_name: str)`
-    :
+    :   Gets a package name and checks is installed MANUAL or not
 
     `load_from_index(index_json: dict, package_name: str)`
     :   Loads package data from index file
@@ -75,4 +75,4 @@ Classes
         Output structure: list [ [<version>, <arch>] ]
 
     `installed(self)`
-    :   Checks current package is installed
+    :   Checks current package is installed. if yes, returns installed version and if not, returns False

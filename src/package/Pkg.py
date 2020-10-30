@@ -40,7 +40,7 @@ class Pkg:
             self.data['repo'] = 'Local'
 
     def installed(self):
-        """ Checks current package is installed """
+        """ Checks current package is installed. if yes, returns installed version and if not, returns False """
         if not Pkg.is_installed(self.data['name']):
             return False
 
@@ -114,6 +114,7 @@ class Pkg:
 
     @staticmethod
     def is_installed_manual(package_name: str):
+        """ Gets a package name and checks is installed MANUAL or not """
         if not Pkg.is_installed(package_name):
             return False
         return os.path.isfile(Env.installed_lists('/' + package_name + '/manual'))
