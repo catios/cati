@@ -67,7 +67,6 @@ cyan = '\033[96m'
 cyan
 """
 
-
 def disable():
     """
     disable ansi characters.
