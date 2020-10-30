@@ -23,8 +23,7 @@ jobs:
         python-version: ${{ matrix.python }}
     - name: Install dependencies
       run: |
-        cat requirements.txt | grep -v 'pkg-resources==0.0.0' > tmp-requirements.txt
-        pip3 install -r tmp-requirements.txt
+        pip3 install -r requirements.txt
     - name: Run tests
       run: make all
 
@@ -46,8 +45,7 @@ jobs:
         python-version: ${{ matrix.python }}
     - name: Install dependencies
       run: |
-        cat requirements.txt | grep -v 'pkg-resources==0.0.0' > tmp-requirements.txt
-        pip3 install -r tmp-requirements.txt
+        pip3 install -r requirements.txt
     - name: Build
       run: |
         make all

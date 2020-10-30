@@ -5,8 +5,7 @@ COPY . /src
 WORKDIR /src
 
 # install requirements
-RUN cat requirements.txt | grep -v 'pkg-resources==0.0.0' > tmp-requirements.txt
-RUN pip3 install -r tmp-requirements.txt
+RUN pip3 install -r requirements.txt
 
 # compile and install
 RUN make all
