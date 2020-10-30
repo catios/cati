@@ -28,6 +28,14 @@ class test_list_command(TestCore):
     """ Test test_list_command """
     def run(self):
         """ Run test """
-        # smooking test for list command
         self.assert_equals(self.run_command('list'), 0)
         self.assert_equals(self.run_command('list', ['--installed']), 0)
+        self.assert_equals(self.run_command('list', ['--installed-manual']), 0)
+        self.assert_equals(self.run_command('list', ['-q']), 0)
+        self.assert_equals(self.run_command('list', ['--quiet']), 0)
+        self.assert_equals(self.run_command('list', ['--author="author1"']), 0)
+        self.assert_equals(self.run_command('list', ['--author="author1|author2"']), 0)
+        self.assert_equals(self.run_command('list', ['--maintainer="maintainer1"']), 0)
+        self.assert_equals(self.run_command('list', ['--maintainer="maintainer1|maintainer2"']), 0)
+        self.assert_equals(self.run_command('list', ['--category="category1"']), 0)
+        self.assert_equals(self.run_command('list', ['--category="category1|category2"']), 0)
