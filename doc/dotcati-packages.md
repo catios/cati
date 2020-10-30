@@ -24,6 +24,7 @@ an example for this file:
     "maintainer": "maintainer of this package",
     "description": "description of this package",
     "channel": "channel of this version",
+    "homepage": "homepage url",
     "category": ["list", "of", "categories"],
 
     "depends": [

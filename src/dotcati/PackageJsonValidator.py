@@ -86,6 +86,15 @@ class PackageJsonValidator:
                 pass
 
             try:
+                tmp = data['homepage']
+                try:
+                    assert type(data['homepage']) == str
+                except:
+                    raise
+            except:
+                pass
+
+            try:
                 tmp = data['category']
                 try:
                     assert type(data['category']) == list

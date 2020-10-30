@@ -45,6 +45,11 @@ def show(data: dict):
     except:
         pass
     try:
+        homepage = data['homepage']
+        output += 'Homepage: ' + ansi.blue + homepage + ansi.reset + '\n'
+    except:
+        pass
+    try:
         category = data['category']
         if category:
             output += 'Categories: '
