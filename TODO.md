@@ -7,7 +7,7 @@
 - [x] handle manual/auto package installation types
 - [x] fix remove calculator bug
 - [x] add new options to list command for filtering the list
-- [ ] add `--quiet|-q` and `--verbose|-v` options for commands
+- [x] add `--quiet|-q` and `--verbose|-v` options for commands
 - [ ] make better docstrings
 - [ ] create confflie system
 - [ ] create static file system

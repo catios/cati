@@ -33,6 +33,8 @@ class test_list_command(TestCore):
         self.assert_equals(self.run_command('list', ['--installed-manual']), 0)
         self.assert_equals(self.run_command('list', ['-q']), 0)
         self.assert_equals(self.run_command('list', ['--quiet']), 0)
+        self.assert_equals(self.run_command('list', ['-v']), 0)
+        self.assert_equals(self.run_command('list', ['--verbose']), 0)
         self.assert_equals(self.run_command('list', ['--author="author1"']), 0)
         self.assert_equals(self.run_command('list', ['--author="author1|author2"']), 0)
         self.assert_equals(self.run_command('list', ['--maintainer="maintainer1"']), 0)

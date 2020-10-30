@@ -34,6 +34,12 @@ Classes
     `help_summary(self)`
     :   Returns summary of help (first line only)
 
+    `is_quiet(self)`
+    :   Checks --quiet and -q options
+
+    `is_verbose(self)`
+    :   Checks --verbose and -v options
+
     `message(self, msg, is_error=False, before='')`
     :   Prints a message on screen
 

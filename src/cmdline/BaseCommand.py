@@ -141,3 +141,11 @@ Usage: cati [command] [options] [args]"""
     def help_summary(self):
         """ Returns summary of help (first line only) """
         return self.help_full(False).split('\n')[0]
+
+    def is_quiet(self):
+        """ Checks --quiet and -q options """
+        return self.has_option('-q') or self.has_option('--quiet')
+
+    def is_verbose(self):
+        """ Checks --verbose and -v options """
+        return self.has_option('-v') or self.has_option('--verbose')
