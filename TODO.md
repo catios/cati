@@ -8,7 +8,7 @@
 - [x] fix remove calculator bug
 - [x] add new options to list command for filtering the list
 - [x] add `--quiet|-q` and `--verbose|-v` options for commands
-- [ ] make better docstrings
+- [x] make better docstrings
 - [ ] create confflie system
 - [ ] create static file system
 - [ ] create package scripts system
