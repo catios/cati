@@ -35,6 +35,7 @@ class Builder:
 
     @staticmethod
     def json_fields_are_valid(data: dict):
+        """ alias for PackageJsonValidator.validate (validates package json info) """
         return PackageJsonValidator.validate(data)
 
     def build(self, dirpath: str, output=None):

@@ -146,7 +146,7 @@ class Installer:
         Install .cati package
 
         installer_events:
-        - package_currently_install: gets a current installed version
+        - package_currently_install: gets the current installed version
         - package_new_installs: gets package archive
         - package_installed: will call after package installation
         - dep_and_conflict_error: will run when there is depends or conflict error

@@ -11,7 +11,7 @@ Classes
     ### Static methods
 
     `json_fields_are_valid(data: dict)`
-    :
+    :   alias for PackageJsonValidator.validate (validates package json info)
 
     ### Methods
 

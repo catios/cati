@@ -19,7 +19,7 @@ Classes
     :   returns sorted list of all of packages
 
     `has_any_thing(self)`
-    :
+    :   returns is there any transactions to do
 
     `refresh_lists(self)`
     :   Refresh packages list and sync them with depends and conflicts

@@ -69,6 +69,7 @@ class Calculator:
         self.refresh_lists()
 
     def has_any_thing(self):
+        """ returns is there any transactions to do """
         return self.to_remove
 
     def get_sorted_list(self):
