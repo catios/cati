@@ -8,7 +8,7 @@ Variables
     
 `commands`
 :   a dictonary from list of subcommands
-    structure: "cmdname": <cmd-class>
+    structure: "cmdname": CmdClass
 
 Functions
 ---------
@@ -16,4 +16,4 @@ Functions
     
 `handle(argv: list)`
 :   handle cli
-    gets argv and runs entered command as subcommand
+    gets argv and runs entered command as subcommand (if not subcommand inserted, runs help command as default)

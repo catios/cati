@@ -27,7 +27,7 @@ from frontend import Temp
 
 is_testing = False
 """
-if this variable is True, print will be disable. this variable will get True value while running tests
+if this variable is True, print will be disable. this variable will get True value while running tests to hide prints
 """
 
 def p(value='', end='\n'):

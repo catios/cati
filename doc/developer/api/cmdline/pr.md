@@ -7,7 +7,7 @@ Variables
 
     
 `is_testing`
-:   if this variable is True, print will be disable. this variable will get True value while running tests
+:   if this variable is True, print will be disable. this variable will get True value while running tests to hide prints
 
 Functions
 ---------

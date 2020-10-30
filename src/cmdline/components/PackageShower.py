@@ -29,7 +29,7 @@ from package.Pkg import Pkg
 
 def show(data: dict):
     """
-    shows package information
+    shows package information.
     gets package data and show them in cli
     """
     output = ''

@@ -27,7 +27,8 @@ from cmdline import ansi, pr
 
 def show(calc: Calculator):
     """
-    shows transactions
+    shows transactions.
+
     gets a transaction.Calculator.Calculator object
     and shows list of calculated transactions
     (install/remove/upgrade/downgrade)

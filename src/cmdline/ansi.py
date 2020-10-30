@@ -23,19 +23,55 @@
 """ ANSI terminal colors """
 
 header = '\033[95m'
+"""
+header
+"""
+
 blue = '\033[94m'
+"""
+blue
+"""
+
 green = '\033[92m'
+"""
+green
+"""
+
 yellow = '\033[93m'
+"""
+yellow
+"""
+
 red = '\033[91m'
+"""
+red
+"""
+
 reset = '\033[0m'
+"""
+reset
+"""
+
 bold = '\033[1m'
+"""
+bold
+"""
+
 underline = '\033[4m'
+"""
+underline
+"""
+
 cyan = '\033[96m'
+"""
+cyan
+"""
+
 
 def disable():
     """
-    disable ansi characters
-    assign '' value to all of ansi chars to disable them
+    disable ansi characters.
+    assign null value to all of ansi chars to disable them
     """
     from cmdline import ansi
     ansi.header = ''
