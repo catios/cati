@@ -24,8 +24,8 @@ an example for this file:
     "maintainer": "maintainer of this package",
     "description": "description of this package",
     "channel": "channel of this version",
-
     "category": ["list", "of", "categories"],
+
     "depends": [
         "pkga",
         "pkga >= 1.7.13",
