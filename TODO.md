@@ -6,8 +6,8 @@
 - [x] handle package architecture in installation process
 - [x] handle manual/auto package installation types
 - [x] fix remove calculator bug
-- [ ] add new options to list command for filtering the list
-- [ ] create `--quiet|-q` and `--verbose|-v` general options and sync commands with them
+- [x] add new options to list command for filtering the list
+- [ ] add `--quiet|-q` and `--verbose|-v` options for commands
 - [ ] make better docstrings
 - [ ] create confflie system
 - [ ] create static file system
