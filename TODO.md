@@ -11,6 +11,7 @@
 - [x] make better docstrings
 - [ ] create confflie system
 - [ ] create static file system
+- [ ] some cleanups and refactors in code
 - [ ] create package scripts system
 - [ ] check state before run transactions
 - [ ] create search command
