@@ -1,6 +1,8 @@
 Module transaction.BaseTransaction
 ==================================
-Transaction base model
+Transaction base model.
+
+transactions are install/remove/upgrade/downgrade operations.
 
 Classes
 -------
@@ -20,11 +22,5 @@ Classes
     `finish_all_state()`
     :   clear all of states
 
-    `finish_last_state()`
-    :   set last item in state to finished
-
-    `handle_state(section: str, pkg: package.Pkg.Pkg)`
-    :   add new item to state
-
     `pop_state()`
-    :   add new item to state
+    :   remove first item from state

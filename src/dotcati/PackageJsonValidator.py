@@ -25,7 +25,7 @@
 class PackageJsonValidator:
     """ Package information json validator """
     @staticmethod
-    def validate(data: dict):
+    def validate(data: dict) -> bool:
         """
         This function gets a json object and checks that fields and value of them where
         are required for a valid package data.json and says this data

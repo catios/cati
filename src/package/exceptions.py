@@ -20,7 +20,7 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-""" Package Exceptions """
+""" Package section exceptions """
 
 class CannotReadFileException(Exception):
     pass

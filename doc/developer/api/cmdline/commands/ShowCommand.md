@@ -6,7 +6,7 @@ Classes
 -------
 
 `ShowCommand()`
-:   Cmdline command model base
+:   Show command
 
     ### Ancestors (in MRO)
 

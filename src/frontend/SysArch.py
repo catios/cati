@@ -23,6 +23,10 @@
 """ Handle system architecture """
 
 is_testing = False
+"""
+in testing environment,
+default architecture is `i386`, not real host arch.
+"""
 
 def sys_arch():
     """ Returns system architecture """

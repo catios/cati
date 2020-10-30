@@ -6,7 +6,7 @@ Classes
 -------
 
 `RemoveCommand()`
-:   Cmdline command model base
+:   Remove command
 
     ### Ancestors (in MRO)
 
@@ -18,16 +18,17 @@ Classes
     :   Define and config this command
 
     `dir_is_not_empty_event(self, pkg: package.Pkg.Pkg, f: str)`
-    :
+    :   will run as package remover event when remover wants to remove a directory
+        but that dir is not empty. this event shows a warning to user
 
     `help(self)`
     :   remove packages
 
     `package_remove_finished_event(self, pkg: package.Pkg.Pkg)`
-    :
+    :   will run as package remover event when package remove process finished
 
     `removing_package_event(self, pkg: package.Pkg.Pkg)`
-    :
+    :   will run as package remover event while starting removing a package
 
     `run(self)`
     :   Run command

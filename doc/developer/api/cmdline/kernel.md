@@ -2,9 +2,18 @@ Module cmdline.kernel
 =====================
 Kernel of cli handler
 
+Variables
+---------
+
+    
+`commands`
+:   a dictonary from list of subcommands
+    structure: "cmdname": CmdClass
+
 Functions
 ---------
 
     
 `handle(argv: list)`
-:   Kernel of cli handler
+:   handle cli
+    gets argv and runs entered command as subcommand (if not subcommand inserted, runs help command as default)

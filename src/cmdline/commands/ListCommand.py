@@ -27,6 +27,7 @@ from cmdline import pr, ansi
 from package.Pkg import Pkg
 
 class ListCommand(BaseCommand):
+    """ List command """
     def help(self):
         """
         shows list of packages
@@ -59,6 +60,9 @@ class ListCommand(BaseCommand):
         }
 
     def show_once(self, package: Pkg):
+        """
+        show once item in loaded packages list
+        """
         if self.has_option('-q') or self.has_option('--quiet'):
             pr.p(package.data['name'])
             return

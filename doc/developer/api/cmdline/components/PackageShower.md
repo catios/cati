@@ -1,9 +1,11 @@
 Module cmdline.components.PackageShower
 =======================================
+Package shower cli component
 
 Functions
 ---------
 
     
 `show(data: dict)`
-:   Show transactions from calc
+:   shows package information.
+    gets package data and show them in cli

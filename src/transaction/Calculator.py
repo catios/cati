@@ -20,7 +20,14 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-""" Transaction calculator """
+"""
+Transaction calculator.
+
+transaction calculator gets a list from packages for
+install/remove/upgrade/downgrade operations
+and calculates all of operations needed to be done
+(actualy, includes dependencies, conflicts...)
+"""
 
 class Calculator:
     """ Transaction calculator """

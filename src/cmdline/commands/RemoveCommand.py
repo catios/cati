@@ -32,6 +32,7 @@ from transaction.BaseTransaction import BaseTransaction
 from frontend.RootRequired import require_root_permission
 
 class RemoveCommand(BaseCommand):
+    """ Remove command """
     def help(self):
         """
         remove packages
@@ -51,15 +52,25 @@ class RemoveCommand(BaseCommand):
         }
 
     def removing_package_event(self, pkg: Pkg):
+        """
+        will run as package remover event while starting removing a package
+        """
         pr.p(
             'Removing ' + ansi.yellow + pkg.data['name'] + ' (' + pkg.data['version'] + ')' + ansi.reset + '...',
             end=' '
         )
 
     def package_remove_finished_event(self, pkg: Pkg):
+        """
+        will run as package remover event when package remove process finished
+        """
         pr.p(ansi.green + 'OK' + ansi.reset)
 
     def dir_is_not_empty_event(self, pkg: Pkg, f: str):
+        """
+        will run as package remover event when remover wants to remove a directory
+        but that dir is not empty. this event shows a warning to user
+        """
         self.message('warning: directory "' + f.split(':', 1)[1] + '" is not emptry and will not be delete' + ansi.yellow, before=ansi.reset)
 
     def run(self):

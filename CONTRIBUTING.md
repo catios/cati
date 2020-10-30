@@ -49,6 +49,10 @@ and ...
 ## testing
 if you are adding/changing a feature, sync test of that feature with your changes (read [testing guide](/doc/developer/testing.md)).
 
+## docstring
+make sure to writing good docstring for classes, functions and variables.
+write docstring between `"""` (double qoute, not single qoute)
+
 ## always run `make all`
 always run `make all` command after your changes.
 

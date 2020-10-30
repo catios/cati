@@ -1,6 +1,19 @@
 Module frontend.Env
 ===================
-Handle environment file paths
+Handle environment file paths.
+
+in cati, we do not write config, database and... file paths directly in everywhere.
+we get that paths from this module.
+also testing system changes base environment path in `base_path_dir` variable
+to isolate program environemnt while running tests
+
+Variables
+---------
+
+    
+`base_path_dir`
+:   base path of the cati files environment.
+    (will get another path in testing environment to isolate testing environment with real environment)
 
 Functions
 ---------
@@ -19,4 +32,4 @@ Functions
 
     
 `state_file()`
-:
+:   State file (read state system documentation)

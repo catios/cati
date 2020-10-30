@@ -20,7 +20,11 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-""" Transaction base model """
+"""
+Transaction base model.
+
+transactions are install/remove/upgrade/downgrade operations.
+"""
 
 from package.Pkg import Pkg
 from frontend import Env
@@ -28,28 +32,6 @@ from transaction.Calculator import Calculator
 
 class BaseTransaction:
     """ Transaction base model """
-    @staticmethod
-    def handle_state(section: str, pkg: Pkg):
-        """ add new item to state """
-        f = open(Env.state_file(), 'r')
-        current_content = f.read()
-        current_content += section + '%' + pkg.data['name'] + '%' + pkg.data['version'] + '%' + pkg.data['arch'] + '\n'
-        f.close()
-        f = open(Env.state_file(), 'w')
-        f.write(current_content)
-        f.close()
-
-    @staticmethod
-    def finish_last_state():
-        """ set last item in state to finished """
-        f = open(Env.state_file(), 'r')
-        current_content = f.read()
-        current_content = current_content[:len(current_content)-1]
-        current_content += '@\n'
-        f.close()
-        f = open(Env.state_file(), 'w')
-        f.write(current_content)
-        f.close()
 
     @staticmethod
     def finish_all_state():
@@ -70,7 +52,7 @@ class BaseTransaction:
 
     @staticmethod
     def pop_state():
-        """ add new item to state """
+        """ remove first item from state """
         f = open(Env.state_file(), 'r')
         content = f.read()
         f.close()
