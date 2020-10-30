@@ -22,6 +22,10 @@ Classes
         Options:
         --installed: show only installed packages
         --installed-manual: show only manual installed packages
+        -q|--quiet: quiet output, only show package names
+        --author: filter packages list by author name. `--author='name of wanted author'` or more than 1 author: `--author='author 1 | author 2 | author 3'` (split with '|')
+        --maintainer: filter packages list by maintainer name. `--maintainer='name of wanted maintainer'` or more than 1 author: `--maintainer='maintainer 1 | maintainer 2 | maintainer 3'` (split with '|')
+        --category: filter packages list by category name. `--category='name of wanted category'` or more than 1 category: `--category='category 1 | category 2 | category 3'` (split with '|')
 
     `run(self)`
     :   Run command
