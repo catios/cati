@@ -19,10 +19,13 @@ Classes
     ### Methods
 
     `general_help(self)`
-    :
+    :   returns general help of cati cli
 
     `handle(self, args: dict)`
     :   Handle run the command
+        first, validates arguments
+        next, checks if --help inserted, show command help
+        if not, run command
 
     `has_option(self, option: str)`
     :   Checks the option is inserted
@@ -41,10 +44,19 @@ Classes
     :   Checks --verbose and -v options
 
     `message(self, msg, is_error=False, before='')`
-    :   Prints a message on screen
+    :   Prints a message like this:
+        cati: <command-name>: <the-message>
+        
+        arguments:
+        - `is_error`: if this is True, message will print on stderr
+        - `before`: before will print in the first of message
 
     `option_value(self, option: str)`
     :   Returns value of option
 
     `validate(self, args: dict)`
     :   Validate inserted arguments in command config frame
+        loads command config from `config` function output
+        next checks arguments and compares them with command config
+        then, if an unknow option is inserted or more/less argument inserted,
+        shows error to user

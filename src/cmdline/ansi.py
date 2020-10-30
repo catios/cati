@@ -33,6 +33,10 @@ underline = '\033[4m'
 cyan = '\033[96m'
 
 def disable():
+    """
+    disable ansi characters
+    assign '' value to all of ansi chars to disable them
+    """
     from cmdline import ansi
     ansi.header = ''
     ansi.blue = ''

@@ -28,6 +28,7 @@ from package.Pkg import Pkg
 from cmdline.components import PackageShower
 
 class ShowCommand(BaseCommand):
+    """ Show command """
     def help(self):
         """
         shows details of packages

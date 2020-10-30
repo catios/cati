@@ -25,23 +25,25 @@
 import sys
 from frontend import Temp
 
-# a variable to enable/disable printing (used in test system)
 is_testing = False
+"""
+if this variable is True, print will be disable. this variable will get True value while running tests
+"""
 
 def p(value='', end='\n'):
-    """ Print on stdout """
+    """ Prints on stdout """
     if is_testing:
     	return
     return print(value, end=end, flush=True)
 
 def e(value='', end='\n'):
-    """ Print on stderr """
+    """ Prints on stderr """
     if is_testing:
     	return
     return print(value, end=end, flush=True, file=sys.stderr)
 
 def exit(code=0):
-    """ Exits program with exit code """
+    """ Exits program with exit code and deletes temp files before exit """
     if is_testing:
     	return
     # delete temp files before exit

@@ -20,11 +20,18 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
+"""
+Package shower cli component
+"""
+
 from cmdline import ansi, pr
 from package.Pkg import Pkg
 
 def show(data: dict):
-    """ Show transactions from calc """
+    """
+    shows package information
+    gets package data and show them in cli
+    """
     output = ''
     output += 'Name: ' + ansi.green + data['name'] + ansi.reset + '\n'
     output += 'Version: ' + ansi.blue + data['version'] + ansi.reset + '\n'

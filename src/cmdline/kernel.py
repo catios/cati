@@ -30,7 +30,6 @@ from cmdline.commands.ListCommand import ListCommand
 from cmdline.commands.RemoveCommand import RemoveCommand
 from cmdline.commands.ShowCommand import ShowCommand
 
-# subcommands list
 commands = {
     'help': HelpCommand,
     'pkg': PkgCommand,
@@ -38,9 +37,16 @@ commands = {
     'remove': RemoveCommand,
     'show': ShowCommand,
 }
+"""
+a dictonary from list of subcommands
+structure: "cmdname": <cmd-class>
+"""
 
 def handle(argv: list):
-    """ Kernel of cli handler """
+    """
+    handle cli
+    gets argv and runs entered command as subcommand
+    """
     # parse inserted arguments
     parsed_args = ArgParser.parse(argv)
 

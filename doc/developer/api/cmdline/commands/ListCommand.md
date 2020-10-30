@@ -6,7 +6,7 @@ Classes
 -------
 
 `ListCommand()`
-:   Cmdline command model base
+:   List command
 
     ### Ancestors (in MRO)
 
@@ -30,4 +30,4 @@ Classes
     :   Run command
 
     `show_once(self, package: package.Pkg.Pkg)`
-    :
+    :   show once item in loaded packages list

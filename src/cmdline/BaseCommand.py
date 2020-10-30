@@ -32,28 +32,35 @@ class BaseCommand:
     def validate(self, args: dict):
         """
         Validate inserted arguments in command config frame
+        loads command config from `config` function output
+        next checks arguments and compares them with command config
+        then, if an unknow option is inserted or more/less argument inserted,
+        shows error to user
         """
 
+        # load command config
         command_config = self.config()
+        # add --help option as default
         command_config['options']['--help'] = [False, False]
 
         self.name = command_config['name']
         self.cati_exec = sys.argv[0]
 
+        # pop first argument (command self name)
         args['arguments'].pop(0)
 
-        # check knowd options and value of them
+        # check knowed options and value of them
         for k in args['options']:
             try:
                 option_config = command_config['options'][k]
             except:
                 self.message('unknow option "' + k + '"')
-                pr.exit(1)
+                return pr.exit(1)
 
             if option_config[1] == True:
                 if args['options'][k] == None:
                     self.message('option ' + k + ' requires value')
-                    pr.exit(1)
+                    return pr.exit(1)
 
         # check required options
         for option in command_config['options']:
@@ -62,7 +69,7 @@ class BaseCommand:
                     args['options'][option]
                 except:
                     self.message('option ' + option + ' is required')
-                    pr.exit(1)
+                    return pr.exit(1)
 
         self.args = args
         self.arguments = self.args['arguments']
@@ -72,15 +79,20 @@ class BaseCommand:
             if command_config['max_args_count'] != None:
                 if len(args['arguments']) > command_config['max_args_count']:
                     self.message('this command requires less than ' + str(command_config['max_args_count']+1) + ' arguments')
-                    pr.exit(1)
+                    return pr.exit(1)
 
             if command_config['min_args_count'] != None:
                 if len(args['arguments']) < command_config['min_args_count']:
                     self.message('this command requires more than ' + str(command_config['min_args_count']-1) + ' arguments')
-                    pr.exit(1)
+                    return pr.exit(1)
 
     def handle(self, args: dict):
-        """ Handle run the command """
+        """
+        Handle run the command
+        first, validates arguments
+        next, checks if --help inserted, show command help
+        if not, run command
+        """
         self.validate(args)
 
         # handle --help option
@@ -91,7 +103,9 @@ class BaseCommand:
         return self.run()
 
     def has_option(self, option: str):
-        """ Checks the option is inserted """
+        """
+        Checks the option is inserted
+        """
         try:
             self.args['options'][option]
             return True
@@ -99,14 +113,24 @@ class BaseCommand:
             return False
 
     def option_value(self, option: str):
-        """ Returns value of option """
+        """
+        Returns value of option
+        """
         if not self.has_option(option):
+            # if option not inserted, return None as default
             return None
-        
+
         return self.args['options'][option]
 
     def message(self, msg, is_error=False, before=''):
-        """ Prints a message on screen """
+        """
+        Prints a message like this:
+        cati: <command-name>: <the-message>
+
+        arguments:
+        - `is_error`: if this is True, message will print on stderr
+        - `before`: before will print in the first of message
+        """
         msg = before + self.cati_exec + ': ' + self.name + ': ' + msg
 
         if is_error:
@@ -115,6 +139,9 @@ class BaseCommand:
             pr.p(msg)
 
     def general_help(self):
+        """
+        returns general help of cati cli
+        """
         return """Cati package manager [""" + cati_version + """]
 Copyright 2020 parsa mpsh - GPL-3
 Usage: cati [command] [options] [args]"""

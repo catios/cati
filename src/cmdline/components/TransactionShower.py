@@ -26,7 +26,12 @@ from transaction.Calculator import Calculator
 from cmdline import ansi, pr
 
 def show(calc: Calculator):
-    """ Show transactions from calc """
+    """
+    shows transactions
+    gets a transaction.Calculator.Calculator object
+    and shows list of calculated transactions
+    (install/remove/upgrade/downgrade)
+    """
     if calc.to_remove:
         pr.p('The following packages will be remove:')
         for pkg in calc.to_remove:

@@ -33,6 +33,7 @@ from package.exceptions import CannotReadFileException
 from cmdline.components import PackageShower
 
 class PkgCommand(BaseCommand):
+    """ Pkg command to work with .cati archives """
     def help(self):
         """
         work with .cati packages
@@ -59,6 +60,7 @@ class PkgCommand(BaseCommand):
         }
 
     def sub_build(self):
+        """ build subcommand (cati pkg build) """
         if len(self.arguments) <= 1:
             self.message('argument package directory(s) required')
             return 1
@@ -83,6 +85,10 @@ class PkgCommand(BaseCommand):
             i += 1
 
     def show_once(self, pkg: ArchiveModel):
+        """
+        shows once package (called from `show` subcommand function)
+        gives package data to cli package sohwer component to show package info
+        """
         PackageShower.show(pkg.data)
         if self.has_option('--files') or self.has_option('-f'):
             pr.p('Files:')
@@ -91,6 +97,7 @@ class PkgCommand(BaseCommand):
             pr.p('='*50)
 
     def sub_show(self):
+        """ show subcommand (cati pkg show) """
         if len(self.arguments) <= 1:
             self.message('argument package file(s) required')
             return 1
@@ -110,24 +117,54 @@ class PkgCommand(BaseCommand):
             i += 1
 
     def cannot_read_file_event(self, path):
+        """
+        index updater cannot_read_file event
+        will pass to installer and installer passes this to index updater
+        """
         self.message('error while reading file "' + path + '". ignored...' + ansi.reset, before=ansi.red)
 
     def invalid_json_data_event(self, path):
+        """
+        index updater invalid_json_data event
+        will pass to installer and installer passes this to index updater
+        """
         self.message('invalid json data in "' + path + '". ignored...' + ansi.reset, before=ansi.red)
 
     def package_currently_installed_event(self, package: ArchiveModel, current_version: str):
+        """
+        installer package_currently_installed event
+        will run when package already installed
+        gets package and current installed version
+        """
         pr.p('Installing ' + ansi.yellow + package.data['name'] + ':' + package.data['version'] + ansi.reset + ' (over ' + ansi.yellow + current_version + ansi.reset + ')...', end=' ')
 
     def package_new_installs_event(self, package: ArchiveModel):
+        """
+        installer package_new_installs event
+        will run when package will NEW installed
+        """
         pr.p('Installing ' + ansi.yellow + package.data['name'] + ':' + package.data['version'] + ansi.reset + '...', end=' ')
 
     def package_installed_event(self, package: ArchiveModel):
+        """
+        installer package_installed event
+        will run when package installation finshed
+        """
         pr.p(ansi.green + 'OK' + ansi.reset)
 
     def directory_not_empty_event(self, package: ArchiveModel, dirpath: str):
+        """
+        installer directory_not_empty event
+        will run when package old directory is not empty
+        """
         pr.e(ansi.yellow + 'warning: directory "' + dirpath + '" is not empty and will not be deleted' + ansi.reset)
 
     def dep_and_conflict_error_event(self, pkg: ArchiveModel, ex: Exception):
+        """
+        installer dep_and_conflict_error event
+        will run when package has conflict/dependency error while installing it
+        `ex` argument can be DependencyError or ConflictError
+        """
         pr.e(
             ansi.red +\
             'Error while installing ' + pkg.data['name'] + ' (' + pkg.data['version'] + '):',
@@ -142,10 +179,19 @@ class PkgCommand(BaseCommand):
         return 1
 
     def arch_error_event(self, pkg: ArchiveModel):
+        """
+        installer arch_error event
+        will run when package architecture is not supported on the system
+        for example while installing `amd64` package on `i386` system
+        """
         pr.e(ansi.red + 'Architecture error while installing "' + pkg.data['name'] + '": your system does not support "' + pkg.data['arch'] + '" packages.' + ansi.reset)
         return 1
 
     def install_once(self, pkg: ArchiveModel):
+        """
+        installs once package
+        is called from install sub command
+        """
         installer = Installer()
 
         try:
@@ -173,6 +219,7 @@ class PkgCommand(BaseCommand):
             raise
 
     def sub_install(self):
+        """ install sub command (cati pkg install) """
         if len(self.arguments) <= 1:
             self.message('argument package file(s) required')
             return 1
