@@ -38,8 +38,10 @@ class HelpCommand(BaseCommand):
         return {
             'name': 'help',
             'options': {
-                '-v': [False, False], # [is-required, can-get-value]
-                '--version': [False, False]
+                '-v': [False, False],
+                '--version': [False, False],
+                '--quiet': [False, False],
+                '-q': [False, False],
             },
             'max_args_count': 1,
             'min_args_count': 0,
@@ -53,19 +55,23 @@ class HelpCommand(BaseCommand):
             pr.p(cati_version)
             return
 
-        pr.p()
-        pr.p(ansi.yellow + "  $$$$$$                $$     $$" + ansi.reset)
-        pr.p(ansi.yellow + " $$    $$              $$" + ansi.reset)
-        pr.p(ansi.yellow + " $$         $$$$$$   $$$$$$    $$" + ansi.reset)
-        pr.p(ansi.yellow + " $$              $$    $$      $$" + ansi.reset)
-        pr.p(ansi.yellow + " $$         $$$$$$$    $$      $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[0] + ansi.reset)
-        pr.p(ansi.yellow + " $$    $$  $$    $$    $$  $$  $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[1] + ansi.reset)
-        pr.p(ansi.yellow + "  $$$$$$    $$$$$$$     $$$$   $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[2] + ansi.reset)
+        if not self.is_quiet():
+            pr.p()
+            pr.p(ansi.yellow + "  $$$$$$                $$     $$" + ansi.reset)
+            pr.p(ansi.yellow + " $$    $$              $$" + ansi.reset)
+            pr.p(ansi.yellow + " $$         $$$$$$   $$$$$$    $$" + ansi.reset)
+            pr.p(ansi.yellow + " $$              $$    $$      $$" + ansi.reset)
+            pr.p(ansi.yellow + " $$         $$$$$$$    $$      $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[0] + ansi.reset)
+            pr.p(ansi.yellow + " $$    $$  $$    $$    $$  $$  $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[1] + ansi.reset)
+            pr.p(ansi.yellow + "  $$$$$$    $$$$$$$     $$$$   $$" + ansi.reset + ansi.cyan + " | " + self.general_help().split('\n')[2] + ansi.reset)
+            pr.p()
 
-        pr.p('\nOptions:')
+        pr.p('Options:')
         pr.p(ansi.header + '\t-v|--version' + ansi.reset + ': shows cati version')
         pr.p(ansi.header + '\t--no-ansi' + ansi.reset + ': disable terminal ansi colors')
         pr.p(ansi.header + '\t--help' + ansi.reset + ': pass it to commands to show help of that command')
+        pr.p(ansi.header + '\t-q|--quiet' + ansi.reset + ': quiet output')
+        pr.p(ansi.header + '\t-v|--verbose' + ansi.reset + ': verbose output')
 
         pr.p()
 
@@ -90,6 +96,7 @@ class HelpCommand(BaseCommand):
             obj = commands[cmd]()
             pr.p('\t' + ansi.green + cmd + ansi.reset + '\t' + obj.help_summary())
 
-        pr.p('\nfor see detailed help about commands, run: "' + ansi.yellow + self.cati_exec + ' help [command-name]' + ansi.reset + '"')
+        if not self.is_quiet():
+            pr.p('\nfor see detailed help about commands, run: "' + ansi.yellow + self.cati_exec + ' help [command-name]' + ansi.reset + '"')
 
         return 0

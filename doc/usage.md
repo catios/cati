@@ -5,6 +5,8 @@ to learn cati usage, read this file.
 - `-v|--version`: shows cati version
 - `--no-ansi`: disable terminal ansi colors
 - `--help`: shows help for a command. example: `cati list --help` shows help of list command
+- `-q|--quiet`: quiet output
+- `-v|--verbose`: verbose output
 
 ## help command
 this command shows help:

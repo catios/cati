@@ -33,7 +33,6 @@ class ListCommand(BaseCommand):
         Options:
         --installed: show only installed packages
         --installed-manual: show only manual installed packages
-        -q|--quiet: quiet output, only show package names
         --author: filter packages list by author name. `--author='name of wanted author'` or more than 1 author: `--author='author 1 | author 2 | author 3'` (split with '|')
         --maintainer: filter packages list by maintainer name. `--maintainer='name of wanted maintainer'` or more than 1 author: `--maintainer='maintainer 1 | maintainer 2 | maintainer 3'` (split with '|')
         --category: filter packages list by category name. `--category='name of wanted category'` or more than 1 category: `--category='category 1 | category 2 | category 3'` (split with '|')
@@ -49,6 +48,8 @@ class ListCommand(BaseCommand):
                 '--installed-manual': [False, False],
                 '--quiet': [False, False],
                 '-q': [False, False],
+                '--verbose': [False, False],
+                '-v': [False, False],
                 '--author': [False, True],
                 '--maintainer': [False, True],
                 '--category': [False, True],
@@ -68,6 +69,15 @@ class ListCommand(BaseCommand):
             else:
                 output += '/Installed:' + ansi.blue + package.installed() + ansi.reset
         output += '/[' + package.data['repo'] + ']'
+
+        # if verbose output wanted, show first line of description
+        if self.is_verbose():
+            try:
+                description_summary = package.data['description'].split('\n')[0]
+                if description_summary != '':
+                    output += '/ ' + ansi.header + description_summary + ansi.reset
+            except:
+                pass
 
         pr.p(output)
 
