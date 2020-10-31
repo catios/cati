@@ -99,4 +99,6 @@ def show(data: dict):
             output += 'Installed-Manual: ' + installed_version + '\n'
         else:
             output += 'Installed: ' + installed_version + '\n'
+    if output[-1] == '\n':
+        output = output[:len(output)-1]
     pr.p(output)
