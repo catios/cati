@@ -6,7 +6,17 @@ Classes
 -------
 
 `ArchiveModel(file_path: str, type_str: str)`
-:   .cati package file model
+:   Archive model factory.
+    
+    the strcuture of packages, maybe change in new version of cati.
+    so, cati should be compatible with old packages where
+    created with old version of cati. this class
+    is a factory to check package version and
+    return archive model object by that
+    version.
+
+`ArchiveModelV1(file_path: str, type_str: str)`
+:   .cati package file model (v1.0)
 
     ### Methods
 

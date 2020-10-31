@@ -28,7 +28,27 @@ from dotcati.PackageJsonValidator import PackageJsonValidator
 from package.Pkg import Pkg
 
 class ArchiveModel:
-    """ .cati package file model """
+    """
+    Archive model factory.
+
+    the strcuture of packages, maybe change in new version of cati.
+    so, cati should be compatible with old packages where
+    created with old version of cati. this class
+    is a factory to check package version and
+    return archive model object by that
+    version.
+    """
+    def __new__(self, file_path: str, type_str: str):
+        # open v1 as default
+        pkg = ArchiveModelV1(file_path, type_str)
+        if pkg.pkg_version() == '1.0':
+            return ArchiveModelV1(file_path, type_str)
+        # return v1 object by default
+        return ArchiveModelV1(file_path, type_str)
+
+class ArchiveModelV1:
+    """ .cati package file model (v1.0) """
+
     def __init__(self, file_path: str, type_str: str):
         self.tar = tarfile.open(file_path, type_str)
 
