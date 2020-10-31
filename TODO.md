@@ -12,6 +12,7 @@
 - [ ] create confflie system
 - [ ] create static file system
 - [ ] some cleanups and refactors in code
+- [ ] create file dependency and conflict system
 - [ ] create package scripts system
 - [ ] check state before run transactions
 - [ ] create search command
