@@ -76,6 +76,10 @@ cati remove pkg1
 cati remove pkg1 pkg2 # ...
 ```
 
+Options:
+- `-y|--yes`: do not ask for user confirmation
+- `--conffiles`: also remove config files (full remove)
+
 ## show command
 this command shows packages details
 
