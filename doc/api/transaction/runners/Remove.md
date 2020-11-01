@@ -14,5 +14,8 @@ Classes
 
     ### Static methods
 
-    `run(pkg: package.Pkg.Pkg, events: dict)`
+    `add_to_unremoved_conffiles(pkg: package.Pkg.Pkg, filepath: str)`
+    :   Adds filepath to list of unremoved conffiles
+
+    `run(pkg: package.Pkg.Pkg, events: dict, remove_conffiles=False)`
     :   Remove pkg

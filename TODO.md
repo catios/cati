@@ -9,7 +9,7 @@
 - [x] add new options to list command for filtering the list
 - [x] add `--quiet|-q` and `--verbose|-v` options for commands
 - [x] make better docstrings
-- [ ] create confflie system
+- [x] create confflie system
 - [ ] create static file system
 - [ ] some cleanups and refactors in code
 - [ ] create file dependency and conflict system

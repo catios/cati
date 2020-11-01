@@ -33,3 +33,7 @@ Functions
     
 `state_file()`
 :   State file (read state system documentation)
+
+    
+`unremoved_conffiles()`
+:   Unremoved conffiles list filepath
