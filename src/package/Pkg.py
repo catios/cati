@@ -112,8 +112,6 @@ class Pkg:
             assert os.path.isdir(Env.installed_lists('/' + package_name))
             assert os.path.isfile(Env.installed_lists('/' + package_name + '/ver'))
             assert os.path.isfile(Env.installed_lists('/' + package_name + '/files'))
-            # TODO : check more files
-
             return True
         except:
             return False

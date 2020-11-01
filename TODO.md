@@ -1,15 +1,7 @@
 
 # TODO
 
-- [x] create show command
-- [x] add new fields to packages
-- [x] handle package architecture in installation process
-- [x] handle manual/auto package installation types
-- [x] fix remove calculator bug
-- [x] add new options to list command for filtering the list
-- [x] add `--quiet|-q` and `--verbose|-v` options for commands
-- [x] make better docstrings
-- [x] create confflie system
+- [ ] handle reverse conflict in installation process
 - [ ] create static file system
 - [ ] some cleanups and refactors in code
 - [ ] create file dependency and conflict system
@@ -24,4 +16,3 @@
 - [ ] create shell completion scripts
 - [ ] create graphical interface base
 - [ ] clean up
-

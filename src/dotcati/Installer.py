@@ -122,7 +122,6 @@ class Installer:
         for item in old_files:
             parts = item.strip().split(':', 1)
             if parts[0] == 'cf' or parts[0] == 'cd':
-                # TODO : some changes in this
                 pass
             else:
                 if os.path.isfile(parts[1]):
