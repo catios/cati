@@ -49,10 +49,16 @@ class Installer:
         """ Copy one of package files """
         if os.path.isfile(paths[1]):
             os.system('cp "' + paths[1] + '" "' + Env.base_path(paths[0]) + '"')
-            self.copied_files.append('f:' + paths[0])
+            if paths[0] in self.conffiles:
+                self.copied_files.append('cf:' + paths[0])
+            else:
+                self.copied_files.append('f:' + paths[0])
         else:
             os.mkdir(Env.base_path(paths[0]))
-            self.copied_files.append('d:' + paths[0])
+            if paths[1] in self.conffiles:
+                self.copied_files.append('cd:' + paths[0])
+            else:
+                self.copied_files.append('d:' + paths[0])
 
     def copy_files(self, pkg: BaseArchive, directory_not_empty_event) -> list:
         """ Copy package files on system """
@@ -67,6 +73,11 @@ class Installer:
             except:
                 pass
         old_files = list(reversed(old_files))
+
+        # load unremoved conffiles list
+        unremoved_conffiles_f = open(Env.unremoved_conffiles(), 'r')
+        unremoved_conffiles = unremoved_conffiles_f.read().strip().split('\n')
+        unremoved_conffiles_f.close()
 
         # extract package in a temp place
         temp_dir = Temp.make_dir()
@@ -85,13 +96,25 @@ class Installer:
         for f in self.loaded_files:
             if os.path.exists(Env.base_path(f[0])):
                 if os.path.isfile(Env.base_path(f[0])):
-                    if ('f:' + f[0]) in old_files:
+                    if ('f:' + f[0]) in old_files or ('cf:' + f[0]) in old_files:
                         self.copy_once_file(f)
                         old_files.pop(old_files.index(('f:' + f[0])))
+                    else:
+                        if f[0] in unremoved_conffiles:
+                            self.copy_once_file(f)
+                            unremoved_conffiles.pop(unremoved_conffiles.index(f[0]))
                 else:
-                    if ('d:' + f[0]) in old_files:
-                        self.copied_files.append('d:' + f[0])
-                        old_files.pop(old_files.index(('d:' + f[0])))
+                    if ('d:' + f[0]) in old_files or ('cd:' + f[0]) in old_files:
+                        if ('cd:' + f[0]) in old_files:
+                            self.copied_files.append('cd:' + f[0])
+                            old_files.pop(old_files.index(('cd:' + f[0])))
+                        else:
+                            self.copied_files.append('d:' + f[0])
+                            old_files.pop(old_files.index(('d:' + f[0])))
+                    else:
+                        if f[0] in unremoved_conffiles:
+                            self.copied_files.append('d:' + f[0])
+                            unremoved_conffiles.pop(unremoved_conffiles.index(f[0]))
             else:
                 self.copy_once_file(f)
 
@@ -99,6 +122,7 @@ class Installer:
         for item in old_files:
             parts = item.strip().split(':', 1)
             if parts[0] == 'cf' or parts[0] == 'cd':
+                # TODO : some changes in this
                 pass
             else:
                 if os.path.isfile(parts[1]):
@@ -109,6 +133,14 @@ class Installer:
                     except:
                         # directory is not emptyr
                         directory_not_empty_event(pkg, parts[1])
+
+        # write new unremoved conffiles list
+        unremoved_conffiles_f = open(Env.unremoved_conffiles(), 'w')
+        new_content = ''
+        for item in unremoved_conffiles:
+            new_content += item + '\n'
+        unremoved_conffiles_f.write(new_content)
+        unremoved_conffiles_f.close()
 
         return self.copied_files
 
@@ -152,6 +184,8 @@ class Installer:
         - dep_and_conflict_error: will run when there is depends or conflict error
         - arch_error: will run when package arch is not sync with sys arch
         """
+
+        self.conffiles = pkg.get_conffiles()
 
         # check package architecture
         if pkg.data['arch'] != 'all':

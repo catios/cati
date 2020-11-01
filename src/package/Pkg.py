@@ -59,6 +59,12 @@ class Pkg:
             return self.data['conflicts']
         except:
             return []
+    def get_conffiles(self):
+        """ Returns package conffiles list """
+        try:
+            return self.data['conffiles']
+        except:
+            return []
 
     def get_reverse_depends(self) -> list:
         """ Returns list of packages has dependency to this package """

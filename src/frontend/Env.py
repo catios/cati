@@ -50,3 +50,7 @@ def installed_lists(path=''):
 def state_file():
     """ State file (read state system documentation) """
     return base_path('/var/lib/cati/state.f')
+
+def unremoved_conffiles():
+    """ Unremoved conffiles list filepath """
+    return base_path('/var/lib/cati/unremoved-conffiles.list')

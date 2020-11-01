@@ -65,6 +65,9 @@ Classes
         "pkga | pkgb | pkgc",
         "pkga | pkgb & pkgc = 1.0",
 
+    `get_conffiles(self)`
+    :   Returns package conffiles list
+
     `get_conflicts(self)`
     :   Returns package conflicts list
 

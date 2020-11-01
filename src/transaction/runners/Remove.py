@@ -31,7 +31,28 @@ from frontend import Env
 class Remove(BaseTransaction):
     """ Remove transaction """
     @staticmethod
-    def run(pkg: Pkg, events: dict):
+    def add_to_unremoved_conffiles(pkg: Pkg, filepath: str):
+        """ Adds filepath to list of unremoved conffiles """
+        f = open(Env.unremoved_conffiles(), 'r')
+        filelist = f.read().strip().split('\n')
+        f.close()
+
+        # add item to list
+        if not filepath in filelist:
+            filelist.append(filepath)
+
+        # generate new content of unremoved_conffiles file
+        new_content = ''
+        for item in filelist:
+            new_content += item + '\n'
+
+        # write new content to file
+        f = open(Env.unremoved_conffiles(), 'w')
+        f.write(new_content)
+        f.close()
+
+    @staticmethod
+    def run(pkg: Pkg, events: dict, remove_conffiles=False):
         """ Remove pkg """
         events['removing_package'](pkg)
 
@@ -43,17 +64,27 @@ class Remove(BaseTransaction):
                 f_type = f.strip().split(':', 1)[0]
                 f_path = f.strip().split(':', 1)[1]
                 if f_type == 'f':
-                    if os.path.isfile(f_path):
-                        os.remove(f_path)
+                    if os.path.isfile(Env.base_path(f_path)):
+                        os.remove(Env.base_path(f_path))
                 elif f_type == 'd':
                     try:
-                        os.rmdir(f_path)
+                        os.rmdir(Env.base_path(f_path))
                     except:
                         events['dir_is_not_empty'](pkg, f)
                 elif f_type == 'cf':
-                    pass # TODO : handle conffiles
+                    if remove_conffiles:
+                        if os.path.isfile(Env.base_path(f_path)):
+                            os.remove(Env.base_path(f_path))
+                    else:
+                        Remove.add_to_unremoved_conffiles(pkg, f_path)
                 elif f_type == 'cd':
-                    pass
+                    if remove_conffiles:
+                        try:
+                            os.rmdir(Env.base_path(f_path))
+                        except:
+                            events['dir_is_not_empty'](pkg, f)
+                    else:
+                        Remove.add_to_unremoved_conffiles(pkg, f_path)
 
         # remove installation config
         shutil.rmtree(Env.installed_lists('/' + pkg.data['name']))

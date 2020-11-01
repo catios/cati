@@ -32,7 +32,6 @@ def repair_once_file(filepath: str, events: dict):
         f.write('')
         f.close()
     except:
-        raise
         events['failed_to_repair']('/' + filepath, 'file')
 
 def repair_once_dir(dirpath: str, events: dict):
@@ -52,7 +51,8 @@ def check(events: dict):
     """
 
     required_files = [
-        '/var/lib/cati/state.f'
+        '/var/lib/cati/state.f',
+        '/var/lib/cati/unremoved-conffiles.list',
     ]
 
     required_dirs = [

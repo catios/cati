@@ -36,6 +36,10 @@ class RemoveCommand(BaseCommand):
     def help(self):
         """
         remove packages
+
+        Options:
+        -y|--yes: do not ask for user confirmation
+        --conffiles: also remove conffiles (full remove)
         """
         pass
 
@@ -46,6 +50,7 @@ class RemoveCommand(BaseCommand):
             'options': {
                 '-y': [False, False],
                 '--yes': [False, False],
+                '--conffiles': [False, False],
             },
             'max_args_count': None,
             'min_args_count': 1,
@@ -120,8 +125,9 @@ class RemoveCommand(BaseCommand):
                 {
                     'removing_package': self.removing_package_event,
                     'package_remove_finished': self.package_remove_finished_event,
-                    'dir_is_not_emptry': self.dir_is_not_empty_event,
-                }
+                    'dir_is_not_empty': self.dir_is_not_empty_event,
+                },
+                self.has_option('--conffiles')
             )
             BaseTransaction.pop_state()
 

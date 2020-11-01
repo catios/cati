@@ -26,7 +26,7 @@
 import sys
 import os
 
-test_template = """""" Test <testname> """
+test_template = '''""" Test <testname> """
 
 from TestCore import TestCore
 
@@ -35,7 +35,7 @@ class <testname>(TestCore):
     def run(self):
         """ Run test """
         self.assert_true(True)
-"""
+'''
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
