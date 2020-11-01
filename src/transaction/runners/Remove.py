@@ -38,7 +38,7 @@ class Remove(BaseTransaction):
         # remove package
         installed_files = open(Env.installed_lists('/' + pkg.data['name'] + '/files'), 'r').read()
         installed_files = installed_files.strip().split('\n')
-        for f in installed_files:
+        for f in list(reversed(installed_files)):
             if f != '':
                 f_type = f.strip().split(':', 1)[0]
                 f_path = f.strip().split(':', 1)[1]
