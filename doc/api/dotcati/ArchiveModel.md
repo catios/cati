@@ -5,18 +5,24 @@ Module dotcati.ArchiveModel
 Classes
 -------
 
-`ArchiveModel(file_path: str, type_str: str)`
-:   Archive model factory.
-    
-    the strcuture of packages, maybe change in new version of cati.
-    so, cati should be compatible with old packages where
-    created with old version of cati. this class
-    is a factory to check package version and
-    return archive model object by that
-    version.
-
 `ArchiveModelV1(file_path: str, type_str: str)`
 :   .cati package file model (v1.0)
+
+    ### Ancestors (in MRO)
+
+    * dotcati.ArchiveModel.BaseArchive
+    * package.Pkg.Pkg
+
+`BaseArchive(file_path: str, type_str: str)`
+:   base archive for archive versions
+
+    ### Ancestors (in MRO)
+
+    * package.Pkg.Pkg
+
+    ### Descendants
+
+    * dotcati.ArchiveModel.ArchiveModelV1
 
     ### Methods
 
@@ -29,12 +35,6 @@ Classes
     `extractall(self, path)`
     :   Extract all of package files to `path`
 
-    `get_conflicts(self)`
-    :   Returns package conflicts list
-
-    `get_depends(self)`
-    :   Returns package dependencies list
-
     `info(self) ‑> dict`
     :   Returns package data.json information
 
@@ -46,3 +46,13 @@ Classes
 
     `read(self)`
     :   Load package information on object
+
+`archive_factory(file_path: str, type_str: str)`
+:   Archive model factory.
+    
+    the strcuture of packages, maybe change in new version of cati.
+    so, cati should be compatible with old packages where
+    created with old version of cati. this class
+    is a factory to check package version and
+    return archive model object by that
+    version.

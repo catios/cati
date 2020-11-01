@@ -1,15 +1,15 @@
 # Dotcati section
 this document is for `src/dotcati` section.
 
-## ArchiveModel
-this class is model of `.cati` file.
+## archive_factory
+this function is factory to load `.cati` file object.
 
 ```python
 # ...
 
-from dotcati.ArchiveModel import ArchiveModel
+from dotcati.ArchiveModel import archive_factory
 
-pkg = ArchiveModel('/path/to/package.cati', 'r') # first argument is file path and second argument is open type
+pkg = archive_factory('/path/to/package.cati', 'r') # first argument is file path and second argument is open type
 
 # ...
 ```

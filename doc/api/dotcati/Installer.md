@@ -10,20 +10,20 @@ Classes
 
     ### Methods
 
-    `check_dep_and_conf(self, pkg: dotcati.ArchiveModel.ArchiveModel)`
+    `check_dep_and_conf(self, pkg: dotcati.ArchiveModel.BaseArchive)`
     :   Checks package dependencies and conflicts.
         
         raises DependencyError when a dependency is not installed.
         
         raises ConflictError when a conflict is installed.
 
-    `copy_files(self, pkg: dotcati.ArchiveModel.ArchiveModel, directory_not_empty_event) ‑> list`
+    `copy_files(self, pkg: dotcati.ArchiveModel.BaseArchive, directory_not_empty_event) ‑> list`
     :   Copy package files on system
 
     `copy_once_file(self, paths)`
     :   Copy one of package files
 
-    `install(self, pkg: dotcati.ArchiveModel.ArchiveModel, index_updater_events: dict, installer_events: dict, is_manual=True)`
+    `install(self, pkg: dotcati.ArchiveModel.BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True)`
     :   Install .cati package
         
         installer_events:

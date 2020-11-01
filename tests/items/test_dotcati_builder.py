@@ -25,7 +25,7 @@
 from TestCore import TestCore
 
 import os
-from dotcati.ArchiveModel import ArchiveModel
+from dotcati.ArchiveModel import archive_factory
 
 class test_dotcati_builder(TestCore):
     """ Test test_dotcati_builder """
@@ -64,7 +64,7 @@ class test_dotcati_builder(TestCore):
         )
 
         try:
-            pkg = ArchiveModel('repository/test-packages/output/testpkga-1.0.cati', 'r')
+            pkg = archive_factory('repository/test-packages/output/testpkga-1.0.cati', 'r')
             pkg.read()
             self.assert_equals(pkg.data['name'], 'testpkga')
             self.assert_equals(pkg.data['version'], '1.0')

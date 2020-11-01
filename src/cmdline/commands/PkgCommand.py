@@ -27,7 +27,7 @@ from cmdline import pr, ansi
 from dotcati.Builder import Builder
 from dotcati.Installer import Installer
 from dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError
-from dotcati.ArchiveModel import ArchiveModel
+from dotcati.ArchiveModel import archive_factory, BaseArchive
 from frontend.RootRequired import require_root_permission
 from package.exceptions import CannotReadFileException
 from cmdline.components import PackageShower
@@ -84,7 +84,7 @@ class PkgCommand(BaseCommand):
 
             i += 1
 
-    def show_once(self, pkg: ArchiveModel):
+    def show_once(self, pkg: BaseArchive):
         """
         shows once package (called from `show` subcommand function)
         gives package data to cli package sohwer component to show package info
@@ -105,7 +105,7 @@ class PkgCommand(BaseCommand):
         i = 1
         while i < len(self.arguments):
             try:
-                pkg = ArchiveModel(self.arguments[i], 'r')
+                pkg = archive_factory(self.arguments[i], 'r')
                 pkg.read()
                 self.show_once(pkg)
                 pkg.close()
@@ -130,7 +130,7 @@ class PkgCommand(BaseCommand):
         """
         self.message('invalid json data in "' + path + '". ignored...' + ansi.reset, before=ansi.red)
 
-    def package_currently_installed_event(self, package: ArchiveModel, current_version: str):
+    def package_currently_installed_event(self, package: BaseArchive, current_version: str):
         """
         installer package_currently_installed event
         will run when package already installed
@@ -138,28 +138,28 @@ class PkgCommand(BaseCommand):
         """
         pr.p('Installing ' + ansi.yellow + package.data['name'] + ':' + package.data['version'] + ansi.reset + ' (over ' + ansi.yellow + current_version + ansi.reset + ')...', end=' ')
 
-    def package_new_installs_event(self, package: ArchiveModel):
+    def package_new_installs_event(self, package: BaseArchive):
         """
         installer package_new_installs event
         will run when package will NEW installed
         """
         pr.p('Installing ' + ansi.yellow + package.data['name'] + ':' + package.data['version'] + ansi.reset + '...', end=' ')
 
-    def package_installed_event(self, package: ArchiveModel):
+    def package_installed_event(self, package: BaseArchive):
         """
         installer package_installed event
         will run when package installation finshed
         """
         pr.p(ansi.green + 'OK' + ansi.reset)
 
-    def directory_not_empty_event(self, package: ArchiveModel, dirpath: str):
+    def directory_not_empty_event(self, package: BaseArchive, dirpath: str):
         """
         installer directory_not_empty event
         will run when package old directory is not empty
         """
         pr.e(ansi.yellow + 'warning: directory "' + dirpath + '" is not empty and will not be deleted' + ansi.reset)
 
-    def dep_and_conflict_error_event(self, pkg: ArchiveModel, ex: Exception):
+    def dep_and_conflict_error_event(self, pkg: BaseArchive, ex: Exception):
         """
         installer dep_and_conflict_error event
         will run when package has conflict/dependency error while installing it
@@ -178,7 +178,7 @@ class PkgCommand(BaseCommand):
 
         return 1
 
-    def arch_error_event(self, pkg: ArchiveModel):
+    def arch_error_event(self, pkg: BaseArchive):
         """
         installer arch_error event
         will run when package architecture is not supported on the system
@@ -187,7 +187,7 @@ class PkgCommand(BaseCommand):
         pr.e(ansi.red + 'Architecture error while installing "' + pkg.data['name'] + '": your system does not support "' + pkg.data['arch'] + '" packages.' + ansi.reset)
         return 1
 
-    def install_once(self, pkg: ArchiveModel):
+    def install_once(self, pkg: BaseArchive):
         """
         installs once package
         is called from install sub command
@@ -230,7 +230,7 @@ class PkgCommand(BaseCommand):
         i = 1
         while i < len(self.arguments):
             try:
-                pkg = ArchiveModel(self.arguments[i], 'r')
+                pkg = archive_factory(self.arguments[i], 'r')
                 pkg.read()
                 packages_to_install.append(pkg)
             except FileNotFoundError as ex:

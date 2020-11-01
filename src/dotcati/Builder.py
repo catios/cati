@@ -26,7 +26,7 @@ import os
 import json
 import tarfile
 from dotcati.exceptions import InvalidPackageDirException
-from dotcati.ArchiveModel import ArchiveModel
+from dotcati.ArchiveModel import archive_factory
 from dotcati.PackageJsonValidator import PackageJsonValidator
 from frontend import Temp
 
@@ -91,7 +91,7 @@ class Builder:
         in output file
         """
         try:
-            pkg = ArchiveModel(output, "w:gz")
+            pkg = archive_factory(output, "w:gz")
         except:
             raise InvalidPackageDirException('file "' + output + '" for output of package not found')
 

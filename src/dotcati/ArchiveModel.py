@@ -27,7 +27,7 @@ import json
 from dotcati.PackageJsonValidator import PackageJsonValidator
 from package.Pkg import Pkg
 
-class ArchiveModel:
+class archive_factory:
     """
     Archive model factory.
 
@@ -46,9 +46,8 @@ class ArchiveModel:
         # return v1 object by default
         return ArchiveModelV1(file_path, type_str)
 
-class ArchiveModelV1:
-    """ .cati package file model (v1.0) """
-
+class BaseArchive(Pkg):
+    """ base archive for archive versions """
     def __init__(self, file_path: str, type_str: str):
         self.tar = tarfile.open(file_path, type_str)
 
@@ -60,13 +59,26 @@ class ArchiveModelV1:
         """ Close package archive """
         return self.tar.close()
 
+    def extractall(self, path):
+        """ Extract all of package files to `path` """
+        return self.tar.extractall(path)
+
+    def pkg_version(self) -> str:
+        """ Returns dotcati package strcuture version """
+        for member in self.tar.getmembers():
+            if member.path == 'cati-version':
+                # load dotcati package version
+                f = self.tar.extractfile(member)
+                return f.read().strip()
+        # default version
+        return '1.0'
+
     def members(self):
         """ Returns members of the archive """
         files = []
         for member in self.tar.getmembers():
             if member.path != '':
                 files.append(member.path)
-
         return files
 
     def read(self):
@@ -77,10 +89,6 @@ class ArchiveModelV1:
         # try to compare version for version validation
         Pkg.compare_version(self.data['version'], '0.0.0')
 
-    def extractall(self, path):
-        """ Extract all of package files to `path` """
-        return self.tar.extractall(path)
-
     def info(self) -> dict:
         """ Returns package data.json information """
         for member in self.tar.getmembers():
@@ -88,27 +96,6 @@ class ArchiveModelV1:
                 f = self.tar.extractfile(member)
                 return json.loads(f.read())
 
-    def get_depends(self):
-        """ Returns package dependencies list """
-        try:
-            return self.data['depends']
-        except:
-            return []
-
-    def get_conflicts(self):
-        """ Returns package conflicts list """
-        try:
-            return self.data['conflicts']
-        except:
-            return []
-
-    def pkg_version(self) -> str:
-        """ Returns dotcati package strcuture version """
-        for member in self.tar.getmembers():
-            if member.path == 'cati-version':
-                # load dotcati package version
-                f = self.tar.extractfile(member)
-                return f.read().strip()
-
-        # default version
-        return '1.0'
+class ArchiveModelV1(BaseArchive):
+    """ .cati package file model (v1.0) """
+    pass

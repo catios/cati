@@ -25,7 +25,7 @@
 import os
 import json
 import time
-from dotcati.ArchiveModel import ArchiveModel
+from dotcati.ArchiveModel import BaseArchive
 from frontend import Env, Temp, SysArch
 from dotcati import ListUpdater
 from package.Pkg import Pkg
@@ -54,7 +54,7 @@ class Installer:
             os.mkdir(Env.base_path(paths[0]))
             self.copied_files.append('d:' + paths[0])
 
-    def copy_files(self, pkg: ArchiveModel, directory_not_empty_event) -> list:
+    def copy_files(self, pkg: BaseArchive, directory_not_empty_event) -> list:
         """ Copy package files on system """
         # load package old files list
         old_files = []
@@ -112,7 +112,7 @@ class Installer:
 
         return self.copied_files
 
-    def check_dep_and_conf(self, pkg: ArchiveModel):
+    def check_dep_and_conf(self, pkg: BaseArchive):
         """
         Checks package dependencies and conflicts.
 
@@ -141,7 +141,7 @@ class Installer:
             if Pkg.check_state(conflict):
                 raise ConflictError(conflict)
 
-    def install(self, pkg: ArchiveModel, index_updater_events: dict, installer_events: dict, is_manual=True):
+    def install(self, pkg: BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True):
         """
         Install .cati package
 
