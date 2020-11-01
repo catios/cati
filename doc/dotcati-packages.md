@@ -40,6 +40,13 @@ an example for this file:
         "pkgb | pkgc <= 1.0",
         "pkg1 = 1.0"
         "..."
+    ],
+
+    "conffiles": [
+        "/path/to/some/file",
+        "/path/to/some/dir",
+        "/etc/somefile"
+        "..."
     ]
 }
 ```
@@ -47,6 +54,8 @@ an example for this file:
 `depends` list making dependency to another packages. if that depended packages ARE NOT installed, this package will not install and cati shows error.
 
 `conflicts` list making conflict to another packages. if that conflicted packages ARE installed, this package will not install and cati shows error.
+
+`conffiles` list declares a list from file/dir paths to set them as config file. config files will not remove in remove process (user can remove them with `--conffiles` in remove command). if some files in your package keeps configuration and something like that, add path of that file to this list
 
 ## Building packages
 
