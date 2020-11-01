@@ -2,6 +2,20 @@ Module dotcati.ArchiveModel
 ===========================
 .cati package file model
 
+Functions
+---------
+
+    
+`archive_factory(file_path: str, type_str: str)`
+:   Archive model factory.
+    
+    the strcuture of packages, maybe change in new version of cati.
+    so, cati should be compatible with old packages where
+    created with old version of cati. this class
+    is a factory to check package version and
+    return archive model object by that
+    version.
+
 Classes
 -------
 
@@ -46,13 +60,3 @@ Classes
 
     `read(self)`
     :   Load package information on object
-
-`archive_factory(file_path: str, type_str: str)`
-:   Archive model factory.
-    
-    the strcuture of packages, maybe change in new version of cati.
-    so, cati should be compatible with old packages where
-    created with old version of cati. this class
-    is a factory to check package version and
-    return archive model object by that
-    version.

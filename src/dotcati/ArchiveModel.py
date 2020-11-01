@@ -27,7 +27,7 @@ import json
 from dotcati.PackageJsonValidator import PackageJsonValidator
 from package.Pkg import Pkg
 
-class archive_factory:
+def archive_factory(file_path: str, type_str: str):
     """
     Archive model factory.
 
@@ -38,13 +38,12 @@ class archive_factory:
     return archive model object by that
     version.
     """
-    def __new__(self, file_path: str, type_str: str):
-        # open v1 as default
-        pkg = ArchiveModelV1(file_path, type_str)
-        if pkg.pkg_version() == '1.0':
-            return ArchiveModelV1(file_path, type_str)
-        # return v1 object by default
+    # open v1 as default
+    pkg = ArchiveModelV1(file_path, type_str)
+    if pkg.pkg_version() == '1.0':
         return ArchiveModelV1(file_path, type_str)
+    # return v1 object by default
+    return ArchiveModelV1(file_path, type_str)
 
 class BaseArchive(Pkg):
     """ base archive for archive versions """
