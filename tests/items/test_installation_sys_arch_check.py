@@ -30,5 +30,5 @@ class test_installation_sys_arch_check(TestCore):
         """ Run test """
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'repository/test-packages/packages/invalid-arch.cati'
+            'tests/test-packages/packages/invalid-arch.cati'
         ]), 1)

@@ -33,7 +33,7 @@ class test_conffile_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'repository/test-packages/packages/conffile-pkg.cati'
+            'tests/test-packages/packages/conffile-pkg.cati'
         ]), 0)
 
         self.assert_true(
@@ -55,7 +55,7 @@ class test_conffile_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'repository/test-packages/packages/conffile-pkg.cati'
+            'tests/test-packages/packages/conffile-pkg.cati'
         ]), 0)
 
         self.assert_true(
@@ -78,7 +78,7 @@ class test_conffile_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'repository/test-packages/packages/conffile-pkg.cati'
+            'tests/test-packages/packages/conffile-pkg.cati'
         ]), 0)
 
         self.assert_true(
@@ -98,7 +98,7 @@ class test_conffile_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'repository/test-packages/packages/conffile-pkg.cati'
+            'tests/test-packages/packages/conffile-pkg.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('remove', [

@@ -34,14 +34,14 @@ class test_dotcati_installer(TestCore):
         """ Run test """
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'repository/test-packages/packages/simple-test-package.cati'
+            'tests/test-packages/packages/simple-test-package.cati'
         ]), 0)
 
         self.assert_true(os.path.isfile(self.env('/usr/bin/cati-testpkga')))
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'repository/test-packages/packages/simple-test-package.cati'
+            'tests/test-packages/packages/simple-test-package.cati'
         ]), 0)
 
         self.assert_true(os.path.isfile(self.env('/usr/bin/cati-testpkga')))

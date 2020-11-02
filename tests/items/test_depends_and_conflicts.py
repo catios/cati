@@ -32,55 +32,55 @@ class test_depends_and_conflicts(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'repository/test-packages/packages/testpkgb-1.0.cati'
+            'tests/test-packages/packages/testpkgb-1.0.cati'
         ]), 1)
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'repository/test-packages/packages/testpkgb-1.1.cati'
-        ]), 1)
-
-        self.refresh_env()
-
-        self.assert_equals(self.run_command('pkg', [
-            'install',
-            'repository/test-packages/packages/testpkgb-1.2.cati'
-        ]), 0)
-
-        self.refresh_env()
-
-        self.assert_equals(self.run_command('pkg', [
-            'install',
-            'repository/test-packages/packages/testpkgc-1.0.cati'
-        ]), 0)
-
-        self.assert_equals(self.run_command('pkg', [
-            'install',
-            'repository/test-packages/packages/testpkgb-1.3.cati'
+            'tests/test-packages/packages/testpkgb-1.1.cati'
         ]), 1)
 
         self.refresh_env()
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'repository/test-packages/packages/testpkgc-2.0.cati'
-        ]), 0)
-
-        self.assert_equals(self.run_command('pkg', [
-            'install',
-            'repository/test-packages/packages/testpkgb-1.3.cati'
+            'tests/test-packages/packages/testpkgb-1.2.cati'
         ]), 0)
 
         self.refresh_env()
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'repository/test-packages/packages/testpkgb-1.2.cati'
+            'tests/test-packages/packages/testpkgc-1.0.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'repository/test-packages/packages/testpkgc-2.0.cati'
+            'tests/test-packages/packages/testpkgb-1.3.cati'
+        ]), 1)
+
+        self.refresh_env()
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkgc-2.0.cati'
+        ]), 0)
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkgb-1.3.cati'
+        ]), 0)
+
+        self.refresh_env()
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkgb-1.2.cati'
+        ]), 0)
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkgc-2.0.cati'
         ]), 1)
 
         self.refresh_env()

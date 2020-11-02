@@ -36,8 +36,8 @@ class test_dotcati_builder(TestCore):
         	'pkg',
         	[
         		'build',
-        		'repository/test-packages/build/notfound',
-        		'--output=repository/test-packages/output/testpkga-1.0.cati'
+        		'tests/test-packages/build/notfound',
+        		'--output=tests/test-packages/output/testpkga-1.0.cati'
         	]
         ), 1)
 
@@ -45,8 +45,8 @@ class test_dotcati_builder(TestCore):
             'pkg',
             [
                 'build',
-                'repository/test-packages/build/testpkga/1.0',
-                '--output=repository/test-packages/output/notfound/test'
+                'tests/test-packages/build/testpkga/1.0',
+                '--output=tests/test-packages/output/notfound/test'
             ]
         ), 1)
 
@@ -54,17 +54,17 @@ class test_dotcati_builder(TestCore):
         	'pkg',
         	[
         		'build',
-        		'repository/test-packages/build/testpkga/1.0',
-        		'--output=repository/test-packages/output/testpkga-1.0.cati'
+        		'tests/test-packages/build/testpkga/1.0',
+        		'--output=tests/test-packages/output/testpkga-1.0.cati'
         	]
         ), 0)
 
         self.assert_true(
-        	os.path.isfile('repository/test-packages/output/testpkga-1.0.cati')
+        	os.path.isfile('tests/test-packages/output/testpkga-1.0.cati')
         )
 
         try:
-            pkg = archive_factory('repository/test-packages/output/testpkga-1.0.cati', 'r')
+            pkg = archive_factory('tests/test-packages/output/testpkga-1.0.cati', 'r')
             pkg.read()
             self.assert_equals(pkg.data['name'], 'testpkga')
             self.assert_equals(pkg.data['version'], '1.0')
@@ -86,7 +86,7 @@ class test_dotcati_builder(TestCore):
             'pkg',
             [
                 'build',
-                'repository/test-packages/build/testpkga/1.1-corrupt',
-                '--output=repository/test-packages/output/testpkga-1.0.cati'
+                'tests/test-packages/build/testpkga/1.1-corrupt',
+                '--output=tests/test-packages/output/testpkga-1.0.cati'
             ]
         ), 1)
