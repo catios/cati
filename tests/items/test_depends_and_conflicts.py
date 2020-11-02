@@ -72,3 +72,15 @@ class test_depends_and_conflicts(TestCore):
         ]), 0)
 
         self.refresh_env()
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'repository/test-packages/packages/testpkgb-1.2.cati'
+        ]), 0)
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'repository/test-packages/packages/testpkgc-2.0.cati'
+        ]), 1)
+
+        self.refresh_env()

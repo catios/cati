@@ -251,6 +251,7 @@ class PkgCommand(BaseCommand):
                     return tmp
                 pkg.close()
             except:
+                raise
                 self.message('cannot install "' + packages_to_install[i].data['name'] + ansi.reset, before=ansi.red)
                 return 1
             i += 1

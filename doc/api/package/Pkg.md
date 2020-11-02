@@ -53,7 +53,7 @@ Classes
 
     ### Methods
 
-    `check_state(query_string: str) ‑> bool`
+    `check_state(query_string: str, virtual=None) ‑> bool`
     :   Checks package state by query string.
         
         For examples:
@@ -64,6 +64,23 @@ Classes
         "pkga | pkgb >= 1.0",
         "pkga | pkgb | pkgc",
         "pkga | pkgb & pkgc = 1.0",
+        
+        `virtual` argument:
+        
+        this argument can make a virtual package state
+        for example package `testpkgz` is not installed,
+        but we want to check the query when this is installed
+        we can set that package in virtual system to query checker
+        calculate tha package as installed/removed
+        virtual structure: this is dictonary:
+        {
+            'install': [
+                ## a list from installed packages:
+                ['testpkgx', '1.0'],
+                ['testpkgz', '3.7.11'],
+                ...
+            ]
+        }
 
     `get_conffiles(self)`
     :   Returns package conffiles list
@@ -73,6 +90,9 @@ Classes
 
     `get_depends(self)`
     :   Returns package dependencies list
+
+    `get_reverse_conflicts(self) ‑> list`
+    :   Returns list of packages has conflicts with this package
 
     `get_reverse_depends(self) ‑> list`
     :   Returns list of packages has dependency to this package

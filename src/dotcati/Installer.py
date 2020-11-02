@@ -164,6 +164,9 @@ class Installer:
         except:
             conflicts = []
 
+        # load package reverse cconflicts (packages has conflict to this package)
+        reverse_conflicts = pkg.get_reverse_conflicts()
+
         for dep in depends:
             if not Pkg.check_state(dep):
                 raise DependencyError(dep)
@@ -171,6 +174,10 @@ class Installer:
         for conflict in conflicts:
             if Pkg.check_state(conflict):
                 raise ConflictError(conflict)
+
+        # check reverse conflicts
+        if reverse_conflicts:
+            raise ConflictError('reverse conflict with ' + reverse_conflicts[0].data['name'] + ': ' + reverse_conflicts[0].conflict_error)
 
     def install(self, pkg: BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True):
         """

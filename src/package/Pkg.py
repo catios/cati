@@ -71,9 +71,32 @@ class Pkg:
         reverse_depends = []
         for pkg in self.all_list()['list']:
             for dep in pkg.get_depends():
-                if dep.strip().split(' ')[0] == self.data['name']:
+                result = Pkg.check_state(dep, virtual={
+                    'remove': [
+                        [
+                            self.data['name'], self.data['version']
+                        ]
+                    ]
+                })
+                if not result:
                     reverse_depends.append(pkg)
         return reverse_depends
+
+    def get_reverse_conflicts(self) -> list:
+        """ Returns list of packages has conflicts with this package """
+        reverse_conflicts_list = []
+        for pkg in self.installed_list()['list']:
+            conflicts = pkg.get_conflicts()
+            for conflict in conflicts:
+                result = Pkg.check_state(conflict, {'install': [
+                    [
+                        self.data['name'], self.data['version']
+                    ]
+                ]})
+                if not result:
+                    pkg.conflict_error = conflict
+                    reverse_conflicts_list.append(pkg)
+        return reverse_conflicts_list
 
     def get_versions_list(self):
         """
@@ -280,7 +303,7 @@ class Pkg:
 
         return Pkg(content_json)
 
-    def check_state(query_string: str) -> bool:
+    def check_state(query_string: str, virtual=None) -> bool:
         """
         Checks package state by query string.
 
@@ -292,6 +315,23 @@ class Pkg:
         "pkga | pkgb >= 1.0",
         "pkga | pkgb | pkgc",
         "pkga | pkgb & pkgc = 1.0",
+
+        `virtual` argument:
+
+        this argument can make a virtual package state
+        for example package `testpkgz` is not installed,
+        but we want to check the query when this is installed
+        we can set that package in virtual system to query checker
+        calculate tha package as installed/removed
+        virtual structure: this is dictonary:
+        {
+            'install': [
+                ## a list from installed packages:
+                ['testpkgx', '1.0'],
+                ['testpkgz', '3.7.11'],
+                ...
+            ]
+        }
         """
 
         # parse query string
@@ -300,7 +340,33 @@ class Pkg:
         for part in parts:
             tmp = part.strip().split('&')
             orig_parts.append(tmp)
-        
+
+        # load virtual item
+        if virtual:
+            try:
+                tmp = virtual['install']
+            except:
+                virtual['install'] = []
+            try:
+                tmp = virtual['remove']
+            except:
+                virtual['remove'] = []
+            virtual_installed_names_list = []
+            virtual_installed_versions_dict = {}
+            for item in virtual['install']:
+                virtual_installed_versions_dict[item[0]] = item[1]
+                virtual_installed_names_list.append(item[0])
+            virtual_removed_names_list = []
+            virtual_removed_versions_dict = {}
+            for item in virtual['remove']:
+                virtual_removed_versions_dict[item[0]] = item[1]
+                virtual_removed_names_list.append(item[0])
+        else:
+            virtual_installed_names_list = []
+            virtual_installed_versions_dict = {}
+            virtual_removed_names_list = []
+            virtual_removed_versions_dict = {}
+
         # parse once query
         i = 0
         while i < len(orig_parts):
@@ -335,13 +401,16 @@ class Pkg:
             ands_ok = True
             for p in tmp:
                 if len(p) == 1:
-                    if not Pkg.is_installed(p[0]):
+                    if not Pkg.is_installed(p[0]) and not p[0] in virtual_installed_names_list or p[0] in virtual_removed_names_list:
                         ands_ok = False
                 elif len(p) == 3:
-                    if not Pkg.is_installed(p[0]):
+                    if not Pkg.is_installed(p[0]) and not p[0] in virtual_installed_names_list or p[0] in virtual_removed_names_list:
                         ands_ok = False
                     else:
-                        a_ver = Pkg.installed_version(p[0])
+                        if p[0] in virtual_installed_names_list:
+                            a_ver = virtual_installed_versions_dict[p[0]]
+                        else:
+                            a_ver = Pkg.installed_version(p[0])
                         b_ver = p[2]
                         if p[1] == '=':
                             if Pkg.compare_version(a_ver, b_ver) != 0:
