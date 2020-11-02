@@ -2,6 +2,7 @@
 # TODO
 
 - [x] handle reverse conflict in installation process
+- [ ] fix reverse conflict/depends bug
 - [ ] create static file system
 - [ ] some cleanups and refactors in code
 - [ ] create file dependency and conflict system
