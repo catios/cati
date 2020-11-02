@@ -9,6 +9,7 @@
 - [ ] check state before run transactions
 - [ ] create search command
 - [ ] create another commands
+- [ ] handle config file replacement system
 - [ ] create repository system
 - [ ] some changes in transaction calculator
 - [ ] create install/upgrade/downgrade transactions system and optimize remove
