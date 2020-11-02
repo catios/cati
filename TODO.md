@@ -9,6 +9,7 @@
 - [ ] check state before run transactions
 - [ ] create search command
 - [ ] create another commands
+- [ ] create security blacklist system
 - [ ] handle config file replacement system
 - [ ] create repository system
 - [ ] some changes in transaction calculator
