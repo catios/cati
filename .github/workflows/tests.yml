@@ -53,19 +53,3 @@ jobs:
         sudo ./dist/cati
 
     name: Build Python ${{ matrix.python }}
-    
-  dockerfile:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Docker
-      run: |
-        sudo apt-get update
-        sudo apt-get install docker.io
-    - name: Build Docker image
-      run: |
-        sudo docker build -t cati .
-
-    name: Build Docker image
