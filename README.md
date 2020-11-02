@@ -13,6 +13,9 @@ you can read full documentation of cati in [doc folder](/doc)
 ## Contributing
 if you want to contribute to cati project, read [contributing guide](/CONTRIBUTING.md)
 
+## Security policy
+read cati security policy in [here](/SECURITY.md).
+
 ## installation
 to compile and install cati on your system, do the following steps:
 
