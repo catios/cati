@@ -1,7 +1,7 @@
 
 # TODO
 
-- [ ] handle reverse conflict in installation process
+- [ ] handle reverse conflict in installation process (in progress in branch feature/handle-reverse-conflict-in-installation-process)
 - [ ] create static file system
 - [ ] some cleanups and refactors in code
 - [ ] create file dependency and conflict system
