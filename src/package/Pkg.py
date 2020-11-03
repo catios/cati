@@ -66,6 +66,13 @@ class Pkg:
         except:
             return []
 
+    def get_static_files(self):
+        """ returns package static files list """
+        try:
+            return self.data['staticfiles']
+        except:
+            return []
+
     def get_reverse_depends(self) -> list:
         """ Returns list of packages has dependency to this package """
         reverse_depends = []

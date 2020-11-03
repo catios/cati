@@ -25,12 +25,21 @@
 import os
 import json
 import time
+import hashlib
 from dotcati.ArchiveModel import BaseArchive
 from frontend import Env, Temp, SysArch
 from dotcati import ListUpdater
 from package.Pkg import Pkg
 from dotcati.exceptions import DependencyError, ConflictError
 from transaction.BaseTransaction import BaseTransaction
+
+def calc_file_sha256(filepath):
+    """ gets filepath and calculates sha256 sum of that """
+    sha256_hash = hashlib.sha256()
+    f = open(filepath, 'rb')
+    for byte_block in iter(lambda: f.read(4096),b""):
+        sha256_hash.update(byte_block)
+    return sha256_hash.hexdigest()
 
 class Installer:
     """ Dotcati package installer """
@@ -253,6 +262,21 @@ class Installer:
             copied_files_str += copied_file + '\n'
         f_files.write(copied_files_str.strip()) # write copied files
         f_files.close()
+
+        # save static files list
+        static_files_list = pkg.get_static_files()
+        f_static_files = open(Env.installed_lists('/' + pkg.data['name'] + '/staticfiles'), 'w')
+        static_files_str = ''
+        for copied_file in copied_files:
+            copied_file_path = copied_file.split(':', 1)[1]
+            if copied_file_path in static_files_list:
+                if os.path.isfile(Env.base_path('/' + copied_file_path)):
+                    # calculate file sha256 sum
+                    copied_file_sha256 = calc_file_sha256(Env.base_path('/' + copied_file_path))
+                    # add file to list
+                    static_files_str += copied_file_sha256 + '@' + copied_file_path + '\n'
+        f_static_files.write(static_files_str.strip()) # write copied files
+        f_static_files.close()
 
         f_installed_at = open(Env.installed_lists('/' + pkg.data['name'] + '/installed_at'), 'w')
         f_installed_at.write(str(time.time())) # write time (installed at)
