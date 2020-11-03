@@ -7,7 +7,7 @@
 - [ ] create file dependency and conflict system
 - [ ] create package scripts system
 - [ ] check state before run transactions
-- [ ] create `search`, `files`, `finfo`, `rdepends` and... commands
+- [ ] create `state`, `check`, `unlock`, `search`, `files`, `finfo`, `rdepends` and... commands
 - [ ] create security blacklist system
 - [ ] handle config file replacement system
 - [ ] some cleanups and refactors in code
