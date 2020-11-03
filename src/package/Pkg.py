@@ -76,7 +76,8 @@ class Pkg:
                         [
                             self.data['name'], self.data['version']
                         ]
-                    ]
+                    ],
+                    'all_real_is_installed': True
                 })
                 if not result:
                     reverse_depends.append(pkg)
@@ -92,8 +93,8 @@ class Pkg:
                     [
                         self.data['name'], self.data['version']
                     ]
-                ]})
-                if not result:
+                ], 'no_real_installs': True})
+                if result:
                     pkg.conflict_error = conflict
                     reverse_conflicts_list.append(pkg)
         return reverse_conflicts_list
@@ -331,6 +332,19 @@ class Pkg:
                 ['testpkgz', '3.7.11'],
                 ...
             ]
+
+            'remove': [
+                ## a list from removed packages:
+                ['testpkgx', '1.0'],
+                ['testpkgz', '3.7.11'],
+                ...
+            ]
+
+            ## set it True if you want to ignore real installations
+            'no_real_installs': True/False
+
+            ## set it True if you want to ignore real not installations
+            'all_real_is_installed': True/False
         }
         """
 
@@ -342,6 +356,8 @@ class Pkg:
             orig_parts.append(tmp)
 
         # load virtual item
+        no_real_installs = False
+        all_real_is_installed = False
         if virtual:
             try:
                 tmp = virtual['install']
@@ -361,11 +377,21 @@ class Pkg:
             for item in virtual['remove']:
                 virtual_removed_versions_dict[item[0]] = item[1]
                 virtual_removed_names_list.append(item[0])
+            try:
+                no_real_installs = virtual['no_real_installs']
+            except:
+                no_real_installs = False
+            try:
+                all_real_is_installed = virtual['all_real_is_installed']
+            except:
+                all_real_is_installed = False
         else:
             virtual_installed_names_list = []
             virtual_installed_versions_dict = {}
             virtual_removed_names_list = []
             virtual_removed_versions_dict = {}
+            no_real_installs = False
+            all_real_is_installed = False
 
         # parse once query
         i = 0
@@ -400,7 +426,11 @@ class Pkg:
         for tmp in orig_parts:
             ands_ok = True
             for p in tmp:
-                if len(p) == 1:
+                if not p[0] in virtual_installed_names_list and no_real_installs:
+                    ands_ok = False
+                elif not p[0] in virtual_removed_names_list and all_real_is_installed:
+                    pass
+                elif len(p) == 1:
                     if not Pkg.is_installed(p[0]) and not p[0] in virtual_installed_names_list or p[0] in virtual_removed_names_list:
                         ands_ok = False
                 elif len(p) == 3:

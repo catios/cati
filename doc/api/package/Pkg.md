@@ -80,6 +80,19 @@ Classes
                 ['testpkgz', '3.7.11'],
                 ...
             ]
+        
+            'remove': [
+                ## a list from removed packages:
+                ['testpkgx', '1.0'],
+                ['testpkgz', '3.7.11'],
+                ...
+            ]
+        
+            ## set it True if you want to ignore real installations
+            'no_real_installs': True/False
+        
+            ## set it True if you want to ignore real not installations
+            'all_real_is_installed': True/False
         }
 
     `get_conffiles(self)`
