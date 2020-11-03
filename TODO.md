@@ -3,7 +3,7 @@
 
 - [x] handle reverse conflict in installation process
 - [x] fix reverse conflict/depends bug
-- [ ] create static file system
+- [x] create static file system
 - [ ] some cleanups and refactors in code
 - [ ] create file dependency and conflict system
 - [ ] create package scripts system
