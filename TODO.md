@@ -10,6 +10,7 @@
 - [ ] create `state`, `check`, `unlock`, `search`, `files`, `finfo`, `rdepends` and... commands
 - [ ] create security blacklist system
 - [ ] handle config file replacement system
+- [ ] handle logging and debug logs
 - [ ] some cleanups and refactors in code
 - [ ] create repository system
 - [ ] some changes in transaction calculator
