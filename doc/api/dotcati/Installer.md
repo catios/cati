@@ -2,6 +2,13 @@ Module dotcati.Installer
 ========================
 Dotcati package installer
 
+Functions
+---------
+
+    
+`calc_file_sha256(filepath)`
+:   gets filepath and calculates sha256 sum of that
+
 Classes
 -------
 

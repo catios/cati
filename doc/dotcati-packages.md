@@ -47,6 +47,12 @@ an example for this file:
         "/path/to/some/dir",
         "/etc/somefile"
         "..."
+    ],
+
+    "staticfiles": [
+        "/path/to/some/static/file",
+        "/usr/bin/somefile",
+        "..."
     ]
 }
 ```
@@ -56,6 +62,8 @@ an example for this file:
 `conflicts` list making conflict to another packages. if that conflicted packages ARE installed, this package will not install and cati shows error.
 
 `conffiles` list declares a list from file/dir paths to set them as config file. config files will not remove in remove process (user can remove them with `--conffiles` in remove command). if some files in your package keeps configuration and something like that, add path of that file to this list
+
+`staticfiles` list declares a list from files where should be static and not changed. for example, binary files are static but configuration files maybe change. this system helps to keep system secure. cati can check static files and if cati detect some changes in that files, gives warning to user and can repair that package by re-installing that.
 
 ## Building packages
 
