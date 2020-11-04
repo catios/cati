@@ -56,6 +56,11 @@ class Remove(BaseTransaction):
         """ Remove pkg """
         events['removing_package'](pkg)
 
+        # run rm-before script
+        if os.path.isfile(Env.installed_lists('/' + pkg.data['name'] + '/rm-before')):
+            os.system('chmod +x "' + Env.installed_lists('/' + pkg.data['name'] + '/rm-before') + '"')
+            os.system(Env.installed_lists('/' + pkg.data['name'] + '/rm-before'))
+
         # remove package
         installed_files = open(Env.installed_lists('/' + pkg.data['name'] + '/files'), 'r').read()
         installed_files = installed_files.strip().split('\n')
@@ -85,6 +90,11 @@ class Remove(BaseTransaction):
                             events['dir_is_not_empty'](pkg, f)
                     else:
                         Remove.add_to_unremoved_conffiles(pkg, f_path)
+
+        # run rm-after script
+        if os.path.isfile(Env.installed_lists('/' + pkg.data['name'] + '/rm-after')):
+            os.system('chmod +x "' + Env.installed_lists('/' + pkg.data['name'] + '/rm-after') + '"')
+            os.system(Env.installed_lists('/' + pkg.data['name'] + '/rm-after'))
 
         # remove installation config
         shutil.rmtree(Env.installed_lists('/' + pkg.data['name']))

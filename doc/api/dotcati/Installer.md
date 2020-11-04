@@ -35,3 +35,6 @@ Classes
 
     `load_files(self, path: str, base_temp_path: str)`
     :   Loads list of package files from extracted temp dir
+
+    `run_script(self, script_name: str, script_path=None)`
+    :   runs an script in the package
