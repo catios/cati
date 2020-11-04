@@ -177,7 +177,6 @@ class Installer:
 
     def run_script(self, script_name: str, script_path=None):
         """ runs an script in the package """
-        # TODO : some changes in script arguments
         if script_path == None:
             script_path = self.extracted_package_dir + '/scripts/' + script_name
         if os.path.isfile(script_path):

@@ -22,6 +22,8 @@
 
 """ Handle system architecture """
 
+import os
+
 is_testing = False
 """
 in testing environment,
@@ -33,4 +35,7 @@ def sys_arch():
     if is_testing:
         return 'i386'
     else:
-        return 'i386' # TODO : return real arch
+        arch = os.uname().machine
+        if arch == 'i686':
+            arch = 'i386'
+        return arch

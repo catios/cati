@@ -33,7 +33,6 @@ class PackageJsonValidator:
         """
 
         try:
-            # TODO : check more fields
             assert type(data['name']) == str
             assert type(data['version']) == str
             assert type(data['arch']) == str
