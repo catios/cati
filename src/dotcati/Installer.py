@@ -32,14 +32,7 @@ from dotcati import ListUpdater
 from package.Pkg import Pkg
 from dotcati.exceptions import DependencyError, ConflictError
 from transaction.BaseTransaction import BaseTransaction
-
-def calc_file_sha256(filepath):
-    """ gets filepath and calculates sha256 sum of that """
-    sha256_hash = hashlib.sha256()
-    f = open(filepath, 'rb')
-    for byte_block in iter(lambda: f.read(4096),b""):
-        sha256_hash.update(byte_block)
-    return sha256_hash.hexdigest()
+from helpers.calc_file_sha256 import calc_file_sha256
 
 class Installer:
     """ Dotcati package installer """

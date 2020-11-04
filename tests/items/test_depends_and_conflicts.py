@@ -22,6 +22,7 @@
 
 """ Test test_depends_and_conflicts """
 
+import os
 from TestCore import TestCore
 
 class test_depends_and_conflicts(TestCore):
@@ -81,6 +82,44 @@ class test_depends_and_conflicts(TestCore):
         self.assert_equals(self.run_command('pkg', [
             'install',
             'tests/test-packages/packages/testpkgc-2.0.cati'
+        ]), 1)
+
+        self.refresh_env()
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkg-with-file-depend.cati'
+        ]), 1)
+
+        os.mkdir(self.env() + '/etc')
+        f = open(self.env() + '/etc/testfile', 'w')
+        f.write('')
+        f.close()
+        f = open(self.env() + '/etc/anotherfile', 'w')
+        f.write('hello\n')
+        f.close()
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkg-with-file-depend.cati'
+        ]), 0)
+
+        self.refresh_env()
+
+        os.mkdir(self.env() + '/etc')
+        f = open(self.env() + '/etc/testfile', 'w')
+        f.write('')
+        f.close()
+        f = open(self.env() + '/etc/anotherfile', 'w')
+        f.write('hello\n')
+        f.close()
+        f = open(self.env() + '/etc/filea', 'w')
+        f.write('')
+        f.close()
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkg-with-file-depend.cati'
         ]), 1)
 
         self.refresh_env()

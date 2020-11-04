@@ -1,7 +1,7 @@
 
 # TODO
 
-- [ ] create file dependency and conflict system
+- [x] create file dependency and conflict system
 - [ ] create package scripts system
 - [ ] check state before run transactions
 - [ ] create `state`, `check`, `unlock`, `search`, `files`, `finfo`, `rdepends` and... commands

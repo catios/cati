@@ -65,6 +65,15 @@ Classes
         "pkga | pkgb | pkgc",
         "pkga | pkgb & pkgc = 1.0",
         
+        also there is a feature to check files:
+        
+        "@/usr/bin/somefile",
+        "somepackage | @/path/to/somefile",
+        "testpkga >= 3.0 | @/somefile"
+        "@/file/one | @/file/two",
+        "@<sha256-hash>@/path/to/file",
+        "@76883f0fd14015c93296f0e4202241f4eb3a23189dbc17990a197477f1dc441a@/path/to/file"
+        
         `virtual` argument:
         
         this argument can make a virtual package state

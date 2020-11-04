@@ -31,14 +31,19 @@ an example for this file:
         "pkga",
         "pkga >= 1.7.13",
         "pkgb | pkgc <= 1.0",
-        "pkg1 = 1.0"
+        "pkg1 = 1.0",
+        "pkg1 >= 2.0 | @/path/to/some/file",
+        "@/another/file | @/thefile",
+        "@76883f0fd14015c93296f0e4202241f4eb3a23189dbc17990a197477f1dc441a@/path/to/file",
         "..."
     ],
     "conflicts": [
         "pkga",
         "pkga >= 1.7.13",
         "pkgb | pkgc <= 1.0",
-        "pkg1 = 1.0"
+        "pkg1 = 1.0",
+        "@/i/have/conflict/with/this/file",
+        "@76883f0fd14015c93296f0e4202241f4eb3a23189dbc17990a197477f1dc441a@/path/to/file",
         "..."
     ],
 
@@ -60,6 +65,8 @@ an example for this file:
 `depends` list making dependency to another packages. if that depended packages ARE NOT installed, this package will not install and cati shows error.
 
 `conflicts` list making conflict to another packages. if that conflicted packages ARE installed, this package will not install and cati shows error.
+
+also you can use file depend/conflict in `depends` and `conflicts` lists. you have to write `@/path/to/file`. for example if you set this as a dependency, that file should be exists for this package, and if you set this as a conflict, package will not install if that file/dir exists. also you can check file sha256. for example `@76883f0fd14015c93296f0e4202241f4eb3a23189dbc17990a197477f1dc441a@/path/to/file`. you should write an `@` and next write specify sha256 and next again an `@` and next file path. now that file should exists, also cati checks sha256 of that file and compares that with your specify hash.
 
 `conffiles` list declares a list from file/dir paths to set them as config file. config files will not remove in remove process (user can remove them with `--conffiles` in remove command). if some files in your package keeps configuration and something like that, add path of that file to this list
 
