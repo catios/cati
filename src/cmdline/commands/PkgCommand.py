@@ -26,7 +26,7 @@ from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
 from dotcati.Builder import Builder
 from dotcati.Installer import Installer
-from dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError
+from dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError, PackageScriptError
 from dotcati.ArchiveModel import archive_factory, BaseArchive
 from frontend.RootRequired import require_root_permission
 from package.exceptions import CannotReadFileException
@@ -213,10 +213,11 @@ class PkgCommand(BaseCommand):
 
             if type(out) == int:
                 return out
+        except PackageScriptError as ex:
+            pr.e('cannot install "' + pkg.data['name'] + ':' + pkg.data['version'] + '": ' + str(ex))
+            return ex.error_code
         except CannotReadFileException as ex:
             self.message(ansi.red + str(ex), True, before=ansi.reset)
-        except:
-            raise
 
     def sub_install(self):
         """ install sub command (cati pkg install) """
@@ -251,7 +252,6 @@ class PkgCommand(BaseCommand):
                     return tmp
                 pkg.close()
             except:
-                raise
                 self.message('cannot install "' + packages_to_install[i].data['name'] + ansi.reset, before=ansi.red)
                 return 1
             i += 1

@@ -33,3 +33,6 @@ class DependencyError(Exception):
 
 class ConflictError(Exception):
     pass
+
+class PackageScriptError(Exception):
+    pass

@@ -30,7 +30,7 @@ from dotcati.ArchiveModel import BaseArchive
 from frontend import Env, Temp, SysArch
 from dotcati import ListUpdater
 from package.Pkg import Pkg
-from dotcati.exceptions import DependencyError, ConflictError
+from dotcati.exceptions import DependencyError, ConflictError, PackageScriptError
 from transaction.BaseTransaction import BaseTransaction
 from helpers.calc_file_sha256 import calc_file_sha256
 
@@ -81,13 +81,7 @@ class Installer:
         unremoved_conffiles = unremoved_conffiles_f.read().strip().split('\n')
         unremoved_conffiles_f.close()
 
-        # extract package in a temp place
-        temp_dir = Temp.make_dir()
-        os.rmdir(temp_dir)
-        try:
-            pkg.extractall(temp_dir)
-        except IsADirectoryError:
-            pass
+        temp_dir = self.extracted_package_dir
 
         # load files list from `files` directory of package
         self.loaded_files = []
@@ -181,6 +175,21 @@ class Installer:
         if reverse_conflicts:
             raise ConflictError('reverse conflict with ' + reverse_conflicts[0].data['name'] + ': ' + reverse_conflicts[0].conflict_error)
 
+    def run_script(self, script_name: str, script_path=None):
+        """ runs an script in the package """
+        # TODO : some changes in script arguments
+        if script_path == None:
+            script_path = self.extracted_package_dir + '/scripts/' + script_name
+        if os.path.isfile(script_path):
+            # script exists, run script
+            os.system('chmod +x "' + script_path + '"')
+            # run script and pass version of package to script
+            result = os.system(script_path + ' "' + self.pkg.data['version'] + '"')
+            if result != 0:
+                tmp = PackageScriptError("script " + script_name + ' returned non-zero code ' + str(result))
+                tmp.error_code = result
+                raise tmp
+
     def install(self, pkg: BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True):
         """
         Install .cati package
@@ -194,6 +203,7 @@ class Installer:
         """
 
         self.conffiles = pkg.get_conffiles()
+        self.pkg = pkg
 
         # check package architecture
         if pkg.data['arch'] != 'all':
@@ -234,11 +244,22 @@ class Installer:
 
         ListUpdater.update_indexes(index_updater_events)
 
+        # extract package in a temp place
+        temp_dir = Temp.make_dir()
+        os.rmdir(temp_dir)
+        try:
+            pkg.extractall(temp_dir)
+        except IsADirectoryError:
+            pass
+        self.extracted_package_dir = temp_dir
+
         # install package
         if Pkg.is_installed(pkg.data['name']):
             installer_events['package_currently_installed'](pkg, Pkg.installed_version(pkg.data['name']))
         else:
             installer_events['package_new_installs'](pkg)
+
+        self.run_script('ins-before')
 
         copied_files = self.copy_files(pkg, installer_events['directory_not_empty'])
 
@@ -279,6 +300,18 @@ class Installer:
             f_manual = open(Env.installed_lists('/' + pkg.data['name'] + '/manual'), 'w')
             f_manual.write('')
             f_manual.close()
+
+        self.run_script('ins-after')
+
+        # copy remove scripts
+        if os.path.isfile(self.extracted_package_dir + '/scripts/rm-before'):
+            os.system(
+                'cp "' + self.extracted_package_dir + '/scripts/rm-before' + '" "' + Env.installed_lists('/' + pkg.data['name'] + '/rm-before') + '"'
+            )
+        if os.path.isfile(self.extracted_package_dir + '/scripts/rm-after'):
+            os.system(
+                'cp "' + self.extracted_package_dir + '/scripts/rm-after' + '" "' + Env.installed_lists('/' + pkg.data['name'] + '/rm-after') + '"'
+            )
 
         # pop package from state
         BaseTransaction.pop_state()
