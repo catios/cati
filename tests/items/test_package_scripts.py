@@ -52,3 +52,10 @@ class test_package_scripts(TestCore):
         os.remove('temp')
 
         self.refresh_env()
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkg-with-error-in-scripts.cati'
+        ]), 1)
+
+        self.refresh_env()

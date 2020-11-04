@@ -214,8 +214,8 @@ class PkgCommand(BaseCommand):
             if type(out) == int:
                 return out
         except PackageScriptError as ex:
-            pr.e('cannot install "' + pkg.data['name'] + ':' + pkg.data['version'] + '": ' + str(ex))
-            return ex.error_code
+            pr.e(ansi.red + 'cannot install "' + pkg.data['name'] + ':' + pkg.data['version'] + '": ' + str(ex) + ansi.reset)
+            return 1
         except CannotReadFileException as ex:
             self.message(ansi.red + str(ex), True, before=ansi.reset)
 
