@@ -28,6 +28,7 @@ from frontend import Env
 from frontend.SysArch import sys_arch
 from package.exceptions import CannotReadFileException
 from packaging import version
+from helpers.calc_file_sha256 import calc_file_sha256
 
 class Pkg:
     """ Package model """
@@ -324,6 +325,15 @@ class Pkg:
         "pkga | pkgb | pkgc",
         "pkga | pkgb & pkgc = 1.0",
 
+        also there is a feature to check files:
+
+        "@/usr/bin/somefile",
+        "somepackage | @/path/to/somefile",
+        "testpkga >= 3.0 | @/somefile"
+        "@/file/one | @/file/two",
+        "@<sha256-hash>@/path/to/file",
+        "@76883f0fd14015c93296f0e4202241f4eb3a23189dbc17990a197477f1dc441a@/path/to/file"
+
         `virtual` argument:
 
         this argument can make a virtual package state
@@ -433,7 +443,21 @@ class Pkg:
         for tmp in orig_parts:
             ands_ok = True
             for p in tmp:
-                if not p[0] in virtual_installed_names_list and no_real_installs:
+                if p[0][0] == '@':
+                    # check file query
+                    parts = p[0].split('@')
+                    if len(parts) == 2:
+                        if not os.path.exists(Env.base_path(parts[-1])):
+                            ands_ok = False
+                    elif len(parts) == 3:
+                        if not os.path.exists(Env.base_path(parts[-1])):
+                            ands_ok = False
+                        else:
+                            if os.path.isfile(Env.base_path(parts[-1])):
+                                sha256_sum = calc_file_sha256(Env.base_path(parts[-1]))
+                                if parts[1] != sha256_sum:
+                                    ands_ok = False
+                elif not p[0] in virtual_installed_names_list and no_real_installs:
                     ands_ok = False
                 elif not p[0] in virtual_removed_names_list and all_real_is_installed:
                     pass
