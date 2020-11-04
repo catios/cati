@@ -7,6 +7,8 @@ structure of packages:
 data.json
 files/
     // package files...
+scripts/
+    // package scripts...
 ```
 
 `data.json` is main file of a package. this file contains information of package.
@@ -72,6 +74,19 @@ also you can use file depend/conflict in `depends` and `conflicts` lists. you ha
 
 `staticfiles` list declares a list from files where should be static and not changed. for example, binary files are static but configuration files maybe change. this system helps to keep system secure. cati can check static files and if cati detect some changes in that files, gives warning to user and can repair that package by re-installing that.
 
+### scripts
+there is an directory named `scripts` in package build directory.
+
+you can write some scripts for packages.
+
+scripts:
+- `ins-before`: will run before start installation process
+- `ins-after`: will run after installation process
+- `rm-before`: will run before remove process
+- `rm-after`: will run after remove process
+
+for example, you can create a file named `ins-before` in `scripts` folder (`scripts/ins-before`) and write an shell script in that.
+
 ## Building packages
 
 to build `.cati` package, you should do the following steps:
@@ -80,6 +95,7 @@ to build `.cati` package, you should do the following steps:
 - create `files/` folder in that
 - write package information and configs in `data.json` as json format
 - put package files to `files/` folder
+- create `scripts/` folder and create package scripts in that (optional)
 
 next build package with this command:
 
