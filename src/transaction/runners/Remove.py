@@ -52,14 +52,15 @@ class Remove(BaseTransaction):
         f.close()
 
     @staticmethod
-    def run(pkg: Pkg, events: dict, remove_conffiles=False):
+    def run(pkg: Pkg, events: dict, remove_conffiles=False, run_scripts=True):
         """ Remove pkg """
         events['removing_package'](pkg)
 
         # run rm-before script
-        if os.path.isfile(Env.installed_lists('/' + pkg.data['name'] + '/rm-before')):
-            os.system('chmod +x "' + Env.installed_lists('/' + pkg.data['name'] + '/rm-before') + '"')
-            os.system(Env.installed_lists('/' + pkg.data['name'] + '/rm-before'))
+        if run_scripts:
+            if os.path.isfile(Env.installed_lists('/' + pkg.data['name'] + '/rm-before')):
+                os.system('chmod +x "' + Env.installed_lists('/' + pkg.data['name'] + '/rm-before') + '"')
+                os.system(Env.installed_lists('/' + pkg.data['name'] + '/rm-before'))
 
         # remove package
         installed_files = open(Env.installed_lists('/' + pkg.data['name'] + '/files'), 'r').read()
@@ -92,9 +93,10 @@ class Remove(BaseTransaction):
                         Remove.add_to_unremoved_conffiles(pkg, f_path)
 
         # run rm-after script
-        if os.path.isfile(Env.installed_lists('/' + pkg.data['name'] + '/rm-after')):
-            os.system('chmod +x "' + Env.installed_lists('/' + pkg.data['name'] + '/rm-after') + '"')
-            os.system(Env.installed_lists('/' + pkg.data['name'] + '/rm-after'))
+        if run_scripts:
+            if os.path.isfile(Env.installed_lists('/' + pkg.data['name'] + '/rm-after')):
+                os.system('chmod +x "' + Env.installed_lists('/' + pkg.data['name'] + '/rm-after') + '"')
+                os.system(Env.installed_lists('/' + pkg.data['name'] + '/rm-after'))
 
         # remove installation config
         shutil.rmtree(Env.installed_lists('/' + pkg.data['name']))

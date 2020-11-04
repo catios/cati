@@ -23,7 +23,7 @@ Classes
     `copy_once_file(self, paths)`
     :   Copy one of package files
 
-    `install(self, pkg: dotcati.ArchiveModel.BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True)`
+    `install(self, pkg: dotcati.ArchiveModel.BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True, run_scripts=True)`
     :   Install .cati package
         
         installer_events:

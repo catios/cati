@@ -53,6 +53,9 @@ sudo cati pkg install somepackage.cati
 sudo cati pkg install pkg1.cati pkg2.cati # ...
 ```
 
+Options:
+- `--without-scripts`: do not run package scripts in installation process
+
 ## list command
 this command shows list of packages
 
@@ -79,6 +82,7 @@ cati remove pkg1 pkg2 # ...
 Options:
 - `-y|--yes`: do not ask for user confirmation
 - `--conffiles`: also remove config files (full remove)
+- `--without-scripts`: do not run package scripts in remove process
 
 ## show command
 this command shows packages details

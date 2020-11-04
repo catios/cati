@@ -40,6 +40,7 @@ class RemoveCommand(BaseCommand):
         Options:
         -y|--yes: do not ask for user confirmation
         --conffiles: also remove conffiles (full remove)
+        --without-scripts: do not run package scripts in remove process
         """
         pass
 
@@ -51,6 +52,7 @@ class RemoveCommand(BaseCommand):
                 '-y': [False, False],
                 '--yes': [False, False],
                 '--conffiles': [False, False],
+                '--without-scripts': [False, False],
             },
             'max_args_count': None,
             'min_args_count': 1,
@@ -127,7 +129,8 @@ class RemoveCommand(BaseCommand):
                     'package_remove_finished': self.package_remove_finished_event,
                     'dir_is_not_empty': self.dir_is_not_empty_event,
                 },
-                self.has_option('--conffiles')
+                self.has_option('--conffiles'),
+                run_scripts=(not self.has_option('--without-scripts'))
             )
             BaseTransaction.pop_state()
 

@@ -41,6 +41,10 @@ Classes
         - build:      build .cati package from directory(s)
         - show:       show content of .cati package(s). options: --files: show package files
         - install:    install a .cati package on system
+        
+        Options:
+        - install subcommand:
+        ---- --without-scripts: do not run package scripts in installation process
 
     `install_once(self, pkg: dotcati.ArchiveModel.BaseArchive)`
     :   installs once package

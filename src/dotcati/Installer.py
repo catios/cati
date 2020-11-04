@@ -190,7 +190,7 @@ class Installer:
                 tmp.error_code = result
                 raise tmp
 
-    def install(self, pkg: BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True):
+    def install(self, pkg: BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True, run_scripts=True):
         """
         Install .cati package
 
@@ -259,7 +259,8 @@ class Installer:
         else:
             installer_events['package_new_installs'](pkg)
 
-        self.run_script('ins-before')
+        if run_scripts:
+            self.run_script('ins-before')
 
         copied_files = self.copy_files(pkg, installer_events['directory_not_empty'])
 
@@ -301,7 +302,8 @@ class Installer:
             f_manual.write('')
             f_manual.close()
 
-        self.run_script('ins-after')
+        if run_scripts:
+            self.run_script('ins-after')
 
         # copy remove scripts
         if os.path.isfile(self.extracted_package_dir + '/scripts/rm-before'):

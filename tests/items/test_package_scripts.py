@@ -59,3 +59,21 @@ class test_package_scripts(TestCore):
         ]), 1)
 
         self.refresh_env()
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkg-with-scripts.cati',
+            '--without-scripts'
+        ]), 0)
+
+        self.assert_true(not os.path.isfile('temp'))
+
+        self.assert_equals(self.run_command('remove', [
+            '-y',
+            'testpkg-with-scripts',
+            '--without-scripts'
+        ]), 0)
+
+        self.assert_true(not os.path.isfile('temp'))
+
+        self.refresh_env()

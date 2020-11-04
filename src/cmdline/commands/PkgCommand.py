@@ -41,6 +41,10 @@ class PkgCommand(BaseCommand):
         - build:      build .cati package from directory(s)
         - show:       show content of .cati package(s). options: --files: show package files
         - install:    install a .cati package on system
+
+        Options:
+        - install subcommand:
+        ---- --without-scripts: do not run package scripts in installation process
         """
         pass
 
@@ -54,6 +58,7 @@ class PkgCommand(BaseCommand):
                 '--files': [False, False],
                 '-f': [False, False],
                 '--auto': [False, False],
+                '--without-scripts': [False, False],
             },
             'max_args_count': None,
             'min_args_count': None,
@@ -208,7 +213,8 @@ class PkgCommand(BaseCommand):
                     'dep_and_conflict_error': self.dep_and_conflict_error_event,
                     'arch_error': self.arch_error_event,
                 },
-                (not self.has_option('--auto'))
+                (not self.has_option('--auto')),
+                run_scripts=(not self.has_option('--without-scripts'))
             )
 
             if type(out) == int:
