@@ -107,3 +107,14 @@ cati state --complete
 Options:
 - `--abort`: cancel undoned transactions
 - `--complete`: complete undoned transactions (this option is in progress)
+
+## query command
+this command checks package query
+
+for example:
+
+```bash
+cati query "somepackage >= 2.0"
+cati query "somepackage = 1.7 | tstpkg & anotherpkg <= 1.5"
+# ...
+```

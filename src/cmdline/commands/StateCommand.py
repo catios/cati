@@ -43,7 +43,7 @@ class StateCommand(BaseCommand):
     def config(self) -> dict:
         """ Define and config this command """
         return {
-            'name': 'list',
+            'name': 'state',
             'options': {
                 '--abort': [False, False],
                 '--complete': [False, False],
