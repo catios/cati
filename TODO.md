@@ -2,10 +2,11 @@
 # TODO
 
 - [ ] check state before run transactions
-- [ ] create `state`, `check`, `unlock`, `search`, `files`, `finfo`, `rdepends` and... commands
+- [ ] create `state`, `check`, `unlock`, `search`, `files`, `finfo`, `rdepends`, `query` and... commands
 - [ ] create security blacklist system
 - [ ] handle config file replacement system
 - [ ] handle logging and debug logs
+- [ ] split package query string documentation from dotcati packages documentation
 - [ ] create repository system
 - [ ] some changes in transaction calculator
 - [ ] create install/upgrade/downgrade transactions system and optimize remove
