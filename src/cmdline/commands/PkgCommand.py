@@ -30,7 +30,8 @@ from dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileExc
 from dotcati.ArchiveModel import archive_factory, BaseArchive
 from frontend.RootRequired import require_root_permission
 from package.exceptions import CannotReadFileException
-from cmdline.components import PackageShower
+from cmdline.components import PackageShower, StateContentShower
+from transaction.BaseTransaction import BaseTransaction
 
 class PkgCommand(BaseCommand):
     """ Pkg command to work with .cati archives """
@@ -232,6 +233,14 @@ class PkgCommand(BaseCommand):
             return 1
 
         require_root_permission()
+
+        # check transactions state before run new transactions
+        pr.p('Checking transactions state...')
+        state_list = BaseTransaction.state_list() # get list of undoned transactions
+        if state_list:
+            # the list is not empty
+            StateContentShower.show(state_list)
+            return 1
 
         packages_to_install = []
         i = 1

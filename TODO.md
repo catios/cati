@@ -1,7 +1,6 @@
 
 # TODO
 
-- [ ] check state before run transactions
 - [ ] create `state`, `check`, `unlock`, `search`, `files`, `finfo`, `rdepends`, `query` and... commands
 - [ ] create security blacklist system
 - [ ] handle config file replacement system

@@ -24,7 +24,7 @@
 
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
-from cmdline.components import TransactionShower
+from cmdline.components import TransactionShower, StateContentShower
 from package.Pkg import Pkg
 from transaction.Calculator import Calculator
 from transaction.runners.Remove import Remove
@@ -85,8 +85,16 @@ class RemoveCommand(BaseCommand):
 
         require_root_permission()
 
+        # check transactions state before run new transactions
+        pr.p('Checking transactions state...')
+        state_list = BaseTransaction.state_list() # get list of undoned transactions
+        if state_list:
+            # the list is not empty
+            StateContentShower.show(state_list)
+            return 1
+
         pr.p('Loading packages list...')
-        pr.p('=======================')
+        pr.p('==============================')
         # load list of packages
         packages = []
         for arg in self.arguments:

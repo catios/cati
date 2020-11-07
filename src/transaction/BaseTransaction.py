@@ -66,3 +66,44 @@ class BaseTransaction:
         f = open(Env.state_file(), 'w')
         f.write(new_content)
         f.close()
+
+    @staticmethod
+    def state_item_to_string(state_item: dict) -> str:
+        """
+        Gets an dictonary as a item in state list where returned by `BaseTransaction.state_list()`
+        and generates an human readable message as string to show that message to user
+        """
+        msg = state_item['action'] + ' ' + state_item['pkg']
+        if state_item['version'] == None:
+            return msg
+        msg += '=' + state_item['version']
+        if state_item['arch'] == None:
+            return msg
+        msg += '=' + state_item['arch']
+        return msg
+
+    @staticmethod
+    def state_list():
+        """ returns list of undoned transactions from state file """
+        f = open(Env.state_file(), 'r')
+        content = f.read()
+        f.close()
+        content = content.strip().split('\n')
+        content = [line.strip() for line in content]
+        result = []
+        for item in content:
+            if item != '':
+                tmp = {}
+                parts = item.split('%')
+                tmp['action'] = parts[0]
+                tmp['pkg'] = parts[1]
+                try:
+                    tmp['version'] = parts[2]
+                except:
+                    tmp['version'] = None
+                try:
+                    tmp['arch'] = parts[3]
+                except:
+                    tmp['arch'] = None
+                result.append(tmp)
+        return result
