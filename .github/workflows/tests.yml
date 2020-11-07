@@ -7,12 +7,13 @@ on:
     branches: [ master ]
 
 jobs:
-  linux_tests:
+  unix_tests:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}-latest
 
     strategy:
       matrix:
+        os: [ubuntu]
         python: [3.6, 3.7, 3.8, 3.9]
 
     steps:
@@ -31,4 +32,4 @@ jobs:
         make
         sudo ./dist/cati
 
-    name: Python ${{ matrix.python }}
+    name: ${{ matrix.os }} python ${{ matrix.python }}
