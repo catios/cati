@@ -29,6 +29,6 @@ jobs:
     - name: Test Build
       run: |
         make
-        ./dist/cati -v
+        sudo ./dist/cati
 
     name: Python ${{ matrix.python }}
