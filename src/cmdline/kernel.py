@@ -29,6 +29,7 @@ from cmdline.commands.PkgCommand import PkgCommand
 from cmdline.commands.ListCommand import ListCommand
 from cmdline.commands.RemoveCommand import RemoveCommand
 from cmdline.commands.ShowCommand import ShowCommand
+from cmdline.commands.QueryCommand import QueryCommand
 
 commands = {
     'help': HelpCommand,
@@ -36,6 +37,7 @@ commands = {
     'list': ListCommand,
     'remove': RemoveCommand,
     'show': ShowCommand,
+    'query': QueryCommand,
 }
 """
 a dictonary from list of subcommands

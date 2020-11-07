@@ -94,3 +94,14 @@ cati show pkg1 pkg2 # ...
 
 Options:
 - `--versions`: shows versions list of packages
+
+## query command
+this command checks package query
+
+for example:
+
+```bash
+cati query "somepackage >= 2.0"
+cati query "somepackage = 1.7 | tstpkg & anotherpkg <= 1.5"
+# ...
+```

@@ -13,6 +13,7 @@ Classes
     * cmdline.commands.HelpCommand.HelpCommand
     * cmdline.commands.ListCommand.ListCommand
     * cmdline.commands.PkgCommand.PkgCommand
+    * cmdline.commands.QueryCommand.QueryCommand
     * cmdline.commands.RemoveCommand.RemoveCommand
     * cmdline.commands.ShowCommand.ShowCommand
 
