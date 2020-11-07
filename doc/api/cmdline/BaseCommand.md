@@ -15,6 +15,7 @@ Classes
     * cmdline.commands.PkgCommand.PkgCommand
     * cmdline.commands.RemoveCommand.RemoveCommand
     * cmdline.commands.ShowCommand.ShowCommand
+    * cmdline.commands.StateCommand.StateCommand
 
     ### Methods
 

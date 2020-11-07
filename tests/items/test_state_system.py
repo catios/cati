@@ -50,4 +50,9 @@ class test_state_system(TestCore):
             'tests/test-packages/packages/testpkgc-2.0.cati'
         ]), 1)
 
+        # tests for cli `state` command
+        self.assert_equals(self.run_command('state'), 1)
+        self.assert_equals(self.run_command('state', ['--abort', '-y']), 0)
+        self.assert_equals(self.run_command('state'), 0)
+
         self.refresh_env()

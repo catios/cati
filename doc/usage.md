@@ -94,3 +94,16 @@ cati show pkg1 pkg2 # ...
 
 Options:
 - `--versions`: shows versions list of packages
+
+## state command
+this command is for managing state transactions. read [state system](/doc/developer/state-system.md) documentation.
+
+```bash
+cati state
+cati state --abort
+cati state --complete
+```
+
+Options:
+- `--abort`: cancel undoned transactions
+- `--complete`: complete undoned transactions (this option is in progress)
