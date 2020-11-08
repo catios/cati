@@ -24,6 +24,7 @@
 
 from TestCore import TestCore
 from frontend import Env
+from package.Pkg import Pkg
 
 class test_state_system(TestCore):
     """ Test test_state_system """
@@ -54,5 +55,20 @@ class test_state_system(TestCore):
         self.assert_equals(self.run_command('state'), 1)
         self.assert_equals(self.run_command('state', ['--abort', '-y']), 0)
         self.assert_equals(self.run_command('state'), 0)
+
+        self.refresh_env()
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkgc-2.0.cati'
+        ]), 0)
+        self.assert_true(Pkg.is_installed('testpkgc'))
+        state_f = open(Env.state_file(), 'w')
+        state_f.write(f'remove%testpkgc')
+        state_f.close()
+        self.assert_equals(self.run_command('state'), 1)
+        self.assert_equals(self.run_command('state', ['--complete']), 0)
+        self.assert_equals(self.run_command('state'), 0)
+        self.assert_true(not Pkg.is_installed('testpkgc'))
 
         self.refresh_env()

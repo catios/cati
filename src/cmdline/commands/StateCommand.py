@@ -25,8 +25,12 @@
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
 from cmdline.components import StateContentShower
+from cmdline.commands.RemoveCommand import RemoveCommand
+from cmdline.commands.PkgCommand import PkgCommand
+from cmdline import ArgParser
 from transaction.BaseTransaction import BaseTransaction
 from frontend.RootRequired import require_root_permission
+from dotcati.ArchiveModel import archive_factory
 
 class StateCommand(BaseCommand):
     """ State command """
@@ -73,7 +77,26 @@ class StateCommand(BaseCommand):
             else:
                 return
         elif self.has_option('--complete'):
-            # TODO : create this option
+            require_root_permission()
+            state_list = BaseTransaction.state_list()
+            if not state_list:
+                pr.p(ansi.green + 'There is not any undoned transaction and everything is ok' + ansi.reset)
+                return 0
+            BaseTransaction.finish_all_state()
+            # complete transactions
+            for item in state_list:
+                if item['action'] == 'remove':
+                    tmp_arguments = [item['pkg'], '-y']
+                    tmp_arguments.insert(0, 'cati')
+                    tmp_arguments.insert(1, 'remove')
+                    cmd = RemoveCommand()
+                    cmd.handle(ArgParser.parse(tmp_arguments))
+                elif item['action'] == 'install':
+                    tmp_arguments = ['install', item['file']]
+                    tmp_arguments.insert(0, 'cati')
+                    tmp_arguments.insert(1, 'pkg')
+                    cmd = PkgCommand()
+                    cmd.handle(ArgParser.parse(tmp_arguments))
             return
         else:
             # show list of undoned transactions
