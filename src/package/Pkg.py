@@ -419,7 +419,7 @@ class Pkg:
                 spliter = None
                 if '>=' in orig_parts[i][j]:
                     spliter = '>='
-                elif '>=' in orig_parts[i][j]:
+                elif '<=' in orig_parts[i][j]:
                     spliter = '<='
                 elif '>' in orig_parts[i][j]:
                     spliter = '>'
