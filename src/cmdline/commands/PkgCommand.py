@@ -22,6 +22,7 @@
 
 """ Pkg command to work with .cati archives """
 
+import os
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
 from dotcati.Builder import Builder
@@ -29,6 +30,7 @@ from dotcati.Installer import Installer
 from dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError, PackageScriptError
 from dotcati.ArchiveModel import archive_factory, BaseArchive
 from frontend.RootRequired import require_root_permission
+from frontend import Env
 from package.exceptions import CannotReadFileException
 from cmdline.components import PackageShower, StateContentShower
 from transaction.BaseTransaction import BaseTransaction
@@ -248,6 +250,7 @@ class PkgCommand(BaseCommand):
             try:
                 pkg = archive_factory(self.arguments[i], 'r')
                 pkg.read()
+                pkg.package_file_path = os.path.abspath(self.arguments[i])
                 packages_to_install.append(pkg)
             except FileNotFoundError as ex:
                 self.message('file "' + self.arguments[i] + '" not found' + ansi.reset, before=ansi.red)
@@ -258,18 +261,29 @@ class PkgCommand(BaseCommand):
 
             i += 1
 
+        # add packages to state
+        state_f = open(Env.state_file(), 'w')
+        tmp = ''
+        for pkg in packages_to_install:
+            tmp += ('install%' + pkg.data['name'] + '%' + pkg.data['version'] + '%' + pkg.data['arch'] + '%' + pkg.package_file_path + '\n')
+        state_f.write(tmp)
+        state_f.close()
+
         i = 0
         while i < len(packages_to_install):
             try:
                 pkg = packages_to_install[i]
                 tmp = self.install_once(pkg)
                 if type(tmp) == int and tmp != 0:
+                    BaseTransaction.finish_all_state()
                     return tmp
                 pkg.close()
             except:
+                BaseTransaction.finish_all_state()
                 self.message('cannot install "' + packages_to_install[i].data['name'] + ansi.reset, before=ansi.red)
                 return 1
             i += 1
+        BaseTransaction.finish_all_state()
 
     def run(self):
         """ Run command """
