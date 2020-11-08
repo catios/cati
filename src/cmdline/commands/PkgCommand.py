@@ -62,6 +62,7 @@ class PkgCommand(BaseCommand):
                 '-f': [False, False],
                 '--auto': [False, False],
                 '--without-scripts': [False, False],
+                '--dont-ignore-state': [False, False], # this will use by `cati install` command
             },
             'max_args_count': None,
             'min_args_count': None,
@@ -275,11 +276,13 @@ class PkgCommand(BaseCommand):
                 pkg = packages_to_install[i]
                 tmp = self.install_once(pkg)
                 if type(tmp) == int and tmp != 0:
-                    BaseTransaction.finish_all_state()
+                    if not self.has_option('--dont-ignore-state'):
+                        BaseTransaction.finish_all_state()
                     return tmp
                 pkg.close()
             except:
-                BaseTransaction.finish_all_state()
+                if not self.has_option('--dont-ignore-state'):
+                    BaseTransaction.finish_all_state()
                 self.message('cannot install "' + packages_to_install[i].data['name'] + ansi.reset, before=ansi.red)
                 return 1
             i += 1
