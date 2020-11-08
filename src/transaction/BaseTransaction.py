@@ -80,6 +80,9 @@ class BaseTransaction:
         if state_item['arch'] == None:
             return msg
         msg += '=' + state_item['arch']
+        if state_item['file'] == None:
+            return msg
+        msg += ' (' + state_item['file'] + ')'
         return msg
 
     @staticmethod
@@ -105,5 +108,9 @@ class BaseTransaction:
                     tmp['arch'] = parts[3]
                 except:
                     tmp['arch'] = None
+                try:
+                    tmp['file'] = parts[4]
+                except:
+                    tmp['file'] = None
                 result.append(tmp)
         return result

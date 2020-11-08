@@ -29,6 +29,7 @@ from cmdline.commands.PkgCommand import PkgCommand
 from cmdline.commands.ListCommand import ListCommand
 from cmdline.commands.RemoveCommand import RemoveCommand
 from cmdline.commands.ShowCommand import ShowCommand
+from cmdline.commands.StateCommand import StateCommand
 from cmdline.commands.QueryCommand import QueryCommand
 
 commands = {
@@ -37,6 +38,7 @@ commands = {
     'list': ListCommand,
     'remove': RemoveCommand,
     'show': ShowCommand,
+    'state': StateCommand,
     'query': QueryCommand,
 }
 """

@@ -16,6 +16,7 @@ Classes
     * cmdline.commands.QueryCommand.QueryCommand
     * cmdline.commands.RemoveCommand.RemoveCommand
     * cmdline.commands.ShowCommand.ShowCommand
+    * cmdline.commands.StateCommand.StateCommand
 
     ### Methods
 

@@ -1,7 +1,6 @@
 
 # TODO
 
-- [ ] create `state` command [(in progress in branch feature/create-state-command)](https://github.com/parsampsh/cati/tree/feature/create-state-command)
 - [ ] create `unlock`, `search`, `files`, `finfo`, `rdepends`, `check` and... commands
 - [ ] create security blacklist system
 - [ ] handle config file replacement system

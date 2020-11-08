@@ -217,11 +217,6 @@ class Installer:
         except ConflictError as ex:
             return installer_events['dep_and_conflict_error'](pkg, ex)
 
-        # add package to state
-        state_f = open(Env.state_file(), 'w')
-        state_f.write('install%' + pkg.data['name'] + '%' + pkg.data['version'] + '%' + pkg.data['arch'] + '\n')
-        state_f.close()
-
         # add package data to lists
         if not os.path.isdir(Env.packages_lists('/' + pkg.data['name'])):
             os.mkdir(Env.packages_lists('/' + pkg.data['name']))

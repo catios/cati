@@ -8,3 +8,4 @@ Sub-modules
 * cmdline.commands.QueryCommand
 * cmdline.commands.RemoveCommand
 * cmdline.commands.ShowCommand
+* cmdline.commands.StateCommand
