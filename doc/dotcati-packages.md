@@ -74,6 +74,8 @@ also you can use file depend/conflict in `depends` and `conflicts` lists. you ha
 
 `staticfiles` list declares a list from files where should be static and not changed. for example, binary files are static but configuration files maybe change. this system helps to keep system secure. cati can check static files and if cati detect some changes in that files, gives warning to user and can repair that package by re-installing that.
 
+to know about `depends` and `conflicts` lists items query syntax, read [Package query](/doc/package-query.md).
+
 ### scripts
 there is an directory named `scripts` in package build directory.
 
