@@ -119,3 +119,6 @@ cati query "somepackage >= 2.0"
 cati query "somepackage = 1.7 | tstpkg & anotherpkg <= 1.5"
 # ...
 ```
+
+## search command
+search between packages by name and description (is alias of `cati list --search="someword"`)
