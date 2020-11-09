@@ -1,7 +1,7 @@
 
 # TODO
 
-- [ ] create `search`, `files`, `finfo`, `rdepends`, `check` and... commands
+- [ ] create `files`, `finfo`, `rdepends`, `check` and... commands
 - [ ] create security blacklist system
 - [ ] handle config file replacement system
 - [ ] handle logging and debug logs

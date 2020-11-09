@@ -37,6 +37,7 @@ class ListCommand(BaseCommand):
         --author: filter packages list by author name. `--author='name of wanted author'` or more than 1 author: `--author='author 1 | author 2 | author 3'` (split with '|')
         --maintainer: filter packages list by maintainer name. `--maintainer='name of wanted maintainer'` or more than 1 author: `--maintainer='maintainer 1 | maintainer 2 | maintainer 3'` (split with '|')
         --category: filter packages list by category name. `--category='name of wanted category'` or more than 1 category: `--category='category 1 | category 2 | category 3'` (split with '|')
+        --search: search by packages name and description `--search="someword"`
         """
         pass
 
@@ -54,6 +55,7 @@ class ListCommand(BaseCommand):
                 '--author': [False, True],
                 '--maintainer': [False, True],
                 '--category': [False, True],
+                '--search': [False, True],
             },
             'max_args_count': 0,
             'min_args_count': 0,
@@ -118,6 +120,12 @@ class ListCommand(BaseCommand):
         if self.has_option('--category'):
             wanted_categories = self.option_value('--category').strip().split('|')
             wanted_categories = [category.strip() for category in wanted_categories]
+        search_query = self.option_value('--search')
+        if search_query:
+            search_query_words = search_query.strip().split(' ')
+            search_query_words = [word.strip() for word in search_query_words]
+        else:
+            search_query_words = []
 
         for package in packages['list']:
             # check filters
@@ -138,6 +146,18 @@ class ListCommand(BaseCommand):
                     if not package.data['category'].strip() in wanted_categories:
                         continue
                 except:
+                    continue
+            if search_query:
+                is_math_with_query = False
+                for word in search_query_words:
+                    if word in package.data['name']:
+                        is_math_with_query = True
+                try:
+                    if search_query in package.data['description']:
+                        is_math_with_query = True
+                except:
+                    pass
+                if not is_math_with_query:
                     continue
             # show item
             self.show_once(package)

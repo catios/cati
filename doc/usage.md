@@ -70,6 +70,7 @@ Options:
 - `--author`: filter packages list by author name. `--author='name of wanted author'` or more than 1 author: `--author='author 1 | author 2 | author 3'` (split with '|')
 - `--maintainer`: filter packages list by maintainer name. `--maintainer='name of wanted maintainer'` or more than 1 author: `--maintainer='maintainer 1 | maintainer 2 | maintainer 3'` (split with '|')
 - `--category`: filter packages list by category name. `--category='name of wanted category'` or more than 1 category: `--category='category 1 | category 2 | category 3'` (split with '|')
+- `--search`: search by packages name and description `--search='somewords'`
 
 ## remove command
 this command remove packages
@@ -118,3 +119,6 @@ cati query "somepackage >= 2.0"
 cati query "somepackage = 1.7 | tstpkg & anotherpkg <= 1.5"
 # ...
 ```
+
+## search command
+search between packages by name and description (is alias of `cati list --search="someword"`)

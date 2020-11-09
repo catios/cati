@@ -31,6 +31,7 @@ from cmdline.commands.RemoveCommand import RemoveCommand
 from cmdline.commands.ShowCommand import ShowCommand
 from cmdline.commands.StateCommand import StateCommand
 from cmdline.commands.QueryCommand import QueryCommand
+from cmdline.commands.SearchCommand import SearchCommand
 
 commands = {
     'help': HelpCommand,
@@ -40,6 +41,7 @@ commands = {
     'show': ShowCommand,
     'state': StateCommand,
     'query': QueryCommand,
+    'search': SearchCommand
 }
 """
 a dictonary from list of subcommands
