@@ -41,3 +41,5 @@ class test_list_command(TestCore):
         self.assert_equals(self.run_command('list', ['--maintainer="maintainer1|maintainer2"']), 0)
         self.assert_equals(self.run_command('list', ['--category="category1"']), 0)
         self.assert_equals(self.run_command('list', ['--category="category1|category2"']), 0)
+        self.assert_equals(self.run_command('list', ['--search="theword"']), 0)
+        self.assert_equals(self.run_command('list', ['--search="the test word"']), 0)
