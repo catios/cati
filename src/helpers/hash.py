@@ -29,3 +29,19 @@ def calc_file_sha256(filepath):
     for byte_block in iter(lambda: f.read(4096),b""):
         sha256_hash.update(byte_block)
     return sha256_hash.hexdigest()
+
+def calc_file_sha512(filepath):
+    """ gets filepath and calculates sha512 sum of that """
+    sha512_hash = hashlib.sha512()
+    f = open(filepath, 'rb')
+    for byte_block in iter(lambda: f.read(4096),b""):
+        sha512_hash.update(byte_block)
+    return sha512_hash.hexdigest()
+
+def calc_file_md5(filepath):
+    """ gets filepath and calculates md5 sum of that """
+    md5_hash = hashlib.md5()
+    f = open(filepath, 'rb')
+    for byte_block in iter(lambda: f.read(4096),b""):
+        md5_hash.update(byte_block)
+    return md5_hash.hexdigest()

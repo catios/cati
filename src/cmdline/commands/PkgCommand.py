@@ -27,7 +27,7 @@ from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
 from dotcati.Builder import Builder
 from dotcati.Installer import Installer
-from dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError, PackageScriptError
+from dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist
 from dotcati.ArchiveModel import archive_factory, BaseArchive
 from frontend.RootRequired import require_root_permission
 from frontend import Env
@@ -226,8 +226,16 @@ class PkgCommand(BaseCommand):
         except PackageScriptError as ex:
             pr.e(ansi.red + 'cannot install "' + pkg.data['name'] + ':' + pkg.data['version'] + '": ' + str(ex) + ansi.reset)
             return 1
+        except PackageIsInSecurityBlacklist as ex:
+            pr.e(ansi.red + 'cannot install ' + pkg.data['name'] + ':' + pkg.data['version'] + ' because this is in security blacklist:')
+            pr.e('  ' + ex.blacklist_item['title'] + ':')
+            for l in ex.blacklist_item['description'].split('\n'):
+                pr.e('\t' + l)
+            pr.p(ansi.reset, end='')
+            return 1
         except CannotReadFileException as ex:
             self.message(ansi.red + str(ex), True, before=ansi.reset)
+            return 1
 
     def sub_install(self):
         """ install sub command (cati pkg install) """

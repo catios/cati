@@ -54,3 +54,7 @@ def state_file():
 def unremoved_conffiles():
     """ Unremoved conffiles list filepath """
     return base_path('/var/lib/cati/unremoved-conffiles.list')
+
+def security_blacklist(path=''):
+    """ Security blacklist directory """
+    return base_path('/var/lib/cati/security-blacklist' + path)

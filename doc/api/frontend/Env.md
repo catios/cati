@@ -31,6 +31,10 @@ Functions
 :   Packages list directory
 
     
+`security_blacklist(path='')`
+:   Security blacklist directory
+
+    
 `state_file()`
 :   State file (read state system documentation)
 

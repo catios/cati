@@ -1,7 +1,6 @@
 
 # TODO
 
-- [ ] create security blacklist system
 - [ ] handle config file replacement system
 - [ ] handle logging and debug logs
 - [ ] create `rdepends` and `check` commands

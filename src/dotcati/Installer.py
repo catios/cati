@@ -27,12 +27,12 @@ import json
 import time
 import hashlib
 from dotcati.ArchiveModel import BaseArchive
-from frontend import Env, Temp, SysArch
+from frontend import Env, Temp, SysArch, SecurityBlacklist
 from dotcati import ListUpdater
 from package.Pkg import Pkg
-from dotcati.exceptions import DependencyError, ConflictError, PackageScriptError
+from dotcati.exceptions import DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist
 from transaction.BaseTransaction import BaseTransaction
-from helpers.hash import calc_file_sha256
+from helpers.hash import calc_file_sha256, calc_file_sha512, calc_file_md5
 
 class Installer:
     """ Dotcati package installer """
@@ -189,6 +189,24 @@ class Installer:
                 tmp.error_code = result
                 raise tmp
 
+    def check_security_blacklist(self, pkg: BaseArchive):
+        """
+        checks package sha256, sha512 and md5 and checks this hashes in security blacklist.
+        raises PackageIsInSecurityBlacklist exception when package is blocked in security blacklist
+        """
+        # calculate hashes
+        sha256 = calc_file_sha256(pkg.package_file_path)
+        sha512 = calc_file_sha512(pkg.package_file_path)
+        md5 = calc_file_md5(pkg.package_file_path)
+
+        # check blacklist
+        blacklist = SecurityBlacklist.get_list()
+        for item in blacklist:
+            if item['md5'] == md5 and item['sha512'] == sha512 and item['sha256'] == sha256:
+                ex = PackageIsInSecurityBlacklist()
+                ex.blacklist_item = item
+                raise ex
+
     def install(self, pkg: BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True, run_scripts=True):
         """
         Install .cati package
@@ -203,6 +221,9 @@ class Installer:
 
         self.conffiles = pkg.get_conffiles()
         self.pkg = pkg
+
+        # check package is in security blacklist
+        self.check_security_blacklist(pkg)
 
         # check package architecture
         if pkg.data['arch'] != 'all':

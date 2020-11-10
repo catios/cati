@@ -17,6 +17,10 @@ Classes
         
         raises ConflictError when a conflict is installed.
 
+    `check_security_blacklist(self, pkg: dotcati.ArchiveModel.BaseArchive)`
+    :   checks package sha256, sha512 and md5 and checks this hashes in security blacklist.
+        raises PackageIsInSecurityBlacklist exception when package is blocked in security blacklist
+
     `copy_files(self, pkg: dotcati.ArchiveModel.BaseArchive, directory_not_empty_event) ‑> list`
     :   Copy package files on system
 
