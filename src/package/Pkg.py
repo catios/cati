@@ -129,6 +129,30 @@ class Pkg:
             return []
 
     @staticmethod
+    def get_all_installed_files_list() -> list:
+        """
+        returns list of all of installed files
+
+        Result structure:
+        [
+            ['pkgname', 'filetype(d,f,cd,cf)', '/file/path'],
+            ['pkg1', 'f', '/path/to/file'],
+            ...
+        ]
+        """
+        # load list of installed packages
+        installed_packages = Pkg.installed_list()['list']
+        result = []
+        for pkg in installed_packages:
+            pkg_installed_files = open(Env.installed_lists('/' + pkg.data['name'] + '/files'), 'r').read()
+            pkg_installed_files = pkg_installed_files.strip().split('\n')
+            pkg_installed_files = [item.strip().split(':', 1) for item in pkg_installed_files]
+            for f in pkg_installed_files:
+                if len(f) > 1:
+                    result.append([pkg.data['name'], f[0], f[1]])
+        return result
+
+    @staticmethod
     def load_last(pkg_name: str):
         """ Load last version of package by name """
         pkgs_list = Pkg.all_list()

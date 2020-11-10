@@ -23,6 +23,16 @@ Classes
         if 0 is returned means a equals b.
         if -1 is returned means a is less than b.
 
+    `get_all_installed_files_list() ‑> list`
+    :   returns list of all of installed files
+        
+        Result structure:
+        [
+            ['pkgname', 'filetype(d,f,cd,cf)', '/file/path'],
+            ['pkg1', 'f', '/path/to/file'],
+            ...
+        ]
+
     `get_last_version(versions: list)`
     :   Gets a list from versions and returns latest version in that list
 

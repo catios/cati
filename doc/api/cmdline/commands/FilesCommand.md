@@ -19,6 +19,9 @@ Classes
 
     `help(self)`
     :   shows files list of packages
+        
+        Options:
+        --installed: shows list of all of installed files/dirs
 
     `run(self)`
     :   Run command

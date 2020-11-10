@@ -130,7 +130,11 @@ cati search 'someword'
 ## files command
 shows list of package files
 
+Options:
+- `--installed`: shows list of all of installed files/dirs
+
 ```bash
 cati files somepkg
 cati files pkg1 pkg2 # ...
+cati files --installed
 ```

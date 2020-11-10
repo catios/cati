@@ -31,6 +31,9 @@ class FilesCommand(BaseCommand):
     def help(self):
         """
         shows files list of packages
+
+        Options:
+        --installed: shows list of all of installed files/dirs
         """
         pass
 
@@ -39,16 +42,43 @@ class FilesCommand(BaseCommand):
         return {
             'name': 'list',
             'options': {
+                '--installed': [False, False],
+                '--quiet': [False, False],
+                '-q': [False, False],
             },
             'max_args_count': None,
-            'min_args_count': 1,
+            'min_args_count': None,
         }
 
     def run(self):
         """ Run command """
 
-        pr.p('Loading packages list...')
-        pr.p('========================')
+        if self.has_option('--installed'):
+            if not self.is_quiet():
+                pr.p('Loading files list...')
+                pr.p('=====================')
+            all_of_installed_files_list = Pkg.get_all_installed_files_list()
+            for item in all_of_installed_files_list:
+                if self.is_quiet():
+                    pr.p(item[2])
+                else:
+                    message = ''
+                    if item[1] == 'd':
+                        message = ' (directory)'
+                    elif item[1] == 'cf':
+                        message = ' (config file)'
+                    elif item[1] == 'cd':
+                        message = ' (config directory)'
+                    pr.p(item[0] + ': ' + item[2] + message)
+            return 0
+
+        if not self.arguments:
+            self.message('argument package names is required', True)
+            return 1
+
+        if not self.is_quiet():
+            pr.p('Loading packages list...')
+            pr.p('========================')
 
         loaded_packages = []
 
@@ -79,10 +109,15 @@ class FilesCommand(BaseCommand):
                 files_list = pkg.data['files']
             except:
                 files_list = []
-            pr.p(pkg.data['name'] + ':')
-            if not files_list:
-                pr.p(ansi.yellow + '  This package is empty' + ansi.reset)
-            for item in files_list:
-                pr.p('  ' + item)
+            if not self.is_quiet():
+                pr.p(pkg.data['name'] + ':')
+                if not files_list:
+                    pr.p(ansi.yellow + '  This package is empty' + ansi.reset)
+                for item in files_list:
+                    pr.p('  ' + item)
+            else:
+                for item in files_list:
+                    pr.p(item)
             if len(loaded_packages) > 1:
-                pr.p('========================')
+                if not self.is_quiet():
+                    pr.p('========================')
