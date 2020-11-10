@@ -3,6 +3,7 @@ Module cmdline.commands
 
 Sub-modules
 -----------
+* cmdline.commands.FilesCommand
 * cmdline.commands.ListCommand
 * cmdline.commands.PkgCommand
 * cmdline.commands.QueryCommand

@@ -122,3 +122,15 @@ cati query "somepackage = 1.7 | tstpkg & anotherpkg <= 1.5"
 
 ## search command
 search between packages by name and description (is alias of `cati list --search="someword"`)
+
+```bash
+cati search 'someword'
+```
+
+## files command
+shows list of package files
+
+```bash
+cati files somepkg
+cati files pkg1 pkg2 # ...
+```

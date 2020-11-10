@@ -233,7 +233,9 @@ class Installer:
 
         lists_f = open(lists_path, 'w')
         pkg.data['repo'] = old_repo
-        lists_f.write(json.dumps(pkg.data))
+        tmp_pkg_data = pkg.data
+        tmp_pkg_data['files'] = ['/' + member[6:] for member in pkg.members() if member[:6] == 'files/']
+        lists_f.write(json.dumps(tmp_pkg_data))
         lists_f.close()
 
         ListUpdater.update_indexes(index_updater_events)
