@@ -138,3 +138,13 @@ cati files somepkg
 cati files pkg1 pkg2 # ...
 cati files --installed
 ```
+
+## finfo command
+shows info about an file
+
+```bash
+cati finfo /usr/bin/somefile
+cati finfo ../dir/file
+```
+
+this info contains that which package is owner of the file and type of that file (conffile)

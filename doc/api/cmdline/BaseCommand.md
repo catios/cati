@@ -11,6 +11,7 @@ Classes
     ### Descendants
 
     * cmdline.commands.FilesCommand.FilesCommand
+    * cmdline.commands.FinfoCommand.FinfoCommand
     * cmdline.commands.HelpCommand.HelpCommand
     * cmdline.commands.ListCommand.ListCommand
     * cmdline.commands.PkgCommand.PkgCommand

@@ -1,10 +1,10 @@
 
 # TODO
 
-- [ ] create `finfo`, `rdepends`, `check` and... commands
 - [ ] create security blacklist system
 - [ ] handle config file replacement system
 - [ ] handle logging and debug logs
+- [ ] create `rdepends` and `check` commands
 - [ ] create repository system
 - [ ] some changes in transaction calculator
 - [ ] create install/upgrade/downgrade transactions system and optimize remove

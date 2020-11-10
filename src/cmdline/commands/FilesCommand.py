@@ -40,7 +40,7 @@ class FilesCommand(BaseCommand):
     def config(self) -> dict:
         """ Define and config this command """
         return {
-            'name': 'list',
+            'name': 'files',
             'options': {
                 '--installed': [False, False],
                 '--quiet': [False, False],

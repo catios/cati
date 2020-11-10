@@ -1,5 +1,5 @@
 #
-# SearchCommand.py
+# FinfoCommand.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -20,45 +20,37 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-""" Search command """
+""" Finfo command """
 
+import os
 from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi, ArgParser
-from cmdline.commands.ListCommand import ListCommand
+from cmdline import pr, ansi
 
-class SearchCommand(BaseCommand):
-    """ Search command """
+class FinfoCommand(BaseCommand):
+    """ Finfo command """
     def help(self):
         """
-        search between packages by name and description
+        shows info about an file
         """
         pass
 
     def config(self) -> dict:
         """ Define and config this command """
         return {
-            'name': 'search',
+            'name': 'finfo',
             'options': {
             },
-            'max_args_count': None,
+            'max_args_count': 1,
             'min_args_count': 1,
         }
 
     def run(self):
         """ Run command """
 
-        # join all of arguments as one argument
-        full_query_string = ''
-        if len(self.arguments) > 1:
-            for arg in self.arguments:
-                full_query_string += arg + ' '
-            full_query_string = full_query_string[:len(full_query_string)-1]
-        else:
-            full_query_string = self.arguments[0]
+        if not os.path.exists(self.arguments[0]):
+            pr.e('file "' + self.arguments[0] + '" not exists.')
+            return 1
 
-        # search arguments with `list --search` command
-        arguments = ['--search=' + full_query_string]
-        arguments.insert(0, 'cati')
-        arguments.insert(1, 'list')
-        list_command = ListCommand()
-        return list_command.handle(ArgParser.parse(arguments))
+        filepath = os.path.abspath(self.arguments[0])
+
+        return os.system(self.cati_exec + ' files --installed | grep ": ' + filepath + '"')

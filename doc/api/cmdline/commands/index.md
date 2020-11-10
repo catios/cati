@@ -4,6 +4,7 @@ Module cmdline.commands
 Sub-modules
 -----------
 * cmdline.commands.FilesCommand
+* cmdline.commands.FinfoCommand
 * cmdline.commands.ListCommand
 * cmdline.commands.PkgCommand
 * cmdline.commands.QueryCommand

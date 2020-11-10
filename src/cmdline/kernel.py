@@ -33,6 +33,7 @@ from cmdline.commands.StateCommand import StateCommand
 from cmdline.commands.QueryCommand import QueryCommand
 from cmdline.commands.SearchCommand import SearchCommand
 from cmdline.commands.FilesCommand import FilesCommand
+from cmdline.commands.FinfoCommand import FinfoCommand
 
 commands = {
     'help': HelpCommand,
@@ -44,6 +45,7 @@ commands = {
     'query': QueryCommand,
     'search': SearchCommand,
     'files': FilesCommand,
+    'finfo': FinfoCommand,
 }
 """
 a dictonary from list of subcommands
