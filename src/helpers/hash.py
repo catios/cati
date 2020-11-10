@@ -1,5 +1,5 @@
 #
-# calc_file_sha256.py
+# hash.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>

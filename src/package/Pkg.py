@@ -28,7 +28,7 @@ from frontend import Env
 from frontend.SysArch import sys_arch
 from package.exceptions import CannotReadFileException
 from packaging import version
-from helpers.calc_file_sha256 import calc_file_sha256
+from helpers.hash import calc_file_sha256
 
 class Pkg:
     """ Package model """

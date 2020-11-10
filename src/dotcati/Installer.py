@@ -32,7 +32,7 @@ from dotcati import ListUpdater
 from package.Pkg import Pkg
 from dotcati.exceptions import DependencyError, ConflictError, PackageScriptError
 from transaction.BaseTransaction import BaseTransaction
-from helpers.calc_file_sha256 import calc_file_sha256
+from helpers.hash import calc_file_sha256
 
 class Installer:
     """ Dotcati package installer """
