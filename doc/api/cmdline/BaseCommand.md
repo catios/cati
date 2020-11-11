@@ -16,6 +16,7 @@ Classes
     * cmdline.commands.ListCommand.ListCommand
     * cmdline.commands.PkgCommand.PkgCommand
     * cmdline.commands.QueryCommand.QueryCommand
+    * cmdline.commands.RDependsCommand.RDependsCommand
     * cmdline.commands.RemoveCommand.RemoveCommand
     * cmdline.commands.SearchCommand.SearchCommand
     * cmdline.commands.ShowCommand.ShowCommand

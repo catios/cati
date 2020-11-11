@@ -148,3 +148,12 @@ cati finfo ../dir/file
 ```
 
 this info contains that which package is owner of the file and type of that file (conffile)
+
+## rdepends command
+shows reverse depends list of packages
+
+```bash
+cati rdepends pkg1
+cati rdepends pkg1 pkg2 # ...
+cati rdepends pkg1 --quiet # quiet output
+```

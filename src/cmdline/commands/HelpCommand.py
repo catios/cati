@@ -95,7 +95,10 @@ class HelpCommand(BaseCommand):
         pr.p('Subcommands:')
         for cmd in commands:
             obj = commands[cmd]()
-            pr.p('\t' + ansi.green + cmd + ansi.reset + '\t' + obj.help_summary())
+            tabs = '\t\t'
+            if len(cmd) > 6:
+                tabs = '\t'
+            pr.p('\t' + ansi.green + cmd + ansi.reset + tabs + obj.help_summary())
 
         if not self.is_quiet():
             pr.p('\nfor see detailed help about commands, run: "' + ansi.yellow + self.cati_exec + ' help [command-name]' + ansi.reset + '"')

@@ -8,6 +8,7 @@ Sub-modules
 * cmdline.commands.ListCommand
 * cmdline.commands.PkgCommand
 * cmdline.commands.QueryCommand
+* cmdline.commands.RDependsCommand
 * cmdline.commands.RemoveCommand
 * cmdline.commands.SearchCommand
 * cmdline.commands.ShowCommand

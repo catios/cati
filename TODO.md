@@ -3,7 +3,7 @@
 
 - [ ] handle config file replacement system
 - [ ] handle logging and debug logs
-- [ ] create `rdepends` and `check` commands
+- [ ] create `check` command
 - [ ] create repository system
 - [ ] some changes in transaction calculator
 - [ ] create install/upgrade/downgrade transactions system and optimize remove
