@@ -4,6 +4,7 @@
 - [ ] handle config file replacement system
 - [ ] handle logging and debug logs
 - [ ] create `check` command
+- [ ] create `any-rm`, `any-ins` and `any` scripts for packages
 - [ ] create repository system
 - [ ] some changes in transaction calculator
 - [ ] create install/upgrade/downgrade transactions system and optimize remove
