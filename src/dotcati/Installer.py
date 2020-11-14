@@ -295,6 +295,10 @@ class Installer:
         f_files.write(copied_files_str.strip()) # write copied files
         f_files.close()
 
+        # copy `any` script
+        if os.path.isfile(self.extracted_package_dir + '/scripts/any'):
+            os.system('cp "' + self.extracted_package_dir + '/scripts/any' + '" "' + Env.any_scripts('/' + pkg.data['name']) + '"')
+
         # save static files list
         static_files_list = pkg.get_static_files()
         f_static_files = open(Env.installed_lists('/' + pkg.data['name'] + '/staticfiles'), 'w')

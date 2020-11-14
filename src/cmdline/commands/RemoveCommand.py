@@ -80,6 +80,10 @@ class RemoveCommand(BaseCommand):
         """
         self.message('warning: directory "' + f.split(':', 1)[1] + '" is not emptry and will not be delete' + ansi.yellow, before=ansi.reset)
 
+    def start_run_any_script_event(self, package_name: str):
+        """ will run when starting running an `any` script """
+        pr.p('Processing scripts for ' + package_name + '...')
+
     def run(self):
         """ Run command """
 
@@ -141,5 +145,9 @@ class RemoveCommand(BaseCommand):
                 run_scripts=(not self.has_option('--without-scripts'))
             )
             BaseTransaction.pop_state()
+
+        BaseTransaction.run_any_scripts(events={
+            'start_run_script': self.start_run_any_script_event,
+        })
 
         BaseTransaction.finish_all_state()

@@ -37,3 +37,6 @@ Classes
 
     `run(self)`
     :   Run command
+
+    `start_run_any_script_event(self, package_name: str)`
+    :   will run when starting running an `any` script

@@ -58,3 +58,7 @@ def unremoved_conffiles():
 def security_blacklist(path=''):
     """ Security blacklist directory """
     return base_path('/var/lib/cati/security-blacklist' + path)
+
+def any_scripts(path=''):
+    """ Any scripts directory """
+    return base_path('/var/lib/cati/any-scripts' + path)

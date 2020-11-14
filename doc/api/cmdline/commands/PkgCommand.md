@@ -74,6 +74,9 @@ Classes
     :   shows once package (called from `show` subcommand function)
         gives package data to cli package sohwer component to show package info
 
+    `start_run_any_script_event(self, package_name: str)`
+    :   will run when starting running an `any` script
+
     `sub_build(self)`
     :   build subcommand (cati pkg build)
 
