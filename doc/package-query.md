@@ -33,7 +33,7 @@ this operation is like `>` but reverse. you can check installed version is less 
 
 example: `pkg1 < 5.0`
 
-### `>=` and '<='
+### `>=` and `<=`
 this operations are like `>` and `<` but they are not `less` or `upper`, they are `less or equals` and `upper or equals`.
 
 for example if `pkg1` installed version is `3.2` and you check query `pkg1 > 3.2`, you will get `False` result. but if you write `pkg1 >= 3.2` you will get True result.
