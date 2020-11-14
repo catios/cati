@@ -25,6 +25,12 @@ Classes
     `pop_state()`
     :   remove first item from state
 
+    `run_any_scripts(events: dict)`
+    :   run all of `any` scripts.
+        
+        events:
+        - start_run_script: will run when starting to run once script (gets package name)
+
     `state_item_to_string(state_item: dict) ‑> str`
     :   Gets an dictonary as a item in state list where returned by `BaseTransaction.state_list()`
         and generates an human readable message as string to show that message to user

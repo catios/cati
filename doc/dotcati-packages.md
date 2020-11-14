@@ -86,8 +86,22 @@ scripts:
 - `ins-after`: will run after installation process
 - `rm-before`: will run before remove process
 - `rm-after`: will run after remove process
+- `any`: any script will run after ANY install/remove process for any package
 
 for example, you can create a file named `ins-before` in `scripts` folder (`scripts/ins-before`) and write an shell script in that.
+
+#### more about `any` script
+when you installing a package where has a `any` script, this script will save in system and will run after any install or remove process on any package. this script is a general script and will run after all of transaction.
+
+you may see something like this in terminal while installing/removing packages:
+
+```
+Processing scripts for pkg1...
+Processing scripts for pkg2...
+...
+```
+
+this message means cati are running `any` script of package `pkg1`, `pkg2`...
 
 ## Building packages
 

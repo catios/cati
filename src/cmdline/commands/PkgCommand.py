@@ -237,6 +237,10 @@ class PkgCommand(BaseCommand):
             self.message(ansi.red + str(ex), True, before=ansi.reset)
             return 1
 
+    def start_run_any_script_event(self, package_name: str):
+        """ will run when starting running an `any` script """
+        pr.p('Processing scripts for ' + package_name + '...')
+
     def sub_install(self):
         """ install sub command (cati pkg install) """
         if len(self.arguments) <= 1:
@@ -294,6 +298,9 @@ class PkgCommand(BaseCommand):
                 self.message('cannot install "' + packages_to_install[i].data['name'] + ansi.reset, before=ansi.red)
                 return 1
             i += 1
+        BaseTransaction.run_any_scripts(events={
+            'start_run_script': self.start_run_any_script_event,
+        })
         BaseTransaction.finish_all_state()
 
     def run(self):

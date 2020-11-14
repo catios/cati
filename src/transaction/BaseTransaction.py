@@ -26,6 +26,7 @@ Transaction base model.
 transactions are install/remove/upgrade/downgrade operations.
 """
 
+import os
 from package.Pkg import Pkg
 from frontend import Env
 from transaction.Calculator import Calculator
@@ -114,3 +115,18 @@ class BaseTransaction:
                     tmp['file'] = None
                 result.append(tmp)
         return result
+
+    @staticmethod
+    def run_any_scripts(events: dict):
+        """
+        run all of `any` scripts.
+        
+        events:
+        - start_run_script: will run when starting to run once script (gets package name)
+        """
+        scripts = os.listdir(Env.any_scripts())
+        for script in scripts:
+            events['start_run_script'](script)
+            # run script
+            os.system('chmod +x "' + Env.any_scripts('/' + script) + '"')
+            os.system(Env.any_scripts('/' + script))
