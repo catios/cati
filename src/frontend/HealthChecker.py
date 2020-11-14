@@ -62,6 +62,7 @@ def check(events: dict):
         '/var/lib/cati/lists',
         '/var/lib/cati/installed',
         '/var/lib/cati/security-blacklist',
+        '/var/lib/cati/any-scripts',
     ]
 
     for d in required_dirs:

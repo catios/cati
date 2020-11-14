@@ -101,4 +101,8 @@ class Remove(BaseTransaction):
         # remove installation config
         shutil.rmtree(Env.installed_lists('/' + pkg.data['name']))
 
+        # remove any script
+        if os.path.isfile(Env.any_scripts('/' + pkg.data['name'])):
+            os.remove(Env.any_scripts('/' + pkg.data['name']))
+
         events['package_remove_finished'](pkg)

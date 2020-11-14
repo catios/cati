@@ -19,6 +19,10 @@ Functions
 ---------
 
     
+`any_scripts(path='')`
+:   Any scripts directory
+
+    
 `base_path(path='')`
 :   Returns environment base path
 
