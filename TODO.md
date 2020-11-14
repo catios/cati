@@ -1,12 +1,12 @@
 
 # TODO
 
-- [ ] handle config file replacement system
-- [ ] handle logging and debug logs
+- [ ] create `forget` command
 - [ ] create `check` command
 - [ ] handle package file conflicts
+- [ ] handle logging and debug logs
+- [ ] handle config file replacement system
 - [ ] handle `deb` and `rpm` package support
-- [ ] create `forget` command
 - [ ] create repository system
 - [ ] some changes in transaction calculator
 - [ ] create install/upgrade/downgrade transactions system and optimize remove
