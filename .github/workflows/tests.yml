@@ -9,11 +9,11 @@ on:
 jobs:
   unix_tests:
 
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        os: [ubuntu, macos]
+        os: [ubuntu-latest, macos-latest]
         python: [3.6, 3.7, 3.8, 3.9]
 
     steps:
@@ -23,8 +23,7 @@ jobs:
       with:
         python-version: ${{ matrix.python }}
     - name: Install dependencies
-      run: |
-        pip3 install -r requirements.txt
+      run: pip3 install -r requirements.txt
     - name: Run tests
       run: make all
     - name: Test Build
@@ -32,4 +31,4 @@ jobs:
         make
         sudo ./dist/cati
 
-    name: ${{ matrix.os }} python ${{ matrix.python }}
+    name: ${{ matrix.os }} with python ${{ matrix.python }}
