@@ -5,6 +5,7 @@ Sub-modules
 -----------
 * cmdline.commands.FilesCommand
 * cmdline.commands.FinfoCommand
+* cmdline.commands.ForgetCommand
 * cmdline.commands.ListCommand
 * cmdline.commands.PkgCommand
 * cmdline.commands.QueryCommand

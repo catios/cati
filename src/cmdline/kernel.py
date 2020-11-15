@@ -35,6 +35,7 @@ from cmdline.commands.SearchCommand import SearchCommand
 from cmdline.commands.FilesCommand import FilesCommand
 from cmdline.commands.FinfoCommand import FinfoCommand
 from cmdline.commands.RDependsCommand import RDependsCommand
+from cmdline.commands.ForgetCommand import ForgetCommand
 
 commands = {
     'help': HelpCommand,
@@ -48,6 +49,7 @@ commands = {
     'files': FilesCommand,
     'finfo': FinfoCommand,
     'rdepends': RDependsCommand,
+    'forget': ForgetCommand,
 }
 """
 a dictonary from list of subcommands

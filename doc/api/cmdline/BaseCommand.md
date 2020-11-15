@@ -12,6 +12,7 @@ Classes
 
     * cmdline.commands.FilesCommand.FilesCommand
     * cmdline.commands.FinfoCommand.FinfoCommand
+    * cmdline.commands.ForgetCommand.ForgetCommand
     * cmdline.commands.HelpCommand.HelpCommand
     * cmdline.commands.ListCommand.ListCommand
     * cmdline.commands.PkgCommand.PkgCommand

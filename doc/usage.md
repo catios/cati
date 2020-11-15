@@ -157,3 +157,12 @@ cati rdepends pkg1
 cati rdepends pkg1 pkg2 # ...
 cati rdepends pkg1 --quiet # quiet output
 ```
+
+## forget command
+forgets packages from packages list
+
+```bash
+cati forget pkg1
+cati forget pkg1=1.12.7 # only version 1.12.7
+cati forget pkg1 pkg2 pkg3=1.0 pkg4
+```
