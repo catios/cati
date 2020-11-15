@@ -1,7 +1,6 @@
 
 # TODO
 
-- [ ] create `forget` command
 - [ ] create `check` command
 - [ ] handle package file conflicts
 - [ ] handle logging and debug logs
