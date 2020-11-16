@@ -37,6 +37,10 @@ class StateCommand(BaseCommand):
     def help(self):
         """
         manage transactions state
+
+        Usage:
+        - cati state [options]
+        
         Options:
         --abort: cancel undoned transactions
         --complete: complete undoned transactions

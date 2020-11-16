@@ -26,6 +26,13 @@ cati help remove
 ## pkg command
 this command is for working with `.cati` packages.
 
+Usage: `cati pkg [subcommand] [args] [options]`
+
+Subcommands:
+- `build`:      build .cati package from directory(s)
+- `show`:       show content of .cati package(s). options: --files: show package files
+- `install`:    install a .cati package on system
+
 #### pkg show
 ```bash
 # showing packages
@@ -44,7 +51,7 @@ cati pkg build package-dir1/ package-dir2/ # ...
 ```
 
 Options:
-- `--output|-o`: set package package output path. for example `cati pkg build pkg/ --output=package.cati`
+- `--output=[path]|-o=[path]`: set package package output path
 
 #### pkg install
 ```bash
@@ -65,13 +72,12 @@ cati list
 ```
 
 Options:
-- `--installed`: only show installed packages list
-- `--installed-manual`: only show manual installed packages list
-- `-q|--quiet`: quiet output, only show package names
-- `--author`: filter packages list by author name. `--author='name of wanted author'` or more than 1 author: `--author='author 1 | author 2 | author 3'` (split with '|')
-- `--maintainer`: filter packages list by maintainer name. `--maintainer='name of wanted maintainer'` or more than 1 author: `--maintainer='maintainer 1 | maintainer 2 | maintainer 3'` (split with '|')
-- `--category`: filter packages list by category name. `--category='name of wanted category'` or more than 1 category: `--category='category 1 | category 2 | category 3'` (split with '|')
-- `--search`: search by packages name and description `--search='somewords'`
+- `--installed`: show only installed packages
+- `--installed-manual`: show only manual installed packages
+- `--author=[author-name or author-nameS splited by '|']`: filter packages list by author name
+- `--maintainer=[maintainer-name or author-nameS splited by '|']`: filter packages list by maintainer name
+- `--category=[category-name or category-nameS splited by '|']`: filter packages list by category
+- `--search=[word]`: search by packages name and description
 
 ## remove command
 this command remove packages

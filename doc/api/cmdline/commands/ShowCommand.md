@@ -20,6 +20,9 @@ Classes
     `help(self)`
     :   shows details of packages
         
+        Usage:
+        - cati show pkg1 pkg2 [options]
+        
         Options:
         --versions: shows versions list of packages
 

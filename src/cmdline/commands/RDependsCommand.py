@@ -32,6 +32,12 @@ class RDependsCommand(BaseCommand):
     def help(self):
         """
         shows reverse depends list of packages
+
+        this command shows which packages has dependency to an package
+
+        Usage:
+        - cati rdepends pkg1
+        - cati rdepends pkg1 pkg2 ...
         """
         pass
 

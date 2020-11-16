@@ -32,8 +32,9 @@ class QueryCommand(BaseCommand):
         """
         checks a package query
 
-        Example:
-        `cati query "somepackage >= 1.0"`
+        Usage:
+        - cati query [query]
+        - cati query "somepackage >= 1.0"
         """
         pass
 

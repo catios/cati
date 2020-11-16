@@ -31,6 +31,11 @@ class SearchCommand(BaseCommand):
     def help(self):
         """
         search between packages by name and description
+
+        (this command is a alias for `cati list --search='word'`)
+
+        Usage:
+        - cati search 'word'
         """
         pass
 

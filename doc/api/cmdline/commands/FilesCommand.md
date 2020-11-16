@@ -20,6 +20,10 @@ Classes
     `help(self)`
     :   shows files list of packages
         
+        Usage:
+        - cati files pkg1
+        - cati files pkg1 pkg2 ...
+        
         Options:
         --installed: shows list of all of installed files/dirs
 

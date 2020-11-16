@@ -23,11 +23,10 @@ Classes
     `help(self)`
     :   forgets packages from packages list
         
-        Example:
-        `cati forget pkg1`
-        OR only forget an specify version:
-        `cati forget pkg1=1.12.7`
-        `cati forget pkg1 pkg2 pkg3=1.0 pkg4 ...`
+        Usage:
+        - cati forget pkg1
+        - cati forget pkg1=1.12.7
+        - cati forget pkg1 pkg2 pkg3=1.0 pkg4 ...
 
     `run(self)`
     :   Run command

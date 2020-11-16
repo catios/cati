@@ -25,6 +25,8 @@
 import sys
 from cmdline import pr
 from frontend.Version import version as cati_version
+from cmdline.commands import HelpCommand
+from cmdline import ArgParser
 
 class BaseCommand:
     """ Cmdline command model base """
@@ -97,9 +99,9 @@ class BaseCommand:
 
         # handle --help option
         if self.has_option('--help'):
-            pr.p(self.help_full())
-            return 0
-        
+            help_cmd = HelpCommand.HelpCommand()
+            return help_cmd.handle(ArgParser.parse(['cati', 'help', self.name]))
+
         return self.run()
 
     def has_option(self, option: str):
