@@ -1,12 +1,12 @@
 
 # TODO
 
-- [ ] create `check` command
 - [ ] handle package file conflicts
+- [ ] create `--target` option for `pkg install` command
+- [ ] create `check` command
 - [ ] handle logging and debug logs
 - [ ] handle config file replacement system
 - [ ] handle `deb` and `rpm` package support
-- [ ] create `--target` option for `pkg install` command
 - [ ] create repository system
 - [ ] some changes in transaction calculator
 - [ ] create install/upgrade/downgrade transactions system and optimize remove
