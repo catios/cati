@@ -1,6 +1,15 @@
 # Cati package manager
 cati is a package manager for GNU/Linux/UNIX systems. cati is written in python
 
+## Why cati?
+some features of cati:
+
+- cati is user friendly, very simple and easy to use
+- cati has all in one, you don't need to have package manager, dependency manager and graphical interface splited, all of them is in one in cati
+- cati repositories structure is simple and also smart and powerful
+- cati packages format is `.cati`, also cati supports `.deb` and `.rpm` packages alongside `.cati` packages
+- cati has a useful graphical interface
+
 ## Authors
 cati writed by [parsampsh](https://github.com/parsampsh) and [contributors](https://github.com/parsampsh/cati/graphs/contributors)
 
