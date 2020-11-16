@@ -9,6 +9,7 @@ some features of cati:
 - cati repositories structure is simple and also smart and powerful
 - cati packages format is `.cati`, also cati supports `.deb` and `.rpm` packages alongside `.cati` packages
 - cati has a useful graphical interface
+- cati has some tools to check your system health and keep that secure
 
 ## Authors
 cati writed by [parsampsh](https://github.com/parsampsh) and [contributors](https://github.com/parsampsh/cati/graphs/contributors)
