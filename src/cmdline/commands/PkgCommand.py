@@ -27,7 +27,7 @@ from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
 from dotcati.Builder import Builder
 from dotcati.Installer import Installer
-from dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist
+from dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist, FileConflictError
 from dotcati.ArchiveModel import archive_factory, BaseArchive
 from frontend.RootRequired import require_root_permission
 from frontend import Env
@@ -235,6 +235,11 @@ class PkgCommand(BaseCommand):
             return 1
         except CannotReadFileException as ex:
             self.message(ansi.red + str(ex), True, before=ansi.reset)
+            return 1
+        except FileConflictError as ex:
+            pr.e(ansi.red + '\nCannot install ' + pkg.data['name'] + ':' + pkg.data['version'] + ': File conflict error:')
+            pr.e('    ' + str(ex))
+            pr.p(ansi.reset, end='')
             return 1
 
     def start_run_any_script_event(self, package_name: str):

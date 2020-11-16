@@ -39,3 +39,6 @@ class PackageScriptError(Exception):
 
 class PackageIsInSecurityBlacklist(Exception):
     pass
+
+class FileConflictError(Exception):
+    pass

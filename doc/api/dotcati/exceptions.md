@@ -21,6 +21,14 @@ Classes
     * builtins.Exception
     * builtins.BaseException
 
+`FileConflictError(*args, **kwargs)`
+:   Common base class for all non-exit exceptions.
+
+    ### Ancestors (in MRO)
+
+    * builtins.Exception
+    * builtins.BaseException
+
 `InvalidPackageDirException(*args, **kwargs)`
 :   Common base class for all non-exit exceptions.
 

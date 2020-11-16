@@ -30,7 +30,7 @@ from dotcati.ArchiveModel import BaseArchive
 from frontend import Env, Temp, SysArch, SecurityBlacklist
 from dotcati import ListUpdater
 from package.Pkg import Pkg
-from dotcati.exceptions import DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist
+from dotcati.exceptions import DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist, FileConflictError
 from transaction.BaseTransaction import BaseTransaction
 from helpers.hash import calc_file_sha256, calc_file_sha512, calc_file_md5
 
@@ -86,6 +86,20 @@ class Installer:
         # load files list from `files` directory of package
         self.loaded_files = []
         self.load_files(temp_dir + '/files', temp_dir + '/files')
+
+        # check file conflicts
+        all_installed_files = Pkg.get_all_installed_files_list()
+        for lf in self.loaded_files:
+            if not os.path.isdir(lf[1]):
+                for insf in all_installed_files:
+                    if insf[0] != pkg.data['name']:
+                        if lf[0] == insf[2]:
+                            insf_pkg = Pkg.load_last(insf[0])
+                            if insf_pkg:
+                                insf[0] = insf[0] + ':' + insf_pkg.installed()
+                            raise FileConflictError(
+                                'package ' + pkg.data['name'] + ':' + pkg.data['version'] + ' and ' + insf[0] + ' both has file "' + lf[0] + '"'
+                            )
 
         # copy loaded files
         self.copied_files = []
