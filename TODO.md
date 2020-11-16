@@ -1,7 +1,6 @@
 
 # TODO
 
-- [ ] create `--target` option for `pkg install` command
 - [ ] create `check` command
 - [ ] handle logging and debug logs
 - [ ] handle config file replacement system
