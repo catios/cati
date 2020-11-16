@@ -47,7 +47,8 @@ class PkgCommand(BaseCommand):
 
         Options:
         - install subcommand:
-        ---- --without-scripts: do not run package scripts in installation process
+        * --without-scripts: do not run package scripts in installation process
+        * --target=[files-install-location-prefix-path]: set files installation prefix
         """
         pass
 
@@ -62,6 +63,7 @@ class PkgCommand(BaseCommand):
                 '-f': [False, False],
                 '--auto': [False, False],
                 '--without-scripts': [False, False],
+                '--target': [False, True],
                 '--dont-ignore-state': [False, False], # this will use by `cati install` command
             },
             'max_args_count': None,
@@ -201,6 +203,9 @@ class PkgCommand(BaseCommand):
         installs once package
         is called from install sub command
         """
+        target_path = self.option_value('--target')
+        if target_path == None:
+            target_path = ''
         installer = Installer()
 
         try:
@@ -218,7 +223,8 @@ class PkgCommand(BaseCommand):
                     'arch_error': self.arch_error_event,
                 },
                 (not self.has_option('--auto')),
-                run_scripts=(not self.has_option('--without-scripts'))
+                run_scripts=(not self.has_option('--without-scripts')),
+                target_path=str(target_path)
             )
 
             if type(out) == int:
@@ -300,7 +306,7 @@ class PkgCommand(BaseCommand):
             except:
                 if not self.has_option('--dont-ignore-state'):
                     BaseTransaction.finish_all_state()
-                self.message('cannot install "' + packages_to_install[i].data['name'] + ansi.reset, before=ansi.red)
+                self.message('cannot install "' + packages_to_install[i].data['name'] + '"' + ansi.reset, before=ansi.red)
                 return 1
             i += 1
         BaseTransaction.run_any_scripts(events={

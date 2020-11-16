@@ -21,13 +21,13 @@ Classes
     :   checks package sha256, sha512 and md5 and checks this hashes in security blacklist.
         raises PackageIsInSecurityBlacklist exception when package is blocked in security blacklist
 
-    `copy_files(self, pkg: dotcati.ArchiveModel.BaseArchive, directory_not_empty_event) ‑> list`
+    `copy_files(self, pkg: dotcati.ArchiveModel.BaseArchive, directory_not_empty_event, target_path='') ‑> list`
     :   Copy package files on system
 
     `copy_once_file(self, paths)`
     :   Copy one of package files
 
-    `install(self, pkg: dotcati.ArchiveModel.BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True, run_scripts=True)`
+    `install(self, pkg: dotcati.ArchiveModel.BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True, run_scripts=True, target_path='')`
     :   Install .cati package
         
         installer_events:

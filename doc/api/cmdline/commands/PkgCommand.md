@@ -44,7 +44,8 @@ Classes
         
         Options:
         - install subcommand:
-        ---- --without-scripts: do not run package scripts in installation process
+        * --without-scripts: do not run package scripts in installation process
+        * --target=[files-install-location-prefix-path]: set files installation prefix
 
     `install_once(self, pkg: dotcati.ArchiveModel.BaseArchive)`
     :   installs once package

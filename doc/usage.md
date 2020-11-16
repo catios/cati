@@ -55,6 +55,7 @@ sudo cati pkg install pkg1.cati pkg2.cati # ...
 
 Options:
 - `--without-scripts`: do not run package scripts in installation process
+- `--target=[files-install-location-prefix-path]`: set files installation prefix
 
 ## list command
 this command shows list of packages

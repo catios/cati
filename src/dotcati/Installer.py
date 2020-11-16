@@ -62,7 +62,7 @@ class Installer:
             else:
                 self.copied_files.append('d:' + paths[0])
 
-    def copy_files(self, pkg: BaseArchive, directory_not_empty_event) -> list:
+    def copy_files(self, pkg: BaseArchive, directory_not_empty_event, target_path='') -> list:
         """ Copy package files on system """
         # load package old files list
         old_files = []
@@ -86,6 +86,7 @@ class Installer:
         # load files list from `files` directory of package
         self.loaded_files = []
         self.load_files(temp_dir + '/files', temp_dir + '/files')
+        self.loaded_files = [[target_path + f[0], f[1]] for f in self.loaded_files]
 
         # check file conflicts
         all_installed_files = Pkg.get_all_installed_files_list()
@@ -221,7 +222,7 @@ class Installer:
                 ex.blacklist_item = item
                 raise ex
 
-    def install(self, pkg: BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True, run_scripts=True):
+    def install(self, pkg: BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True, run_scripts=True, target_path=''):
         """
         Install .cati package
 
@@ -293,7 +294,7 @@ class Installer:
         if run_scripts:
             self.run_script('ins-before')
 
-        copied_files = self.copy_files(pkg, installer_events['directory_not_empty'])
+        copied_files = self.copy_files(pkg, installer_events['directory_not_empty'], target_path)
 
         # set install configuration
         if not os.path.isdir(Env.installed_lists('/' + pkg.data['name'])):

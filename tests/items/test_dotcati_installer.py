@@ -50,3 +50,25 @@ class test_dotcati_installer(TestCore):
         self.assert_equals(pkg.installed(), '1.0')
 
         self.refresh_env()
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkg-with-file-conflict-a.cati',
+        ]), 0)
+
+        self.assert_true(os.path.isfile(self.env() + '/etc/testpkg-with-file-conflict/test.txt'))
+
+        self.refresh_env()
+
+        os.mkdir(self.env() + '/app')
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkg-with-file-conflict-a.cati',
+            '--target=/app'
+        ]), 0)
+
+        self.assert_true(not os.path.isfile(self.env() + '/etc/testpkg-with-file-conflict/test.txt'))
+        self.assert_true(os.path.isfile(self.env() + '/app/etc/testpkg-with-file-conflict/test.txt'))
+
+        self.refresh_env()
