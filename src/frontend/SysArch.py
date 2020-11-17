@@ -36,6 +36,6 @@ def sys_arch():
         return 'i386'
     else:
         arch = os.uname().machine
-        if arch in ['i686', 'i586', 'i486']:
+        if arch == 'i686':
             arch = 'i386'
         return arch
