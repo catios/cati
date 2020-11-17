@@ -49,7 +49,7 @@ Classes
     `extractall(self, path)`
     :   Extract all of package files to `path`
 
-    `info(self) ‑> dict`
+    `info(self) ‑> (<class 'dict'>, None)`
     :   Returns package data.json information
 
     `members(self)`

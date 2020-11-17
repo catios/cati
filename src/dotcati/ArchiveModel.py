@@ -88,12 +88,13 @@ class BaseArchive(Pkg):
         # try to compare version for version validation
         Pkg.compare_version(self.data['version'], '0.0.0')
 
-    def info(self) -> dict:
+    def info(self) -> (dict, None):
         """ Returns package data.json information """
         for member in self.tar.getmembers():
             if member.path == 'data.json':
                 f = self.tar.extractfile(member)
                 return json.loads(f.read())
+        return None
 
 class ArchiveModelV1(BaseArchive):
     """ .cati package file model (v1.0) """

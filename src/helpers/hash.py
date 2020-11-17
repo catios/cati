@@ -20,6 +20,8 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
+""" Some helper functions for hashing """
+
 import hashlib
 
 def calc_file_sha256(filepath):
