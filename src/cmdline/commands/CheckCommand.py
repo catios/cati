@@ -38,7 +38,7 @@ class CheckCommand(BaseCommand):
     def config(self) -> dict:
         """ Define and config this command """
         return {
-            'name': 'list',
+            'name': 'check',
             'options': {
             },
             'max_args_count': 0,
