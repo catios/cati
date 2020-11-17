@@ -3,6 +3,7 @@ Module cmdline.commands
 
 Sub-modules
 -----------
+* cmdline.commands.CheckCommand
 * cmdline.commands.FilesCommand
 * cmdline.commands.FinfoCommand
 * cmdline.commands.ForgetCommand
