@@ -131,3 +131,5 @@ class CheckCommand(BaseCommand):
             return 1
         else:
             pr.p(ansi.green + 'all of static files are ok' + ansi.reset)
+        
+        # TODO : check database and configuration files health
