@@ -48,6 +48,8 @@ class CheckCommand(BaseCommand):
             'options': {
                 '--quiet': [False, False],
                 '-q': [False, False],
+                '--verbose': [False, False],
+                '-v': [False, False],
             },
             'max_args_count': 0,
             'min_args_count': 0,
@@ -76,6 +78,8 @@ class CheckCommand(BaseCommand):
         conflict_problems = []
         installed_packages = Pkg.installed_list()['list']
         for pkg in installed_packages:
+            if self.is_verbose():
+                pr.p('[info] checking dependencies and conflicts for ' + pkg.data['name'] + '...')
             for dp in pkg.get_depends():
                 if not Pkg.check_state(dp):
                     dependency_problems.append([
@@ -101,6 +105,8 @@ class CheckCommand(BaseCommand):
             pr.p('Checking packages static files...')
         staticfile_problems = []
         for pkg in installed_packages:
+            if self.is_verbose():
+                pr.p('[info] checking static files for ' + pkg.data['name'] + '...')
             files = pkg.installed_static_files()
             for f in files:
                 f[1] = Env.base_path(f[1])
