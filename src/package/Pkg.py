@@ -47,6 +47,15 @@ class Pkg:
 
         return Pkg.installed_version(self.data['name'])
 
+    def installed_static_files(self):
+        """ returns list of installed files of package """
+        if not self.installed():
+            return False
+        installed_static_files_list = open(Env.installed_lists('/' + self.data['name'] + '/staticfiles'), 'r').read().strip()
+        installed_static_files_list = installed_static_files_list.split('\n')
+        installed_static_files_list = [item.strip().split('@', 1) for item in installed_static_files_list if item.strip() != '']
+        return installed_static_files_list
+
     def get_depends(self):
         """ Returns package dependencies list """
         try:
