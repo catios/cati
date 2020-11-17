@@ -173,3 +173,12 @@ cati forget pkg1
 cati forget pkg1=1.12.7 # only version 1.12.7
 cati forget pkg1 pkg2 pkg3=1.0 pkg4
 ```
+
+## check command
+checks system health and packages security
+
+this command checks system health and packages security and static files
+
+```bash
+cati check
+```

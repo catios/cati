@@ -1,7 +1,6 @@
 
 # TODO
 
-- [ ] create `check` command
 - [ ] handle logging and debug logs
 - [ ] handle config file replacement system
 - [ ] handle `deb` and `rpm` package support

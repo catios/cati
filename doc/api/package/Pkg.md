@@ -138,3 +138,6 @@ Classes
 
     `installed(self)`
     :   Checks current package is installed. if yes, returns installed version and if not, returns False
+
+    `installed_static_files(self)`
+    :   returns list of installed files of package
