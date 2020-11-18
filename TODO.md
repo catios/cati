@@ -1,10 +1,8 @@
-
 # TODO
 
 - [ ] handle logging and debug logs
 - [ ] handle config file replacement system
 - [ ] handle `deb` and `rpm` package support
-- [ ] some changes in permission checker
 - [ ] create repository system
 - [ ] some changes in transaction calculator
 - [ ] create install/upgrade/autoremove/clear-cache/full-upgrade commands
