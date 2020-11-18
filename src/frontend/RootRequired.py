@@ -25,6 +25,7 @@
 import os
 import sys
 from cmdline import pr, ansi
+from frontend import Env
 
 is_testing = False
 """
@@ -45,9 +46,24 @@ def require_root_permission(is_cli=True, die_action=None):
     if is_testing:
         return
 
-    if os.getuid() != 0:
-        if is_cli:
-            pr.e(ansi.red + sys.argv[0] + ': permission is denied' + ansi.reset)
-            pr.exit(1)
-        else:
-            die_action()
+    if os.getuid() == 0:
+        return
+
+    # check write and read access for needed files
+    files_to_check = [
+        Env.packages_lists(),
+        Env.installed_lists(),
+        Env.state_file(),
+        Env.unremoved_conffiles(),
+        Env.security_blacklist(),
+        Env.any_scripts(),
+    ]
+    for f in files_to_check:
+        if not os.access(f, os.W_OK) or not os.access(f, os.R_OK):
+            if is_cli:
+                pr.e(ansi.red + sys.argv[0] + ': permission is denied' + ansi.reset)
+                pr.exit(1)
+                return
+            else:
+                die_action()
+                return
