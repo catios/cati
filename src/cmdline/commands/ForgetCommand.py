@@ -110,16 +110,10 @@ class ForgetCommand(BaseCommand):
                 shutil.rmtree(Env.packages_lists('/' + pkg.data['name']))
                 pr.p('Package ' + pkg.data['name'] + ' was forgoten successfully')
             else:
-                # TODO : fix bug of this code:
-                # for example if we want to delete version `1.0`,
-                # and there is another version named `1.0-alpha`,
-                # so, we have two files, `1.0-{arch}` and `1.0-alpha-{arch}`.
-                # in this glob query, we will get both of them and both of them
-                # will be deleted but we just want to delete `1.0` not `1.0-alpha`.
-                # this bug have to be fixed
                 files = glob.glob(Env.packages_lists('/' + pkg.data['name'] + '/' + pkg.data['version'] + '-*'))
                 for f in files:
-                    os.remove(f)
+                    if not '-' in f[len(Env.packages_lists('/' + pkg.data['name'] + '/' + pkg.data['version'] + '-')):]:
+                        os.remove(f)
                 pr.p('Version ' + pkg.data['version'] + ' of package ' + pkg.data['name'] + ' was forgoten successfully')
             try:
                 if len(os.listdir(Env.packages_lists('/' + pkg.data['name']))) <= 1:
