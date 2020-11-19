@@ -53,6 +53,7 @@ def check(events: dict):
     required_files = [
         '/var/lib/cati/state.f',
         '/var/lib/cati/unremoved-conffiles.list',
+        '/etc/cati/repos.list',
     ]
 
     required_dirs = [
@@ -63,6 +64,9 @@ def check(events: dict):
         '/var/lib/cati/installed',
         '/var/lib/cati/security-blacklist',
         '/var/lib/cati/any-scripts',
+        '/etc',
+        '/etc/cati',
+        '/etc/cati/repos.list.d',
     ]
 
     for d in required_dirs:

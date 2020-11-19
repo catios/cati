@@ -91,7 +91,6 @@ class test_depends_and_conflicts(TestCore):
             'tests/test-packages/packages/testpkg-with-file-depend.cati'
         ]), 1)
 
-        os.mkdir(self.env() + '/etc')
         f = open(self.env() + '/etc/testfile', 'w')
         f.write('')
         f.close()
@@ -106,7 +105,6 @@ class test_depends_and_conflicts(TestCore):
 
         self.refresh_env()
 
-        os.mkdir(self.env() + '/etc')
         f = open(self.env() + '/etc/testfile', 'w')
         f.write('')
         f.close()

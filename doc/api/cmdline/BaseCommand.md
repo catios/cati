@@ -20,6 +20,7 @@ Classes
     * cmdline.commands.QueryCommand.QueryCommand
     * cmdline.commands.RDependsCommand.RDependsCommand
     * cmdline.commands.RemoveCommand.RemoveCommand
+    * cmdline.commands.RepoCommand.RepoCommand
     * cmdline.commands.SearchCommand.SearchCommand
     * cmdline.commands.ShowCommand.ShowCommand
     * cmdline.commands.StateCommand.StateCommand

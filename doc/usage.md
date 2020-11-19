@@ -182,3 +182,18 @@ this command checks system health and packages security and static files
 ```bash
 cati check
 ```
+
+## repo command
+manage repositories
+
+Options:
+- `-a|--add [new repo]`: add new repository
+- `-e|--edit`: open repositories config file with vim editor
+
+```bash
+cati repo
+sudo cati repo --edit
+sudo cati repo --add '<new repo>'
+```
+
+read [repositories guide](/doc/repositories.md) for more information about repositories.
