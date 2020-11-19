@@ -22,10 +22,13 @@
 
 """ .cati package file model """
 
+import os
+import mimetypes
 import tarfile
 import json
 from dotcati.PackageJsonValidator import PackageJsonValidator
 from package.Pkg import Pkg
+from dotcati import PkgConvertor
 
 def archive_factory(file_path: str, type_str: str):
     """
@@ -38,6 +41,16 @@ def archive_factory(file_path: str, type_str: str):
     return archive model object by that
     version.
     """
+    if os.path.isfile(file_path):
+        if mimetypes.guess_type(file_path) == 'application/x-debian-package':
+            # package is a deb package
+            # content deb2cati
+            file_path = PkgConvertor.deb2cati(file_path)
+        elif mimetypes.guess_type(file_path) == 'application/x-redhat-package-manager':
+            # package is a rpm package
+            # content rpm2cati
+            file_path = PkgConvertor.rpm2cati(file_path)
+
     # open v1 as default
     pkg = ArchiveModelV1(file_path, type_str)
     if pkg.pkg_version() == '1.0':

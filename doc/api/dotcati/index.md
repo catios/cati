@@ -8,4 +8,5 @@ Sub-modules
 * dotcati.Installer
 * dotcati.ListUpdater
 * dotcati.PackageJsonValidator
+* dotcati.PkgConvertor
 * dotcati.exceptions
