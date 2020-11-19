@@ -61,6 +61,8 @@ class PkgCommand(BaseCommand):
         return {
             'name': 'pkg',
             'options': {
+                '--quiet': [False, False],
+                '-q': [False, False],
                 '--output': [False, True],
                 '-o': [False, True],
                 '--files': [False, False],
@@ -88,8 +90,8 @@ class PkgCommand(BaseCommand):
                     output = self.option_value('-o')
                 builder = Builder()
                 output_package = builder.build(self.arguments[i], output)
-
-                pr.p(ansi.green + 'Package ' + self.arguments[i] + ' created successfuly in ' + output_package + ansi.reset)
+                if not self.is_quiet():
+                    pr.p(ansi.green + 'Package ' + self.arguments[i] + ' created successfuly in ' + output_package + ansi.reset)
             except FileNotFoundError as ex:
                 self.message('directory "' + self.arguments[i] + '" not found' + ansi.reset, before=ansi.red)
                 return 1

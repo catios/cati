@@ -42,11 +42,11 @@ def archive_factory(file_path: str, type_str: str):
     version.
     """
     if os.path.isfile(file_path):
-        if mimetypes.guess_type(file_path) == 'application/x-debian-package':
+        if mimetypes.guess_type(file_path)[0] == 'application/x-debian-package':
             # package is a deb package
             # content deb2cati
             file_path = PkgConvertor.deb2cati(file_path)
-        elif mimetypes.guess_type(file_path) == 'application/x-redhat-package-manager':
+        elif mimetypes.guess_type(file_path)[0] == 'application/x-redhat-package-manager':
             # package is a rpm package
             # content rpm2cati
             file_path = PkgConvertor.rpm2cati(file_path)
