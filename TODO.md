@@ -1,7 +1,6 @@
 # TODO
 
 - [ ] create repository system
-- [ ] some changes in transaction calculator
 - [ ] create install/upgrade/autoremove/clear-cache/full-upgrade commands
 - [ ] some changes in config file replacement system
 - [ ] handle logging and debug logs
