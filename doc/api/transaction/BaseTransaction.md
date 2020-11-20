@@ -25,7 +25,7 @@ Classes
     `pop_state()`
     :   remove first item from state
 
-    `run_any_scripts(events: dict)`
+    `run_any_scripts(runed_transactions: list, events: dict)`
     :   run all of `any` scripts.
         
         events:

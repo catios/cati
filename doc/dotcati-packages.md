@@ -112,6 +112,15 @@ Processing scripts for pkg2...
 
 this message means cati are running `any` script of package `pkg1`, `pkg2`...
 
+#### scripts arguments
+package scripts maybe get some arguments. this arguments maybe useful for your script.
+
+Arguments of scripts:
+
+- `ins-before` and `ins-after`: this scripts get old version of package. if package is not installed already and this is new install, them don't get any argument. for example, if package version `1.0` installed and user is installing version `1.2`, you script will get argument `1.2`.
+- `rm-before` and `rm-after`: this scripts will get an argument with two types: `with-conffiles` or `without-conffiles` this means remove process is with config files or not.
+- `any`: any script gets list of processed transactions. this is two types; `remove` or `install`. if runed processes are installation processes, arguments are like this: `install <pkg-name>@<version> <pkg-name>@<version> <pkg-name>@<version> ...` and if processes are remove, arguments are like this: `remove <pkg-name>@<version> <pkg-name>@<version> <pkg-name>@<version> ...`. this maybe useful for your script.
+
 ## Building packages
 
 to build `.cati` package, you should do the following steps:

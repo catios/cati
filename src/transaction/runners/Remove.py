@@ -60,7 +60,10 @@ class Remove(BaseTransaction):
         if run_scripts:
             if os.path.isfile(Env.installed_lists('/' + pkg.data['name'] + '/rm-before')):
                 os.system('chmod +x "' + Env.installed_lists('/' + pkg.data['name'] + '/rm-before') + '"')
-                os.system(Env.installed_lists('/' + pkg.data['name'] + '/rm-before'))
+                with_conffiles_arg = 'without-conffiles'
+                if remove_conffiles:
+                    with_conffiles_arg = 'with-conffiles'
+                os.system(Env.installed_lists('/' + pkg.data['name'] + '/rm-before') + ' ' + with_conffiles_arg)
 
         # remove package
         installed_files = open(Env.installed_lists('/' + pkg.data['name'] + '/files'), 'r').read()
@@ -95,8 +98,11 @@ class Remove(BaseTransaction):
         # run rm-after script
         if run_scripts:
             if os.path.isfile(Env.installed_lists('/' + pkg.data['name'] + '/rm-after')):
+                with_conffiles_arg = 'without-conffiles'
+                if remove_conffiles:
+                    with_conffiles_arg = 'with-conffiles'
                 os.system('chmod +x "' + Env.installed_lists('/' + pkg.data['name'] + '/rm-after') + '"')
-                os.system(Env.installed_lists('/' + pkg.data['name'] + '/rm-after'))
+                os.system(Env.installed_lists('/' + pkg.data['name'] + '/rm-after') + ' ' + with_conffiles_arg)
 
         # remove installation config
         shutil.rmtree(Env.installed_lists('/' + pkg.data['name']))

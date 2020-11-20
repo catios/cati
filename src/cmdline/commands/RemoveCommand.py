@@ -135,6 +135,8 @@ class RemoveCommand(BaseCommand):
         # add packages to state
         BaseTransaction.add_to_state(calc)
 
+        packages_to_remove_names_and_versions = [pkg.data['name'] + '@' + pkg.data['version'] for pkg in calc.to_remove]
+
         # run transactions
         for pkg in calc.to_remove:
             Remove.run(
@@ -149,7 +151,7 @@ class RemoveCommand(BaseCommand):
             )
             BaseTransaction.pop_state()
 
-        BaseTransaction.run_any_scripts(events={
+        BaseTransaction.run_any_scripts(['remove', packages_to_remove_names_and_versions], events={
             'start_run_script': self.start_run_any_script_event,
         })
 

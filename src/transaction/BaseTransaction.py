@@ -117,16 +117,20 @@ class BaseTransaction:
         return result
 
     @staticmethod
-    def run_any_scripts(events: dict):
+    def run_any_scripts(runed_transactions: list, events: dict):
         """
         run all of `any` scripts.
         
         events:
         - start_run_script: will run when starting to run once script (gets package name)
         """
+        runed_transactions_str = ''
+        for rt in runed_transactions[1]:
+            runed_transactions_str += rt + ' '
+        runed_transactions_str = runed_transactions_str.strip()
         scripts = os.listdir(Env.any_scripts())
         for script in scripts:
             events['start_run_script'](script)
             # run script
             os.system('chmod +x "' + Env.any_scripts('/' + script) + '"')
-            os.system(Env.any_scripts('/' + script))
+            os.system(Env.any_scripts('/' + script) + ' ' + runed_transactions[0] + ' ' + runed_transactions_str)

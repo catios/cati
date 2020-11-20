@@ -299,6 +299,7 @@ class PkgCommand(BaseCommand):
         state_f.write(tmp)
         state_f.close()
 
+        packages_to_install_names_and_versions = [pkg.data['name'] + '@' + pkg.data['version'] for pkg in packages_to_install]
         i = 0
         while i < len(packages_to_install):
             try:
@@ -315,7 +316,7 @@ class PkgCommand(BaseCommand):
                 self.message('cannot install "' + packages_to_install[i].data['name'] + '"' + ansi.reset, before=ansi.red)
                 return 1
             i += 1
-        BaseTransaction.run_any_scripts(events={
+        BaseTransaction.run_any_scripts(['install', packages_to_install_names_and_versions], events={
             'start_run_script': self.start_run_any_script_event,
         })
         BaseTransaction.finish_all_state()

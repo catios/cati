@@ -192,14 +192,16 @@ class Installer:
 
     def run_script(self, script_name: str, script_path=None):
         """ runs an script in the package """
-        # TODO : handle scripts arguments
         if script_path == None:
             script_path = self.extracted_package_dir + '/scripts/' + script_name
         if os.path.isfile(script_path):
             # script exists, run script
             os.system('chmod +x "' + script_path + '"')
-            # run script and pass version of package to script
-            result = os.system(script_path + ' "' + self.pkg.data['version'] + '"')
+            # run script and pass old version of package (if currently installed)
+            old_version = ''
+            if Pkg.is_installed(self.pkg.data['name']):
+                old_version = '"' + Pkg.installed_version(self.pkg.data['name']) + '"'
+            result = os.system(script_path + ' ' + old_version)
             if result != 0:
                 tmp = PackageScriptError("script " + script_name + ' returned non-zero code ' + str(result))
                 tmp.error_code = result
