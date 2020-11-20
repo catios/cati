@@ -64,3 +64,40 @@ class test_check_command(TestCore):
         self.assert_equals(self.run_command('check', []), 1)
 
         self.refresh_env()
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/staticfile-pkg.cati'
+        ]), 0)
+
+        self.assert_equals(self.run_command('check', []), 0)
+
+        os.remove(self.env() + '/var/lib/cati/installed/staticfile-pkg/ver')
+
+        self.assert_equals(self.run_command('check', []), 1)
+
+        self.refresh_env()
+
+        self.assert_equals(self.run_command('check', []), 0)
+
+        os.mkdir(self.env() + '/var/lib/cati/security-blacklist/thedir')
+
+        self.assert_equals(self.run_command('check', []), 1)
+
+        self.refresh_env()
+
+        self.assert_equals(self.run_command('check', []), 0)
+
+        f = open(self.env() + '/var/lib/cati/security-blacklist/a.json', 'w')
+        f.write('badjson')
+        f.close()
+
+        self.assert_equals(self.run_command('check', []), 1)
+
+        f = open(self.env() + '/var/lib/cati/security-blacklist/a.json', 'w')
+        f.write('[]')
+        f.close()
+
+        self.assert_equals(self.run_command('check', []), 0)
+
+        self.refresh_env()

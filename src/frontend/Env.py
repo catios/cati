@@ -62,3 +62,9 @@ def security_blacklist(path=''):
 def any_scripts(path=''):
     """ Any scripts directory """
     return base_path('/var/lib/cati/any-scripts' + path)
+
+def repos_config():
+    return base_path('/etc/cati/repos.list')
+
+def repos_config_dir(path=''):
+    return base_path('/etc/cati/repos.list.d' + path)

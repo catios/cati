@@ -35,6 +35,14 @@ Functions
 :   Packages list directory
 
     
+`repos_config()`
+:   
+
+    
+`repos_config_dir(path='')`
+:   
+
+    
 `security_blacklist(path='')`
 :   Security blacklist directory
 

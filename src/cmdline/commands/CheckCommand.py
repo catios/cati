@@ -23,13 +23,16 @@
 """ Check command """
 
 import os
+import json
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi, ArgParser
 from frontend.RootRequired import require_root_permission
 from cmdline.commands.StateCommand import StateCommand
+from cmdline.components import ReposListErrorShower
 from package.Pkg import Pkg
 from helpers.hash import calc_file_sha256
 from frontend import Env
+from repo.Repo import Repo
 
 class CheckCommand(BaseCommand):
     """ Check command """
@@ -132,4 +135,42 @@ class CheckCommand(BaseCommand):
         else:
             pr.p(ansi.green + 'all of static files are ok' + ansi.reset)
         
-        # TODO : check database and configuration files health
+        # check repos config files health
+        if not self.is_quiet():
+            pr.p('Checking cati configuration files...')
+        if self.is_verbose():
+                pr.p('[info] checking repositories config...')
+        repos = Repo.get_list()
+        pr.p(ansi.red, end='')
+        ReposListErrorShower.show(repos)
+        pr.p(ansi.reset, end='')
+        for repo in repos:
+            if repo.syntax_errors:
+                return 1
+        pr.p(ansi.green + 'all of cati configuration files are ok' + ansi.reset)
+
+        # check database files
+        if not self.is_quiet():
+            pr.p('Checking cati database...')
+        database_problems = []
+        for f in os.listdir(Env.installed_lists()):
+            if self.is_verbose():
+                pr.p('[info] checking database install dir for ' + f + '...')
+            if not os.path.isfile(Env.installed_lists('/' + f + '/files')) or not os.path.isfile(Env.installed_lists('/' + f + '/ver')):
+                database_problems.append('installed packages database: directory ' + Env.installed_lists('/' + f) + ' is corrupt')
+        for f in os.listdir(Env.security_blacklist()):
+            if self.is_verbose():
+                pr.p('[info] checking security blacklist part ' + f + '...')
+            if not os.path.isfile(Env.security_blacklist('/' + f)):
+                database_problems.append('security blacklist: an directory detected: ' + Env.security_blacklist('/' + f))
+            else:
+                tmp = open(Env.security_blacklist('/' + f), 'r')
+                try:
+                    json.loads(tmp.read())
+                except:
+                    database_problems.append('security blacklist: invalid json data in ' + Env.security_blacklist('/' + f))
+        if database_problems:
+            for problem in database_problems:
+                pr.p(ansi.red + 'database: ' + problem + ansi.reset)
+            return 1
+        pr.p(ansi.green + 'all of cati database is ok' + ansi.reset)

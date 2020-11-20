@@ -12,6 +12,7 @@ Sub-modules
 * cmdline.commands.QueryCommand
 * cmdline.commands.RDependsCommand
 * cmdline.commands.RemoveCommand
+* cmdline.commands.RepoCommand
 * cmdline.commands.SearchCommand
 * cmdline.commands.ShowCommand
 * cmdline.commands.StateCommand

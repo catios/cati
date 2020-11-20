@@ -57,6 +57,8 @@ def require_root_permission(is_cli=True, die_action=None):
         Env.unremoved_conffiles(),
         Env.security_blacklist(),
         Env.any_scripts(),
+        Env.repos_config(),
+        Env.repos_config_dir(),
     ]
     for f in files_to_check:
         if not os.access(f, os.W_OK) or not os.access(f, os.R_OK):
