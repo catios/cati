@@ -1,6 +1,6 @@
 # Cati files and directories structure
 
-## `/var/lib/cati/lists`
+## directory `/var/lib/cati/lists`
 
 this directory keeps list of packages.
 
@@ -32,17 +32,43 @@ for example, `somepackage` with version `1.5` for `amd64` architecture, has a fi
 also there is a file named `/var/lib/cati/lists/somepackage/index`.
 the `index` file just keeps list of versions and architectures of package.
 
-## `/var/lib/cati/installed`
+## directory `/var/lib/cati/installed`
 this directory contains list of INSTALLED packages.
 
 for example, package `somepackage` is installed. there is a directory named `/var/lib/cati/installed/somepackage/`.
 in this directory, is some files:
 - `ver`: contains installed version of package
 - `files`: contains list of package installed files on system
+- `staticfiles`: contains list of package installed STATIC files and hash of them
 - `installed_at`: contains time where package installed at that time
+- `manual`: this file is optional. if this file exists, means this package is installed manually
 
 so, there is this files for `somepackage` installation: `/var/lib/cati/installed/somepackage/ver`, `/var/lib/cati/installed/somepackage/files`, `/var/lib/cati/installed/somepackage/installed_at`
 
-## `/var/lib/cati/state.f`
+## directory `/var/lib/cati/any-scripts`
+this directory keeps list of packages `any` scripts.
+
+packages has an script named `any`. cati keeps them in this folder.
+for example any script of package `pkg1` is saved in `/var/lib/cati/any-scripts/pkg1`
+
+## directory `/var/lib/cati/security-blacklist`
+this directory keeps security blacklist database.
+
+read [security blacklist system](/doc/security-blacklist.md).
+
+## file `/var/lib/cati/state.f`
 this file contains transaction state.
 read [State system](/doc/developer/state-system.md)
+
+## file `/var/lib/cati/unremoved-conffiles.list`
+this file contains list of unremoved config files of packages to handle then later.
+
+## file `/etc/cati/repos.list`
+this file contains list of repositories
+
+read [repository system](/doc/repositories.md).
+
+## directory `/etc/cati/repos.list.d`
+this directory contains list of repositories in parted files.
+
+read [repository system](/doc/repositories.md).
