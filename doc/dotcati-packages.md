@@ -52,7 +52,7 @@ an example for this file:
         "another-pkg",
         "pkg2",
         "..."
-    ]
+    ],
 
     "conffiles": [
         "/path/to/some/file",
