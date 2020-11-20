@@ -93,6 +93,16 @@ def show(data: dict):
         for conflict in conflicts:
             output += ansi.bold + conflict + ansi.reset + ', '
         output = output[:len(output)-2]
+        output += '\n'
+    try:
+    	suggests = data['suggests']
+    except:
+    	suggests = []
+    if suggests:
+        output += 'Suggests: '
+        for suggest in suggests:
+            output += ansi.bold + suggest + ansi.reset + ', '
+        output = output[:len(output)-2]
     if Pkg.is_installed(data['name']):
         installed_version = Pkg.installed_version(data['name'])
         if Pkg.is_installed_manual(data['name']):
@@ -101,4 +111,4 @@ def show(data: dict):
             output += 'Installed: ' + installed_version + '\n'
     if output[-1] == '\n':
         output = output[:len(output)-1]
-    pr.p(output)
+    pr.p(output.strip())

@@ -48,6 +48,11 @@ an example for this file:
         "@76883f0fd14015c93296f0e4202241f4eb3a23189dbc17990a197477f1dc441a@/path/to/file",
         "..."
     ],
+    "suggests": [
+        "another-pkg",
+        "pkg2",
+        "..."
+    ]
 
     "conffiles": [
         "/path/to/some/file",
@@ -70,6 +75,8 @@ an example for this file:
 
 also you can use file depend/conflict in `depends` and `conflicts` lists. you have to write `@/path/to/file`. for example if you set this as a dependency, that file should be exists for this package, and if you set this as a conflict, package will not install if that file/dir exists. also you can check file sha256. for example `@76883f0fd14015c93296f0e4202241f4eb3a23189dbc17990a197477f1dc441a@/path/to/file`. you should write an `@` and next write specify sha256 and next again an `@` and next file path. now that file should exists, also cati checks sha256 of that file and compares that with your specify hash.
 
+`suggests` field declares an list from related packages to this package. you have to just list name of related packages.
+
 `conffiles` list declares a list from file/dir paths to set them as config file. config files will not remove in remove process (user can remove them with `--conffiles` in remove command). if some files in your package keeps configuration and something like that, add path of that file to this list
 
 `staticfiles` list declares a list from files where should be static and not changed. for example, binary files are static but configuration files maybe change. this system helps to keep system secure. cati can check static files and if cati detect some changes in that files, gives warning to user and can repair that package by re-installing that.
@@ -89,6 +96,8 @@ scripts:
 - `any`: any script will run after ANY install/remove process for any package
 
 for example, you can create a file named `ins-before` in `scripts` folder (`scripts/ins-before`) and write an shell script in that.
+
+if an script returns an non-zero code, the process will be stoped (only for installation scripts).
 
 #### more about `any` script
 when you installing a package where has a `any` script, this script will save in system and will run after any install or remove process on any package. this script is a general script and will run after all of transaction.

@@ -87,15 +87,21 @@ def deb2cati(file_path: str) -> str:
         for k in control_fields:
             # TODO : convert more fields
             if k == 'Package':
-                cati_data['name'] = control_fields[k]
+                cati_data['name'] = control_fields[k].strip()
             elif k == 'Version':
-                cati_data['version'] = control_fields[k]
+                cati_data['version'] = control_fields[k].strip()
             elif k == 'Architecture':
-                cati_data['arch'] = control_fields[k]
+                cati_data['arch'] = control_fields[k].strip()
             elif k == 'Maintainer':
-                cati_data['maintainer'] = control_fields[k]
+                cati_data['maintainer'] = control_fields[k].strip()
             elif k == 'Description':
                 cati_data['description'] = control_fields[k]
+            elif k == 'Homepage':
+                cati_data['homepage'] = control_fields[k].strip()
+            elif k == 'Section':
+                cati_data['category'] = [control_fields[k].strip()]
+            elif k == 'Suggests':
+                cati_data['suggests'] = [tmp.strip() for tmp in control_fields[k].strip().split(',')]
         os.system('rm control -rf')
         cati_data_f = open('data.json', 'w')
         cati_data_f.write(json.dumps(cati_data))
