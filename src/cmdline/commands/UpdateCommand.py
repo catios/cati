@@ -79,6 +79,8 @@ class UpdateCommand(BaseCommand):
             if repo.successful_loaded:
                 if repo.test():
                     orig_repos.append(repo)
+                else:
+                    pr.e(ansi.red + 'Cannot make connection to repo "' + repo.full_string + '"' + ansi.reset)
 
         if not self.is_quiet():
             pr.p('Updating repositories...')

@@ -22,8 +22,22 @@
 
 """ repo http driver """
 
+import requests
 from repo.drivers.BaseDriver import BaseDriver
 
 class Http(BaseDriver):
     """ repo http driver """
-    pass
+    def test(self):
+        """ test repo """
+        try:
+            res = requests.get(self.url + '?cati-repo-test=1')
+        except:
+            return False
+        return res.ok
+
+    def get_data(self):
+        """ Returns repo data """
+        res = requests.get(self.url + '?get_data=1')
+        if not res.ok:
+            return int(res.status_code)
+        return res.text
