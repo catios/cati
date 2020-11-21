@@ -84,6 +84,14 @@ class Repo:
             self.syntax_errors.append('invalid url type')
             return
 
+    def test(self) -> bool:
+        """ Test repository """
+        return self.__driver.test()
+
+    def get_data(self) -> str:
+        """ Recives repo data returns data as json """
+        return self.__driver.get_data()
+
     @staticmethod
     def get_list():
         """ returns list of repositories """

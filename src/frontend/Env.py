@@ -68,3 +68,6 @@ def repos_config():
 
 def repos_config_dir(path=''):
     return base_path('/etc/cati/repos.list.d' + path)
+
+def cache_dir(path=''):
+    return base_path('/var/cache/cati' + path)

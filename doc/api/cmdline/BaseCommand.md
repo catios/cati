@@ -24,6 +24,7 @@ Classes
     * cmdline.commands.SearchCommand.SearchCommand
     * cmdline.commands.ShowCommand.ShowCommand
     * cmdline.commands.StateCommand.StateCommand
+    * cmdline.commands.UpdateCommand.UpdateCommand
 
     ### Methods
 

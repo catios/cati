@@ -22,8 +22,23 @@
 
 """ repo file driver """
 
+import os
+import json
 from repo.drivers.BaseDriver import BaseDriver
+from repo.DirCrawler import DirCrawler
 
 class File(BaseDriver):
     """ repo file driver """
-    pass
+    def test(self):
+        """ test repo """
+        dir_path = self.url.split('://', 1)[-1]
+        return os.path.isdir(dir_path) and os.access(dir_path, os.R_OK)
+
+    def get_data(self):
+        """ Returns repo data """
+        crawler = DirCrawler(self.url.split('://', 1)[-1])
+        crawler.start()
+        try:
+            return json.dumps(crawler.loaded_packages)
+        except:
+            return '[]'

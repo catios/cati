@@ -16,3 +16,4 @@ Sub-modules
 * cmdline.commands.SearchCommand
 * cmdline.commands.ShowCommand
 * cmdline.commands.StateCommand
+* cmdline.commands.UpdateCommand

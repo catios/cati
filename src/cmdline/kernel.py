@@ -38,6 +38,7 @@ from cmdline.commands.RDependsCommand import RDependsCommand
 from cmdline.commands.ForgetCommand import ForgetCommand
 from cmdline.commands.CheckCommand import CheckCommand
 from cmdline.commands.RepoCommand import RepoCommand
+from cmdline.commands.UpdateCommand import UpdateCommand
 
 commands = {
     'help': HelpCommand,
@@ -54,6 +55,7 @@ commands = {
     'forget': ForgetCommand,
     'check': CheckCommand,
     'repo': RepoCommand,
+    'update': UpdateCommand,
 }
 """
 a dictonary from list of subcommands

@@ -27,6 +27,10 @@ Functions
 :   Returns environment base path
 
     
+`cache_dir(path='')`
+:   
+
+    
 `installed_lists(path='')`
 :   Installed packages list directory
 

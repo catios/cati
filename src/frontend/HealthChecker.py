@@ -64,6 +64,8 @@ def check(events: dict):
         '/var/lib/cati/installed',
         '/var/lib/cati/security-blacklist',
         '/var/lib/cati/any-scripts',
+        '/var/cache',
+        '/var/cache/cati',
         '/etc',
         '/etc/cati',
         '/etc/cati/repos.list.d',
