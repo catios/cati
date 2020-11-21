@@ -17,6 +17,9 @@ Classes
     `config(self) ‑> dict`
     :   Define and config this command
 
+    `empty_method(self, a=None, b=None)`
+    :   an empty method
+
     `help(self)`
     :   updates list of available packages from repositories
         

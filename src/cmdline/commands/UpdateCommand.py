@@ -22,6 +22,7 @@
 
 """ Update command """
 
+import os
 import time
 import random
 import json
@@ -31,6 +32,7 @@ from cmdline.components import ReposListErrorShower
 from repo.Repo import Repo
 from frontend import Env, RootRequired
 from dotcati.PackageJsonValidator import PackageJsonValidator
+from dotcati import ListUpdater
 
 class UpdateCommand(BaseCommand):
     """ Update command """
@@ -49,10 +51,16 @@ class UpdateCommand(BaseCommand):
             'options': {
                 '--quiet': [False, False],
                 '-q': [False, False],
+                '--verbose': [False, False],
+                '-v': [False, False],
             },
             'max_args_count': 0,
             'min_args_count': 0,
         }
+
+    def empty_method(self, a=None, b=None):
+        """ an empty method """
+        pass
 
     def run(self):
         """ Run command """
@@ -80,7 +88,7 @@ class UpdateCommand(BaseCommand):
         downloaded_paths = []
 
         # update repos
-        for repo in orig_repos:
+        for repo in list(reversed(orig_repos)):
             if not self.is_quiet():
                 pr.p('Fetching ' + repo.name + ' (' + repo.url + ') data...')
             data = repo.get_data()
@@ -101,6 +109,9 @@ class UpdateCommand(BaseCommand):
                     raise
                     pr.e(ansi.red + 'Cannot update ' + repo.name + ' (' + repo.url + '): invalid json data recived' + ansi.reset)
 
+        if not self.is_quiet():
+            pr.p('Updating packages list...')
+
         # load downloaded data
         packages = []
         for path in downloaded_paths:
@@ -112,7 +123,30 @@ class UpdateCommand(BaseCommand):
                 if PackageJsonValidator.validate(item):
                     packages.append(item)
                 else:
-                    # TODO : show error
                     pass
 
-        print(packages)
+        for pkg in packages:
+            if PackageJsonValidator.validate(pkg):
+                if self.is_verbose():
+                    pr.p('adding ' + pkg['name'] + ':' + pkg['version'] + ':' + pkg['arch'] + '...')
+                # write package on list
+                if not os.path.isdir(Env.packages_lists('/' + pkg['name'])):
+                    os.mkdir(Env.packages_lists('/' + pkg['name']))
+                try:
+                    f = open(Env.packages_lists('/' + pkg['name'] + '/' + pkg['version'] + '-' + pkg['arch']), 'w')
+                    f.write(json.dumps(pkg))
+                    f.close()
+                except:
+                    pr.e(ansi.red + 'error while adding ' + pkg['name'] + ':' + pkg['version'] + ':' + pkg['arch'] + ansi.reset)
+            else:
+                if self.is_verbose():
+                    pr.p(ansi.yellow + 'invalid json data in an item. ignored...' + ansi.reset)
+
+        if self.is_quiet():
+            pr.p('Finishing update...')
+        ListUpdater.update_indexes({
+            'cannot_read_file': self.empty_method,
+            'invalid_json_data': self.empty_method,
+        })
+
+        pr.p(ansi.green + 'Done.' + ansi.reset)

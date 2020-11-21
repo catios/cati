@@ -189,11 +189,13 @@ manage repositories
 Options:
 - `-a|--add [new repo]`: add new repository
 - `-e|--edit`: open repositories config file with vim editor
+- `--scan [repository directory]`: scan packages inside an directory and create data files from package to make that dir an local repository
 
 ```bash
 cati repo
 sudo cati repo --edit
 sudo cati repo --add '<new repo>'
+cati repo --scan /path/to/packages/dir
 ```
 
 read [repositories guide](/doc/repositories.md) for more information about repositories.

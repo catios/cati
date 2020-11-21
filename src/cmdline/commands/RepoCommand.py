@@ -26,6 +26,7 @@ import os
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
 from repo.Repo import Repo
+from repo import Scanner
 from cmdline.components import ReposListErrorShower
 from frontend import Env, RootRequired
 
@@ -40,6 +41,7 @@ class RepoCommand(BaseCommand):
         Options:
         -e|--edit: open repositories config file with editor
         -a|--add [new-repo]: add new repository
+        --scan [directory]: scans packages inside in a directory and creates data files for repo
 
         Repo config structure:
         <url> pkg=<type of packages. for example `cati` or `deb`> arch=<wanted architecture> name=<an name for repo> priority=<priority between another repos>
@@ -57,6 +59,7 @@ class RepoCommand(BaseCommand):
                 '-e': [False, False],
                 '--add': [False, False],
                 '-a': [False, False],
+                '--scan': [False, False],
             },
             'max_args_count': None,
             'min_args_count': None,
@@ -89,6 +92,15 @@ class RepoCommand(BaseCommand):
             f = open(path, 'w')
             f.write('# added manually\n' + repo_string)
             f.close()
+            return 0
+
+        if self.has_option('--scan'):
+            for arg in self.arguments:
+                if os.path.isdir(arg):
+                    Scanner.scan(arg)
+                    pr.p(ansi.green + 'directory ' + arg + ' scanned successfully' + ansi.reset)
+                else:
+                    self.message('directory' + arg + ' not found', is_error=True)
             return 0
 
         # show list of repos

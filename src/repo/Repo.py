@@ -23,6 +23,7 @@
 """ Cati repository model """
 
 import os
+import json
 from frontend import SysArch, Env
 from repo.drivers.File import File as FileDriver
 from repo.drivers.Http import Http as HttpDriver
@@ -90,7 +91,22 @@ class Repo:
 
     def get_data(self) -> str:
         """ Recives repo data returns data as json """
-        return self.__driver.get_data()
+        data = self.__driver.get_data()
+        try:
+            j = json.loads(data)
+            i = 0
+            while i < len(j):
+                j[i]['repo'] = self.name
+                try:
+                    if j[i]['arch'] != self.arch or j[i]['pkg_type'] != self.pkg:
+                        j.pop(i)
+                except:
+                    pass
+                i += 1
+            data = json.dumps(j)
+        except:
+            pass
+        return data
 
     @staticmethod
     def get_list():

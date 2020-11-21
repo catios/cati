@@ -92,3 +92,7 @@ class test_repo_command(TestCore):
         self.assert_equals(Repo.get_list()[-1].successful_loaded, False)
 
         self.refresh_env()
+
+        self.assert_equals(self.run_command('repo', ['--scan', 'repository/test-repository']), 0)
+
+        self.refresh_env()
