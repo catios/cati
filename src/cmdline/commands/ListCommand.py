@@ -75,9 +75,9 @@ class ListCommand(BaseCommand):
         output = ansi.green + package.data['name'] + ansi.reset + '/' +  ansi.yellow + package.data['version'] + ansi.reset
         if package.installed():
             if package.is_installed_manual(package.data['name']):
-                output += '/Installed-Manual:' + ansi.blue + package.installed() + ansi.reset
+                output += '/Installed-Manual:' + ansi.blue + package.installed().strip() + ansi.reset
             else:
-                output += '/Installed:' + ansi.blue + package.installed() + ansi.reset
+                output += '/Installed:' + ansi.blue + package.installed().strip() + ansi.reset
         output += '/[' + package.data['repo'] + ']'
 
         # if verbose output wanted, show first line of description

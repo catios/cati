@@ -39,6 +39,7 @@ class Pkg:
             self.data['repo']
         except:
             self.data['repo'] = 'Local'
+        self.data['version'] = self.data['version'].strip()
 
     def installed(self):
         """ Checks current package is installed. if yes, returns installed version and if not, returns False """

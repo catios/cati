@@ -44,11 +44,11 @@ def archive_factory(file_path: str, type_str: str):
     if os.path.isfile(file_path):
         if mimetypes.guess_type(file_path)[0] == 'application/x-debian-package':
             # package is a deb package
-            # content deb2cati
+            # convert deb2cati
             file_path = PkgConvertor.deb2cati(file_path)
         elif mimetypes.guess_type(file_path)[0] == 'application/x-redhat-package-manager':
             # package is a rpm package
-            # content rpm2cati
+            # convert rpm2cati
             file_path = PkgConvertor.rpm2cati(file_path)
 
     # open v1 as default
@@ -100,6 +100,7 @@ class BaseArchive(Pkg):
             raise
         # try to compare version for version validation
         Pkg.compare_version(self.data['version'], '0.0.0')
+        self.data['version'] = self.data['version'].strip()
 
     def info(self) -> (dict, None):
         """ Returns package data.json information """
