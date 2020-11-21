@@ -9,6 +9,7 @@ Cati repository server side script
  * crawls an directory and extracts data of packages from that
  */
 function get_data($path){
+    // TODO : return real data
     return '[]';
 }
 
