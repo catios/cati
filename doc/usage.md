@@ -199,3 +199,10 @@ cati repo --scan /path/to/packages/dir
 ```
 
 read [repositories guide](/doc/repositories.md) for more information about repositories.
+
+## update command
+update list of available packages from repositories
+
+```bash
+sudo cati update
+```

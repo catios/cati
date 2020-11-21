@@ -47,7 +47,7 @@ class UpdateCommand(BaseCommand):
     def config(self) -> dict:
         """ Define and config this command """
         return {
-            'name': 'finfo',
+            'name': 'update',
             'options': {
                 '--quiet': [False, False],
                 '-q': [False, False],
