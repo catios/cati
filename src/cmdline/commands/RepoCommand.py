@@ -42,7 +42,7 @@ class RepoCommand(BaseCommand):
         -a|--add [new-repo]: add new repository
 
         Repo config structure:
-        <url> pkg=<type of packages. for example `cati` or `deb`> arch=<wanted architecture> name=<an name for repo>s priority=<priority between another repos>
+        <url> pkg=<type of packages. for example `cati` or `deb`> arch=<wanted architecture> name=<an name for repo> priority=<priority between another repos>
         """
         pass
 
