@@ -206,3 +206,15 @@ update list of available packages from repositories
 ```bash
 sudo cati update
 ```
+
+## autoremove command
+remove unused automatic installed packages.
+
+Options:
+- `-y|--yes`: do not ask for user confirmation
+- `--conffiles`: also remove config files (full remove)
+- `--without-scripts`: do not run package scripts in remove process
+
+```bash
+sudo cati autoremove [options]
+```

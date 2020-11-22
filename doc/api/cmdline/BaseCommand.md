@@ -10,6 +10,7 @@ Classes
 
     ### Descendants
 
+    * cmdline.commands.AutoremoveCommand.AutoremoveCommand
     * cmdline.commands.CheckCommand.CheckCommand
     * cmdline.commands.FilesCommand.FilesCommand
     * cmdline.commands.FinfoCommand.FinfoCommand
