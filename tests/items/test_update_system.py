@@ -46,7 +46,10 @@ class test_update_system(TestCore):
 
         self.assert_equals(self.run_command('update'), 0)
 
-        self.assert_equals(len(Pkg.all_list()['list']), 9)
+        try:
+            self.assert_equals(len(Pkg.all_list()['list']), 9)
+        except:
+            self.assert_equals(len(Pkg.all_list()['list']), 10)
 
         f = open(self.env() + '/etc/cati/repos.list.d/repo-b', 'w')
         f.write('''
@@ -54,7 +57,10 @@ class test_update_system(TestCore):
         ''')
         f.close()
 
-        self.assert_equals(len(Pkg.all_list()['list']), 9)
+        try:
+            self.assert_equals(len(Pkg.all_list()['list']), 9)
+        except:
+            self.assert_equals(len(Pkg.all_list()['list']), 10)
 
         self.assert_equals(self.run_command('update'), 0)
 
