@@ -1,7 +1,6 @@
 # TODO
 
-- [ ] create repository system
-- [ ] create install/upgrade/autoremove/clear-cache/full-upgrade commands
+- [ ] create autoremove/clear-cache/install/upgrade/full-upgrade commands
 - [ ] some changes in config file replacement system
 - [ ] handle logging and debug logs
 - [ ] create graphical interface base
