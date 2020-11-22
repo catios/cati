@@ -218,3 +218,10 @@ Options:
 ```bash
 sudo cati autoremove [options]
 ```
+
+## clear-cache command
+clears cache files
+
+```bash
+cati clear-cache
+```

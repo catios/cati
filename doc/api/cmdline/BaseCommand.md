@@ -12,6 +12,7 @@ Classes
 
     * cmdline.commands.AutoremoveCommand.AutoremoveCommand
     * cmdline.commands.CheckCommand.CheckCommand
+    * cmdline.commands.ClearCacheCommand.ClearCacheCommand
     * cmdline.commands.FilesCommand.FilesCommand
     * cmdline.commands.FinfoCommand.FinfoCommand
     * cmdline.commands.ForgetCommand.ForgetCommand

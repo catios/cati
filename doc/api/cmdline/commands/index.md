@@ -5,6 +5,7 @@ Sub-modules
 -----------
 * cmdline.commands.AutoremoveCommand
 * cmdline.commands.CheckCommand
+* cmdline.commands.ClearCacheCommand
 * cmdline.commands.FilesCommand
 * cmdline.commands.FinfoCommand
 * cmdline.commands.ForgetCommand

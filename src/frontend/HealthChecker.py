@@ -66,6 +66,7 @@ def check(events: dict):
         '/var/lib/cati/any-scripts',
         '/var/cache',
         '/var/cache/cati',
+        '/var/cache/cati/archives',
         '/etc',
         '/etc/cati',
         '/etc/cati/repos.list.d',

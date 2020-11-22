@@ -40,6 +40,7 @@ from cmdline.commands.CheckCommand import CheckCommand
 from cmdline.commands.RepoCommand import RepoCommand
 from cmdline.commands.UpdateCommand import UpdateCommand
 from cmdline.commands.AutoremoveCommand import AutoremoveCommand
+from cmdline.commands.ClearCacheCommand import ClearCacheCommand
 
 commands = {
     'help': HelpCommand,
@@ -58,6 +59,7 @@ commands = {
     'repo': RepoCommand,
     'update': UpdateCommand,
     'autoremove': AutoremoveCommand,
+    'clear-cache': ClearCacheCommand,
 }
 """
 a dictonary from list of subcommands
