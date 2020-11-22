@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] create clear-cache/download/install/upgrade/full-upgrade commands
+- [ ] create download/install/upgrade/full-upgrade commands
 - [ ] some changes in config file replacement system
 - [ ] handle logging and debug logs
 - [ ] create graphical interface base
