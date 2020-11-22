@@ -270,7 +270,9 @@ class Pkg:
         errors = []
         packages = []
 
-        for item in os.listdir(Env.packages_lists()):
+        tmp_list = os.listdir(Env.packages_lists())
+        tmp_list.sort()
+        for item in tmp_list:
             if os.path.isfile(Env.packages_lists('/' + item + '/index')):
                 f_index = open(Env.packages_lists('/' + item + '/index'), 'r')
                 try:
