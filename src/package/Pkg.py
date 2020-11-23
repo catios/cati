@@ -190,7 +190,7 @@ class Pkg:
         return os.path.isfile(Env.installed_lists('/' + package_name + '/manual'))
 
     @staticmethod
-    def load_version(pkg_name: str, version: str):
+    def load_version(pkg_name: str, version: str, arch=''):
         """
         loads a specify version of a package
         Outputs:
@@ -214,17 +214,19 @@ class Pkg:
 
         # load package versions list
         versions = []
-        arch = ''
         try:
-            versions = index[SysArch.sys_arch()]
-            arch = SysArch.sys_arch()
+            versions = index[arch]
         except:
             try:
-                versions = index['all']
-                arch = 'all'
+                versions = index[SysArch.sys_arch()]
+                arch = SysArch.sys_arch()
             except:
-                versions = index[list(index.keys())[0]]
-                arch = list(index.keys())[0]
+                try:
+                    versions = index['all']
+                    arch = 'all'
+                except:
+                    versions = index[list(index.keys())[0]]
+                    arch = list(index.keys())[0]
 
         for ver in versions:
             if ver == version:

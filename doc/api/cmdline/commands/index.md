@@ -6,6 +6,7 @@ Sub-modules
 * cmdline.commands.AutoremoveCommand
 * cmdline.commands.CheckCommand
 * cmdline.commands.ClearCacheCommand
+* cmdline.commands.DownloadCommand
 * cmdline.commands.FilesCommand
 * cmdline.commands.FinfoCommand
 * cmdline.commands.ForgetCommand

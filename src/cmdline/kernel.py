@@ -41,6 +41,7 @@ from cmdline.commands.RepoCommand import RepoCommand
 from cmdline.commands.UpdateCommand import UpdateCommand
 from cmdline.commands.AutoremoveCommand import AutoremoveCommand
 from cmdline.commands.ClearCacheCommand import ClearCacheCommand
+from cmdline.commands.DownloadCommand import DownloadCommand
 
 commands = {
     'help': HelpCommand,
@@ -60,6 +61,7 @@ commands = {
     'update': UpdateCommand,
     'autoremove': AutoremoveCommand,
     'clear-cache': ClearCacheCommand,
+    'download': DownloadCommand,
 }
 """
 a dictonary from list of subcommands

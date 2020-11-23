@@ -225,3 +225,16 @@ clears cache files
 ```bash
 cati clear-cache
 ```
+
+## download command
+download packages
+
+Options:
+- `--output=[file output path]`: set file output path
+
+```bash
+cati download pkg1
+cati download pkg1=<version> pkg2=<version>
+cati download pkg1=<version>=<arch>
+cati download pkg1 --output=a.cati
+```

@@ -54,7 +54,7 @@ Classes
     `load_last(pkg_name: str)`
     :   Load last version of package by name
 
-    `load_version(pkg_name: str, version: str)`
+    `load_version(pkg_name: str, version: str, arch='')`
     :   loads a specify version of a package
         Outputs:
         - 1: package not found
