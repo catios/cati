@@ -31,26 +31,31 @@ class test_download_command(TestCore):
         """ Run test """
         self.refresh_env()
 
-        self.assert_equals(self.run_command('download', ['gfdgghgf']), 1)
+        self.disable_raising()
+        try:
+            self.assert_equals(self.run_command('download', ['gfdgghgf']), 1)
 
-        self.assert_equals(self.run_command('repo', ['--scan', 'repository/test-repository']), 0)
-        self.assert_equals(self.run_command('repo', ['--add', 'file://' + os.path.abspath('repository/test-repository') + ' name=main arch=all']), 0)
+            self.assert_equals(self.run_command('repo', ['--scan', 'repository/test-repository']), 0)
+            self.assert_equals(self.run_command('repo', ['--add', 'file://' + os.path.abspath('repository/test-repository') + ' name=main arch=all']), 0)
 
-        self.assert_equals(self.run_command('update', []), 0)
+            self.assert_equals(self.run_command('update', []), 0)
 
-        self.assert_equals(self.run_command('download', ['testpkgc']), 0)
+            self.assert_equals(self.run_command('download', ['testpkgc']), 0)
 
-        self.assert_true(os.path.isfile('testpkgc-2.0.cati'))
-        os.remove('testpkgc-2.0.cati')
+            self.assert_true(os.path.isfile('testpkgc-2.0.cati'))
+            os.remove('testpkgc-2.0.cati')
 
-        self.assert_equals(self.run_command('download', ['testpkgc=2.0']), 0)
+            self.assert_equals(self.run_command('download', ['testpkgc=2.0']), 0)
 
-        self.assert_true(os.path.isfile('testpkgc-2.0.cati'))
-        os.remove('testpkgc-2.0.cati')
+            self.assert_true(os.path.isfile('testpkgc-2.0.cati'))
+            os.remove('testpkgc-2.0.cati')
 
-        self.assert_equals(self.run_command('download', ['testpkgc=2.0', '--output=a.cati']), 0)
+            self.assert_equals(self.run_command('download', ['testpkgc=2.0', '--output=a.cati']), 0)
 
-        self.assert_true(os.path.isfile('a.cati'))
-        os.remove('a.cati')
+            self.assert_true(os.path.isfile('a.cati'))
+            os.remove('a.cati')
+        except:
+            pass
+        self.enable_raising()
 
         self.refresh_env()

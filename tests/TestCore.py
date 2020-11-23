@@ -30,6 +30,8 @@ from frontend import Env, HealthChecker
 
 class TestCore:
     """ Testing system core """
+    def __init__(self):
+        self.raising = True
 
     def get_name(self):
         """ Returns test name """
@@ -43,8 +45,17 @@ class TestCore:
         try:
             assert value
         except:
-            print('Assertion Error: ' + error_msg)
+            if self.raising:
+                print('Assertion Error: ' + error_msg)
             raise
+
+    def disable_raising(self):
+        """ Disable assert error raising """
+        self.raising = False
+
+    def enable_raising(self):
+        """ Enable assert error raising """
+        self.raising = True
 
     def assert_true(self, value):
         """ Assert True """
