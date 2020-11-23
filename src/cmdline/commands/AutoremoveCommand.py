@@ -61,19 +61,23 @@ class AutoremoveCommand(BaseCommand):
         all_packages = Pkg.all_list()['list']
 
         for pkg in all_packages:
-            if Pkg.is_installed(pkg.data['name']):
-                if not Pkg.is_installed_manual(pkg.data['name']):
-                    has_any_reverse_depends = False
-                    for rdep in pkg.get_reverse_depends():
-                        if rdep.installed():
-                            rdep_is_in_unused_packages = False
-                            for upkg in self.unused_packages:
-                                if upkg.data['name'] == rdep.data['name']:
-                                    rdep_is_in_unused_packages = True
-                            if not rdep_is_in_unused_packages:
-                                has_any_reverse_depends = True
-                    if not has_any_reverse_depends:
-                        self.unused_packages.append(pkg)
+            try:
+                if Pkg.is_installed(pkg.data['name']):
+                    if not Pkg.is_installed_manual(pkg.data['name']):
+                        has_any_reverse_depends = False
+                        reverse_depends = Pkg.load_version(pkg.data['name'], Pkg.installed_version(pkg.data['name'])).get_reverse_depends()
+                        for rdep in reverse_depends:
+                            if rdep.installed():
+                                rdep_is_in_unused_packages = False
+                                for upkg in self.unused_packages:
+                                    if upkg.data['name'] == rdep.data['name']:
+                                        rdep_is_in_unused_packages = True
+                                if not rdep_is_in_unused_packages:
+                                    has_any_reverse_depends = True
+                        if not has_any_reverse_depends:
+                            self.unused_packages.append(pkg)
+            except:
+                pass
 
     def run(self):
         """ Run command """
