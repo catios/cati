@@ -126,7 +126,13 @@ class test_conffile_system(TestCore):
         content = f.read()
         f.close()
 
-        self.assert_equals(content.strip(), 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855@/etc/cati-test-pkg/dir/hello.list\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855@/etc/cati-test-pkg/a.conf')
+        try:
+            self.disable_raising()
+            self.assert_equals(content.strip(), 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855@/etc/cati-test-pkg/dir/hello.list\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855@/etc/cati-test-pkg/a.conf')
+        except:
+            self.enable_raising()
+            self.assert_equals(content.strip(), 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855@/etc/cati-test-pkg/a.conf\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855@/etc/cati-test-pkg/dir/hello.list')
+        self.enable_raising()
 
         f = open(self.env() + '/etc/cati-test-pkg/dir/hello.list', 'w')
         f.write('hello')
