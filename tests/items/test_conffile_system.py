@@ -24,8 +24,6 @@
 
 import os
 from TestCore import TestCore
-# TODO : delete this line
-from cmdline import pr
 
 class test_conffile_system(TestCore):
     """ Test test_conffile_system """
@@ -33,8 +31,6 @@ class test_conffile_system(TestCore):
         """ Run test """
         self.refresh_env()
 
-        # TODO : delete this line
-        pr.is_testing = False
         self.assert_equals(self.run_command('pkg', [
             'install',
             'tests/test-packages/packages/conffile-pkg.cati'
@@ -175,8 +171,5 @@ class test_conffile_system(TestCore):
         content = f.read().strip()
         f.close()
         self.assert_equals(content, '')
-
-        # TODO : delete this line
-        pr.is_testing = True
 
         self.refresh_env()

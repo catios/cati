@@ -316,8 +316,6 @@ class PkgCommand(BaseCommand):
             except:
                 if not self.has_option('--dont-ignore-state'):
                     BaseTransaction.finish_all_state()
-                # TODO : delete this line
-                raise
                 self.message('cannot install "' + packages_to_install[i].data['name'] + '"' + ansi.reset, before=ansi.red)
                 return 1
             i += 1
