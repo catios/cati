@@ -13,8 +13,24 @@ if you want to start contributing to cati, do the following steps:
 - send pull request from your branch to `master`
 
 ### run/build
+before start, you need to install cati dev/runtime dependencies:
+- `python3` for development environment
+- `pip3` for development environment
+- `virtualenv` for development environment
+- `vim` for runtime
+- `wget` for runtime
 
-to start development environment, do the following steps:
+to check them you can use the following commands:
+
+```bash
+python3 --version
+python3 -m pip --version
+virtualenv --version
+vim --version
+wget --version
+```
+
+next, to start development environment, do the following steps:
 
 ```bash
 git clone <your-fork-url>

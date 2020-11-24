@@ -27,14 +27,27 @@ if you want to contribute to cati project, read [contributing guide](/CONTRIBUTI
 read cati security policy in [here](/SECURITY.md).
 
 ## Installation
-before installation, you need to install `python3`, `pip3` and `virtualenv` on your system.
-to check them, run this commands in terminal:
+
+### dependencies
+before compile and install cati install the cati dependencies:
+
+- `python3 (>= 3.6)` for development environment
+- `pip3` for development environment
+- `virtualenv` for development environment
+- `vim` for runtime
+- `wget` for runtime
+
+to check them you can use the following commands:
 
 ```bash
 python3 --version
 python3 -m pip --version
 virtualenv --version
+vim --version
+wget --version
 ```
+
+### compile and install
 
 to compile and install cati on your system, do the following steps:
 
