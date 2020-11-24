@@ -348,7 +348,7 @@ class Installer:
                 try:
                     conffile_hash = self.uncopied_conffiles[copied_conffile.split(':', 1)[-1]]
                 except:
-                    conffile_hash = calc_file_sha256(copied_conffile.split(':', 1)[-1])
+                    conffile_hash = calc_file_sha256(Env.base_path(copied_conffile.split(':', 1)[-1]))
                 copied_conffiles_str += conffile_hash + '@' + copied_conffile.split(':', 1)[-1] + '\n'
         f_conffiles.write(copied_conffiles_str.strip()) # write copied conffiles
         f_conffiles.close()
