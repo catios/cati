@@ -62,6 +62,7 @@ sudo cati pkg install pkg1.cati pkg2.cati # ...
 
 Options:
 - `--without-scripts`: do not run package scripts in installation process
+- `--keep-conffiles`: don't overwrite new version of config files
 - `--target=[files-install-location-prefix-path]`: set files installation prefix
 
 ## list command
