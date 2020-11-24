@@ -34,6 +34,7 @@ before compile and install cati install the cati dependencies:
 - `python3 (>= 3.6)` for development environment
 - `pip3` for development environment
 - `virtualenv` for development environment
+- `make` for development environment
 - `vim` for runtime
 - `wget` for runtime
 
@@ -43,6 +44,7 @@ to check them you can use the following commands:
 python3 --version
 python3 -m pip --version
 virtualenv --version
+make --version
 vim --version
 wget --version
 ```
