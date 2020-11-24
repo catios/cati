@@ -50,11 +50,21 @@ class Installer:
     def copy_once_file(self, paths):
         """ Copy one of package files """
         if os.path.isfile(paths[1]):
-            os.system('cp "' + paths[1] + '" "' + Env.base_path(paths[0]) + '"')
             if paths[0] in self.conffiles:
                 self.copied_files.append('cf:' + paths[0])
+                old_conffiles = [item[-1] for item in self.old_conffiles]
+                if paths[0] in old_conffiles:
+                    f_hash = calc_file_sha256(paths[1])
+                    if [f_hash, paths[0]] in self.old_conffiles:
+                        self.uncopied_conffiles[paths[0]] = f_hash
+                        return
+                    else:
+                        if self.keep_conffiles:
+                            self.uncopied_conffiles[paths[0]] = f_hash
+                            return
             else:
                 self.copied_files.append('f:' + paths[0])
+            os.system('cp "' + paths[1] + '" "' + Env.base_path(paths[0]) + '"')
         else:
             os.mkdir(Env.base_path(paths[0]))
             if paths[1] in self.conffiles:
@@ -109,7 +119,10 @@ class Installer:
                 if os.path.isfile(Env.base_path(f[0])):
                     if ('f:' + f[0]) in old_files or ('cf:' + f[0]) in old_files:
                         self.copy_once_file(f)
-                        old_files.pop(old_files.index(('f:' + f[0])))
+                        try:
+                            old_files.pop(old_files.index(('f:' + f[0])))
+                        except:
+                            pass
                     else:
                         if f[0] in unremoved_conffiles:
                             self.copy_once_file(f)
@@ -225,7 +238,7 @@ class Installer:
                 ex.blacklist_item = item
                 raise ex
 
-    def install(self, pkg: BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True, run_scripts=True, target_path=''):
+    def install(self, pkg: BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True, run_scripts=True, target_path='', keep_conffiles=False):
         """
         Install .cati package
 
@@ -239,6 +252,8 @@ class Installer:
 
         self.conffiles = pkg.get_conffiles()
         self.pkg = pkg
+        self.keep_conffiles = keep_conffiles
+        self.uncopied_conffiles = {}
 
         # check package is in security blacklist
         self.check_security_blacklist(pkg)
@@ -255,6 +270,17 @@ class Installer:
             return installer_events['dep_and_conflict_error'](pkg, ex)
         except ConflictError as ex:
             return installer_events['dep_and_conflict_error'](pkg, ex)
+
+        # load old conffiles
+        self.old_conffiles = []
+        try:
+            f = open(Env.installed_lists('/' + pkg.data['name'] + '/conffiles'), 'r')
+            content = f.read()
+            f.close()
+            tmp = content.strip().split('\n')
+            self.old_conffiles = [item.strip().split('@') for item in tmp]
+        except:
+            pass
 
         # add package data to lists
         if not os.path.isdir(Env.packages_lists('/' + pkg.data['name'])):
@@ -306,12 +332,26 @@ class Installer:
         f_ver.write(pkg.data['version']) # write installed version
         f_ver.close()
 
+        # write copied files list
         f_files = open(Env.installed_lists('/' + pkg.data['name'] + '/files'), 'w')
         copied_files_str = ''
         for copied_file in copied_files:
             copied_files_str += copied_file + '\n'
         f_files.write(copied_files_str.strip()) # write copied files
         f_files.close()
+
+        # write conffiles list
+        f_conffiles = open(Env.installed_lists('/' + pkg.data['name'] + '/conffiles'), 'w')
+        copied_conffiles_str = ''
+        for copied_conffile in copied_files:
+            if copied_conffile.split(':')[0] == 'cf':
+                try:
+                    conffile_hash = self.uncopied_conffiles[copied_conffile.split(':', 1)[-1]]
+                except:
+                    conffile_hash = calc_file_sha256(copied_conffile.split(':', 1)[-1])
+                copied_conffiles_str += conffile_hash + '@' + copied_conffile.split(':', 1)[-1] + '\n'
+        f_conffiles.write(copied_conffiles_str.strip()) # write copied conffiles
+        f_conffiles.close()
 
         # copy `any` script
         if os.path.isfile(self.extracted_package_dir + '/scripts/any'):

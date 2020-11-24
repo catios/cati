@@ -53,6 +53,7 @@ class PkgCommand(BaseCommand):
         - install subcommand:
         * --without-scripts: do not run package scripts in installation process
         * --target=[files-install-location-prefix-path]: set files installation prefix
+        * --keep-conffiles: don't overwrite new version of config files
         """
         pass
 
@@ -70,7 +71,8 @@ class PkgCommand(BaseCommand):
                 '--auto': [False, False],
                 '--without-scripts': [False, False],
                 '--target': [False, True],
-                '--dont-ignore-state': [False, False], # this will use by `cati install` command
+                '--dont-ignore-state': [False, False],
+                '--keep-conffiles': [False, False],
             },
             'max_args_count': None,
             'min_args_count': None,
@@ -230,7 +232,8 @@ class PkgCommand(BaseCommand):
                 },
                 (not self.has_option('--auto')),
                 run_scripts=(not self.has_option('--without-scripts')),
-                target_path=str(target_path)
+                target_path=str(target_path),
+                keep_conffiles=self.has_option('--keep-conffiles')
             )
 
             if type(out) == int:
