@@ -34,6 +34,11 @@ def show(calc: Calculator):
     (install/remove/upgrade/downgrade)
     """
     if calc.to_remove:
-        pr.p('The following packages will be remove:')
+        pr.p('The following packages will be removed:')
         for pkg in calc.to_remove:
             pr.p('- ' + ansi.red + pkg.data['name'] + ansi.reset)
+    # TODO : seprate upgrade and downgrade and install
+    if calc.to_install:
+        pr.p('The following packages will be installed:')
+        for pkg in calc.to_install:
+            pr.p('- ' + ansi.green + pkg.data['name'] + '(' + pkg.wanted_version + ')' + ansi.reset)

@@ -21,6 +21,9 @@ Classes
     `has_any_thing(self)`
     :   returns is there any transactions to do
 
+    `install(self, pkgs: list)`
+    :   Add packages for install
+
     `refresh_lists(self)`
     :   Refresh packages list and sync them with depends and conflicts
 

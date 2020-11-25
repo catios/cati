@@ -59,5 +59,10 @@ class ClearCacheCommand(BaseCommand):
                 if self.is_verbose():
                     pr.p('removing ' + Env.cache_dir('/' + f) + '...')
                 os.remove(Env.cache_dir('/' + f))
+        for f in os.listdir(Env.cache_dir('/archives')):
+            if os.path.isfile(Env.cache_dir('/archives/' + f)):
+                if self.is_verbose():
+                    pr.p('removing ' + Env.cache_dir('/archives/' + f) + '...')
+                os.remove(Env.cache_dir('/archives/' + f))
 
         pr.p(ansi.green + 'Cache files cleared successfully' + ansi.reset)
