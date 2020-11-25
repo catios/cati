@@ -28,5 +28,5 @@ class test_install(TestCore):
     """ Test test_install """
     def run(self):
         """ Run test """
-        # TODO : write this test
+        # TODO : write this test with upgrade test
         self.assert_true(True)
