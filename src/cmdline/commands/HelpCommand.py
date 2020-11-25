@@ -82,7 +82,6 @@ class HelpCommand(BaseCommand):
         if len(self.arguments) >= 1:
             # a command inserted. show detail of that command
             try:
-
                 cmd = commands[self.arguments[0]]
                 obj = cmd()
                 pr.p(obj.help_full(False))
@@ -96,7 +95,7 @@ class HelpCommand(BaseCommand):
         for cmd in commands:
             obj = commands[cmd]()
             tabs = '\t\t'
-            if len(cmd) > 6:
+            if len(cmd) > 7:
                 tabs = '\t'
             pr.p('\t' + ansi.green + cmd + ansi.reset + tabs + obj.help_summary())
 

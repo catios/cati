@@ -239,3 +239,33 @@ cati download pkg1=<version> pkg2=<version>
 cati download pkg1=<version>=<arch>
 cati download pkg1 --output=a.cati
 ```
+
+## install command
+install packages
+
+Options:
+- `-y|--yes`: don't ask for user confirmation
+
+```bash
+cati install [options] pkg1 pkg2 pkg3 ...
+cati install [options] pkg1 pkg2=<version>
+```
+
+## upgrade command
+upgrade all of packages
+
+Options: all of `install` command options
+
+```bash
+cati upgrade [options]
+```
+
+## full-upgrade command
+update, upgrade and autoremove
+
+Options:
+- `-y|--yes`: don't ask for user confirmation
+
+```bash
+cati full-upgrade [options]
+```

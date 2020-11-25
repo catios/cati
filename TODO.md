@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] create install/upgrade/full-upgrade commands
+- [ ] complete install command
 - [ ] handle logging and debug logs
 - [ ] create graphical interface base
 - [ ] write big data test to test program in an environment with much data

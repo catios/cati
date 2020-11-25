@@ -10,6 +10,8 @@ Sub-modules
 * cmdline.commands.FilesCommand
 * cmdline.commands.FinfoCommand
 * cmdline.commands.ForgetCommand
+* cmdline.commands.FullUpgradeCommand
+* cmdline.commands.InstallCommand
 * cmdline.commands.ListCommand
 * cmdline.commands.PkgCommand
 * cmdline.commands.QueryCommand
@@ -20,3 +22,4 @@ Sub-modules
 * cmdline.commands.ShowCommand
 * cmdline.commands.StateCommand
 * cmdline.commands.UpdateCommand
+* cmdline.commands.UpgradeCommand

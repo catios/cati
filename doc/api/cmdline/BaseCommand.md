@@ -17,7 +17,9 @@ Classes
     * cmdline.commands.FilesCommand.FilesCommand
     * cmdline.commands.FinfoCommand.FinfoCommand
     * cmdline.commands.ForgetCommand.ForgetCommand
+    * cmdline.commands.FullUpgradeCommand.FullUpgradeCommand
     * cmdline.commands.HelpCommand.HelpCommand
+    * cmdline.commands.InstallCommand.InstallCommand
     * cmdline.commands.ListCommand.ListCommand
     * cmdline.commands.PkgCommand.PkgCommand
     * cmdline.commands.QueryCommand.QueryCommand
@@ -28,6 +30,7 @@ Classes
     * cmdline.commands.ShowCommand.ShowCommand
     * cmdline.commands.StateCommand.StateCommand
     * cmdline.commands.UpdateCommand.UpdateCommand
+    * cmdline.commands.UpgradeCommand.UpgradeCommand
 
     ### Methods
 

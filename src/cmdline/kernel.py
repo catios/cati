@@ -42,6 +42,9 @@ from cmdline.commands.UpdateCommand import UpdateCommand
 from cmdline.commands.AutoremoveCommand import AutoremoveCommand
 from cmdline.commands.ClearCacheCommand import ClearCacheCommand
 from cmdline.commands.DownloadCommand import DownloadCommand
+from cmdline.commands.InstallCommand import InstallCommand
+from cmdline.commands.UpgradeCommand import UpgradeCommand
+from cmdline.commands.FullUpgradeCommand import FullUpgradeCommand
 
 commands = {
     'help': HelpCommand,
@@ -62,6 +65,9 @@ commands = {
     'autoremove': AutoremoveCommand,
     'clear-cache': ClearCacheCommand,
     'download': DownloadCommand,
+    'install': InstallCommand,
+    'upgrade': UpgradeCommand,
+    'full-upgrade': FullUpgradeCommand,
 }
 """
 a dictonary from list of subcommands
