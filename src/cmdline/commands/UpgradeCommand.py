@@ -52,8 +52,14 @@ class UpgradeCommand(BaseCommand):
     def run(self):
         """ Run command """
 
-        # TODO : find upgradable packages
+        pr.p('Checking upgradable packages...')
+        installed_packages = Pkg.installed_list()['list']
         upgradable_packages = []
+        for pkg in installed_packages:
+            installed_version = pkg.installed()
+            latest_version = pkg.data['version']
+            if Pkg.compare_version(latest_version, installed_version) == 1:
+                upgradable_packages.append(pkg)
 
         if not upgradable_packages:
             pr.p(ansi.green + 'all of packages are up to date' + ansi.reset)

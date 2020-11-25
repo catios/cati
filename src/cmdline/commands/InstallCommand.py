@@ -25,6 +25,7 @@
 from cmdline.BaseCommand import BaseCommand
 from package.Pkg import Pkg
 from frontend import RootRequired
+from cmdline import pr, ansi
 
 class InstallCommand(BaseCommand):
     """ Install command """
