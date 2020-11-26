@@ -1,5 +1,5 @@
-Module transaction
-==================
+Namespace transaction
+=====================
 
 Sub-modules
 -----------

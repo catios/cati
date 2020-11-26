@@ -1,5 +1,5 @@
-Module transaction.runners
-==========================
+Namespace transaction.runners
+=============================
 
 Sub-modules
 -----------

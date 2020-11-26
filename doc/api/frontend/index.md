@@ -1,5 +1,5 @@
-Module frontend
-===============
+Namespace frontend
+==================
 
 Sub-modules
 -----------

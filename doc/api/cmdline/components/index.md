@@ -1,5 +1,5 @@
-Module cmdline.components
-=========================
+Namespace cmdline.components
+============================
 
 Sub-modules
 -----------

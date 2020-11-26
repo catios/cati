@@ -1,5 +1,5 @@
-Module package
-==============
+Namespace package
+=================
 
 Sub-modules
 -----------

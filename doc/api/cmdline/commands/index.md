@@ -1,5 +1,5 @@
-Module cmdline.commands
-=======================
+Namespace cmdline.commands
+==========================
 
 Sub-modules
 -----------

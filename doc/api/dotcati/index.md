@@ -1,5 +1,5 @@
-Module dotcati
-==============
+Namespace dotcati
+=================
 
 Sub-modules
 -----------

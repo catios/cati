@@ -42,7 +42,7 @@ pylint:
 docs:
 	@rm -rf doc/api
 	@printf 'Generating api doc... '
-	@PYTHONPATH='$(shell pwd)/src' $(PY) -m pdoc dotcati frontend package transaction cmdline --output-dir doc/api --skip-errors &> /dev/null
+	@PYTHONPATH='$(shell pwd)/src' $(PY) -m pdoc dotcati frontend package transaction cmdline repo helpers --output-dir doc/api --skip-errors &> /dev/null
 	@printf '\033[32mFinished\033[0m\n'
 
 ### test		run tests
