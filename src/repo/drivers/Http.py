@@ -22,8 +22,10 @@
 
 """ repo http driver """
 
+import os
 import requests
 from repo.drivers.BaseDriver import BaseDriver
+from frontend import Temp
 
 class Http(BaseDriver):
     """ repo http driver """
@@ -35,9 +37,20 @@ class Http(BaseDriver):
             return False
         return res.ok
 
-    def get_data(self):
+    def get_data(self, download_event=None):
         """ Returns repo data """
-        res = requests.get(self.url + '?get_data=1')
-        if not res.ok:
-            return int(res.status_code)
-        return res.text
+        i = 0
+        last_res = None
+        temp_file = Temp.make_file()
+        os.remove(temp_file)
+        while i < 5:
+            if i > 4:
+                return last_res
+            last_res = download_event(self.url + '?get_data=1', temp_file)
+            if last_res == True:
+                f = open(temp_file, 'r')
+                content = f.read().strip()
+                f.close()
+                if content != '':
+                    return content
+            i += 1

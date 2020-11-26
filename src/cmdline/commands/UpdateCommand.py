@@ -28,7 +28,7 @@ import random
 import json
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
-from cmdline.components import ReposListErrorShower
+from cmdline.components import ReposListErrorShower, DownloadProgress
 from repo.Repo import Repo
 from frontend import Env, RootRequired
 from dotcati.PackageJsonValidator import PackageJsonValidator
@@ -62,6 +62,10 @@ class UpdateCommand(BaseCommand):
         """ an empty method """
         pass
 
+    def download_event(self, url, output):
+        """ repo data download event """
+        return DownloadProgress.download(url, output)
+
     def run(self):
         """ Run command """
 
@@ -93,10 +97,11 @@ class UpdateCommand(BaseCommand):
         for repo in list(reversed(orig_repos)):
             if not self.is_quiet():
                 pr.p('Fetching ' + repo.name + ' (' + repo.url + ') data...')
-            data = repo.get_data()
+            data = repo.get_data(download_event=self.download_event)
             if type(data) == int:
                 pr.e(ansi.red + 'Cannot update ' + repo.name + ' (' + repo.url + '): error code ' + str(data) + ansi.reset)
-                pass
+            elif isinstance(data, Exception):
+                pr.e(ansi.red + 'Cannot update ' + repo.name + ' (' + repo.url + '): ' + str(data) + ansi.reset)
             else:
                 # validate data
                 try:
@@ -108,7 +113,6 @@ class UpdateCommand(BaseCommand):
                     f.close()
                     downloaded_paths.append(path)
                 except:
-                    raise
                     pr.e(ansi.red + 'Cannot update ' + repo.name + ' (' + repo.url + '): invalid json data recived' + ansi.reset)
 
         if not self.is_quiet():

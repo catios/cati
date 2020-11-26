@@ -89,9 +89,9 @@ class Repo:
         """ Test repository """
         return self.__driver.test()
 
-    def get_data(self) -> str:
+    def get_data(self, download_event=None) -> str:
         """ Recives repo data returns data as json """
-        data = self.__driver.get_data()
+        data = self.__driver.get_data(download_event)
         try:
             j = json.loads(data)
             i = 0

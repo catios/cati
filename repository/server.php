@@ -92,6 +92,9 @@ if(is_dir($full_path) || is_file($full_path)){
         return FALSE;
     }else{
         if(isset($_GET['get_data'])){
+            header('Content-Type: application/json');
+            header("Content-Transfer-Encoding: Binary");
+            header("Content-disposition: attachment; filename=\"" . 'repo-data.json' . "\"");
             die(get_data($full_path));
         }else{
             echo '<h1>Cati repository</h1>';

@@ -17,6 +17,9 @@ Classes
     `config(self) ‑> dict`
     :   Define and config this command
 
+    `download_event(self, url, output)`
+    :   repo data download event
+
     `empty_method(self, a=None, b=None)`
     :   an empty method
 

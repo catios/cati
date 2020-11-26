@@ -26,6 +26,7 @@ import os
 import shutil
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
+from cmdline.components import DownloadProgress
 from package.Pkg import Pkg
 
 class DownloadCommand(BaseCommand):
@@ -73,9 +74,11 @@ class DownloadCommand(BaseCommand):
         if file_path[:7] == 'http://' or file_path[:8] == 'https://':
             i = 0
             while i < 5:
-                # TODO : use something else of `wget`
-                if os.system('wget "' + file_path + '" -O "' + output + '"') == 0:
+                res = DownloadProgress.download(file_path, output)
+                if res == True:
                     break
+                else:
+                    pr.e(ansi.red + str(res) + ansi.reset)
                 i += 1
             if i == 5:
                 return False

@@ -1,5 +1,5 @@
 #
-# File.py
+# DownloadProgress.py
 #
 # the cati project
 # Copyright 2020 parsa mpsh <parsampsh@gmail.com>
@@ -20,25 +20,15 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-""" repo file driver """
+""" Cli download progress bar """
 
-import os
-import json
-from repo.drivers.BaseDriver import BaseDriver
-from repo.DirCrawler import DirCrawler
+import wget
 
-class File(BaseDriver):
-    """ repo file driver """
-    def test(self):
-        """ test repo """
-        dir_path = self.url.split('://', 1)[-1]
-        return os.path.isdir(dir_path) and os.access(dir_path, os.R_OK)
-
-    def get_data(self, download_event=None):
-        """ Returns repo data """
-        crawler = DirCrawler(self.url.split('://', 1)[-1])
-        crawler.start()
-        try:
-            return json.dumps(crawler.loaded_packages)
-        except:
-            return '[]'
+def download(url, output_path=None):
+    """ Download `url` and save in `output_path` """
+    try:
+        wget.download(url, out=output_path)
+        print()
+        return True
+    except Exception as ex:
+        return ex
