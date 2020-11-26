@@ -66,3 +66,36 @@ class test_autoremove_command(TestCore):
         self.assert_true(not Pkg.is_installed('testpkg10'))
 
         self.refresh_env()
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkg11.cati',
+            'tests/test-packages/packages/testpkg10.cati',
+            '--auto',
+        ]), 0)
+
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/testpkg9.cati',
+        ]), 0)
+
+        self.assert_true(Pkg.is_installed('testpkg11'))
+        self.assert_true(Pkg.is_installed('testpkg10'))
+        self.assert_true(Pkg.is_installed('testpkg9'))
+
+        self.assert_equals(self.run_command('remove', [
+            '-y',
+            'testpkg9',
+        ]), 0)
+
+        self.assert_true(Pkg.is_installed('testpkg11'))
+        self.assert_true(Pkg.is_installed('testpkg10'))
+        self.assert_true(not Pkg.is_installed('testpkg9'))
+
+        self.assert_equals(self.run_command('autoremove', ['-y']), 0)
+
+        self.assert_true(not Pkg.is_installed('testpkg11'))
+        self.assert_true(not Pkg.is_installed('testpkg10'))
+        self.assert_true(not Pkg.is_installed('testpkg9'))
+
+        self.refresh_env()
