@@ -37,8 +37,36 @@ def show(calc: Calculator):
         pr.p('The following packages will be removed:')
         for pkg in calc.to_remove:
             pr.p('- ' + ansi.red + pkg.data['name'] + ansi.reset)
-    # TODO : seprate upgrade and downgrade and install
-    if calc.to_install:
+
+    to_install = []
+    to_upgrade = []
+    to_downgrade = []
+    to_reinstall = []
+    for pkg in calc.to_install:
+        if not pkg.installed():
+            to_install.append(pkg)
+        elif pkg.compare_version(pkg.wanted_version, pkg.data['version']) == 1:
+            to_upgrade.append(pkg)
+        elif pkg.compare_version(pkg.wanted_version, pkg.data['version']) == -1:
+            to_downgrade.append(pkg)
+        else:
+            to_reinstall.append(pkg)
+    if to_upgrade:
+        pr.p('The following packages will be upgraded:')
+        for pkg in to_upgrade:
+            pr.p('- ' + ansi.yellow + pkg.data['name'] + '(' + pkg.installed() + ' -> ' + pkg.wanted_version + ')' + ansi.reset)
+
+    if to_downgrade:
+        pr.p('The following packages will be downgraded:')
+        for pkg in to_downgrade:
+            pr.p('- ' + ansi.yellow + pkg.data['name'] + '(' + pkg.installed() + ' \/ ' + pkg.wanted_version + ')' + ansi.reset)
+
+    if to_reinstall:
+        pr.p('The following packages will be re-installed:')
+        for pkg in to_reinstall:
+            pr.p('- ' + ansi.yellow + pkg.data['name'] + '(' + pkg.wanted_version + ')' + ansi.reset)
+
+    if to_install:
         pr.p('The following packages will be installed:')
-        for pkg in calc.to_install:
+        for pkg in to_install:
             pr.p('- ' + ansi.green + pkg.data['name'] + '(' + pkg.wanted_version + ')' + ansi.reset)
