@@ -100,8 +100,9 @@ class InstallCommand(BaseCommand):
             return 1
 
         # calculate transactions
+        pr.p('Calculating transactions...')
         calc = Calculator()
-        calc.install(loaded_packages)
+        calc.install(list(reversed(loaded_packages)))
 
         # show transaction
         TransactionShower.show(calc)
