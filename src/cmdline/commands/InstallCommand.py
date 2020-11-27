@@ -24,7 +24,7 @@
 
 from cmdline.BaseCommand import BaseCommand
 from package.Pkg import Pkg
-from frontend import RootRequired
+from frontend import RootRequired, Env
 from cmdline import pr, ansi, ArgParser
 from transaction.Calculator import Calculator
 from cmdline.components import TransactionShower
@@ -107,30 +107,38 @@ class InstallCommand(BaseCommand):
         TransactionShower.show(calc)
 
         if not self.has_option('-y') or self.has_option('--yes'):
-            pr.p('Do you want to continue? [Y/n] ')
+            pr.p('Do you want to continue? [Y/n] ', end='')
             answer = input()
             if answer == 'y' or answer == 'Y' or answer == '':
                 pass
             else:
+                pr.p('Abort.')
                 return 1
 
         # start download packages
+        pr.p('Downloading packages...')
         downloaed_paths = []
         for pkg in calc.to_install:
             download_path = Env.cache_dir('/archives/' + pkg.data['name'] + '-' + pkg.wanted_version + '-' + pkg.data['arch'])
             download_cmd = DownloadCommand()
             i = 0
             res = 1
-            while res != 0:
+            tmp = True
+            while tmp:
                 if i > 5:
                     pr.e(ansi.red + 'Failed to download packages' + ansi.reset)
                     return res
-                res = download_cmd.handle(ArgParser.parse(['cati', 'download', pkg.data['name'] + '=' + pkg.wanted_version, '--output=' + download_path]))
+                pr.p('Downloading ' + pkg.data['name'] + ':' + pkg.data['version'] + ':' + pkg.data['arch'] + '...')
+                res = download_cmd.handle(ArgParser.parse(['cati', 'download', '-q', pkg.data['name'] + '=' + pkg.wanted_version, '--output=' + download_path]))
+                if res == 1 or res == None:
+                    tmp = False
                 i += 1
             downloaed_paths.append(download_path)
+        pr.p('Download completed.')
 
         # remove packages
-        if self.to_remove:
+        if calc.to_remove:
+            pr.p('Removing packages...')
             package_names = [pkg.data['name'] for pkg in self.to_remove]
             remove_cmd = RemoveCommand()
             res = remove_cmd.handle(ArgParser.parse(['cati', 'remove', *package_names, '-y']))
@@ -139,9 +147,11 @@ class InstallCommand(BaseCommand):
                 return res
 
         # install packages
+        pr.p('Installing packages...')
         pkg_cmd = PkgCommand()
         res = pkg_cmd.handle(ArgParser.parse(['cati', 'pkg', 'install', *downloaed_paths]))
-        if res != 0:
+        if res != 0 and res != None:
+            print(res)
             pr.e(ansi.red + 'Failed to install packages' + ansi.reset)
             return res
 

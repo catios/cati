@@ -45,9 +45,9 @@ def show(calc: Calculator):
     for pkg in calc.to_install:
         if not pkg.installed():
             to_install.append(pkg)
-        elif pkg.compare_version(pkg.wanted_version, pkg.data['version']) == 1:
+        elif pkg.compare_version(pkg.wanted_version, pkg.installed()) == 1:
             to_upgrade.append(pkg)
-        elif pkg.compare_version(pkg.wanted_version, pkg.data['version']) == -1:
+        elif pkg.compare_version(pkg.wanted_version, pkg.installed()) == -1:
             to_downgrade.append(pkg)
         else:
             to_reinstall.append(pkg)
@@ -59,7 +59,7 @@ def show(calc: Calculator):
     if to_downgrade:
         pr.p('The following packages will be downgraded:')
         for pkg in to_downgrade:
-            pr.p('- ' + ansi.yellow + pkg.data['name'] + '(' + pkg.installed() + ' \/ ' + pkg.wanted_version + ')' + ansi.reset)
+            pr.p('- ' + ansi.yellow + pkg.data['name'] + '(' + pkg.installed() + ' >> ' + pkg.wanted_version + ')' + ansi.reset)
 
     if to_reinstall:
         pr.p('The following packages will be re-installed:')

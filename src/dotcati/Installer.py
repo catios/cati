@@ -294,10 +294,18 @@ class Installer:
             lists_f.close()
         except:
             old_repo = 'Local'
-            pass
+
+        try:
+            lists_f = open(lists_path, 'r')
+            old_file_path = json.loads(lists_f.read())['file_path']
+            lists_f.close()
+        except:
+            old_file_path = False
 
         lists_f = open(lists_path, 'w')
         pkg.data['repo'] = old_repo
+        if old_file_path != False:
+            pkg.data['file_path'] = old_file_path
         tmp_pkg_data = pkg.data
         tmp_pkg_data['files'] = ['/' + member[6:] for member in pkg.members() if member[:6] == 'files/']
         lists_f.write(json.dumps(tmp_pkg_data))
