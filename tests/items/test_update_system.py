@@ -48,7 +48,7 @@ class test_update_system(TestCore):
 
         try:
             pkg_count = len(Pkg.all_list()['list'])
-            self.assert_true(pkg_count == 9 or pkg_count == 10 or pkg_count == 8 or pkg_count == 7)
+            self.assert_true(pkg_count == 9 or pkg_count == 10 or pkg_count == 8 or pkg_count == 7 or pkg_count == 11)
         except:
             print('Packages count:', pkg_count)
             raise
@@ -61,7 +61,7 @@ class test_update_system(TestCore):
 
         try:
             pkg_count = len(Pkg.all_list()['list'])
-            self.assert_true(pkg_count == 9 or pkg_count == 10 or pkg_count == 8 or pkg_count == 7)
+            self.assert_true(pkg_count == 9 or pkg_count == 10 or pkg_count == 8 or pkg_count == 7 or pkg_count == 11)
         except:
             print('Packages count:', pkg_count)
             raise
@@ -70,7 +70,7 @@ class test_update_system(TestCore):
 
         try:
             pkg_count = len(Pkg.all_list()['list'])
-            self.assert_true(pkg_count == 15 or pkg_count == 14)
+            self.assert_true(pkg_count == 15 or pkg_count == 14 or pkg_count == 16)
         except:
             print('Packages count:', pkg_count)
             raise
