@@ -72,3 +72,6 @@ read [repository system](/doc/repositories.md).
 this directory contains list of repositories in parted files.
 
 read [repository system](/doc/repositories.md).
+
+## directory `/var/cache/cati`
+cati uses this directory to cache some data like downloaded archives and repositories downloaded data.
