@@ -350,7 +350,7 @@ class Pkg:
 
         return Pkg(content_json)
 
-    def check_state(query_string: str, virtual=None) -> bool:
+    def check_state(query_string: str, virtual=None, get_false_pkg=False, get_false_pkg_next=0, get_true_pkg=False, get_true_pkg_next=0) -> bool:
         """
         Checks package state by query string.
 
@@ -497,14 +497,26 @@ class Pkg:
                                     ands_ok = False
                 elif not p[0] in virtual_installed_names_list and no_real_installs:
                     ands_ok = False
+                    if get_false_pkg and get_false_pkg_next <= 0:
+                        return p
+                    else:
+                        get_false_pkg_next -= 1
                 elif not p[0] in virtual_removed_names_list and all_real_is_installed:
                     pass
                 elif len(p) == 1:
                     if not Pkg.is_installed(p[0]) and not p[0] in virtual_installed_names_list or p[0] in virtual_removed_names_list:
                         ands_ok = False
+                        if get_false_pkg and get_false_pkg_next <= 0:
+                            return p
+                        else:
+                            get_false_pkg_next -= 1
                 elif len(p) == 3:
                     if not Pkg.is_installed(p[0]) and not p[0] in virtual_installed_names_list or p[0] in virtual_removed_names_list:
                         ands_ok = False
+                        if get_false_pkg and get_false_pkg_next <= 0:
+                            return p
+                        else:
+                            get_false_pkg_next -= 1
                     else:
                         if p[0] in virtual_installed_names_list:
                             a_ver = virtual_installed_versions_dict[p[0]]
@@ -514,20 +526,48 @@ class Pkg:
                         if p[1] == '=':
                             if Pkg.compare_version(a_ver, b_ver) != 0:
                                 ands_ok = False
+                                if get_false_pkg and get_false_pkg_next <= 0:
+                                    return p
+                                else:
+                                    get_false_pkg_next -= 1
                         elif p[1] == '>':
                             if Pkg.compare_version(a_ver, b_ver) != 1:
                                 ands_ok = False
+                                if get_false_pkg and get_false_pkg_next <= 0:
+                                    return p
+                                else:
+                                    get_false_pkg_next -= 1
                         elif p[1] == '<':
                             if Pkg.compare_version(a_ver, b_ver) != -1:
                                 ands_ok = False
+                                if get_false_pkg and get_false_pkg_next <= 0:
+                                    return p
+                                else:
+                                    get_false_pkg_next -= 1
                         elif p[1] == '<=':
                             if Pkg.compare_version(a_ver, b_ver) != -1 and Pkg.compare_version(a_ver, b_ver) != 0:
                                 ands_ok = False
+                                if get_false_pkg and get_false_pkg_next <= 0:
+                                    return p
+                                else:
+                                    get_false_pkg_next -= 1
                         elif p[1] == '>=':
                             if Pkg.compare_version(a_ver, b_ver) != 1 and Pkg.compare_version(a_ver, b_ver) != 0:
                                 ands_ok = False
+                                if get_false_pkg and get_false_pkg_next <= 0:
+                                    return p
+                                else:
+                                    get_false_pkg_next -= 1
                         else:
                             ands_ok = False
+                            if get_false_pkg and get_false_pkg_next <= 0:
+                                return p
+                            else:
+                                get_false_pkg_next -= 1
+                if ands_ok and get_true_pkg and get_true_pkg_next <= 0:
+                    return p
+                else:
+                    get_true_pkg_next -= 1
             if ands_ok:
                 return True
 

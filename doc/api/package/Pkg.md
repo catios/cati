@@ -63,7 +63,7 @@ Classes
 
     ### Methods
 
-    `check_state(query_string: str, virtual=None) ‑> bool`
+    `check_state(query_string: str, virtual=None, get_false_pkg=False, get_false_pkg_next=0, get_true_pkg=False, get_true_pkg_next=0) ‑> bool`
     :   Checks package state by query string.
         
         For examples:

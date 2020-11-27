@@ -102,6 +102,10 @@ class InstallCommand(BaseCommand):
         # calculate transactions
         pr.p('Calculating transactions...')
         calc = Calculator()
+        i = 0
+        while i < len(loaded_packages):
+            loaded_packages[i].is_manual = True
+            i += 1
         calc.install(list(reversed(loaded_packages)))
 
         # show transaction
@@ -134,26 +138,29 @@ class InstallCommand(BaseCommand):
                 if res == 1 or res == None:
                     tmp = False
                 i += 1
-            downloaed_paths.append(download_path)
+            downloaed_paths.append([download_path, pkg.is_manual])
         pr.p('Download completed.')
 
         # remove packages
         if calc.to_remove:
             pr.p('Removing packages...')
-            package_names = [pkg.data['name'] for pkg in self.to_remove]
+            package_names = [pkg.data['name'] for pkg in calc.to_remove]
             remove_cmd = RemoveCommand()
             res = remove_cmd.handle(ArgParser.parse(['cati', 'remove', *package_names, '-y']))
-            if res != 0:
+            if res != 0 and res != None:
                 pr.e(ansi.red + 'Failed to remove packages' + ansi.reset)
                 return res
 
         # install packages
         pr.p('Installing packages...')
-        pkg_cmd = PkgCommand()
-        res = pkg_cmd.handle(ArgParser.parse(['cati', 'pkg', 'install', *downloaed_paths]))
-        if res != 0 and res != None:
-            print(res)
-            pr.e(ansi.red + 'Failed to install packages' + ansi.reset)
-            return res
+        for path in downloaed_paths:
+            is_auto = []
+            if not path[1]:
+                is_auto = ['--auto']
+            pkg_cmd = PkgCommand()
+            res = pkg_cmd.handle(ArgParser.parse(['cati', 'pkg', 'install', path[0], *is_auto]))
+            if res != 0 and res != None:
+                pr.e(ansi.red + 'Failed to install packages' + ansi.reset)
+                return res
 
         pr.p(ansi.green + 'Done.' + ansi.reset)

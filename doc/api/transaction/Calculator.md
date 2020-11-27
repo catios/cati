@@ -18,6 +18,15 @@ Classes
     `get_sorted_list(self)`
     :   returns sorted list of all of packages
 
+    `handle_install_conflicts(self)`
+    :   Adds installable packages conflicts to install list
+
+    `handle_install_depends(self)`
+    :   Adds installable packages depends to install list
+
+    `handle_install_reverse_conflicts(self)`
+    :   Adds installable packages reverse conflicts to install list
+
     `has_any_thing(self)`
     :   returns is there any transactions to do
 

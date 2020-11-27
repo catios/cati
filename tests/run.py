@@ -86,6 +86,7 @@ def run():
     print()
     print(ansi.green + 'All ' + str(count) + ' tests passed successfuly')
     print('Cleaning up...' + ansi.reset)
+    os.remove('testpkgc-1.0.cati')
     shutil.rmtree(Env.base_path_dir)
     Temp.clean()
 

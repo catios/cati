@@ -75,8 +75,160 @@ class Calculator:
                 tmp = pkg.wanted_version
             except:
                 pkg.wanted_version = pkg.data['version']
-            self.to_install.insert(0, pkg)
+            try:
+                tmp = pkg.depend_get_next
+            except:
+                pkg.depend_get_next = {}
+            try:
+                tmp = pkg.conflict_get_next
+            except:
+                pkg.conflict_get_next = {}
+            try:
+                tmp = pkg.is_manual
+            except:
+                pkg.is_manual = False
+            i = 0
+            added = False
+            while i < len(self.to_install):
+                if self.to_install[i].data['name'] == pkg.wanted_version:
+                    self.to_install[i] = pkg
+                    added = True
+                i += 1
+            if not added:
+                self.to_install.insert(0, pkg)
         self.refresh_lists()
+
+    def handle_install_depends(self):
+        """ Adds installable packages depends to install list """
+        new_to_install = []
+        i = 0
+        while i < len(self.to_install):
+            depends = self.to_install[i].get_depends()
+            for depend in depends:
+                if not Pkg.check_state(depend):
+                    # find package depend
+                    try:
+                        self.to_install[i].depend_get_next[depend]
+                    except:
+                        try:
+                            self.to_install[i].depend_get_next[depend] = 0
+                        except:
+                            self.to_install[i].depend_get_next = {}
+                            self.to_install[i].depend_get_next[depend] = 0
+                    pkg = Pkg.check_state(depend, get_false_pkg=True, get_false_pkg_next=self.to_install[i].depend_get_next[depend])
+                    self.to_install[i].depend_get_next[depend] += 1
+                    if len(pkg) == 1:
+                        a = 0
+                        added = False
+                        while a < len(self.to_install):
+                            if self.to_install[a].data['name'] == pkg[0]:
+                                added = True
+                            a += 1
+                        if not added:
+                            new_to_install.append(Pkg.load_last(pkg[0]))
+                    elif len(pkg) == 3:
+                        a = 0
+                        added = False
+                        while a < len(self.to_install):
+                            if self.to_install[a].data['name'] == pkg[0]:
+                                wanted_version = pkg[2]
+                                installed_version = self.to_install[a].wanted_version
+                                if pkg[1] == '=':
+                                    if Pkg.compare_version(installed_version, wanted_version) == 0:
+                                        added = True
+                                elif pkg[1] == '>=':
+                                    if Pkg.compare_version(installed_version, wanted_version) >= 0:
+                                        added = True
+                                elif pkg[1] == '<=':
+                                    if Pkg.compare_version(installed_version, wanted_version) <= 0:
+                                        added = True
+                                elif pkg[1] == '>':
+                                    if Pkg.compare_version(installed_version, wanted_version) == 1:
+                                        added = True
+                                elif pkg[1] == '<':
+                                    if Pkg.compare_version(installed_version, wanted_version) == -1:
+                                        added = True
+                            a += 1
+                        if not added:
+                            pkg_obj = None
+                            if pkg[1] == '=':
+                                pkg_obj = Pkg.load_version(pkg[0], pkg[2])
+                            elif pkg[1] == '>=' or pkg[1] == '>':
+                                pkg_obj = Pkg.load_last(pkg[0])
+                            elif pkg[1] == '<=':
+                                pkg_obj = Pkg.load_version(pkg[0], pkg[2])
+                            elif pkg[1] == '<':
+                                pkg_obj = Pkg.load_last(pkg[0])
+                                versions = pkg_obj.get_versions_list()
+                                x = 0
+                                while x < len(versions):
+                                    if Pkg.compare_version(versions[x][0], pkg[0]) >= 0:
+                                        versions.pop(x)
+                                    x += 1
+                                versions = [v[0] for v in versions]
+                                wanted_ver = pkg.get_last_version(versions)
+                                pkg_obj = Pkg.load_version(pkg[0], wanted_ver)
+                            new_to_install.append(pkg_obj)
+            i += 1
+
+        if new_to_install:
+            self.install(new_to_install)
+
+    def handle_install_reverse_conflicts(self):
+        """ Adds installable packages reverse conflicts to install list """
+        new_to_remove = []
+        i = 0
+        while i < len(self.to_install):
+            conflicts = self.to_install[i].get_reverse_conflicts()
+            for conflict in conflicts:
+                if conflict.installed():
+                    a = 0
+                    added = False
+                    while a < len(self.to_remove):
+                        if self.to_remove[a].data['name'] == conflict.data['name']:
+                            added = True
+                        a += 1
+                    if not added:
+                        new_to_remove.append(conflict)
+            i += 1
+
+        if new_to_remove:
+            self.remove(new_to_remove)
+
+    def handle_install_conflicts(self):
+        """ Adds installable packages conflicts to install list """
+        new_to_remove = []
+        i = 0
+        while i < len(self.to_install):
+            conflicts = self.to_install[i].get_conflicts()
+            for conflict in conflicts:
+                if Pkg.check_state(conflict):
+                    # find package conflict
+                    try:
+                        self.to_install[i].conflict_get_next[conflict]
+                    except:
+                        try:
+                            self.to_install[i].conflict_get_next[conflict] = 0
+                        except:
+                            self.to_install[i].conflict_get_next = {}
+                            self.to_install[i].conflict_get_next[conflict] = 0
+                    pkg = Pkg.check_state(conflict, get_true_pkg=True, get_true_pkg_next=self.to_install[i].conflict_get_next[conflict])
+                    self.to_install[i].conflict_get_next[conflict] += 1
+                    a = 0
+                    added = False
+                    if type(pkg) == list:
+                        while a < len(self.to_remove):
+                            if self.to_remove[a].data['name'] == pkg[0]:
+                                added = True
+                            a += 1
+                        if not added:
+                            new_to_remove.append(Pkg.load_last(pkg[0]))
+            i += 1
+
+        if new_to_remove:
+            self.remove(new_to_remove)
+        
+        self.handle_install_reverse_conflicts()
 
     def refresh_lists(self):
         """ Refresh packages list and sync them with depends and conflicts """
@@ -88,8 +240,10 @@ class Calculator:
         i = 0
         while i < len(self.to_install):
             wv = self.to_install[i].wanted_version
+            im = self.to_install[i].is_manual
             self.to_install[i] = Pkg.load_version(self.to_install[i].data['name'], self.to_install[i].wanted_version)
             self.to_install[i].wanted_version = wv
+            self.to_install[i].is_manual = im
             i += 1
 
         # remove repeated lists in to_remove list
@@ -117,4 +271,5 @@ class Calculator:
         if new_to_remove:
             self.remove(new_to_remove)
 
-        # TODO : handle to_install list
+        self.handle_install_depends()
+        self.handle_install_conflicts()
