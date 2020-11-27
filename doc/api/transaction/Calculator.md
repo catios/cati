@@ -27,6 +27,9 @@ Classes
     `handle_install_reverse_conflicts(self)`
     :   Adds installable packages reverse conflicts to install list
 
+    `handle_install_reverse_depends(self)`
+    :   Adds installable packages reverse conflicts to install list
+
     `has_any_thing(self)`
     :   returns is there any transactions to do
 

@@ -22,11 +22,56 @@
 
 """ Test test_install """
 
+import os
 from TestCore import TestCore
+from package.Pkg import Pkg
 
 class test_install(TestCore):
     """ Test test_install """
     def run(self):
         """ Run test """
-        # TODO : write this test with upgrade test
-        self.assert_true(True)
+        self.refresh_env()
+
+        repo1 = "file://" + os.getcwd() + '/repository name=test arch=all pkg=cati'
+        repo2 = "file://" + os.getcwd() + '/repository name=test arch=i386 pkg=cati'
+
+        self.assert_equals(self.run_command('repo', ['--add', repo1]), 0)
+        self.assert_equals(self.run_command('repo', ['--add', repo2]), 0)
+        self.assert_equals(self.run_command('update'), 0)
+
+        self.assert_equals(self.run_command('install', ['testpkg10', '-y']), 0)
+
+        self.assert_true(Pkg.is_installed('testpkg10'))
+        self.assert_true(Pkg.is_installed('testpkg11'))
+
+        self.assert_equals(self.run_command('install', ['testpkgb', '-y']), 0)
+
+        self.assert_true(Pkg.is_installed('testpkgb'))
+        self.assert_true(Pkg.is_installed('testpkgc'))
+
+        self.assert_equals(self.run_command('install', ['testpkgz', '-y']), 0)
+
+        self.assert_true(not Pkg.is_installed('testpkgb'))
+        self.assert_true(not Pkg.is_installed('testpkgc'))
+        self.assert_true(Pkg.is_installed('testpkgz'))
+
+        self.assert_equals(self.run_command('install', ['testpkgb', '-y']), 0)
+
+        self.assert_true(Pkg.is_installed('testpkgb'))
+        self.assert_true(Pkg.is_installed('testpkgc'))
+        self.assert_true(not Pkg.is_installed('testpkgz'))
+
+        self.assert_equals(self.run_command('remove', ['testpkgb', 'testpkgc', '-y']), 0)
+
+        # test upgrade
+        self.assert_equals(self.run_command('install', ['testpkgc=1.0', '-y']), 0)
+
+        testpkgc = Pkg.load_last('testpkgc')
+        self.assert_equals(testpkgc.installed(), '1.0')
+
+        self.assert_equals(self.run_command('upgrade', ['-y']), 0)
+
+        testpkgc = Pkg.load_last('testpkgc')
+        self.assert_equals(testpkgc.installed(), '2.0')
+
+        self.refresh_env()

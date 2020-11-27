@@ -174,6 +174,13 @@ class Calculator:
         if new_to_install:
             self.install(new_to_install)
 
+        self.handle_install_reverse_depends()
+
+    def handle_install_reverse_depends(self):
+        """ Adds installable packages reverse conflicts to install list """
+        # TODO : handle reverse depends
+        pass
+
     def handle_install_reverse_conflicts(self):
         """ Adds installable packages reverse conflicts to install list """
         new_to_remove = []
