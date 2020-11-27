@@ -29,14 +29,12 @@ read cati security policy in [here](/SECURITY.md).
 ## Installation
 
 ### dependencies
-before compile and install cati install the cati dependencies:
+before compile and install cati install the cati dev-dependencies:
 
-- `python3 (>= 3.6)` for development environment
-- `pip3` for development environment
-- `virtualenv` for development environment
-- `make` for development environment
-- `vim` for runtime
-- `wget` for runtime
+- `python3 (>= 3.6)`
+- `pip3`
+- `virtualenv`
+- `make`
 
 to check them you can use the following commands:
 
@@ -45,8 +43,6 @@ python3 --version
 python3 -m pip --version
 virtualenv --version
 make --version
-vim --version
-wget --version
 ```
 
 ### compile and install

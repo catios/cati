@@ -29,6 +29,8 @@ and calculates all of operations needed to be done
 (actualy, includes dependencies, conflicts...)
 """
 
+from package.Pkg import Pkg
+
 class Calculator:
     """ Transaction calculator """
     def __init__(self):
@@ -78,7 +80,18 @@ class Calculator:
 
     def refresh_lists(self):
         """ Refresh packages list and sync them with depends and conflicts """
-        # TODO : handle to_install list
+        # sync versions
+        i = 0
+        while i < len(self.to_remove):
+            self.to_remove[i] = Pkg.load_version(self.to_remove[i].data['name'], self.to_remove[i].installed())
+            i += 1
+        i = 0
+        while i < len(self.to_install):
+            wv = self.to_install[i].wanted_version
+            self.to_install[i] = Pkg.load_version(self.to_install[i].data['name'], self.to_install[i].wanted_version)
+            self.to_install[i].wanted_version = wv
+            i += 1
+
         # remove repeated lists in to_remove list
         a = 0
         while a < len(self.to_remove):
@@ -103,3 +116,5 @@ class Calculator:
                         new_to_remove.append(rd)
         if new_to_remove:
             self.remove(new_to_remove)
+
+        # TODO : handle to_install list
