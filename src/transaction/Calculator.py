@@ -178,7 +178,6 @@ class Calculator:
 
     def handle_install_reverse_depends(self):
         """ Adds installable packages reverse conflicts to install list """
-        # TODO : handle reverse depends
         pass
 
     def handle_install_reverse_conflicts(self):

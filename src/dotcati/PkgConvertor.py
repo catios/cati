@@ -93,7 +93,6 @@ def deb2cati(file_path: str) -> str:
         # convert control fields to cati data.json
         cati_data = {}
         for k in control_fields:
-            # TODO : convert more fields
             if k == 'Package':
                 cati_data['name'] = control_fields[k].strip()
             elif k == 'Version':

@@ -1,6 +1,8 @@
 # TODO
 
 - [ ] create `--download-only` option for install command
+- [ ] some changes in transaction calculator
+- [ ] add more fields to package convertor
 - [ ] handle logging and debug logs
 - [ ] create graphical interface base
 - [ ] write big data test to test program in an environment with much data
