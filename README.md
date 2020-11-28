@@ -59,7 +59,7 @@ source venv/bin/activate
 python3 -m pip install -r requirements.txt
 
 # compile and install
-make
+make -j4 # use `-jN` option to speed up build process
 sudo make install clean
 ```
 
