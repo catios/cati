@@ -39,7 +39,7 @@ this module gets package information as json (`data.json`) and validate fields i
 ```python
 # ...
 
-from dotcati import PackageJsonValidator
+from dotcati.PackageJsonValidator import PackageJsonValidator
 
 PackageJsonValidator.validate(data) # output is boolean
 
