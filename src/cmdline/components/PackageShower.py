@@ -29,8 +29,10 @@ from package.Pkg import Pkg
 
 def show(data: dict):
     """
-    shows package information.
-    gets package data and show them in cli
+    shows package information from data dictonary.
+    
+    Args:
+        data: (dict) package data dictonary
     """
     output = ''
     output += 'Name: ' + ansi.green + data['name'] + ansi.reset + '\n'

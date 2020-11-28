@@ -7,8 +7,7 @@ Functions
 
     
 `show(calc: transaction.Calculator.Calculator)`
-:   shows transactions.
+:   shows transactions from `Calculator` object.
     
-    gets a transaction.Calculator.Calculator object
-    and shows list of calculated transactions
-    (install/remove/upgrade/downgrade)
+    Args:
+        calc: `transaction.Calculator.Calculator` object

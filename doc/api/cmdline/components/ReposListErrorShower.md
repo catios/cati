@@ -6,5 +6,8 @@ Functions
 ---------
 
     
-`show(repos)`
-:
+`show(repos: list)`
+:   Shows errors in the repositories list
+    
+    Args:
+        repos: list of loaded repositories (list[repo.Repo.Repo])

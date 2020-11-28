@@ -31,19 +31,36 @@ if this variable is True, print will be disable. this variable will get True val
 """
 
 def p(value='', end='\n'):
-    """ Prints on stdout """
+    """
+    Prints on stdout
+
+    Args:
+        value: that value you want to print
+        end: the end of line (default is `\\n`)
+    """
     if is_testing:
     	return
     return print(value, end=end, flush=True)
 
 def e(value='', end='\n'):
-    """ Prints on stderr """
+    """
+    Prints on stderr
+
+    Args:
+        value: that value you want to print
+        end: the end of line (default is `\\n`)
+    """
     if is_testing:
     	return
     return print(value, end=end, flush=True, file=sys.stderr)
 
 def exit(code=0):
-    """ Exits program with exit code and deletes temp files before exit """
+    """
+    Exits program with exit code and deletes temp files before exit
+
+    Args:
+        code: the exit code (default 0)
+    """
     if is_testing:
     	return
     # delete temp files before exit

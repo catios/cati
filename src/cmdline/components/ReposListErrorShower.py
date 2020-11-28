@@ -24,7 +24,13 @@
 
 from cmdline import pr
 
-def show(repos):
+def show(repos: list):
+    """
+    Shows errors in the repositories list
+
+    Args:
+        repos: list of loaded repositories (list[repo.Repo.Repo])
+    """
     for repo in repos:
         if repo.syntax_errors:
             for error in repo.syntax_errors:
