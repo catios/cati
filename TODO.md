@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] create `--download-only` option for install command
 - [ ] some changes in transaction calculator
 - [ ] add more fields to package convertor
 - [ ] handle logging and debug logs
