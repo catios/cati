@@ -29,7 +29,7 @@ import shutil
 created_temp_dirs = []
 created_temp_files = []
 
-def make_dir():
+def make_dir() -> str:
     """ Makes a temp directory and returns path of that directory """
     global created_temp_dirs
     path = '/tmp/' + 'cati-temp-' + str(random.random())
@@ -41,7 +41,7 @@ def make_dir():
     created_temp_dirs.append(path)
     return path
 
-def make_file():
+def make_file() -> str:
     """ Makes a temp file and returns path of that file """
     global created_temp_files
     path = '/tmp/' + 'cati-temp-' + str(random.random())

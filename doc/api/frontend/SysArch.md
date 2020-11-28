@@ -14,5 +14,5 @@ Functions
 ---------
 
     
-`sys_arch()`
+`sys_arch() ‑> str`
 :   Returns system architecture

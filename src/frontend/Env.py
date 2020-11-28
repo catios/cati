@@ -31,7 +31,7 @@ to isolate program environemnt while running tests
 
 base_path_dir = ''
 """
-base path of the cati files environment.
+str: base path of the cati files environment.
 (will get another path in testing environment to isolate testing environment with real environment)
 """
 

@@ -31,7 +31,15 @@ from cmdline.commands import PkgCommand
 from cmdline import ArgParser
 
 def deb2cati(file_path: str) -> str:
-    """ Converts deb package to cati package and returns generated cati package file path """
+    """
+    Converts deb package to cati package and returns generated cati package file path
+
+    Args:
+        file_path: deb package filepath
+
+    Returns:
+        returns generated cati package filepath
+    """
     file_path = os.path.abspath(file_path)
     tmp_dir = Temp.make_dir()
     cwd = os.getcwd()
@@ -130,7 +138,15 @@ def deb2cati(file_path: str) -> str:
     return file_path
 
 def rpm2cati(file_path: str) -> str:
-    """ Converts rpm package to cati package and returns generated cati package file path """
+    """
+    Converts rpm package to cati package and returns generated cati package file path
+
+    Args:
+        file_path: rpm package filepath
+
+    Returns:
+        returns generated cati package filepath
+    """
     # require alien
     if os.system('alien 2> /dev/null') != 256:
         return file_path

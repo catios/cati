@@ -24,8 +24,16 @@
 
 import hashlib
 
-def calc_file_sha256(filepath):
-    """ gets filepath and calculates sha256 sum of that """
+def calc_file_sha256(filepath: str) -> str:
+    """
+    gets filepath and calculates sha256 sum of that
+    
+    Args:
+        filepath (str): filepath you want to calculate hash of that
+
+    Returns:
+        str: calculated hash
+    """
     sha256_hash = hashlib.sha256()
     f = open(filepath, 'rb')
     for byte_block in iter(lambda: f.read(4096),b""):
@@ -33,7 +41,15 @@ def calc_file_sha256(filepath):
     return sha256_hash.hexdigest()
 
 def calc_file_sha512(filepath):
-    """ gets filepath and calculates sha512 sum of that """
+    """
+    gets filepath and calculates sha512 sum of that
+    
+    Args:
+        filepath (str): filepath you want to calculate hash of that
+
+    Returns:
+        str: calculated hash
+    """
     sha512_hash = hashlib.sha512()
     f = open(filepath, 'rb')
     for byte_block in iter(lambda: f.read(4096),b""):
@@ -41,7 +57,15 @@ def calc_file_sha512(filepath):
     return sha512_hash.hexdigest()
 
 def calc_file_md5(filepath):
-    """ gets filepath and calculates md5 sum of that """
+    """
+    gets filepath and calculates md5 sum of that
+    
+    Args:
+        filepath (str): filepath you want to calculate hash of that
+
+    Returns:
+        str: calculated hash
+    """
     md5_hash = hashlib.md5()
     f = open(filepath, 'rb')
     for byte_block in iter(lambda: f.read(4096),b""):

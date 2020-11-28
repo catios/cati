@@ -24,5 +24,5 @@
 
 version = 'v0.1-dev'
 """
-cati version
+str: cati version
 """

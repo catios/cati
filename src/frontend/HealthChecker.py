@@ -26,7 +26,14 @@ import os
 from frontend import Env
 
 def repair_once_file(filepath: str, events: dict):
-    """ Repairs once file """
+    """
+    Repairs once file
+
+    Args:
+        filepath (str): the filepath to repair
+        events (dict):
+            - faild_to_repair
+    """
     try:
         f = open(Env.base_path('/' + filepath).replace('//', '/'), 'w')
         f.write('')
@@ -35,7 +42,14 @@ def repair_once_file(filepath: str, events: dict):
         events['failed_to_repair']('/' + filepath, 'file')
 
 def repair_once_dir(dirpath: str, events: dict):
-    """ Repairs once dir """
+    """
+    Repairs once dir
+
+    Args:
+        dirpath (str): the dirpath to repair
+        events (dict):
+            - faild_to_repair
+    """
     try:
         os.mkdir(Env.base_path('/' + dirpath))
     except:
@@ -45,9 +59,10 @@ def check(events: dict):
     """
     Check all of needed files and dirs for cati installation
 
-    events:
-    - failed_to_repair: will run when cati installation is corrupt and user has not root permission
-    to repair it and passes filepath and type of that to function
+    Args:
+        events:
+            - failed_to_repair: will run when cati installation is corrupt and user has not root permission
+            to repair it and passes filepath and type of that to function
     """
 
     required_files = [

@@ -7,4 +7,4 @@ Variables
 
     
 `version`
-:   cati version
+:   str: cati version

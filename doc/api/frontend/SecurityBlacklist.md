@@ -11,5 +11,8 @@ Functions
 ---------
 
     
-`get_list()`
+`get_list() ‑> list`
 :   returns list of blaclist items
+    
+    Returns:
+        list: returns list of blacklist items

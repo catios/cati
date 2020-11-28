@@ -30,7 +30,7 @@ in testing environment,
 default architecture is `i386`, not real host arch.
 """
 
-def sys_arch():
+def sys_arch() -> str:
     """ Returns system architecture """
     if is_testing:
         return 'i386'

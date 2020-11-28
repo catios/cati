@@ -33,8 +33,13 @@ import os
 import json
 from frontend import Env
 
-def get_list():
-    """ returns list of blaclist items """
+def get_list() -> list:
+    """
+    returns list of blaclist items
+    
+    Returns:
+        list: returns list of blacklist items
+    """
     db_parts = os.listdir(Env.security_blacklist())
     blacklist = []
     for part in db_parts:
