@@ -22,6 +22,7 @@
 
 """ Install command """
 
+import os
 from cmdline.BaseCommand import BaseCommand
 from package.Pkg import Pkg
 from frontend import RootRequired, Env
@@ -31,6 +32,7 @@ from cmdline.components import TransactionShower
 from cmdline.commands.DownloadCommand import DownloadCommand
 from cmdline.commands.RemoveCommand import RemoveCommand
 from cmdline.commands.PkgCommand import PkgCommand
+from helpers.hash import calc_file_sha256, calc_file_md5
 
 class InstallCommand(BaseCommand):
     """ Install command """
@@ -44,6 +46,7 @@ class InstallCommand(BaseCommand):
         Options:
         -y|--yes: don't ask for user confirmation
         --reinstall: reinstall gived packages
+        --download-only: only download packages. this helps you to only download packages and install them later
         """
         pass
 
@@ -55,6 +58,7 @@ class InstallCommand(BaseCommand):
                 '-y': [False, False],
                 '--yes': [False, False],
                 '--reinstall': [False, False],
+                '--download-only': [False, False],
             },
             'max_args_count': None,
             'min_args_count': 1,
@@ -117,6 +121,14 @@ class InstallCommand(BaseCommand):
                 if calc.to_install[i].installed() == calc.to_install[i].wanted_version:
                     if not self.has_option('--reinstall'):
                         pr.p('Package ' + calc.to_install[i].data['name'] + '=' + calc.to_install[i].wanted_version + ' is currently installed. use --reinstall option to re-install it.')
+                        if calc.to_install[i].is_manual:
+                            try:
+                                pr.p('Setting it as manual installed package...')
+                                manual_f = open(Env.installed_lists('/' + pkg.data['name'] + '/manual'), 'w')
+                                manual_f.write('')
+                                manual_f.close()
+                            except:
+                                pass
                         calc.to_install.pop(i)
             i += 1
 
@@ -142,6 +154,26 @@ class InstallCommand(BaseCommand):
         downloaed_paths = []
         for pkg in calc.to_install:
             download_path = Env.cache_dir('/archives/' + pkg.data['name'] + '-' + pkg.wanted_version + '-' + pkg.data['arch'])
+            if os.path.isfile(download_path):
+                file_sha256 = calc_file_sha256(download_path)
+                file_md5 = calc_file_md5(download_path)
+                valid_sha256 = None
+                valid_md5 = None
+                try:
+                    valid_sha256 = pkg.data['file_sha256']
+                except:
+                    valid_sha256 = file_sha256
+                try:
+                    valid_md5 = pkg.data['file_md5']
+                except:
+                    valid_md5 = file_md5
+                if file_md5 != valid_md5 or file_sha256 != valid_sha256:
+                    # file is corrupt and should be download again
+                    os.remove(download_path)
+                else:
+                    pr.p('Using Cache for ' + pkg.data['name'] + ':' + pkg.data['version'] + ':' + pkg.data['arch'] + '...')
+                    downloaed_paths.append([download_path, pkg.is_manual])
+                    continue
             download_cmd = DownloadCommand()
             i = 0
             res = 1
@@ -157,6 +189,10 @@ class InstallCommand(BaseCommand):
                 i += 1
             downloaed_paths.append([download_path, pkg.is_manual])
         pr.p('Download completed.')
+
+        # check --download-only option
+        if self.has_option('--download-only'):
+            return 0
 
         # remove packages
         if calc.to_remove:

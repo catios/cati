@@ -349,11 +349,29 @@ class Installer:
         except:
             old_file_path = False
 
+        try:
+            lists_f = open(lists_path, 'r')
+            old_file_sha256 = json.loads(lists_f.read())['file_sha256']
+            lists_f.close()
+        except:
+            old_file_sha256 = False
+
+        try:
+            lists_f = open(lists_path, 'r')
+            old_file_md5 = json.loads(lists_f.read())['file_md5']
+            lists_f.close()
+        except:
+            old_file_md5 = False
+
         lists_f = open(lists_path, 'w')
         pkg.data['repo'] = old_repo
         if old_file_path != False:
             pkg.data['file_path'] = old_file_path
         tmp_pkg_data = pkg.data
+        if old_file_md5:
+            tmp_pkg_data['file_md5'] = old_file_md5
+        if old_file_sha256:
+            tmp_pkg_data['file_sha256'] = old_file_sha256
         tmp_pkg_data['files'] = ['/' + member[6:] for member in pkg.members() if member[:6] == 'files/']
         lists_f.write(json.dumps(tmp_pkg_data))
         lists_f.close()

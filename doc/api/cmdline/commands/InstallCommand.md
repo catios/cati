@@ -26,6 +26,7 @@ Classes
         Options:
         -y|--yes: don't ask for user confirmation
         --reinstall: reinstall gived packages
+        --download-only: only download packages. this helps you to only download packages and install them later
 
     `run(self)`
     :   Run command

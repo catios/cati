@@ -25,6 +25,7 @@
 import os
 import json
 from dotcati.ArchiveModel import archive_factory
+from helpers.hash import calc_file_sha256, calc_file_md5
 
 def scan(directory: str):
     """
@@ -55,6 +56,8 @@ def scan_once(filepath: str):
     data = pkg.data
 
     data['file_path'] = os.path.abspath(filepath)
+    data['file_sha256'] = calc_file_sha256(filepath)
+    data['file_md5'] = calc_file_md5(filepath)
     data['pkg_type'] = filepath.split('.')[-1]
 
     data_file = open(filepath + '.json', 'w')
