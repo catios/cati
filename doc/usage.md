@@ -115,7 +115,7 @@ cati state --complete
 
 Options:
 - `--abort`: cancel undoned transactions
-- `--complete`: complete undoned transactions (this option is in progress)
+- `--complete`: complete undoned transactions
 
 ## query command
 this command checks package query
@@ -127,6 +127,8 @@ cati query "somepackage >= 2.0"
 cati query "somepackage = 1.7 | tstpkg & anotherpkg <= 1.5"
 # ...
 ```
+
+read [package query guide](package-query.md) for more information.
 
 ## search command
 search between packages by name and description (is alias of `cati list --search="someword"`)
@@ -158,7 +160,7 @@ cati finfo ../dir/file
 this info contains that which package is owner of the file and type of that file (conffile)
 
 ## rdepends command
-shows reverse depends list of packages
+shows reverse depends list of packages (list of that packages has dependency to a package)
 
 ```bash
 cati rdepends pkg1
@@ -247,8 +249,8 @@ Options:
 - `-y|--yes`: don't ask for user confirmation
 
 ```bash
-cati install [options] pkg1 pkg2 pkg3 ...
-cati install [options] pkg1 pkg2=<version>
+sudo cati install [options] pkg1 pkg2 pkg3 ...
+sudo cati install [options] pkg1 pkg2=<version>
 ```
 
 ## upgrade command
@@ -257,7 +259,7 @@ upgrade all of packages
 Options: all of `install` command options
 
 ```bash
-cati upgrade [options]
+sudo cati upgrade [options]
 ```
 
 ## full-upgrade command
@@ -267,5 +269,5 @@ Options:
 - `-y|--yes`: don't ask for user confirmation
 
 ```bash
-cati full-upgrade [options]
+sudo cati full-upgrade [options]
 ```
