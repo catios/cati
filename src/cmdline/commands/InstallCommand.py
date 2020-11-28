@@ -43,6 +43,7 @@ class InstallCommand(BaseCommand):
 
         Options:
         -y|--yes: don't ask for user confirmation
+        --reinstall: reinstall gived packages
         """
         pass
 
@@ -53,6 +54,7 @@ class InstallCommand(BaseCommand):
             'options': {
                 '-y': [False, False],
                 '--yes': [False, False],
+                '--reinstall': [False, False],
             },
             'max_args_count': None,
             'min_args_count': 1,
@@ -107,6 +109,21 @@ class InstallCommand(BaseCommand):
             loaded_packages[i].is_manual = True
             i += 1
         calc.install(list(reversed(loaded_packages)))
+
+        # handle reinstallable packages
+        i = 0
+        while i < len(calc.to_install):
+            if calc.to_install[i].installed():
+                if calc.to_install[i].installed() == calc.to_install[i].wanted_version:
+                    if not self.has_option('--reinstall'):
+                        pr.p('Package ' + calc.to_install[i].data['name'] + '=' + calc.to_install[i].wanted_version + ' is currently installed. use --reinstall option to re-install it.')
+                        calc.to_install.pop(i)
+            i += 1
+
+        # check transactions exists
+        if not calc.has_any_thing():
+            pr.p('Nothing to do.')
+            return 0
 
         # show transaction
         TransactionShower.show(calc)

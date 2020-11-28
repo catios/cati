@@ -25,6 +25,7 @@ Classes
         
         Options:
         -y|--yes: don't ask for user confirmation
+        --reinstall: reinstall gived packages
 
     `run(self)`
     :   Run command

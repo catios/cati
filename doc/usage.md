@@ -247,10 +247,12 @@ install packages
 
 Options:
 - `-y|--yes`: don't ask for user confirmation
+- `--reinstall`: re-install currently installed packages
 
 ```bash
 sudo cati install [options] pkg1 pkg2 pkg3 ...
 sudo cati install [options] pkg1 pkg2=<version>
+sudo cati install somepkg --reinstall # reinstall somepkg if currently installed
 ```
 
 ## upgrade command
