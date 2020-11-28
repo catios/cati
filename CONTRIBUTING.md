@@ -65,7 +65,9 @@ if you are adding/changing a feature, sync test of that feature with your change
 
 ## docstring
 make sure to writing good docstring for classes, functions and variables.
-write docstring between `"""` (double qoute, not single qoute)
+write docstring between `"""` (double qoute, not single qoute).
+
+Also use [google python docstring style](https://google.github.io/styleguide/pyguide.html#s3.8.1-comments-in-doc-strings) to writing docstrings.
 
 ## always run `make all`
 always run `make all` command after your changes.
