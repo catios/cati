@@ -20,10 +20,10 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
+""" Crawls an directory and extracts packages data from that """
+
 import os
 import json
-
-""" Crawls an directory and extracts packages data from that """
 
 class DirCrawler:
     """ Crawls an directory and extracts packages data from that """
@@ -31,8 +31,13 @@ class DirCrawler:
         self.dirpath = dirpath
         self.loaded_packages = []
 
-    def add_once(self, path):
-        """ add once package data item """
+    def add_once(self, path: str):
+        """
+        add once package data item
+        
+        Args:
+            path (str): package filepath
+        """
         if path.split('.')[-1] != 'json':
             return
         try:
@@ -46,7 +51,12 @@ class DirCrawler:
         self.loaded_packages.append(json_data)
 
     def start(self, path=''):
-        """ start crwaling """
+        """
+        start crwaling (loaded packages will put in self.loaded_packages)
+        
+        Args:
+            path (str): directory path
+        """
         if path == '':
             path = self.dirpath
         for item in os.listdir(path):

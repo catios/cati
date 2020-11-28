@@ -41,15 +41,20 @@ class Pkg:
             self.data['repo'] = 'Local'
         self.data['version'] = self.data['version'].strip()
 
-    def installed(self):
+    def installed(self) -> (str, bool):
         """ Checks current package is installed. if yes, returns installed version and if not, returns False """
         if not Pkg.is_installed(self.data['name']):
             return False
 
         return Pkg.installed_version(self.data['name'])
 
-    def installed_static_files(self):
-        """ returns list of installed files of package """
+    def installed_static_files(self) -> list:
+        """
+        returns list of installed files of package
+
+        Returns:
+            list[str]: files paths
+        """
         if not self.installed():
             return False
         installed_static_files_list = open(Env.installed_lists('/' + self.data['name'] + '/staticfiles'), 'r').read().strip()
@@ -57,27 +62,27 @@ class Pkg:
         installed_static_files_list = [item.strip().split('@', 1) for item in installed_static_files_list if item.strip() != '']
         return installed_static_files_list
 
-    def get_depends(self):
+    def get_depends(self) -> list:
         """ Returns package dependencies list """
         try:
             return self.data['depends']
         except:
             return []
 
-    def get_conflicts(self):
+    def get_conflicts(self) -> list:
         """ Returns package conflicts list """
         try:
             return self.data['conflicts']
         except:
             return []
-    def get_conffiles(self):
+    def get_conffiles(self) -> list:
         """ Returns package conffiles list """
         try:
             return self.data['conffiles']
         except:
             return []
 
-    def get_static_files(self):
+    def get_static_files(self) -> list:
         """ returns package static files list """
         try:
             return self.data['staticfiles']
@@ -85,7 +90,11 @@ class Pkg:
             return []
 
     def get_reverse_depends(self) -> list:
-        """ Returns list of packages has dependency to this package """
+        """ Returns list of packages has dependency to this package
+        
+        Returns:
+            list[Pkg]: list of packages has dependency to this package
+        """
         reverse_depends = []
         for pkg in self.all_list()['list']:
             for dep in pkg.get_depends():
@@ -102,7 +111,10 @@ class Pkg:
         return reverse_depends
 
     def get_reverse_conflicts(self) -> list:
-        """ Returns list of packages has conflicts with this package """
+        """ Returns list of packages has conflicts with this package
+        
+        Returns:
+            list[Pkg]: list of packages has conflict with this package"""
         reverse_conflicts_list = []
         for pkg in self.installed_list()['list']:
             conflicts = pkg.get_conflicts()
@@ -120,7 +132,9 @@ class Pkg:
     def get_versions_list(self):
         """
         returns versions list of the package
-        Output structure: list [ [<version>, <arch>] ]
+        
+        Returns:
+            list: list of versions: [ [<version>, <arch>] ]
         """
         try:
             f_index = open(Env.packages_lists('/' + self.data['name'] + '/index'), 'r')
@@ -143,12 +157,12 @@ class Pkg:
         """
         returns list of all of installed files
 
-        Result structure:
-        [
-            ['pkgname', 'filetype(d,f,cd,cf)', '/file/path'],
-            ['pkg1', 'f', '/path/to/file'],
-            ...
-        ]
+        Returns:
+            list: [
+                ['pkgname', 'filetype(d,f,cd,cf)', '/file/path'],
+                ['pkg1', 'f', '/path/to/file'],
+                ...
+            ]
         """
         # load list of installed packages
         installed_packages = Pkg.installed_list()['list']
@@ -163,8 +177,16 @@ class Pkg:
         return result
 
     @staticmethod
-    def load_last(pkg_name: str):
-        """ Load last version of package by name """
+    def load_last(pkg_name: str) -> bool:
+        """ Load last version of package by name
+
+        Args:
+            pkg_name (str): the package name
+
+        Returns:
+            bool (False): package not found
+            Pkg: the loaded Pkg boject
+        """
         pkgs_list = Pkg.all_list()
         for item in pkgs_list['list']:
             if item.data['name'] == pkg_name:
@@ -172,8 +194,15 @@ class Pkg:
         return False
 
     @staticmethod
-    def is_installed(package_name: str):
-        """ Gets a package name and checks is installed or not """
+    def is_installed(package_name: str) -> bool:
+        """ Gets a package name and checks is installed or not
+        
+        Args:
+            package_name (str): the package name you want to check is installed
+        
+        Returns:
+            bool
+        """
         try:
             assert os.path.isdir(Env.installed_lists('/' + package_name))
             assert os.path.isfile(Env.installed_lists('/' + package_name + '/ver'))
@@ -183,8 +212,15 @@ class Pkg:
             return False
 
     @staticmethod
-    def is_installed_manual(package_name: str):
-        """ Gets a package name and checks is installed MANUAL or not """
+    def is_installed_manual(package_name: str) -> bool:
+        """ Gets a package name and checks is installed MANUAL or not
+        
+        Args:
+            package_name (str): the package name you want to check is installed
+        
+        Returns:
+            bool
+        """
         if not Pkg.is_installed(package_name):
             return False
         return os.path.isfile(Env.installed_lists('/' + package_name + '/manual'))
@@ -193,10 +229,16 @@ class Pkg:
     def load_version(pkg_name: str, version: str, arch=''):
         """
         loads a specify version of a package
-        Outputs:
-        - 1: package not found
-        - 2: package found, but version not found
-        - Pkg object: package and version found and returned
+
+        Args:
+            pkg_name (str): name of package
+            version (str): that version you want to load
+            arch (str): load specify arch (optional)
+        
+        Returns:
+            int (1): package not found
+            int (2): package found, but version/arch not found
+            Pkg object: package and version found and returned
         """
         if not os.path.isfile(Env.packages_lists('/' + pkg_name + '/index')):
             return 1
@@ -241,8 +283,18 @@ class Pkg:
         return 2
 
     @staticmethod
-    def installed_version(package_name: str):
-        """ Gets name of package and returns installed version of that """
+    def installed_version(package_name: str) -> str:
+        """ Gets name of package and returns installed version of that
+        
+        Args:
+            package_name (str): name of package
+        
+        Returns:
+            str: installed version
+        
+        Raises:
+            package.exceptions.CannotReadFileException: when cannot read package database files
+        """
         try:
             f = open(Env.installed_lists('/' + package_name + '/ver'), 'r')
             version = f.read()
@@ -252,8 +304,16 @@ class Pkg:
         return version
 
     @staticmethod
-    def installed_list():
-        """ Returns list of only installed packages """
+    def installed_list() -> dict:
+        """ Returns list of only installed packages 
+        
+        Returns:
+            dict: output has two keys:
+                  {
+                      "list": list[Pkg] // list of packages
+                      "errors": list // errors while loading packages
+                  }
+        """
         all_packages = Pkg.all_list()
         installed_packages = {
             'errors': all_packages['errors'],
@@ -267,7 +327,15 @@ class Pkg:
 
     @staticmethod
     def all_list():
-        """ Returns list of packages """
+        """ Returns list of packages
+        
+        Returns:
+            dict: output has two keys:
+                  {
+                      "list": list[Pkg] // list of packages
+                      "errors": list // errors while loading packages
+                  }
+        """
 
         errors = []
         packages = []
@@ -296,12 +364,18 @@ class Pkg:
         return {'list': packages, 'errors': errors}
 
     @staticmethod
-    def compare_version(a, b):
+    def compare_version(a: str, b: str):
         """
         Compares two versions.
-        if 1 is returned means a is upper than b.
-        if 0 is returned means a equals b.
-        if -1 is returned means a is less than b.
+
+        Args:
+            a (str): first version
+            b (str): second version
+        
+        Returns:
+            if 1 is returned means a is upper than b.
+            if 0 is returned means a equals b.
+            if -1 is returned means a is less than b.
         """
         a = version.parse(a)
         b = version.parse(b)
@@ -316,8 +390,15 @@ class Pkg:
             return -1
 
     @staticmethod
-    def get_last_version(versions: list):
-        """ Gets a list from versions and returns latest version in that list """
+    def get_last_version(versions: list) -> str:
+        """ Gets a list from versions and returns latest version in that list
+        
+        Args:
+            versions (list[str]): list of versions you want find last of them
+        
+        Returns:
+            str: the last version in the list
+        """
         max_ver = ''
         for version in versions:
             if Pkg.compare_version(version, max_ver) == 1:
@@ -327,7 +408,15 @@ class Pkg:
 
     @staticmethod
     def load_from_index(index_json: dict, package_name: str):
-        """ Loads package data from index file """
+        """ Loads package data from index file
+        
+        Args:
+            package_name (str): name of the package
+            index_json (dict): loaded json data from `/var/lib/cati/lists/<pkgname>/index` file
+
+        Returns:
+            Pkg: the loaded Pkg object
+        """
         try:
             arch = sys_arch()
             versions = index_json[arch]
@@ -354,7 +443,7 @@ class Pkg:
         """
         Checks package state by query string.
 
-        For examples:
+        Examples:
         "somepackage >= 1.5",
         "somepackage",
         "somepackage = 2.0",

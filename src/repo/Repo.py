@@ -29,6 +29,7 @@ from repo.drivers.File import File as FileDriver
 from repo.drivers.Http import Http as HttpDriver
 
 class Repo:
+    """ Cati repository model """
     def __init__(self, config: str):
         # ignore comments
         self.full_string = config.strip()
@@ -86,11 +87,24 @@ class Repo:
             return
 
     def test(self) -> bool:
-        """ Test repository """
+        """
+        Test repository
+        
+        Returns:
+            bool: True means connection is ok, False means not
+        """
         return self.__driver.test()
 
     def get_data(self, download_event=None) -> str:
-        """ Recives repo data returns data as json """
+        """
+        Recives repo data returns data as json
+
+        Args:
+            download_event (callable, None): if repo driver is http, this should be a function to download data
+
+        Returns:
+            str: repository data
+        """
         data = self.__driver.get_data(download_event)
         try:
             j = json.loads(data)
@@ -109,8 +123,13 @@ class Repo:
         return data
 
     @staticmethod
-    def get_list():
-        """ returns list of repositories """
+    def get_list() -> list:
+        """
+        returns list of repositories
+        
+        Returns:
+            list[Repo]: list of loaded repositories
+        """
         repos = []
         files = [Env.repos_config()]
         for item in os.listdir(Env.repos_config_dir()):

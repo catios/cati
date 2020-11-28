@@ -27,7 +27,12 @@ import json
 from dotcati.ArchiveModel import archive_factory
 
 def scan(directory: str):
-    """ Scans an directory and create packages data files """
+    """
+    Scans an directory and create packages data files
+    
+    Args:
+        directory (str): the repository directory path
+    """
     for item in os.listdir(directory):
         if os.path.isfile(directory + '/' + item):
             if item.split('.')[-1] in ['cati', 'deb', 'rpm']:
@@ -39,7 +44,12 @@ def scan(directory: str):
             scan(directory + '/' + item)
 
 def scan_once(filepath: str):
-    """ Scan once package """
+    """
+    Scan once package
+    
+    Args:
+        filepath (str): the package filepath
+    """
     pkg = archive_factory(filepath, 'r')
     pkg.read()
     data = pkg.data

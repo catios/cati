@@ -29,7 +29,7 @@ from frontend import Temp
 
 class Http(BaseDriver):
     """ repo http driver """
-    def test(self):
+    def test(self) -> bool:
         """ test repo """
         try:
             res = requests.get(self.url + '?cati-repo-test=1')
@@ -37,7 +37,7 @@ class Http(BaseDriver):
             return False
         return res.ok
 
-    def get_data(self, download_event=None):
+    def get_data(self, download_event=None) -> str:
         """ Returns repo data """
         i = 0
         last_res = None

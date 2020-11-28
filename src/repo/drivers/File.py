@@ -29,12 +29,12 @@ from repo.DirCrawler import DirCrawler
 
 class File(BaseDriver):
     """ repo file driver """
-    def test(self):
+    def test(self) -> bool:
         """ test repo """
         dir_path = self.url.split('://', 1)[-1]
         return os.path.isdir(dir_path) and os.access(dir_path, os.R_OK)
 
-    def get_data(self, download_event=None):
+    def get_data(self, download_event=None) -> str:
         """ Returns repo data """
         crawler = DirCrawler(self.url.split('://', 1)[-1])
         crawler.start()

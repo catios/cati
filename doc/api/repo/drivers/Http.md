@@ -14,8 +14,8 @@ Classes
 
     ### Methods
 
-    `get_data(self, download_event=None)`
+    `get_data(self, download_event=None) ‑> str`
     :   Returns repo data
 
-    `test(self)`
+    `test(self) ‑> bool`
     :   test repo
