@@ -12,7 +12,7 @@ to test this queries, you can check them with `cati query` command:
 cati query "pkg1 > 4.0"
 ```
 
-so, now you know base structure of query strings. lets go to learn more.
+so, now you know base structure of query strings. lets learn more.
 
 ### only checking package installation
 in this type, you just want to an package be installed. (means installed version is not important).
