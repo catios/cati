@@ -83,6 +83,37 @@ also you can use file depend/conflict in `depends` and `conflicts` lists. you ha
 
 to know about `depends` and `conflicts` lists items query syntax, read [Package query](/doc/package-query.md).
 
+#### User defined fields
+also you can declare more fields with custome names. them have not any ability. but will be showed to the user.
+the user defined fields name should start with `x` or `X` character.
+
+for example:
+
+```json
+{
+    "name": "mypkg",
+    "version": "1.0",
+    "arch": "all",
+
+    "x-my-field": "this is a user defined field",
+    "X-Anotherfield": "hi"
+}
+```
+
+when user shows information of this package with `show` or `pkg show` commands, will see something like this:
+
+```
+Name: mypkg
+Version: 1.0
+Arch: all
+...
+x-my-field: this is a user defined field
+X-Anotherfield: hi
+...
+```
+
+also you can write multiline data in user defined fields.
+
 ### scripts
 there is an directory named `scripts` in package build directory.
 

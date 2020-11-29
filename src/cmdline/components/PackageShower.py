@@ -111,6 +111,13 @@ def show(data: dict):
             output += 'Installed-Manual: ' + installed_version + '\n'
         else:
             output += 'Installed: ' + installed_version + '\n'
+
+    # show user defined fields
+    for k in data:
+        if k[0] == 'x' or k[0] == 'X':
+            # that fields start with `x` character are user defined fields
+            output += k + ': ' + data[k] + '\n'
+
     if output[-1] == '\n':
         output = output[:len(output)-1]
     pr.p(output.strip())
