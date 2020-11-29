@@ -79,6 +79,7 @@ Options:
 - `--maintainer=[maintainer-name or author-nameS splited by '|']`: filter packages list by maintainer name
 - `--category=[category-name or category-nameS splited by '|']`: filter packages list by category
 - `--search=[word]`: search by packages name and description
+- `--upgradable`: show list of upgradable
 
 ## remove command
 this command remove packages

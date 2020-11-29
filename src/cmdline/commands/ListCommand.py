@@ -42,6 +42,7 @@ class ListCommand(BaseCommand):
         --maintainer=[maintainer-name or author-nameS splited by `|`]: filter packages list by maintainer name
         --category=[category-name or category-nameS splited by `|`]: filter packages list by category
         --search=[word]: search by packages name and description
+        --upgradable: show list of upgradable packages
         """
         pass
 
@@ -56,6 +57,7 @@ class ListCommand(BaseCommand):
                 '-q': [False, False],
                 '--verbose': [False, False],
                 '-v': [False, False],
+                '--upgradable': [False, False],
                 '--author': [False, True],
                 '--maintainer': [False, True],
                 '--category': [False, True],
@@ -162,6 +164,13 @@ class ListCommand(BaseCommand):
                 except:
                     pass
                 if not is_math_with_query:
+                    continue
+
+            if self.has_option('--upgradable'):
+                if package.installed():
+                    if Pkg.compare_version(package.data['version'], package.installed()) != 1:
+                        continue
+                else:
                     continue
             # show item
             self.show_once(package)
