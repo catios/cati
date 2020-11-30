@@ -246,8 +246,12 @@ class Installer:
             os.system('chmod +x "' + script_path + '"')
             # run script and pass old version of package (if currently installed)
             old_version = ''
-            if Pkg.is_installed(self.pkg.data['name']):
-                old_version = '"' + Pkg.installed_version(self.pkg.data['name']) + '"'
+            try:
+                old_version = self.old_version
+            except:
+                if Pkg.is_installed(self.pkg.data['name']):
+                    self.old_version = '"' + Pkg.installed_version(self.pkg.data['name']) + '"'
+                    old_version = self.old_version
             result = os.system(script_path + ' ' + old_version)
             if result != 0:
                 tmp = PackageScriptError("script " + script_name + ' returned non-zero code ' + str(result))
