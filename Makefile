@@ -43,6 +43,7 @@ docs:
 	@rm -rf doc/api
 	@printf 'Generating api doc... '
 	@PYTHONPATH='$(shell pwd)/src' $(PY) -m pdoc frontend package transaction cmdline repo helpers dotcati --output-dir doc/api --skip-errors &> /dev/null
+	@echo "#### This api documentation is auto generated from docstrings with pdoc" > doc/api/README.md
 	@printf '\033[32mFinished\033[0m\n'
 
 ### test		run tests
