@@ -1,4 +1,4 @@
-# Cati usage
+# Cati command line usage
 to learn cati usage, read this file.
 
 ## Options
