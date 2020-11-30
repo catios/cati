@@ -8,7 +8,6 @@ WORKDIR /src
 RUN pip3 install -r requirements.txt
 
 # compile and install
-RUN make all
 RUN make
 RUN make install
 
