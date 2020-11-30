@@ -110,16 +110,21 @@ class Repo:
             j = json.loads(data)
             i = 0
             while i < len(j):
-                j[i]['repo'] = self.name
                 try:
                     if j[i]['arch'] != self.arch or j[i]['pkg_type'] != self.pkg:
                         j.pop(i)
                 except:
-                    pass
+                    j.pop(i)
                 i += 1
             data = json.dumps(j)
         except:
             pass
+        data = json.loads(data)
+        i = 0
+        while i < len(data):
+            data[i]['repo'] = self.name
+            i += 1
+        data = json.dumps(data)
         return data
 
     @staticmethod
