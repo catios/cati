@@ -22,12 +22,23 @@ an example for this file:
 
     "__comment__": "the following fields are optional",
 
-    "author": "the main developer of program",
-    "maintainer": "maintainer of this package",
+    "author": "the main developer of program (for example: `the name <main@example.com>`)",
+    "maintainer": "maintainer of this package (for example: `the name <main@example.com>`)",
+    "uploaders": [
+        "if package has more than one maintainer, you can write main maintainer in maintainer field and list another maintainers here",
+        "the name 2 <main2@example.com>",
+        "the name 3 <main3@example.com>",
+        "..."
+    ],
+    "changed-by": "who changed this version (for example: `the name <main@example.com>`)",
     "description": "description of this package",
+    "changes": "what is changes in this version (can be multiline)",
+    "date": "date of create date or last update of this package (for example: `2020-3-17`)",
+    "urgency": "LEVEL (this field shows this update for package how much is important)",
     "channel": "channel of this version",
     "homepage": "homepage url",
     "category": ["list", "of", "categories"],
+    "essential": false,
 
     "depends": [
         "pkga",
@@ -75,13 +86,17 @@ an example for this file:
 
 also you can use file depend/conflict in `depends` and `conflicts` lists. you have to write `@/path/to/file`. for example if you set this as a dependency, that file should be exists for this package, and if you set this as a conflict, package will not install if that file/dir exists. also you can check file sha256. for example `@76883f0fd14015c93296f0e4202241f4eb3a23189dbc17990a197477f1dc441a@/path/to/file`. you should write an `@` and next write specify sha256 and next again an `@` and next file path. now that file should exists, also cati checks sha256 of that file and compares that with your specify hash.
 
+to know about `depends` and `conflicts` lists items query syntax, read [Package query](/doc/package-query.md).
+
 `suggests` field declares an list from related packages to this package. you have to just list name of related packages.
 
 `conffiles` list declares a list from file/dir paths to set them as config file. config files will not remove in remove process (user can remove them with `--conffiles` in remove command). if some files in your package keeps configuration and something like that, add path of that file to this list
 
 `staticfiles` list declares a list from files where should be static and not changed. for example, binary files are static but configuration files maybe change. this system helps to keep system secure. cati can check static files and if cati detect some changes in that files, gives warning to user and can repair that package by re-installing that.
 
-to know about `depends` and `conflicts` lists items query syntax, read [Package query](/doc/package-query.md).
+`urgency` field shows that this update for the package how much is important (like Debian). this can be `low`, `medium`, `high`, `emergency`, or `critical`. also you can write more description in the `()`. for example: `high (This update is very important)` or without caption `high`.
+
+`essential` field is an boolean field. if you set this field `true`, this package will be unremovable but upgrade/downgrade is enable (like Debian). the default value is `false`. you can set this field `true` for base system packages. (remember that user can force remove this packages with `--force` option for remove command).
 
 #### User defined fields
 also you can declare more fields with custome names. them have not any ability. but will be showed to the user.

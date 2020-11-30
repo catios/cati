@@ -49,6 +49,21 @@ def show(data: dict):
     except:
         pass
     try:
+        changed_by = data['changed-by']
+        output += 'Changed-By: ' + changed_by + '\n'
+    except:
+        pass
+    try:
+    	uploaders = data['uploaders']
+    except:
+    	uploaders = []
+    if uploaders:
+        output += 'Uploaders: '
+        for uploader in uploaders:
+            output += uploader + ', '
+        output = output[:len(output)-2]
+        output += '\n'
+    try:
         channel = data['channel']
         output += 'Channel: ' + ansi.red + channel + ansi.reset + '\n'
     except:
@@ -74,6 +89,30 @@ def show(data: dict):
     try:
         description = data['description']
         output += 'Description: ' + description + '\n'
+    except:
+        pass
+    try:
+        changes = data['changes']
+        output += 'Changes: ' + description + '\n'
+    except:
+        pass
+    try:
+        date = data['date']
+        output += 'Last-Update-Date: ' + date + '\n'
+    except:
+        pass
+    try:
+        urgency = data['urgency']
+        output += 'Update-Level: ' + urgency + '\n'
+    except:
+        pass
+    try:
+        essential = data['essential']
+        if essential:
+            essential = 'Yes'
+        else:
+            essential = 'No'
+        output += 'Essential: ' + essential + '\n'
     except:
         pass
     try:

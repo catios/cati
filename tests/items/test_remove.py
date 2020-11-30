@@ -75,3 +75,27 @@ class test_remove(TestCore):
         self.assert_true(not Pkg.is_installed('testpkg11'))
 
         self.refresh_env()
+        
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            'tests/test-packages/packages/essential-package.cati'
+        ]), 0)
+
+        self.assert_true(Pkg.is_installed('essential-package'))
+
+        self.assert_equals(self.run_command('remove', [
+            'essential-package',
+            '-y'
+        ]), 1)
+
+        self.assert_true(Pkg.is_installed('essential-package'))
+
+        self.assert_equals(self.run_command('remove', [
+            'essential-package',
+            '-y',
+            '--force'
+        ]), 0)
+
+        self.assert_true(not Pkg.is_installed('essential-package'))
+
+        self.refresh_env()

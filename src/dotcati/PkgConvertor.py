@@ -101,8 +101,25 @@ def deb2cati(file_path: str) -> str:
                 cati_data['arch'] = control_fields[k].strip()
             elif k == 'Maintainer':
                 cati_data['maintainer'] = control_fields[k].strip()
+            elif k == 'Uploaders':
+                cati_data['uploaders'] = control_fields[k].strip().split(',')
+                cati_data['uploaders'] = [a.strip() for a in cati_data['uploaders']]
             elif k == 'Description':
                 cati_data['description'] = control_fields[k]
+            elif k == 'Changed-By':
+                cati_data['changed-by'] = control_fields[k]
+            elif k == 'Changes':
+                cati_data['changes'] = control_fields[k]
+            elif k == 'Date':
+                cati_data['date'] = control_fields[k]
+            elif k == 'Urgency':
+                cati_data['urgency'] = control_fields[k]
+            elif k == 'Essential':
+                cati_data['essential'] = control_fields[k]
+                if cati_data['essential'] == 'yes' or cati_data['essential'] == 'Yes':
+                    cati_data['essential'] = True
+                else:
+                    cati_data['essential'] = False
             elif k == 'Homepage':
                 cati_data['homepage'] = control_fields[k].strip()
             elif k == 'Section':

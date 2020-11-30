@@ -49,7 +49,7 @@ class PackageJsonValidator:
                     assert type(data['depends']) == list
                 except:
                     raise
-            except:
+            except KeyError as ex:
                 pass
 
             try:
@@ -58,7 +58,7 @@ class PackageJsonValidator:
                     assert type(data['conflicts']) == list
                 except:
                     raise
-            except:
+            except KeyError as ex:
                 pass
 
             try:
@@ -67,7 +67,7 @@ class PackageJsonValidator:
                     assert type(data['suggests']) == list
                 except:
                     raise
-            except:
+            except KeyError as ex:
                 pass
 
             try:
@@ -76,7 +76,7 @@ class PackageJsonValidator:
                     assert type(data['conffiles']) == list
                 except:
                     raise
-            except:
+            except KeyError as ex:
                 pass
 
             try:
@@ -85,7 +85,7 @@ class PackageJsonValidator:
                     assert type(data['staticfiles']) == list
                 except:
                     raise
-            except:
+            except KeyError as ex:
                 pass
 
             try:
@@ -94,7 +94,7 @@ class PackageJsonValidator:
                     assert type(data['description']) == str
                 except:
                     raise
-            except:
+            except KeyError as ex:
                 pass
 
             try:
@@ -104,7 +104,7 @@ class PackageJsonValidator:
                     assert not '|' in data['author']
                 except:
                     raise
-            except:
+            except KeyError as ex:
                 pass
 
             try:
@@ -114,7 +114,7 @@ class PackageJsonValidator:
                     assert not '|' in data['maintainer']
                 except:
                     raise
-            except:
+            except KeyError as ex:
                 pass
 
             try:
@@ -123,7 +123,7 @@ class PackageJsonValidator:
                     assert type(data['homepage']) == str
                 except:
                     raise
-            except:
+            except KeyError as ex:
                 pass
 
             try:
@@ -132,7 +132,7 @@ class PackageJsonValidator:
                     assert type(data['category']) == list
                 except:
                     raise
-            except:
+            except KeyError as ex:
                 pass
 
             try:
@@ -141,7 +141,61 @@ class PackageJsonValidator:
                     assert type(data['channel']) == str
                 except:
                     raise
-            except:
+            except KeyError as ex:
+                pass
+
+            try:
+                tmp = data['uploaders']
+                try:
+                    assert type(data['uploaders']) == list
+                except:
+                    raise
+            except KeyError as ex:
+                pass
+
+            try:
+                tmp = data['changed-by']
+                try:
+                    assert type(data['changed-by']) == str
+                except:
+                    raise
+            except KeyError as ex:
+                pass
+
+            try:
+                tmp = data['changes']
+                try:
+                    assert type(data['changes']) == str
+                except:
+                    raise
+            except KeyError as ex:
+                pass
+
+            try:
+                tmp = data['date']
+                try:
+                    assert type(data['date']) == str
+                except:
+                    raise
+            except KeyError as ex:
+                pass
+
+            try:
+                urgency = data['urgency']
+                try:
+                    assert type(data['urgency']) == str
+                except:
+                    raise
+            except KeyError as ex:
+                pass
+
+            try:
+                essential = data['essential']
+                try:
+                    assert type(data['essential']) == bool
+                except:
+                    raise
+            except KeyError as ex:
                 pass
 
             return True

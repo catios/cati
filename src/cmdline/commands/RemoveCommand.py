@@ -44,6 +44,7 @@ class RemoveCommand(BaseCommand):
         -y|--yes: do not ask for user confirmation
         --conffiles: also remove conffiles (full remove)
         --without-scripts: do not run package scripts in remove process
+        --force|-f: force remove essential packages
         """
         pass
 
@@ -56,6 +57,8 @@ class RemoveCommand(BaseCommand):
                 '--yes': [False, False],
                 '--conffiles': [False, False],
                 '--without-scripts': [False, False],
+                '--force': [False, False],
+                '-f': [False, False],
             },
             'max_args_count': None,
             'min_args_count': 1,
@@ -120,6 +123,20 @@ class RemoveCommand(BaseCommand):
 
         # show transactions
         TransactionShower.show(calc)
+
+        essential_packages = []
+        for pkg in calc.to_remove:
+            try:
+                if pkg.data['essential']:
+                    essential_packages.append(pkg)
+            except:
+                pass
+
+        if not self.has_option('--force') or self.has_option('-f'):
+            for pkg in essential_packages:
+                pr.p(ansi.red + 'Package "' + pkg.data['name'] + ' is a essential package and cannot be remove. use --force|-f option to force remove them' + ansi.reset)
+            if essential_packages:
+                return 1
 
         if not calc.has_any_thing():
             return

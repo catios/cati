@@ -29,6 +29,7 @@ Classes
         -y|--yes: do not ask for user confirmation
         --conffiles: also remove conffiles (full remove)
         --without-scripts: do not run package scripts in remove process
+        --force|-f: force remove essential packages
 
     `run(self)`
     :   Run command

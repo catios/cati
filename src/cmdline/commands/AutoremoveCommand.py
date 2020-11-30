@@ -39,6 +39,7 @@ class AutoremoveCommand(BaseCommand):
         -y|--yes: do not ask for user confirmation
         --conffiles: also remove conffiles (full remove)
         --without-scripts: do not run package scripts in remove process
+        --force|-f: force remove essential packages
         """
         pass
 
@@ -51,6 +52,8 @@ class AutoremoveCommand(BaseCommand):
                 '--yes': [False, False],
                 '--conffiles': [False, False],
                 '--without-scripts': [False, False],
+                '--force': [False, False],
+                '-f': [False, False],
             },
             'max_args_count': 0,
             'min_args_count': 0,

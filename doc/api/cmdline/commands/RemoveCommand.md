@@ -31,6 +31,7 @@ Classes
         -y|--yes: do not ask for user confirmation
         --conffiles: also remove conffiles (full remove)
         --without-scripts: do not run package scripts in remove process
+        --force|-f: force remove essential packages
 
     `package_remove_finished_event(self, pkg: package.Pkg.Pkg)`
     :   will run as package remover event when package remove process finished
