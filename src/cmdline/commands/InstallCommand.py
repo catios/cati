@@ -64,6 +64,14 @@ class InstallCommand(BaseCommand):
             'min_args_count': 1,
         }
 
+    def set_manual_installs(self, packages):
+        """ Sets installed packages type (manual/auto) """
+        for pkg in packages:
+            if not pkg.is_manual:
+                path = Env.installed_lists('/' + pkg.data['name'] + '/manual')
+                if os.path.isfile(path):
+                    os.remove(path)
+
     def run(self):
         """ Run command """
 
@@ -172,7 +180,7 @@ class InstallCommand(BaseCommand):
                     os.remove(download_path)
                 else:
                     pr.p('Using Cache for ' + pkg.data['name'] + ':' + pkg.data['version'] + ':' + pkg.data['arch'] + '...')
-                    downloaed_paths.append([download_path, pkg.is_manual])
+                    downloaed_paths.append(download_path)
                     continue
             download_cmd = DownloadCommand()
             i = 0
@@ -187,7 +195,7 @@ class InstallCommand(BaseCommand):
                 if res == 1 or res == None:
                     tmp = False
                 i += 1
-            downloaed_paths.append([download_path, pkg.is_manual])
+            downloaed_paths.append(download_path)
         pr.p('Download completed.')
 
         # check --download-only option
@@ -206,14 +214,13 @@ class InstallCommand(BaseCommand):
 
         # install packages
         pr.p('Installing packages...')
-        for path in downloaed_paths:
-            is_auto = []
-            if not path[1]:
-                is_auto = ['--auto']
-            pkg_cmd = PkgCommand()
-            res = pkg_cmd.handle(ArgParser.parse(['cati', 'pkg', 'install', path[0], *is_auto]))
-            if res != 0 and res != None:
-                pr.e(ansi.red + 'Failed to install packages' + ansi.reset)
-                return res
+        pkg_cmd = PkgCommand()
+        res = pkg_cmd.handle(ArgParser.parse(['cati', 'pkg', 'install', *downloaed_paths]))
+        if res != 0 and res != None:
+            self.set_manual_installs(calc.to_install)
+            pr.e(ansi.red + 'Failed to install packages' + ansi.reset)
+            return res
+
+        self.set_manual_installs(calc.to_install)
 
         pr.p(ansi.green + 'Done.' + ansi.reset)

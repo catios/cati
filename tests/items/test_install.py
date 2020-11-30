@@ -50,6 +50,7 @@ class test_install(TestCore):
 
             self.assert_true(Pkg.is_installed('testpkgb'))
             self.assert_true(Pkg.is_installed('testpkgc'))
+            self.assert_true(not Pkg.is_installed_manual('testpkgc'))
 
             self.assert_equals(self.run_command('install', ['testpkgz', '-y']), 0)
 

@@ -30,3 +30,6 @@ Classes
 
     `run(self)`
     :   Run command
+
+    `set_manual_installs(self, packages)`
+    :   Sets installed packages type (manual/auto)
