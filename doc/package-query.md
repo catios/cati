@@ -14,6 +14,8 @@ cati query "pkg1 > 4.0"
 
 so, now you know base structure of query strings. lets learn more.
 
+#### cati uses python `packaging` library to comparing versions
+
 ### only checking package installation
 in this type, you just want to an package be installed. (means installed version is not important).
 
