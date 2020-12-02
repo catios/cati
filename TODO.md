@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] create option `--force|-f` for `pkg install` command to force install blocked packages in security blacklist
 - [ ] some changes in transaction calculator
 - [ ] add more fields to package convertor
 - [ ] create version channel system for install process
