@@ -59,6 +59,7 @@ def scan_once(filepath: str):
     data['file_sha256'] = calc_file_sha256(filepath)
     data['file_md5'] = calc_file_md5(filepath)
     data['pkg_type'] = filepath.split('.')[-1]
+    data['file_size'] = os.path.getsize(filepath)
 
     data_file = open(filepath + '.json', 'w')
     data_file.write(json.dumps(data))

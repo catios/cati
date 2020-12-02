@@ -46,6 +46,15 @@ Classes
                 ...
             ]
 
+    `get_download_size_str(dsize: int) ‑> str`
+    :   Returns file size str from bytes interger
+        
+        Args:
+            dsize: bytes count
+        
+        Returns:
+            str: download str
+
     `get_last_version(versions: list) ‑> str`
     :   Gets a list from versions and returns latest version in that list
         
@@ -189,6 +198,12 @@ Classes
 
     `get_depends(self) ‑> list`
     :   Returns package dependencies list
+
+    `get_file_size_str(self) ‑> str`
+    :   Returns file size of the package as str (for example `32 MB`)
+        
+        Returns:
+            str: file size str
 
     `get_reverse_conflicts(self) ‑> list`
     :   Returns list of packages has conflicts with this package

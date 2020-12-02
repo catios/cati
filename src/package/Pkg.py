@@ -129,6 +129,33 @@ class Pkg:
                     reverse_conflicts_list.append(pkg)
         return reverse_conflicts_list
 
+    def get_file_size_str(self) -> str:
+        """
+        Returns file size of the package as str (for example `32 MB`)
+
+        Returns:
+            str: file size str
+        """
+        try:
+            file_size = self.data['file_size']
+        except:
+            file_size = 0
+
+        return Pkg.get_download_size_str(file_size)
+
+    @staticmethod
+    def get_download_size_str(dsize: int) -> str:
+        """
+        Returns file size str from bytes interger
+
+        Args:
+            dsize: bytes count
+
+        Returns:
+            str: download str
+        """
+        return str(dsize) + ' B'
+
     def get_versions_list(self):
         """
         returns versions list of the package

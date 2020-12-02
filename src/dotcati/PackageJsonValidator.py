@@ -190,6 +190,15 @@ class PackageJsonValidator:
                 pass
 
             try:
+                installed_size = data['installed-size']
+                try:
+                    assert type(data['installed-size']) == int
+                except:
+                    raise
+            except KeyError as ex:
+                pass
+
+            try:
                 essential = data['essential']
                 try:
                     assert type(data['essential']) == bool

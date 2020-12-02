@@ -39,6 +39,7 @@ an example for this file:
     "homepage": "homepage url",
     "category": ["list", "of", "categories"],
     "essential": false,
+    "installed-size": 123,
 
     "depends": [
         "pkga",
@@ -97,6 +98,8 @@ to know about `depends` and `conflicts` lists items query syntax, read [Package 
 `urgency` field shows that this update for the package how much is important (like Debian). this can be `low`, `medium`, `high`, `emergency`, or `critical`. also you can write more description in the `()`. for example: `high (This update is very important)` or without caption `high`.
 
 `essential` field is an boolean field. if you set this field `true`, this package will be unremovable but upgrade/downgrade is enable (like Debian). the default value is `false`. you can set this field `true` for base system packages. (remember that user can force remove this packages with `--force` option for remove command).
+
+`installed-size` field is size of files will be installed on files by this package. this should be integer (Bytes count).
 
 #### User defined fields
 also you can declare more fields with custome names. them have not any ability. but will be showed to the user.

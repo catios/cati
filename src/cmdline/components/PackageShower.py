@@ -116,6 +116,21 @@ def show(data: dict):
     except:
         pass
     try:
+        file_size = Pkg.get_download_size_str(data['file_size'])
+        output += 'Download-Size: ' + str(file_size) + '\n'
+    except:
+        pass
+    try:
+        installed_size = Pkg.get_download_size_str(data['installed-size'])
+        output += 'Installed-Size: ' + str(installed_size) + '\n'
+    except:
+        pass
+    try:
+        repo = data['repo']
+        output += 'Repository: ' + repo + '\n'
+    except:
+        pass
+    try:
     	depends = data['depends']
     except:
     	depends = []

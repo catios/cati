@@ -18,6 +18,12 @@ Classes
     `get_sorted_list(self)`
     :   returns sorted list of all of packages
 
+    `get_total_download_size(self) ‑> int`
+    :   Returns total download size of packages
+        
+        Returns:
+            int: the bytes count
+
     `handle_install_conflicts(self)`
     :   Adds installable packages conflicts to install list
 

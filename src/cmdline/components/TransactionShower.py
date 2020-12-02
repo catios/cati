@@ -53,19 +53,23 @@ def show(calc: Calculator):
     if to_upgrade:
         pr.p('The following packages will be upgraded:')
         for pkg in to_upgrade:
-            pr.p('- ' + ansi.yellow + pkg.data['name'] + '(' + pkg.installed() + ' -> ' + pkg.wanted_version + ')' + ansi.reset)
+            pr.p('- ' + ansi.yellow + pkg.data['name'] + '(' + pkg.installed() + ' -> ' + pkg.wanted_version + ') ' + pkg.get_file_size_str() + ansi.reset)
 
     if to_downgrade:
         pr.p('The following packages will be downgraded:')
         for pkg in to_downgrade:
-            pr.p('- ' + ansi.yellow + pkg.data['name'] + '(' + pkg.installed() + ' >> ' + pkg.wanted_version + ')' + ansi.reset)
+            pr.p('- ' + ansi.yellow + pkg.data['name'] + '(' + pkg.installed() + ' >> ' + pkg.wanted_version + ') ' + pkg.get_file_size_str() + ansi.reset)
 
     if to_reinstall:
         pr.p('The following packages will be re-installed:')
         for pkg in to_reinstall:
-            pr.p('- ' + ansi.yellow + pkg.data['name'] + '(' + pkg.wanted_version + ')' + ansi.reset)
+            pr.p('- ' + ansi.yellow + pkg.data['name'] + '(' + pkg.wanted_version + ') ' + pkg.get_file_size_str() + ansi.reset)
 
     if to_install:
         pr.p('The following packages will be installed:')
         for pkg in to_install:
-            pr.p('- ' + ansi.green + pkg.data['name'] + '(' + pkg.wanted_version + ')' + ansi.reset)
+            pr.p('- ' + ansi.green + pkg.data['name'] + '(' + pkg.wanted_version + ') ' + pkg.get_file_size_str() + ansi.reset)
+
+    total_download_size = calc.get_total_download_size()
+
+    pr.p('Total download size: ' + str(total_download_size))

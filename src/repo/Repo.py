@@ -123,6 +123,10 @@ class Repo:
         i = 0
         while i < len(data):
             data[i]['repo'] = self.name
+            try:
+                data[i]['file_size']
+            except:
+                data[i]['file_size'] = 0
             i += 1
         data = json.dumps(data)
         return data

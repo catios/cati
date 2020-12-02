@@ -41,6 +41,24 @@ class Calculator:
         """ returns is there any transactions to do """
         return self.to_remove or self.to_install
 
+    def get_total_download_size(self) -> int:
+        """
+        Returns total download size of packages
+
+        Returns:
+            int: the bytes count
+        """
+
+        total_size = 0
+
+        for pkg in self.to_install:
+            try:
+                total_size += int(pkg.data['file_size'])
+            except:
+                pass
+
+        return total_size
+
     def remove(self, pkgs: list):
         """ Add packages to remove """
         for pkg in pkgs:
