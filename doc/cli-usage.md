@@ -64,6 +64,7 @@ Options:
 - `--without-scripts`: do not run package scripts in installation process
 - `--keep-conffiles`: don't overwrite new version of config files
 - `--target=[files-install-location-prefix-path]`: set files installation prefix
+- `--force|-f`: force install that packages are blocked in securiy blacklist
 
 ## list command
 this command shows list of packages

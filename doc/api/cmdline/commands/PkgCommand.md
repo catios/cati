@@ -51,6 +51,7 @@ Classes
         * --without-scripts: do not run package scripts in installation process
         * --target=[files-install-location-prefix-path]: set files installation prefix
         * --keep-conffiles: don't overwrite new version of config files
+        * --force|-f: force install that packages are blocked in securiy blacklist
 
     `install_once(self, pkg: dotcati.ArchiveModel.BaseArchive)`
     :   installs once package

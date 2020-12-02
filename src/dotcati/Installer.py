@@ -282,7 +282,7 @@ class Installer:
                 ex.blacklist_item = item
                 raise ex
 
-    def install(self, pkg: BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True, run_scripts=True, target_path='', keep_conffiles=False):
+    def install(self, pkg: BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True, run_scripts=True, target_path='', keep_conffiles=False, check_security_blacklist=True):
         """
         Install .cati package
 
@@ -299,6 +299,7 @@ class Installer:
             run_scripts (bool): run package install scripts or not (default is True)
             target_path (str): where is the target path for installed files (will pass to `self.copy_files()`)
             keep_conffiles (bool): stil keep config files if changed (default is True)
+            check_security_blacklist (bool): check package is in security blacklist or not
         """
 
         self.conffiles = pkg.get_conffiles()
@@ -307,7 +308,8 @@ class Installer:
         self.uncopied_conffiles = {}
 
         # check package is in security blacklist
-        self.check_security_blacklist(pkg)
+        if check_security_blacklist:
+            self.check_security_blacklist(pkg)
 
         # check package architecture
         if pkg.data['arch'] != 'all':

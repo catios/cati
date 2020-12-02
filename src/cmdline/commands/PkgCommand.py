@@ -54,6 +54,7 @@ class PkgCommand(BaseCommand):
         * --without-scripts: do not run package scripts in installation process
         * --target=[files-install-location-prefix-path]: set files installation prefix
         * --keep-conffiles: don't overwrite new version of config files
+        * --force|-f: force install that packages are blocked in securiy blacklist
         """
         pass
 
@@ -73,6 +74,8 @@ class PkgCommand(BaseCommand):
                 '--target': [False, True],
                 '--dont-ignore-state': [False, False],
                 '--keep-conffiles': [False, False],
+                '--force': [False, False],
+                '-f': [False, False],
             },
             'max_args_count': None,
             'min_args_count': None,
@@ -233,7 +236,8 @@ class PkgCommand(BaseCommand):
                 (not self.has_option('--auto')),
                 run_scripts=(not self.has_option('--without-scripts')),
                 target_path=str(target_path),
-                keep_conffiles=self.has_option('--keep-conffiles')
+                keep_conffiles=self.has_option('--keep-conffiles'),
+                check_security_blacklist=(not self.has_option('--force') and not self.has_option('-f'))
             )
 
             if type(out) == int:

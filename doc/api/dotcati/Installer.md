@@ -46,7 +46,7 @@ Classes
     `copy_once_file(self, paths)`
     :   Copy one of package files (this method is called from `copy_files` method)
 
-    `install(self, pkg: dotcati.ArchiveModel.BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True, run_scripts=True, target_path='', keep_conffiles=False)`
+    `install(self, pkg: dotcati.ArchiveModel.BaseArchive, index_updater_events: dict, installer_events: dict, is_manual=True, run_scripts=True, target_path='', keep_conffiles=False, check_security_blacklist=True)`
     :   Install .cati package
         
         Args:
@@ -62,6 +62,7 @@ Classes
             run_scripts (bool): run package install scripts or not (default is True)
             target_path (str): where is the target path for installed files (will pass to `self.copy_files()`)
             keep_conffiles (bool): stil keep config files if changed (default is True)
+            check_security_blacklist (bool): check package is in security blacklist or not
 
     `load_files(self, path: str, base_temp_path: str)`
     :   Loads list of package files from extracted temp dir

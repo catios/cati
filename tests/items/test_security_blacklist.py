@@ -52,4 +52,10 @@ class test_security_blacklist(TestCore):
             'tests/test-packages/packages/some-malware.cati'
         ]), 1)
 
+        self.assert_equals(self.run_command('pkg', [
+            'install',
+            '--force',
+            'tests/test-packages/packages/some-malware.cati'
+        ]), 0)
+
         self.refresh_env()
