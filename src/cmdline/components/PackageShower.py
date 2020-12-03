@@ -159,6 +159,24 @@ def show(data: dict):
         for suggest in suggests:
             output += ansi.bold + suggest + ansi.reset + ', '
         output = output[:len(output)-2]
+    try:
+    	enhances = data['enhances']
+    except:
+    	enhances = []
+    if enhances:
+        output += 'Enhances: '
+        for enhance in enhances:
+            output += ansi.bold + enhance + ansi.reset + ', '
+        output = output[:len(output)-2]
+    try:
+    	provides = data['provides']
+    except:
+    	provides = []
+    if provides:
+        output += 'Provides: '
+        for provide in provides:
+            output += ansi.bold + provides + ansi.reset + ', '
+        output = output[:len(output)-2]
     if Pkg.is_installed(data['name']):
         installed_version = Pkg.installed_version(data['name'])
         if Pkg.is_installed_manual(data['name']):

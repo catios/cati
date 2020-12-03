@@ -30,6 +30,44 @@ from frontend import Temp
 from cmdline.commands import PkgCommand
 from cmdline import ArgParser
 
+def convert_depends_list(debian_depends_control_value: str) -> list:
+    """
+    Converts the debian control file `depends/conflicts` items syntax to cati depends/conflicts list
+
+    Args:
+        debian_depends_control_value (str): value of package debian control field
+
+    Returns:
+        list: the list of depends/conflicts (converted to cati strcture)
+    """
+    depends_list = debian_depends_control_value.strip().split(',')
+    depends_list = [item.strip().split('|') for item in depends_list]
+    cati_data_json_list = []
+
+    for item in depends_list:
+        current_item = ''
+        for part in item:
+            part = part.strip()
+            part_parts = part.split(' ', 1)
+            pkg_name = part_parts[0]
+            pkg_name = pkg_name.split(':')[0]
+            version_part = None
+            if len(part_parts) > 1:
+                version_part = part_parts[1]
+                version_part = version_part.strip().strip('(').strip(')')
+                version_part = version_part.replace('>>', '>')
+                version_part = version_part.replace('<<', '<')
+            current_item += pkg_name + ' '
+            if version_part:
+                current_item += str(version_part)
+            current_item += '| '
+        current_item = current_item.strip()
+        current_item = current_item[:len(current_item)-1]
+        current_item = current_item.strip()
+        cati_data_json_list.append(current_item)
+
+    return cati_data_json_list
+
 def deb2cati(file_path: str) -> str:
     """
     Converts deb package to cati package and returns generated cati package file path
@@ -101,6 +139,8 @@ def deb2cati(file_path: str) -> str:
                 cati_data['arch'] = control_fields[k].strip()
             elif k == 'Maintainer':
                 cati_data['maintainer'] = control_fields[k].strip()
+            elif k == 'Original-Maintainer':
+                cati_data['X-Original-Maintainer'] = control_fields[k].strip()
             elif k == 'Uploaders':
                 cati_data['uploaders'] = control_fields[k].strip().split(',')
                 cati_data['uploaders'] = [a.strip() for a in cati_data['uploaders']]
@@ -124,14 +164,35 @@ def deb2cati(file_path: str) -> str:
                 cati_data['homepage'] = control_fields[k].strip()
             elif k == 'Section':
                 cati_data['category'] = [control_fields[k].strip()]
+            elif k == 'Depends' or k == 'Pre-Depends':
+                try:
+                    cati_data['depends']
+                except:
+                    cati_data['depends'] = []
+                cati_data['depends'] = [*cati_data['depends'], *convert_depends_list(control_fields[k].strip())]
+            elif k == 'Conflicts':
+                cati_data['conflicts'] = convert_depends_list(control_fields[k].strip())
+            elif k == 'Recommends':
+                cati_data['recommends'] = convert_depends_list(control_fields[k].strip())
+            elif k == 'Breaks':
+                cati_data['breaks'] = convert_depends_list(control_fields[k].strip())
+            elif k == 'Replaces':
+                cati_data['replaces'] = convert_depends_list(control_fields[k].strip())
             elif k == 'Suggests':
-                cati_data['suggests'] = [tmp.strip() for tmp in control_fields[k].strip().split(',')]
+                cati_data['suggests'] = convert_depends_list(control_fields[k].strip())
+                cati_data['suggests'] = [item_tmp.split(' ')[0] for item_tmp in cati_data['suggests']]
+            elif k == 'Enhances':
+                cati_data['enhances'] = convert_depends_list(control_fields[k].strip())
+                cati_data['enhances'] = [item_tmp.split(' ')[0] for item_tmp in cati_data['enhances']]
+            elif k == 'Provides':
+                cati_data['provides'] = convert_depends_list(control_fields[k].strip())
+                cati_data['provides'] = [item_tmp.split(' ')[0] for item_tmp in cati_data['provides']]
         os.system('rm control -rf')
         cati_data_f = open('data.json', 'w')
         cati_data_f.write(json.dumps(cati_data))
         cati_data_f.close()
         os.chdir('..')
-        
+
         # build pkg
         pkg_command = PkgCommand.PkgCommand()
         pkg_command.handle(ArgParser.parse(['cati', 'pkg', 'build', 'cati', '-q']))
