@@ -86,12 +86,12 @@ class CheckCommand(BaseCommand):
             for dp in pkg.get_depends():
                 if not Pkg.check_state(dp):
                     dependency_problems.append([
-                        [pkg, dp]
+                        pkg, dp
                     ])
             for conflict in pkg.get_conflicts():
                 if Pkg.check_state(conflict):
                     conflict_problems.append([
-                        [pkg, conflict]
+                        pkg, conflict
                     ])
 
         if dependency_problems or conflict_problems:
