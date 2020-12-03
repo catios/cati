@@ -175,7 +175,7 @@ def show(data: dict):
     if provides:
         output += 'Provides: '
         for provide in provides:
-            output += ansi.bold + provides + ansi.reset + ', '
+            output += ansi.bold + provide + ansi.reset + ', '
         output = output[:len(output)-2]
     if Pkg.is_installed(data['name']):
         installed_version = Pkg.installed_version(data['name'])
@@ -188,7 +188,7 @@ def show(data: dict):
     for k in data:
         if k[0] == 'x' or k[0] == 'X':
             # that fields start with `x` character are user defined fields
-            output += k + ': ' + data[k] + '\n'
+            output += '\n' + k + ': ' + data[k]
 
     if output[-1] == '\n':
         output = output[:len(output)-1]
