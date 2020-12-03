@@ -60,7 +60,27 @@ an example for this file:
         "@76883f0fd14015c93296f0e4202241f4eb3a23189dbc17990a197477f1dc441a@/path/to/file",
         "..."
     ],
+    "replaces": [
+        "pkga",
+        "pkga >= 1.7.13",
+        "pkgb | pkgc <= 1.0",
+        "pkg1 = 1.0",
+        "..."
+    ],
+
     "suggests": [
+        "another-pkg",
+        "pkg2",
+        "..."
+    ],
+
+    "enhances": [
+        "another-pkg",
+        "pkg2",
+        "..."
+    ],
+
+    "recommends": [
         "another-pkg",
         "pkg2",
         "..."
@@ -85,11 +105,17 @@ an example for this file:
 
 `conflicts` list making conflict to another packages. if that conflicted packages ARE installed, this package will not install and cati shows error.
 
+`replaces` field declares a list from packages to allow this package to replace this package files on files of  them. for example if `pkg1` package has file `/usr/bin/app` and also package `pkg2` has that file, if you add `pkg2` to `replaces` list of `pkg1`, cati allows `pkg1` to replace that file on `pkg2`.
+
 also you can use file depend/conflict in `depends` and `conflicts` lists. you have to write `@/path/to/file`. for example if you set this as a dependency, that file should be exists for this package, and if you set this as a conflict, package will not install if that file/dir exists. also you can check file sha256. for example `@76883f0fd14015c93296f0e4202241f4eb3a23189dbc17990a197477f1dc441a@/path/to/file`. you should write an `@` and next write specify sha256 and next again an `@` and next file path. now that file should exists, also cati checks sha256 of that file and compares that with your specify hash.
 
-to know about `depends` and `conflicts` lists items query syntax, read [Package query](/doc/package-query.md).
+to know about `depends`, `conflicts` and `replaces` lists items query syntax, read [Package query](/doc/package-query.md).
 
 `suggests` field declares an list from related packages to this package. you have to just list name of related packages.
+
+`enhances` field declares list of that packages where this package can power up them.
+
+`recommends` field declares list of packages recommended for current packages. user can install them with `--install-recommends` option in `install` command.
 
 `conffiles` list declares a list from file/dir paths to set them as config file. config files will not remove in remove process (user can remove them with `--conffiles` in remove command). if some files in your package keeps configuration and something like that, add path of that file to this list
 

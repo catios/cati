@@ -170,12 +170,14 @@ def deb2cati(file_path: str) -> str:
                 except:
                     cati_data['depends'] = []
                 cati_data['depends'] = [*cati_data['depends'], *convert_depends_list(control_fields[k].strip())]
-            elif k == 'Conflicts':
-                cati_data['conflicts'] = convert_depends_list(control_fields[k].strip())
+            elif k == 'Conflicts' or k == 'Breaks':
+                try:
+                    cati_data['conflicts']
+                except:
+                    cati_data['conflicts'] = []
+                cati_data['conflicts'] = [*cati_data['conflicts'], *convert_depends_list(control_fields[k].strip())]
             elif k == 'Recommends':
                 cati_data['recommends'] = convert_depends_list(control_fields[k].strip())
-            elif k == 'Breaks':
-                cati_data['breaks'] = convert_depends_list(control_fields[k].strip())
             elif k == 'Replaces':
                 cati_data['replaces'] = convert_depends_list(control_fields[k].strip())
             elif k == 'Suggests':
@@ -187,6 +189,8 @@ def deb2cati(file_path: str) -> str:
             elif k == 'Provides':
                 cati_data['provides'] = convert_depends_list(control_fields[k].strip())
                 cati_data['provides'] = [item_tmp.split(' ')[0] for item_tmp in cati_data['provides']]
+            elif k[0] == 'X' or k[0] == 'x':
+                cati_data[k] = control_fields[k].strip()
         os.system('rm control -rf')
         cati_data_f = open('data.json', 'w')
         cati_data_f.write(json.dumps(cati_data))

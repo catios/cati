@@ -1,5 +1,6 @@
 # TODO
 
+- [ ] handle `recommends`, `replaces` and `provides` fields for packages
 - [ ] some changes in transaction calculator
 - [ ] create version channel system for install process
 - [ ] handle logging and debug logs
