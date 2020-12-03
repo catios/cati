@@ -73,5 +73,4 @@ Also use [google python docstring style](https://google.github.io/styleguide/pyg
 always run `make all` command after your changes.
 
 ## idea
-if you don't have any idea and want to contribute, best way to find tasks is that to check [issues](https://github.com/parsampsh/cati/issues) and [todo](/TODO.md) file.
-
+if you don't have any idea and want to contribute, best way to find tasks is that to check [issues](https://github.com/catios/cati/issues) and [todo](/TODO.md) file.

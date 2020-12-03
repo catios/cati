@@ -12,7 +12,7 @@ some features of cati:
 - Cati has some tools to check your system health and keep that secure
 
 ## Authors
-cati writed by [parsampsh](https://github.com/parsampsh) and [contributors](https://github.com/parsampsh/cati/graphs/contributors)
+cati writed by [parsampsh](https://github.com/parsampsh) and [contributors](https://github.com/catios/cati/graphs/contributors)
 
 ## License
 cati [licensed](/LICENSE) under GPL-v3
@@ -50,7 +50,7 @@ make --version
 to compile and install cati on your system, do the following steps:
 
 ```bash
-git clone https://github.com/parsampsh/cati.git
+git clone https://github.com/catios/cati.git
 cd cati
 
 # install dependencies
