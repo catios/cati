@@ -4,6 +4,7 @@
 - [Command Line Usage](cli-usage.md)
 - [Deb and RPM Packages support](deb-and-rpm-packages-support.md)
 - [Cati Files and Directories Structure](files-and-dirs-structure.md)
+- [Configurations](configurations.md)
 
 ### Package Maintainer Guides
 - [Dotcati Packages](dotcati-packages.md)

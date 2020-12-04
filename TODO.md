@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] add a config feature to set what architectures is allowed to be install
 - [ ] some changes in transaction calculator
 - [ ] create version channel system for install process
 - [ ] handle `recommends`, `replaces` and `provides` fields for packages

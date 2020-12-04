@@ -312,9 +312,8 @@ class Installer:
             self.check_security_blacklist(pkg)
 
         # check package architecture
-        if pkg.data['arch'] != 'all':
-            if SysArch.sys_arch() != pkg.data['arch']:
-                return installer_events['arch_error'](pkg)
+        if not pkg.data['arch'] in SysArch.allowed_archs():
+            return installer_events['arch_error'](pkg)
 
         # check package dependencies and conflicts
         try:

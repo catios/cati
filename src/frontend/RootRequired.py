@@ -63,6 +63,7 @@ def require_root_permission(is_cli=True, die_action=None):
         Env.repos_config(),
         Env.repos_config_dir(),
         Env.cache_dir(),
+        Env.allowed_archs(),
     ]
     for f in files_to_check:
         if not os.access(f, os.W_OK) or not os.access(f, os.R_OK):

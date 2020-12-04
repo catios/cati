@@ -75,3 +75,7 @@ read [repository system](/doc/repositories.md).
 
 ## directory `/var/cache/cati`
 cati uses this directory to cache some data like downloaded archives and repositories downloaded data.
+
+## file `/etc/cati/allowed-architectures.list`
+this file contains list of allowed packages architectures for install.
+read [Configruration](configurations.md) for more information.

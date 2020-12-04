@@ -19,6 +19,10 @@ Functions
 ---------
 
     
+`allowed_arhcs()`
+:   
+
+    
 `any_scripts(path='')`
 :   Any scripts directory
 

@@ -69,6 +69,7 @@ def check(events: dict):
         '/var/lib/cati/state.f',
         '/var/lib/cati/unremoved-conffiles.list',
         '/etc/cati/repos.list',
+        '/etc/cati/allowed-architectures.list',
     ]
 
     required_dirs = [

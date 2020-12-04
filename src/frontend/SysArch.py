@@ -23,6 +23,7 @@
 """ Handle system architecture """
 
 import os
+from . import Env
 
 is_testing = False
 """
@@ -39,3 +40,30 @@ def sys_arch() -> str:
         if arch == 'i686':
             arch = 'i386'
         return arch
+
+def allowed_archs() -> list:
+    """
+    Returns list of allowed architectures to install on the system
+
+    The default archs are `all` and system architecture. also more archs
+    will be loaded from /etc/cati/allowed-architectures.list
+
+    Returns:
+        list: list of allowed archs like ['all', 'amd64', '...']
+    """
+    # set default archs
+    archs = ['all', sys_arch()]
+
+    # load added archs
+    f = open(Env.allowed_arhcs(), 'r')
+    content = f.read()
+    f.close()
+
+    content = content.strip().split('\n')
+    content = [line.strip() for line in content if line.strip() != '']
+    archs = [*archs, *content]
+
+    # remove repeated items from list
+    archs = list(dict.fromkeys(archs))
+
+    return archs
