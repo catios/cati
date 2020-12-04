@@ -141,6 +141,16 @@ def show(data: dict):
         output = output[:len(output)-2]
         output += '\n'
     try:
+    	recommends = data['recommends']
+    except:
+    	recommends = []
+    if recommends:
+        output += 'Recommends: '
+        for rec in recommends:
+            output += ansi.bold + rec + ansi.reset + ', '
+        output = output[:len(output)-2]
+        output += '\n'
+    try:
     	conflicts = data['conflicts']
     except:
     	conflicts = []
@@ -159,6 +169,7 @@ def show(data: dict):
         for suggest in suggests:
             output += ansi.bold + suggest + ansi.reset + ', '
         output = output[:len(output)-2]
+        output += '\n'
     try:
     	enhances = data['enhances']
     except:
@@ -168,6 +179,7 @@ def show(data: dict):
         for enhance in enhances:
             output += ansi.bold + enhance + ansi.reset + ', '
         output = output[:len(output)-2]
+        output += '\n'
     try:
     	provides = data['provides']
     except:
@@ -177,6 +189,7 @@ def show(data: dict):
         for provide in provides:
             output += ansi.bold + provide + ansi.reset + ', '
         output = output[:len(output)-2]
+        output += '\n'
     if Pkg.is_installed(data['name']):
         installed_version = Pkg.installed_version(data['name'])
         if Pkg.is_installed_manual(data['name']):
