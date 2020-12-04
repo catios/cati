@@ -18,6 +18,12 @@ Classes
 
     ### Methods
 
+    `get_arch_str(self) ‑> str`
+    :   Returns self.arch list (allowed package arch of repo) as string
+        
+        Returns:
+            str
+
     `get_data(self, download_event=None) ‑> str`
     :   Recives repo data returns data as json
         
@@ -26,6 +32,12 @@ Classes
         
         Returns:
             str: repository data
+
+    `get_pkg_str(self) ‑> str`
+    :   Returns self.pkg list (allowed package type of repo) as string
+        
+        Returns:
+            str
 
     `test(self) ‑> bool`
     :   Test repository

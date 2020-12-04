@@ -44,7 +44,11 @@ class RepoCommand(BaseCommand):
         --scan [directory]: scans packages inside in a directory and creates data files for repo
 
         Repo config structure:
-        <url> pkg=<type of packages. for example `cati` or `deb`> arch=<wanted architecture> name=<an name for repo> priority=<priority between another repos>
+        <url> pkg=<type(s) of packages. for example `cati` or `deb`> arch=<wanted architecture> name=<an name for repo> priority=<priority between another repos>
+        
+        Example:
+        https://pkg.example.com/packages pkg=cati arch=all,i386 name=main-repo
+        file:///path/to/packages pkg=cati,deb arch=all name=deb-repo
         """
         pass
 
@@ -84,7 +88,7 @@ class RepoCommand(BaseCommand):
                 ReposListErrorShower.show([tmp_repo])
                 return 1
             # write repo
-            path = Env.repos_config_dir('/' + tmp_repo.name + '-' + tmp_repo.pkg + '-' + tmp_repo.arch)
+            path = Env.repos_config_dir('/' + tmp_repo.name + '-' + tmp_repo.get_pkg_str() + '-' + tmp_repo.get_arch_str())
             tmp = ''
             tmp_i = 1
             while os.path.isfile(path + tmp):
@@ -112,4 +116,4 @@ class RepoCommand(BaseCommand):
         ReposListErrorShower.show(repos)
         for repo in repos:
             if repo.successful_loaded:
-                pr.p(repo.name + ': ' + repo.url + ' pkg=' + repo.pkg + ' arch=' + repo.arch)
+                pr.p(repo.name + ': ' + repo.url + ' pkg=' + repo.get_pkg_str() + ' arch=' + repo.get_arch_str())

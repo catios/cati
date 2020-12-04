@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] add new features for repository configuration
 - [ ] create version channel system for install process
 - [ ] handle `recommends`, `replaces` and `provides` fields for packages
 - [ ] handle logging and debug logs

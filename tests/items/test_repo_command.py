@@ -37,7 +37,7 @@ class test_repo_command(TestCore):
         f.write('''
         # The comment
 
-        https://cati.example.com/packages name=main-repo pkg=cati arch=amd64 priority=10 # another comment
+        https://cati.example.com/packages name=main-repo pkg=cati arch=amd64,all priority=10 # another comment
 
         https://cati.example2.com/packages name=test-repo pkg=deb arch=i386
         https://cati.example2.com/packages2 name=test-repo2 pkg=deb arch=all priority=2 # all
@@ -51,18 +51,18 @@ class test_repo_command(TestCore):
         self.assert_equals(len(repos), 3)
 
         self.assert_equals(repos[0].name, 'test-repo')
-        self.assert_equals(repos[0].pkg, 'deb')
-        self.assert_equals(repos[0].arch, 'i386')
+        self.assert_equals(repos[0].pkg, ['deb'])
+        self.assert_equals(repos[0].arch, ['i386'])
         self.assert_equals(int(repos[0].priority), 1)
 
         self.assert_equals(repos[1].name, 'test-repo2')
-        self.assert_equals(repos[1].pkg, 'deb')
-        self.assert_equals(repos[1].arch, 'all')
+        self.assert_equals(repos[1].pkg, ['deb'])
+        self.assert_equals(repos[1].arch, ['all'])
         self.assert_equals(int(repos[1].priority), 2)
 
         self.assert_equals(repos[2].name, 'main-repo')
-        self.assert_equals(repos[2].pkg, 'cati')
-        self.assert_equals(repos[2].arch, 'amd64')
+        self.assert_equals(repos[2].pkg, ['cati'])
+        self.assert_equals(repos[2].arch, ['amd64', 'all'])
         self.assert_equals(int(repos[2].priority), 10)
 
         f = open(self.env() + '/etc/cati/repos.list.d/test', 'w')

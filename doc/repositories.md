@@ -59,9 +59,9 @@ What is that `pkg=cati`, `name=example-repo` and...?
 
 they are repo config options.
 
-`pkg=<package-type>` says to cati to load what type of packages from the repository. default type is `cati`.
+`pkg=<package-type>` says to cati to load what type of packages from the repository. default type is `cati`. also you can set more that one value, for example `pkg=cati,deb` (split by `,`).
 
-`arch=<architecture>` says to cati to load packages with which architecture from that repo. default arch is architecture of your system.
+`arch=<architecture>` says to cati to load packages with which architecture from that repo. default arch is architecture of your system. also you can set more that one value, for example `arch=all,amd64` (split by `,`).
 
 `name=<name>` just sets an name for repository. default name is `main`.
 

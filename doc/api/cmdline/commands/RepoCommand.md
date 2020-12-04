@@ -28,7 +28,11 @@ Classes
         --scan [directory]: scans packages inside in a directory and creates data files for repo
         
         Repo config structure:
-        <url> pkg=<type of packages. for example `cati` or `deb`> arch=<wanted architecture> name=<an name for repo> priority=<priority between another repos>
+        <url> pkg=<type(s) of packages. for example `cati` or `deb`> arch=<wanted architecture> name=<an name for repo> priority=<priority between another repos>
+        
+        Example:
+        https://pkg.example.com/packages pkg=cati arch=all,i386 name=main-repo
+        file:///path/to/packages pkg=cati,deb arch=all name=deb-repo
 
     `run(self)`
     :   Run command

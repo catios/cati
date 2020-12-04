@@ -40,10 +40,10 @@ class Repo:
         config.pop(0)
 
         # set default values
-        self.pkg = 'main-repo'
-        self.arch = SysArch.sys_arch()
+        self.pkg = ['cati']
+        self.arch = [SysArch.sys_arch()]
         self.priority = 1
-        self.name = self.pkg + '-' + self.arch + '@' + self.url
+        self.name = self.pkg[0] + '-' + self.arch[0] + '-' + str(self.priority)
 
         for item in config:
             item = item.strip()
@@ -53,9 +53,11 @@ class Repo:
                     self.syntax_errors.append('undefined value for `' + parts[0] + '`')
                 else:
                     if parts[0] == 'pkg':
-                        self.pkg = parts[1]
+                        self.pkg = parts[1].strip().split(',')
+                        self.pkg = [tmp.strip() for tmp in self.pkg if tmp.strip() != '']
                     elif parts[0] == 'arch':
-                        self.arch = parts[1]
+                        self.arch = parts[1].strip().split(',')
+                        self.arch = [tmp.strip() for tmp in self.arch if tmp.strip() != '']
                     elif parts[0] == 'priority':
                         try:
                             self.priority = int(parts[1])
@@ -111,7 +113,7 @@ class Repo:
             i = 0
             while i < len(j):
                 try:
-                    if j[i]['arch'] != self.arch or j[i]['pkg_type'] != self.pkg:
+                    if not j[i]['arch'] in self.arch or not j[i]['pkg_type'] in self.pkg:
                         j.pop(i)
                 except:
                     j.pop(i)
@@ -130,6 +132,30 @@ class Repo:
             i += 1
         data = json.dumps(data)
         return data
+
+    def get_pkg_str(self) -> str:
+        """
+        Returns self.pkg list (allowed package type of repo) as string
+
+        Returns:
+            str
+        """
+        s = ''
+        for pkg in self.pkg:
+            s += pkg + ','
+        return s.strip(',')
+
+    def get_arch_str(self) -> str:
+        """
+        Returns self.arch list (allowed package arch of repo) as string
+
+        Returns:
+            str
+        """
+        s = ''
+        for arch in self.arch:
+            s += arch + ','
+        return s.strip(',')
 
     @staticmethod
     def get_list() -> list:
