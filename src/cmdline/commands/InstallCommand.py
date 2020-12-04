@@ -120,7 +120,11 @@ class InstallCommand(BaseCommand):
         while i < len(loaded_packages):
             loaded_packages[i].is_manual = True
             i += 1
-        calc.install(list(reversed(loaded_packages)))
+        try:
+            calc.install(list(reversed(loaded_packages)))
+        except:
+            pr.e(ansi.red + 'ERROR: There is some dependnecy problems.' + ansi.reset)
+            return 1
 
         # handle reinstallable packages
         i = 0

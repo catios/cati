@@ -97,6 +97,8 @@ class Pkg:
         """
         reverse_depends = []
         for pkg in self.all_list()['list']:
+            if pkg.installed():
+                pkg = Pkg.load_version(pkg.data['name'], pkg.installed())
             for dep in pkg.get_depends():
                 result = Pkg.check_state(dep, virtual={
                     'remove': [

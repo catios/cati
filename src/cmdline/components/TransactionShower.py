@@ -72,4 +72,5 @@ def show(calc: Calculator):
 
     total_download_size = calc.get_total_download_size()
 
-    pr.p('Total download size: ' + str(total_download_size))
+    if total_download_size > 0:
+        pr.p('Total download size: ' + str(total_download_size))

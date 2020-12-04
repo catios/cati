@@ -195,8 +195,35 @@ class Calculator:
         self.handle_install_reverse_depends()
 
     def handle_install_reverse_depends(self):
-        """ Adds installable packages reverse conflicts to install list """
-        pass
+        """ Adds installable packages reverse depends to install list """
+        new_to_remove = []
+        i = 0
+        while i < len(self.to_install):
+            reverse_depends = self.to_install[i].get_reverse_depends()
+            for dep in reverse_depends:
+                if dep.installed():
+                    dep = Pkg.load_version(dep.data['name'], dep.installed())
+                    for tmp_dep in dep.get_depends():
+                        result = Pkg.check_state(tmp_dep, virtual={
+                            'install': [
+                                [
+                                    self.to_install[i].data['name'], self.to_install[i].data['version']
+                                ]
+                            ],
+                        })
+                        if not result:
+                            a = 0
+                            added = False
+                            while a < len(self.to_remove):
+                                if self.to_remove[a].data['name'] == dep.data['name']:
+                                    added = True
+                                a += 1
+                            if not added:
+                                new_to_remove.append(dep)
+            i += 1
+
+        if new_to_remove:
+            self.remove(new_to_remove)
 
     def handle_install_reverse_conflicts(self):
         """ Adds installable packages reverse conflicts to install list """
