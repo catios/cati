@@ -19,7 +19,7 @@ Functions
 ---------
 
     
-`allowed_arhcs()`
+`allowed_archs()`
 :   
 
     

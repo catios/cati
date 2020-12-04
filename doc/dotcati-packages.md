@@ -127,6 +127,8 @@ to know about `depends`, `conflicts` and `replaces` lists items query syntax, re
 
 `installed-size` field is size of files will be installed on files by this package. this should be integer (Bytes count).
 
+`channel` field is the version channel. read [Version channels](version-channels.md).
+
 #### User defined fields
 also you can declare more fields with custome names. them have not any ability. but will be showed to the user.
 the user defined fields name should start with `x` or `X` character.

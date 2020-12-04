@@ -80,7 +80,7 @@ class Builder:
             raise InvalidPackageDirException('one or more fields in data.json is invalid')
 
         if not os.path.isdir(dirpath + '/files'):
-            raise InvalidPackageDirException('directory files not found')
+            os.mkdir(dirpath + '/files')
 
         # compress and build package
         if output == None:

@@ -11,6 +11,7 @@
 - [Package Query Syntax](package-query.md)
 - [Cati Repositories](repositories.md)
 - [Security Blacklist](security-blacklist.md)
+- [Version channels](version-channels.md)
 
 ### Developer Guides
 - [Contributing Guide](/CONTRIBUTING.md)

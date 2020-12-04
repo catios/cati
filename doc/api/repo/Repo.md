@@ -24,6 +24,12 @@ Classes
         Returns:
             str
 
+    `get_channel_str(self) ‑> str`
+    :   Returns self.channel list (allowed version channels of repo) as string
+        
+        Returns:
+            str
+
     `get_data(self, download_event=None) ‑> str`
     :   Recives repo data returns data as json
         

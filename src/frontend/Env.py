@@ -72,5 +72,5 @@ def repos_config_dir(path=''):
 def cache_dir(path=''):
     return base_path('/var/cache/cati' + path)
 
-def allowed_arhcs():
+def allowed_archs():
     return base_path('/etc/cati/allowed-architectures.list')

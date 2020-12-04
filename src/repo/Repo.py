@@ -42,8 +42,9 @@ class Repo:
         # set default values
         self.pkg = ['cati']
         self.arch = [SysArch.sys_arch()]
+        self.channel = ['default']
         self.priority = 1
-        self.name = self.pkg[0] + '-' + self.arch[0] + '-' + str(self.priority)
+        self.name = None
 
         for item in config:
             item = item.strip()
@@ -58,6 +59,9 @@ class Repo:
                     elif parts[0] == 'arch':
                         self.arch = parts[1].strip().split(',')
                         self.arch = [tmp.strip() for tmp in self.arch if tmp.strip() != '']
+                    elif parts[0] == 'channel':
+                        self.channel = parts[1].strip().split(',')
+                        self.channel = [tmp.strip() for tmp in self.channel if tmp.strip() != '']
                     elif parts[0] == 'priority':
                         try:
                             self.priority = int(parts[1])
@@ -68,6 +72,8 @@ class Repo:
                     else:
                         self.syntax_errors.append('unknow option `' + parts[0] + '`')
 
+        if self.name == None:
+            self.name = self.pkg[0] + '-' + self.arch[0] + '-' + self.channel[0] + '-' + str(self.priority)
         if self.name == 'Local' or self.name == 'local':
             self.name = self.name + '-repo'
 
@@ -124,6 +130,14 @@ class Repo:
         data = json.loads(data)
         i = 0
         while i < len(data):
+            try:
+                tmp_channel = data[i]['channel']
+                if self.channel != ['default']:
+                    if not tmp_channel in self.channel:
+                        data.pop(i)
+                        continue
+            except:
+                pass
             data[i]['repo'] = self.name
             try:
                 data[i]['file_size']
@@ -155,6 +169,18 @@ class Repo:
         s = ''
         for arch in self.arch:
             s += arch + ','
+        return s.strip(',')
+
+    def get_channel_str(self) -> str:
+        """
+        Returns self.channel list (allowed version channels of repo) as string
+
+        Returns:
+            str
+        """
+        s = ''
+        for channel in self.channel:
+            s += channel + ','
         return s.strip(',')
 
     @staticmethod

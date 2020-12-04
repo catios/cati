@@ -55,7 +55,7 @@ def allowed_archs() -> list:
     archs = ['all', sys_arch()]
 
     # load added archs
-    f = open(Env.allowed_arhcs(), 'r')
+    f = open(Env.allowed_archs(), 'r')
     content = f.read()
     f.close()
 

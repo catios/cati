@@ -44,11 +44,11 @@ class RepoCommand(BaseCommand):
         --scan [directory]: scans packages inside in a directory and creates data files for repo
 
         Repo config structure:
-        <url> pkg=<type(s) of packages. for example `cati` or `deb`> arch=<wanted architecture> name=<an name for repo> priority=<priority between another repos>
+        <url> pkg=<type(s) of packages. for example `cati` or `deb`> arch=<wanted architecture> channel=<wanted version channel(s)> name=<an name for repo> priority=<priority between another repos>
         
         Example:
         https://pkg.example.com/packages pkg=cati arch=all,i386 name=main-repo
-        file:///path/to/packages pkg=cati,deb arch=all name=deb-repo
+        file:///path/to/packages pkg=cati,deb arch=all channel=alpha,security name=deb-repo
         """
         pass
 
@@ -116,4 +116,4 @@ class RepoCommand(BaseCommand):
         ReposListErrorShower.show(repos)
         for repo in repos:
             if repo.successful_loaded:
-                pr.p(repo.name + ': ' + repo.url + ' pkg=' + repo.get_pkg_str() + ' arch=' + repo.get_arch_str())
+                pr.p(repo.name + ': ' + repo.url + ' pkg=' + repo.get_pkg_str() + ' arch=' + repo.get_arch_str() + ' channel=' + repo.get_channel_str())

@@ -23,9 +23,9 @@ example of `/etc/cati/repos.list`:
 
 ```
 https://cati.example.com/packages pkg=cati arch=i386 name=example-repo
-https://cati.example.com/packages pkg=cati arch=all name=example-repo2
+https://cati.example.com/packages pkg=cati arch=all name=example-repo2 channel=security
 https://cati.example.com/packages pkg=deb arch=all name=example-repo3
-file:///path/to/packages pkg=cati arch=all name=local-repo
+file:///path/to/packages pkg=cati arch=all name=local-repo channel=alpha,release
 ```
 
 also we create an file in `/etc/cati/repos.list.d/another-repo`:
@@ -62,6 +62,8 @@ they are repo config options.
 `pkg=<package-type>` says to cati to load what type of packages from the repository. default type is `cati`. also you can set more that one value, for example `pkg=cati,deb` (split by `,`).
 
 `arch=<architecture>` says to cati to load packages with which architecture from that repo. default arch is architecture of your system. also you can set more that one value, for example `arch=all,amd64` (split by `,`).
+
+`channel=<channel>` sets wanted version channels. read [Version channels](version-channels.md). also you can set multiple value by sepraing with `,`. for example `channel=a,b`.
 
 `name=<name>` just sets an name for repository. default name is `main`.
 
