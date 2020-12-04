@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] fix package shower bugs
 - [ ] add a config feature to set what architectures is allowed to be install
 - [ ] some changes in transaction calculator
 - [ ] create version channel system for install process
