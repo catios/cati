@@ -70,7 +70,7 @@ class test_update_system(TestCore):
 
         try:
             pkg_count = len(Pkg.all_list()['list'])
-            self.assert_true(pkg_count >= 15 and pkg_count >= 19)
+            self.assert_true(pkg_count >= 15 and pkg_count <= 19)
         except:
             print('Packages count:', pkg_count)
             raise

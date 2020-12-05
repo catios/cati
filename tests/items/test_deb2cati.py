@@ -32,7 +32,7 @@ class test_deb2cati(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'show',
-            'repository/test-repository/test-deb-pkg.deb'
+            'tests/test-packages/test-deb-pkg.deb'
         ]), 0)
 
         self.refresh_env()
