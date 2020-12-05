@@ -205,6 +205,9 @@ Classes
         Returns:
             str: file size str
 
+    `get_recommends(self) ‑> list`
+    :   Returns package recommends list
+
     `get_reverse_conflicts(self) ‑> list`
     :   Returns list of packages has conflicts with this package
         

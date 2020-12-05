@@ -33,9 +33,10 @@ from package.Pkg import Pkg
 
 class Calculator:
     """ Transaction calculator """
-    def __init__(self):
+    def __init__(self, with_recommends=False):
         self.to_remove = []
         self.to_install = []
+        self.with_recommends = with_recommends
 
     def has_any_thing(self):
         """ returns is there any transactions to do """
@@ -122,6 +123,8 @@ class Calculator:
         i = 0
         while i < len(self.to_install):
             depends = self.to_install[i].get_depends()
+            if self.with_recommends:
+                depends = [*depends, *self.to_install[i].get_recommends()]
             for depend in depends:
                 if not Pkg.check_state(depend):
                     # find package depend

@@ -47,6 +47,7 @@ class InstallCommand(BaseCommand):
         -y|--yes: don't ask for user confirmation
         --reinstall: reinstall gived packages
         --download-only: only download packages. this helps you to only download packages and install them later
+        --with-recommends: also install recommended packages
         """
         pass
 
@@ -59,6 +60,7 @@ class InstallCommand(BaseCommand):
                 '--yes': [False, False],
                 '--reinstall': [False, False],
                 '--download-only': [False, False],
+                '--with-recommends': [False, False],
             },
             'max_args_count': None,
             'min_args_count': 1,
@@ -115,7 +117,7 @@ class InstallCommand(BaseCommand):
 
         # calculate transactions
         pr.p('Calculating transactions...')
-        calc = Calculator()
+        calc = Calculator(with_recommends=self.has_option('--with-recommends'))
         i = 0
         while i < len(loaded_packages):
             loaded_packages[i].is_manual = True

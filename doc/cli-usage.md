@@ -251,6 +251,7 @@ Options:
 - `-y|--yes`: don't ask for user confirmation
 - `--reinstall`: re-install currently installed packages
 - `--download-only`: only download packages. this helps you to only download packages and install them later
+- `--with-recommends`: also install recommended packages
 
 ```bash
 sudo cati install [options] pkg1 pkg2 pkg3 ...

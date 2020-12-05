@@ -69,12 +69,20 @@ class Pkg:
         except:
             return []
 
+    def get_recommends(self) -> list:
+        """ Returns package recommends list """
+        try:
+            return self.data['recommends']
+        except:
+            return []
+
     def get_conflicts(self) -> list:
         """ Returns package conflicts list """
         try:
             return self.data['conflicts']
         except:
             return []
+
     def get_conffiles(self) -> list:
         """ Returns package conffiles list """
         try:

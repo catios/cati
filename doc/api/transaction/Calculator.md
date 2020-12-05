@@ -10,7 +10,7 @@ and calculates all of operations needed to be done
 Classes
 -------
 
-`Calculator()`
+`Calculator(with_recommends=False)`
 :   Transaction calculator
 
     ### Methods

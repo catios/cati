@@ -77,4 +77,23 @@ class test_install(TestCore):
         testpkgc = Pkg.load_last('testpkgc')
         self.assert_equals(testpkgc.installed(), '2.0')
 
+        # test recommends
+        self.refresh_env()
+
+        self.assert_equals(self.run_command('repo', ['--add', 'file://' + os.getcwd() + '/repository/test-repository arch=all,i386 name=test pkg=cati']), 0)
+        self.assert_equals(self.run_command('update'), 0)
+        self.assert_equals(self.run_command('install', ['testpkgr', '-y']), 0)
+        self.assert_true(Pkg.is_installed('testpkgr'))
+        self.assert_true(Pkg.is_installed('testpkgc'))
+        self.assert_true(not Pkg.is_installed('testpkg11'))
+
+        self.refresh_env()
+
+        self.assert_equals(self.run_command('repo', ['--add', 'file://' + os.getcwd() + '/repository/test-repository arch=all,i386 name=test pkg=cati']), 0)
+        self.assert_equals(self.run_command('update'), 0)
+        self.assert_equals(self.run_command('install', ['testpkgr', '-y', '--with-recommends']), 0)
+        self.assert_true(Pkg.is_installed('testpkgr'))
+        self.assert_true(Pkg.is_installed('testpkgc'))
+        self.assert_true(Pkg.is_installed('testpkg11'))
+
         self.refresh_env()

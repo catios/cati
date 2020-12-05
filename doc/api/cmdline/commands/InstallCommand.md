@@ -27,6 +27,7 @@ Classes
         -y|--yes: don't ask for user confirmation
         --reinstall: reinstall gived packages
         --download-only: only download packages. this helps you to only download packages and install them later
+        --with-recommends: also install recommended packages
 
     `run(self)`
     :   Run command
