@@ -32,7 +32,7 @@ class test_security_blacklist(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/some-malware.cati'
+            'repository/test-repository/some-malware.cati'
         ]), 0)
 
         f = open(self.env() + '/var/lib/cati/security-blacklist/1.json', 'w')
@@ -49,13 +49,13 @@ class test_security_blacklist(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/some-malware.cati'
+            'repository/test-repository/some-malware.cati'
         ]), 1)
 
         self.assert_equals(self.run_command('pkg', [
             'install',
             '--force',
-            'tests/test-packages/packages/some-malware.cati'
+            'repository/test-repository/some-malware.cati'
         ]), 0)
 
         self.refresh_env()

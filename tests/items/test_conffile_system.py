@@ -33,7 +33,7 @@ class test_conffile_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/conffile-pkg.cati'
+            'repository/test-repository/conffile-pkg.cati'
         ]), 0)
 
         self.assert_true(
@@ -55,7 +55,7 @@ class test_conffile_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/conffile-pkg.cati'
+            'repository/test-repository/conffile-pkg.cati'
         ]), 0)
 
         self.assert_true(
@@ -78,7 +78,7 @@ class test_conffile_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/conffile-pkg.cati'
+            'repository/test-repository/conffile-pkg.cati'
         ]), 0)
 
         self.assert_true(
@@ -98,7 +98,7 @@ class test_conffile_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/conffile-pkg.cati'
+            'repository/test-repository/conffile-pkg.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('remove', [
@@ -115,7 +115,7 @@ class test_conffile_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/conffile-pkg.cati'
+            'repository/test-repository/conffile-pkg.cati'
         ]), 0)
 
         f = open(self.env() + '/var/lib/cati/installed/conffile-pkg/conffiles', 'r')
@@ -136,7 +136,7 @@ class test_conffile_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/conffile-pkg.cati'
+            'repository/test-repository/conffile-pkg.cati'
         ]), 0)
 
         f = open(self.env() + '/etc/cati-test-pkg/dir/hello.list', 'r')
@@ -146,7 +146,7 @@ class test_conffile_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/conffile-pkg-1.1.cati'
+            'repository/test-repository/conffile-pkg-1.1.cati'
         ]), 0)
 
         f = open(self.env() + '/etc/cati-test-pkg/dir/hello.list', 'r')
@@ -158,13 +158,13 @@ class test_conffile_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/conffile-pkg.cati'
+            'repository/test-repository/conffile-pkg.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('pkg', [
             'install',
             '--keep-conffiles',
-            'tests/test-packages/packages/conffile-pkg-1.1.cati'
+            'repository/test-repository/conffile-pkg-1.1.cati'
         ]), 0)
 
         f = open(self.env() + '/etc/cati-test-pkg/dir/hello.list', 'r')

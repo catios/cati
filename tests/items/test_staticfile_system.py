@@ -32,7 +32,7 @@ class test_staticfile_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/staticfile-pkg.cati',
+            'repository/test-repository/staticfile-pkg.cati',
         ]), 0)
 
         # check static file list content

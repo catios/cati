@@ -33,7 +33,7 @@ class test_package_any_script(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg-with-any-script.cati'
+            'repository/test-repository/testpkg-with-any-script.cati'
         ]), 0)
 
         self.assert_true(os.path.isfile(self.env() + '/var/lib/cati/any-scripts/testpkg-with-any-script'))
@@ -51,7 +51,7 @@ class test_package_any_script(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg-with-any-script.cati'
+            'repository/test-repository/testpkg-with-any-script.cati'
         ]), 0)
 
         self.assert_true(os.path.isfile('temp'))
@@ -65,12 +65,12 @@ class test_package_any_script(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg-with-any-script.cati'
+            'repository/test-repository/testpkg-with-any-script.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkgc-2.0.cati'
+            'repository/test-repository/testpkgc-2.0.cati'
         ]), 0)
 
         os.remove('temp')

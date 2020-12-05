@@ -36,7 +36,7 @@ class test_dotcati_builder(TestCore):
         	'pkg',
         	[
         		'build',
-        		'tests/test-packages/build/notfound',
+        		'test/test-packages/build/notfound',
         		'--output=tests/test-packages/output/testpkga-1.0.cati'
         	]
         ), 1)
@@ -45,7 +45,7 @@ class test_dotcati_builder(TestCore):
             'pkg',
             [
                 'build',
-                'tests/test-packages/build/testpkga/1.0',
+                'test/test-packages/build/testpkga/1.0',
                 '--output=tests/test-packages/output/notfound/test'
             ]
         ), 1)

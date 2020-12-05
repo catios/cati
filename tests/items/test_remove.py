@@ -34,17 +34,17 @@ class test_remove(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg10.cati'
+            'repository/test-repository/testpkg10.cati'
         ]), 1)
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg11.cati'
+            'repository/test-repository/testpkg11.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg10.cati'
+            'repository/test-repository/testpkg10.cati'
         ]), 0)
 
         self.assert_true(Pkg.is_installed('testpkg10'))
@@ -60,7 +60,7 @@ class test_remove(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg10.cati'
+            'repository/test-repository/testpkg10.cati'
         ]), 0)
 
         self.assert_true(Pkg.is_installed('testpkg10'))
@@ -78,7 +78,7 @@ class test_remove(TestCore):
         
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/essential-package.cati'
+            'repository/test-repository/essential-package.cati'
         ]), 0)
 
         self.assert_true(Pkg.is_installed('essential-package'))

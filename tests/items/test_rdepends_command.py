@@ -36,8 +36,8 @@ class test_rdepends_command(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg11.cati',
-            'tests/test-packages/packages/testpkg10.cati',
+            'repository/test-repository/testpkg11.cati',
+            'repository/test-repository/testpkg10.cati',
         ]), 0)
 
         self.assert_equals(self.run_command('rdepends', [

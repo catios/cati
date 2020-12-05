@@ -34,7 +34,7 @@ class test_show_command(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkgc-2.0.cati'
+            'repository/test-repository/testpkgc-2.0.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('show', ['testpkgc']), 0)
@@ -42,7 +42,7 @@ class test_show_command(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg11.cati'
+            'repository/test-repository/testpkg11.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('show', ['testpkg11']), 0)

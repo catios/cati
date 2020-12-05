@@ -33,7 +33,7 @@ class test_package_scripts(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg-with-scripts.cati'
+            'repository/test-repository/testpkg-with-scripts.cati'
         ]), 0)
 
         f = open('temp', 'r')
@@ -55,14 +55,14 @@ class test_package_scripts(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg-with-error-in-scripts.cati'
+            'repository/test-repository/testpkg-with-error-in-scripts.cati'
         ]), 1)
 
         self.refresh_env()
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg-with-scripts.cati',
+            'repository/test-repository/testpkg-with-scripts.cati',
             '--without-scripts'
         ]), 0)
 

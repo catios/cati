@@ -35,14 +35,14 @@ class test_check_command(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkgc-2.0.cati'
+            'repository/test-repository/testpkgc-2.0.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('check', []), 0)
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/staticfile-pkg.cati'
+            'repository/test-repository/staticfile-pkg.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('check', []), 0)
@@ -67,7 +67,7 @@ class test_check_command(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/staticfile-pkg.cati'
+            'repository/test-repository/staticfile-pkg.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('check', []), 0)

@@ -34,7 +34,7 @@ class test_state_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkgc-2.0.cati'
+            'repository/test-repository/testpkgc-2.0.cati'
         ]), 0)
 
         state_f = open(Env.state_file(), 'w')
@@ -48,7 +48,7 @@ class test_state_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkgc-2.0.cati'
+            'repository/test-repository/testpkgc-2.0.cati'
         ]), 1)
 
         # tests for cli `state` command
@@ -60,7 +60,7 @@ class test_state_system(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkgc-2.0.cati'
+            'repository/test-repository/testpkgc-2.0.cati'
         ]), 0)
         self.assert_true(Pkg.is_installed('testpkgc'))
         state_f = open(Env.state_file(), 'w')

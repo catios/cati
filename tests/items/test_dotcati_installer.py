@@ -34,14 +34,14 @@ class test_dotcati_installer(TestCore):
         """ Run test """
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/simple-test-package.cati'
+            'repository/test-repository/simple-test-package.cati'
         ]), 0)
 
         self.assert_true(os.path.isfile(self.env('/usr/bin/cati-testpkga')))
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/simple-test-package.cati'
+            'repository/test-repository/simple-test-package.cati'
         ]), 0)
 
         self.assert_true(os.path.isfile(self.env('/usr/bin/cati-testpkga')))
@@ -53,7 +53,7 @@ class test_dotcati_installer(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg-with-file-conflict-a.cati',
+            'repository/test-repository/testpkg-with-file-conflict-a.cati',
         ]), 0)
 
         self.assert_true(os.path.isfile(self.env() + '/etc/testpkg-with-file-conflict/test.txt'))
@@ -64,7 +64,7 @@ class test_dotcati_installer(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg-with-file-conflict-a.cati',
+            'repository/test-repository/testpkg-with-file-conflict-a.cati',
             '--target=/app'
         ]), 0)
 

@@ -32,31 +32,31 @@ class test_packages_file_conflict_error(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg-with-file-conflict-a.cati'
+            'repository/test-repository/testpkg-with-file-conflict-a.cati'
         ]), 0)
 
         self.refresh_env()
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg-with-file-conflict-b.cati'
+            'repository/test-repository/testpkg-with-file-conflict-b.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg-with-file-conflict-a.cati'
+            'repository/test-repository/testpkg-with-file-conflict-a.cati'
         ]), 1)
 
         self.refresh_env()
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg-with-file-conflict-a.cati'
+            'repository/test-repository/testpkg-with-file-conflict-a.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkg-with-file-conflict-b.cati'
+            'repository/test-repository/testpkg-with-file-conflict-b.cati'
         ]), 1)
 
         self.refresh_env()

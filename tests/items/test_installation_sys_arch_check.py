@@ -32,7 +32,7 @@ class test_installation_sys_arch_check(TestCore):
         
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/invalid-arch.cati'
+            'repository/test-repository/invalid-arch.cati'
         ]), 1)
 
         f = open(self.env() + '/etc/cati/allowed-architectures.list', 'w')
@@ -41,7 +41,7 @@ class test_installation_sys_arch_check(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/invalid-arch.cati'
+            'repository/test-repository/invalid-arch.cati'
         ]), 0)
 
         self.refresh_env()

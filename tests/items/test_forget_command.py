@@ -34,12 +34,12 @@ class test_forget_command(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkgc-1.0.cati'
+            'repository/test-repository/testpkgc-1.0.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkgc-2.0.cati'
+            'repository/test-repository/testpkgc-2.0.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('forget', [
@@ -59,12 +59,12 @@ class test_forget_command(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkgc-1.0.cati'
+            'repository/test-repository/testpkgc-1.0.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkgc-2.0.cati'
+            'repository/test-repository/testpkgc-2.0.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('forget', [
@@ -79,12 +79,12 @@ class test_forget_command(TestCore):
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkgc-2.0.cati'
+            'repository/test-repository/testpkgc-2.0.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('pkg', [
             'install',
-            'tests/test-packages/packages/testpkgc-2.0-alpha.cati'
+            'repository/test-repository/testpkgc-2.0-alpha.cati'
         ]), 0)
 
         self.assert_equals(self.run_command('forget', [
