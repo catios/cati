@@ -127,7 +127,20 @@ def deb2cati(file_path: str) -> str:
                     value = line.split(':', 1)[1].strip()
                     tmp_last_key = key
                     control_fields[key] = value
-        
+
+        # convert scripts
+        if os.path.isfile('control/preinst'):
+            shutil.copy('control/preinst', 'scripts/ins-before')
+
+        if os.path.isfile('control/postinst'):
+            shutil.copy('control/postinst', 'scripts/ins-after')
+
+        if os.path.isfile('control/prerm'):
+            shutil.copy('control/prerm', 'scripts/rm-before')
+
+        if os.path.isfile('control/postrm'):
+            shutil.copy('control/postrm', 'scripts/rm-after')
+
         # convert control fields to cati data.json
         cati_data = {}
         for k in control_fields:

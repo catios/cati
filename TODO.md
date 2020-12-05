@@ -1,7 +1,5 @@
 # TODO
 
-
-- [ ] convert deb package scripts to cati scripts
 - [ ] create graphical interface base
 - [ ] create shell completion scripts
 - [ ] create manpages
