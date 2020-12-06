@@ -1,6 +1,7 @@
 # Cati Documentation
 
 ### User Guides
+- [Introduction](introduction.md)
 - [Command Line Usage](cli-usage.md)
 - [Deb and RPM Packages support](deb-and-rpm-packages-support.md)
 - [Cati Files and Directories Structure](files-and-dirs-structure.md)
@@ -12,6 +13,7 @@
 - [Cati Repositories](repositories.md)
 - [Security Blacklist](security-blacklist.md)
 - [Version channels](version-channels.md)
+- [Distribution Guide](distro-guide.md)
 
 ### Developer Guides
 - [Contributing Guide](/CONTRIBUTING.md)
