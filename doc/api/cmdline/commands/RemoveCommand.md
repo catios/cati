@@ -24,8 +24,7 @@ Classes
     `help(self)`
     :   remove packages
         
-        Usage:
-        - cati remove pkg1 pkg2 [options]
+        Usage: cati remove pkg1 pkg2 [options]
         
         Options:
         -y|--yes: do not ask for user confirmation

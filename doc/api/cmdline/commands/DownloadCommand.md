@@ -29,6 +29,7 @@ Classes
         
         Options:
         --output=[output file path]: set file download path
+        -q|--quiet: quiet output
 
     `run(self)`
     :   Run command

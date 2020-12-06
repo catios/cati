@@ -27,6 +27,10 @@ Classes
     :   updates list of available packages from repositories
         
         Usage: cati update [options]
+        
+        Options:
+        -q|--quiet: quiet output
+        -v|--verbose: verbose output
 
     `run(self)`
     :   Run command

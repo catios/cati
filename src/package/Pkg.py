@@ -108,16 +108,17 @@ class Pkg:
             if pkg.installed():
                 pkg = Pkg.load_version(pkg.data['name'], pkg.installed())
             for dep in pkg.get_depends():
-                result = Pkg.check_state(dep, virtual={
-                    'remove': [
-                        [
-                            self.data['name'], self.data['version']
-                        ]
-                    ],
-                    'all_real_is_installed': True
-                })
-                if not result:
-                    reverse_depends.append(pkg)
+                if dep.strip()[0] != '@':
+                    result = Pkg.check_state(dep, virtual={
+                        'remove': [
+                            [
+                                self.data['name'], self.data['version']
+                            ]
+                        ],
+                        'all_real_is_installed': True
+                    })
+                    if not result:
+                        reverse_depends.append(pkg)
         return reverse_depends
 
     def get_reverse_conflicts(self) -> list:

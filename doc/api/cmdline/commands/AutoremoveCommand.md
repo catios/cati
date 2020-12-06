@@ -23,13 +23,9 @@ Classes
     `help(self)`
     :   remove unused automaticaly installed packages
         
-        Usage: cati autoremove [options]
+        Usage: sudo cati autoremove [options]
         
-        Options:
-        -y|--yes: do not ask for user confirmation
-        --conffiles: also remove conffiles (full remove)
-        --without-scripts: do not run package scripts in remove process
-        --force|-f: force remove essential packages
+        Options: all of remove command options
 
     `run(self)`
     :   Run command

@@ -34,8 +34,7 @@ class FinfoCommand(BaseCommand):
 
         this command says an file is for which package and some another details
 
-        Usage:
-        - cati finfo /path/to/file
+        Usage: cati finfo /path/to/file
         """
         pass
 

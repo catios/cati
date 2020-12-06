@@ -1,7 +1,6 @@
 # TODO
 
 - [ ] create graphical interface base
-- [ ] create shell completion scripts
 - [ ] create manpages
 - [ ] write an introduction in doc
 - [ ] write a distro guide

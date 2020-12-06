@@ -37,17 +37,14 @@ class ForgetCommand(BaseCommand):
         """
         forgets packages from packages list
 
-        Usage:
-        - cati forget pkg1
-        - cati forget pkg1=1.12.7
-        - cati forget pkg1 pkg2 pkg3=1.0 pkg4 ...
+        Usage: cati forget pkg1 pkg2 pkg3=1.6.7 ...
         """
         pass
 
     def config(self) -> dict:
         """ Define and config this command """
         return {
-            'name': 'show',
+            'name': 'forget',
             'options': {
             },
             'max_args_count': None,

@@ -34,8 +34,7 @@ class SearchCommand(BaseCommand):
 
         (this command is a alias for `cati list --search='word'`)
 
-        Usage:
-        - cati search 'word'
+        Usage: cati search 'word'
         """
         pass
 

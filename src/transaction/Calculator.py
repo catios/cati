@@ -126,7 +126,7 @@ class Calculator:
             if self.with_recommends:
                 depends = [*depends, *self.to_install[i].get_recommends()]
             for depend in depends:
-                if not Pkg.check_state(depend):
+                if not Pkg.check_state(depend) and depend.strip()[0] != '@':
                     # find package depend
                     try:
                         self.to_install[i].depend_get_next[depend]

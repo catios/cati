@@ -41,8 +41,7 @@ class PkgCommand(BaseCommand):
         """
         work with .cati packages
 
-        Usage:
-        - cati pkg [subcommand] [args] [options]
+        Usage: cati pkg [subcommand] [args] [options]
 
         Subcommands:
         - build:      build .cati package from directory(s)

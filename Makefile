@@ -24,6 +24,8 @@ compile: all
 ### install		installs program on system
 install: ./dist/cati
 	@cp ./dist/cati $(INSTALLATION_PATH)
+	@mkdir -p /usr/share/bash-completion/completions
+	@cp ./etc/shell-completion/cati.bash /usr/share/bash-completion/completions/cati
 	@echo -e "\033[32mCati installed successfuly\033[0m"
 	@$(INSTALLATION_PATH)
 

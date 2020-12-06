@@ -38,8 +38,7 @@ class StateCommand(BaseCommand):
         """
         manage transactions state
 
-        Usage:
-        - cati state [options]
+        Usage: cati state [options]
         
         Options:
         --abort: cancel undoned transactions
