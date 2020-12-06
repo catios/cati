@@ -18,7 +18,7 @@ _cati_pkg()
 
 _cati_list()
 {
-	COMPREPLY=($(compgen -W "--help --installed -q --quiet -v --verbose --installed-manual --author= --maintiner= --category= --search= --upgradable" -- "$thecur"))
+	COMPREPLY=($(compgen -W "-q --quiet -v --verbose --help --installed -q --quiet -v --verbose --installed-manual --author= --maintiner= --category= --search= --upgradable" -- "$thecur"))
 }
 
 _CATI_REMOVE_COMMAND_OPTIONS="-y --yes --conffiles --without-scripts --force -f"
@@ -40,12 +40,12 @@ _cati_state()
 
 _cati_query()
 {
-	COMPREPLY=($(compgen -W "--help -q --quiet" -- "$thecur"))
+	COMPREPLY=($(compgen -W "-q --quiet --help -q --quiet" -- "$thecur"))
 }
 
 _cati_files()
 {
-	COMPREPLY=($(compgen -W "--help --installed $(ls /var/lib/cati/lists)" -- "$thecur"))
+	COMPREPLY=($(compgen -W "-q --quiet --help --installed $(ls /var/lib/cati/lists)" -- "$thecur"))
 }
 
 _cati_finfo()
@@ -55,7 +55,7 @@ _cati_finfo()
 
 _cati_rdepends()
 {
-	COMPREPLY=($(compgen -W "--help $(ls /var/lib/cati/lists)" -- "$thecur"))
+	COMPREPLY=($(compgen -W "-q --quiet --help $(ls /var/lib/cati/lists)" -- "$thecur"))
 }
 
 _cati_forget()
@@ -75,7 +75,7 @@ _cati_repo()
 
 _cati_update()
 {
-	COMPREPLY=($(compgen -W "" -- "$thecur"))
+	COMPREPLY=($(compgen -W "-v --verbose -q -quiet" -- "$thecur"))
 }
 
 _cati_autoremove()
@@ -85,7 +85,7 @@ _cati_autoremove()
 
 _cati_download()
 {
-	COMPREPLY=($(compgen -W "--help $(ls /var/lib/cati/lists) --output= -o=" -- "$thecur"))
+	COMPREPLY=($(compgen -W "-q --quiet --help $(ls /var/lib/cati/lists) --output= -o=" -- "$thecur"))
 }
 
 _CATI_INSTALL_COMMAND_OPTIONS="-y --yes --reinstall --download-only --with-recommends"
