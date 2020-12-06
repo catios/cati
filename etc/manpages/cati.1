@@ -1,3 +1,7 @@
+.\" Cati manual page
+.\" This file is part of cati project
+.\" Copyright 2020 parsa shahmaleki <parsampsh@gmail.com>
+
 .TH cati 1 "6 December 2020" "Cati 0.1-dev" "Cati Manual"
 
 .SH NAME
@@ -53,10 +57,71 @@ is a package manager for UNIX systems. cati can install/remove/list and manage p
 also cati can load packages lists from repositories(local file repositories and http server repositories).
 cati is very simple and easy to use and also is powerful.
 
+.B help
+shows this help
+
+.B pkg
+work with .cati packages
+
+.B list
+shows list of packages
+
+.B remove
+remove packages
+
+.B show
+shows details of packages
+
+.B state
+manage transactions state
+
+.B query
+checks a package query
+
+.B search
+search between packages by name and description
+
+.B files
+shows files list of packages
+
+.B finfo
+shows info about an file
+
+.B rdepends
+shows reverse depends list of packages
+
+.B forget
+forgets packages from packages list
+
+.B check
+checks system health and security
+
+.B repo
+manage repositories
+
+.B update
+updates list of available packages from repositories
+
+.B autoremove
+remove unused automaticaly installed packages
+
+.B clear-cache
+clears cache files
+
+.B download
+download packages
+
+.B install
+install packages
+
+.B upgrade
+upgrade all of packages
+
+.B full-upgrade
+update, upgrade and autoremove
+
 .SH DIAGNOSTICS
 cati returns zero exit code when process is successful and returns exit code 1 when there is an error.
 
 .SH AUTHOR
 .B parsa shahmaleki <parsampsh@gmail.com>
-
-
