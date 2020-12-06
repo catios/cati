@@ -16,26 +16,24 @@ pkg [ show
 | install 
 .I pkg1.cati
 ]
-list |
+| list |
 remove
 .I pkg1 pkg2
-... |
-show
+| show
 .I pkg1 pkg2=<version>
-... |
-state [ --abort, --complete, -y|--yes ] |
-query
+| state [ --abort, --complete, -y|--yes ]
+| query
 .I "pkgx >= 4.5"
 | search
 .I "word"
 | files
 .I pkg1 pkg2
-... | finfo
+ | finfo
 .I /path/to/file
 | rdepends
 .I pkg1 pkg2
-... | forget
-.I pkg1 pkg2=<version>...
+ | forget
+.I pkg1 pkg2=<version>
 | check |
 repo [-a|--add, -e|--edit, --scan] |
 update |
@@ -45,13 +43,15 @@ download
 .I pkg1 --output=<out.cati>
 | install
 .I pkg1 pkg2
-... | upgrade |
+| upgrade |
 full-upgrade}
-{--version, --help, -v|--verbose, -q|--quiet}
+{--version, --help, -v|--verbose, -q|--quiet, --no-ansi}
 
 .SH DESCRIPTION
 .B cati
-is a package manager for UNIX systems. cati can install/remove/list and manage packages on system. also cati can load packages lists from repositories(local file repositories and http server repositories). cati is very simple and easy to use also is powerful.
+is a package manager for UNIX systems. cati can install/remove/list and manage packages on system.
+also cati can load packages lists from repositories(local file repositories and http server repositories).
+cati is very simple and easy to use and also is powerful.
 
 .SH DIAGNOSTICS
 cati returns zero exit code when process is successful and returns exit code 1 when there is an error.
