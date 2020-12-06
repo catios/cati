@@ -20,7 +20,10 @@ Classes
     `help(self)`
     :   clears cache files
         
-        Usage: cati clear-cache
+        Usage: sudo cati clear-cache [options]
+        
+        Options:
+        -v|--verbose: verbose output
 
     `run(self)`
     :   Run command

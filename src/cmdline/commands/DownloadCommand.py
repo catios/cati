@@ -41,6 +41,7 @@ class DownloadCommand(BaseCommand):
 
         Options:
         --output=[output file path]: set file download path
+        -q|--quiet: quiet output
         """
         pass
 

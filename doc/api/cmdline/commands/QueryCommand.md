@@ -20,9 +20,8 @@ Classes
     `help(self)`
     :   checks a package query
         
-        Usage:
-        - cati query [query]
-        - cati query "somepackage >= 1.0"
+        Usage: cati query [query]
+        ...... cati query "somepackage >= 1.0"
 
     `run(self)`
     :   Run command

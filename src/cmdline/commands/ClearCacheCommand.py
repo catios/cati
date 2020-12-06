@@ -33,7 +33,10 @@ class ClearCacheCommand(BaseCommand):
         """
         clears cache files
 
-        Usage: cati clear-cache
+        Usage: sudo cati clear-cache [options]
+
+        Options:
+        -v|--verbose: verbose output
         """
         pass
 

@@ -23,10 +23,7 @@ Classes
     `help(self)`
     :   forgets packages from packages list
         
-        Usage:
-        - cati forget pkg1
-        - cati forget pkg1=1.12.7
-        - cati forget pkg1 pkg2 pkg3=1.0 pkg4 ...
+        Usage: cati forget pkg1 pkg2 pkg3=1.6.7 ...
 
     `run(self)`
     :   Run command

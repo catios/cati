@@ -33,28 +33,18 @@ class AutoremoveCommand(BaseCommand):
         """
         remove unused automaticaly installed packages
 
-        Usage: cati autoremove [options]
+        Usage: sudo cati autoremove [options]
 
-        Options:
-        -y|--yes: do not ask for user confirmation
-        --conffiles: also remove conffiles (full remove)
-        --without-scripts: do not run package scripts in remove process
-        --force|-f: force remove essential packages
+        Options: all of remove command options
         """
         pass
 
     def config(self) -> dict:
         """ Define and config this command """
+        rmcmd_options = RemoveCommand().config()['options']
         return {
             'name': 'autoremove',
-            'options': {
-                '-y': [False, False],
-                '--yes': [False, False],
-                '--conffiles': [False, False],
-                '--without-scripts': [False, False],
-                '--force': [False, False],
-                '-f': [False, False],
-            },
+            'options': rmcmd_options,
             'max_args_count': 0,
             'min_args_count': 0,
         }

@@ -32,8 +32,7 @@ class ListCommand(BaseCommand):
         """
         shows list of packages
 
-        Usage:
-        - cati list [options]
+        Usage: cati list [options]
 
         Options:
         --installed: show only installed packages

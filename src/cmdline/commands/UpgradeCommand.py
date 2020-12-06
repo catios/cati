@@ -33,7 +33,7 @@ class UpgradeCommand(BaseCommand):
         """
         upgrade all of packages
 
-        Usage: cati upgrade [options]
+        Usage: sudo cati upgrade [options]
 
         Options: all of `install` command options
         """

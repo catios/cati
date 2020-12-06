@@ -35,16 +35,17 @@ class RDependsCommand(BaseCommand):
 
         this command shows which packages has dependency to an package
 
-        Usage:
-        - cati rdepends pkg1
-        - cati rdepends pkg1 pkg2 ...
+        Usage: cati rdepends pkg1 pkg2 ... [options]
+
+        Options:
+        -q|--quiet: quiet output
         """
         pass
 
     def config(self) -> dict:
         """ Define and config this command """
         return {
-            'name': 'show',
+            'name': 'rdepends',
             'options': {
                 '-q': [False, False],
                 '--quiet': [False, False],
