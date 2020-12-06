@@ -1,7 +1,6 @@
 # TODO
 
 - [ ] create graphical interface base
-- [ ] create manpages
 - [ ] write an introduction in doc
 - [ ] write a distro guide
 - [ ] handle `replaces` and `provides` fields for packages
