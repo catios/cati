@@ -47,7 +47,7 @@ class ForgetCommand(BaseCommand):
     def config(self) -> dict:
         """ Define and config this command """
         return {
-            'name': 'show',
+            'name': 'forget',
             'options': {
             },
             'max_args_count': None,

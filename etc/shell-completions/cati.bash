@@ -3,8 +3,8 @@
 # Copyright parsa shahmaleki <parsampsh@gmail.com>
 # Under the GPL-v3
 
-_CATI_MAIN_COMMANDS="help pkg list remove show state query search files finfo"
-_CATI_GENERAL_OPTIONS="--no-ansi -h --help"
+_CATI_MAIN_COMMANDS="help pkg list remove show state query search files finfo rdepends forget check repo update autoremove clear-cache download install upgrade full-upgrade"
+_CATI_GENERAL_OPTIONS="--no-ansi"
 
 _cati_help()
 {
@@ -13,42 +13,96 @@ _cati_help()
 
 _cati_pkg()
 {
-	COMPREPLY=($(compgen -f -W "install show build --without-scripts --target= --keep-conffiles --force -f" -- "$thecur"))
+	COMPREPLY=($(compgen -f -W "--help install show build --without-scripts --target= --keep-conffiles --force -f" -- "$thecur"))
 }
 
 _cati_list()
 {
-	COMPREPLY=($(compgen -W "--installed -q --quiet -v --verbose --installed-manual --author= --maintiner= --category= --search= --upgradable" -- "$thecur"))
+	COMPREPLY=($(compgen -W "--help --installed -q --quiet -v --verbose --installed-manual --author= --maintiner= --category= --search= --upgradable" -- "$thecur"))
 }
+
+_CATI_REMOVE_COMMAND_OPTIONS="-y --yes --conffiles --without-scripts --force -f"
 
 _cati_remove()
 {
-	COMPREPLY=($(compgen -W "$(ls /var/lib/cati/installed) -y --yes --conffiles --without-scripts --force -f" -- "$thecur"))
+	COMPREPLY=($(compgen -W "--help $(ls /var/lib/cati/installed) ${_CATI_REMOVE_COMMAND_OPTIONS}" -- "$thecur"))
 }
 
 _cati_show()
 {
-	COMPREPLY=($(compgen -W "--versions" -- "$thecur"))
+	COMPREPLY=($(compgen -W "--help --versions $(ls /var/lib/cati/lists)" -- "$thecur"))
 }
 
 _cati_state()
 {
-	COMPREPLY=($(compgen -W "--abort --complete -y --yes" -- "$thecur"))
+	COMPREPLY=($(compgen -W "--help --abort --complete -y --yes" -- "$thecur"))
 }
 
 _cati_query()
 {
-	COMPREPLY=($(compgen -W "-q --quiet" -- "$thecur"))
+	COMPREPLY=($(compgen -W "--help -q --quiet" -- "$thecur"))
 }
 
 _cati_files()
 {
-	COMPREPLY=($(compgen -W "--installed $(ls /var/lib/cati/lists)" -- "$thecur"))
+	COMPREPLY=($(compgen -W "--help --installed $(ls /var/lib/cati/lists)" -- "$thecur"))
 }
 
 _cati_finfo()
 {
 	COMPREPLY=($(compgen -fd))
+}
+
+_cati_rdepends()
+{
+	COMPREPLY=($(compgen -W "--help $(ls /var/lib/cati/lists)" -- "$thecur"))
+}
+
+_cati_forget()
+{
+	COMPREPLY=($(compgen -W "--help $(ls /var/lib/cati/lists)" -- "$thecur"))
+}
+
+_cati_check()
+{
+	COMPREPLY=($(compgen -W "--help -q --quiet -v --verbose" -- "$thecur"))
+}
+
+_cati_repo()
+{
+	COMPREPLY=($(compgen -W "--help -e --edit -a --add --scan" -- "$thecur"))
+}
+
+_cati_update()
+{
+	COMPREPLY=($(compgen -W "" -- "$thecur"))
+}
+
+_cati_autoremove()
+{
+	COMPREPLY=($(compgen -W "--help ${_CATI_REMOVE_COMMAND_OPTIONS}" -- "$thecur"))
+}
+
+_cati_download()
+{
+	COMPREPLY=($(compgen -W "--help $(ls /var/lib/cati/lists) --output= -o=" -- "$thecur"))
+}
+
+_CATI_INSTALL_COMMAND_OPTIONS="-y --yes --reinstall --download-only --with-recommends"
+
+_cati_install()
+{
+	COMPREPLY=($(compgen -W "--help $(ls /var/lib/cati/lists) ${_CATI_INSTALL_COMMAND_OPTIONS}" -- "$thecur"))
+}
+
+_cati_upgrade()
+{
+	COMPREPLY=($(compgen -W "--help ${_CATI_INSTALL_COMMAND_OPTIONS}" -- "$thecur"))
+}
+
+_cati_full_upgrade()
+{
+	COMPREPLY=($(compgen -W "--help -y --yes" -- "$thecur"))
 }
 
 _cati() {
@@ -87,8 +141,18 @@ _cati() {
 		search);;
 		files) _cati_files;;
 		finfo) _cati_finfo;;
+		rdepends) _cati_rdepends;;
+		forget) _cati_forget;;
+		check) _cati_check;;
+		repo) _cati_repo;;
+		update) _cati_update;;
+		autoremove) _cati_autoremove;;
+		clear-cache) _cati_update;;
+		download) _cati_download;;
+		install) _cati_install;;
+		upgrade) _cati_upgrade;;
+		full-upgrade) _cati_full_upgrade;;
 	esac
 }
 
 complete -F _cati cati
-
