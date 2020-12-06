@@ -26,6 +26,8 @@ install: ./dist/cati
 	@cp ./dist/cati $(INSTALLATION_PATH)
 	@mkdir -p /usr/share/bash-completion/completions
 	@cp ./etc/shell-completion/cati.bash /usr/share/bash-completion/completions/cati
+	@mkdir -p /usr/share/man/man1
+	@cp ./etc/manpages/cati.1 /usr/share/man/man1/cati.1
 	@echo -e "\033[32mCati installed successfuly\033[0m"
 	@$(INSTALLATION_PATH)
 

@@ -1,0 +1,62 @@
+.TH cati 1 "December 6, 2020" "Cati 0.1-dev" "Cati Manual"
+
+.SH NAME
+cati - Package Manager
+
+.SH SYNOPSIS
+.B cati
+{
+help [?
+.I command-name
+] |
+pkg [ show 
+.I pkg1.cati
+| build
+.I pkg1-dir
+| install 
+.I pkg1.cati
+]
+list |
+remove
+.I pkg1 pkg2
+... |
+show
+.I pkg1 pkg2=<version>
+... |
+state [ --abort, --complete, -y|--yes ] |
+query
+.I "pkgx >= 4.5"
+| search
+.I "word"
+| files
+.I pkg1 pkg2
+... | finfo
+.I /path/to/file
+| rdepends
+.I pkg1 pkg2
+... | forget
+.I pkg1 pkg2=<version>...
+| check |
+repo [-a|--add, -e|--edit, --scan] |
+update |
+autoremove |
+clear-cache |
+download 
+.I pkg1 --output=<out.cati>
+| install
+.I pkg1 pkg2
+... | upgrade |
+full-upgrade}
+{--version, --help, -v|--verbose, -q|--quiet}
+
+.SH DESCRIPTION
+.B cati
+is a package manager for UNIX systems. cati can install/remove/list and manage packages on system. also cati can load packages lists from repositories(local file repositories and http server repositories). cati is very simple and easy to use also is powerful.
+
+.SH DIAGNOSTICS
+cati returns zero exit code when process is successful and returns exit code 1 when there is an error.
+
+.SH AUTHOR
+.B parsa shahmaleki <parsampsh@gmail.com>
+
+
