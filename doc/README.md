@@ -2,7 +2,7 @@
 
 ### User Guides
 - [Introduction](introduction.md)
-- [Command Line Usage](cli-usage.md)
+- [Command Line Manual](cli-manual.txt)
 - [Deb and RPM Packages support](deb-and-rpm-packages-support.md)
 - [Cati Files and Directories Structure](files-and-dirs-structure.md)
 - [Configurations](configurations.md)
