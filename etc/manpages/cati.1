@@ -78,7 +78,24 @@ another subcommand is
 . another command is
 .I build
 . with this command you can build .cati packages.
-"cati pkg build /path/to/pkgbuild-directory another-pkg-build-dir/"
+"cati pkg build /path/to/pkgbuild-directory another-pkg-build-dir/".
+`pkg install` command has a option named
+.I --without-scripts.
+packages has some scripts while install/remove process. in installation process, if you don't want to run scripts,
+use this option.
+.I --target=[target-path]
+is other option for install command.
+this option sets target installation path. for example if a package has a file in `/usr/bin/myapp`, if you
+set `/some/dir` value on this option, that file will be installed in `/some/dir/usr/bin/myapp`.
+.I --keep-conffiles
+is other option.
+this option says to cati to keep old version of
+.B Config files.
+config files are a file in package which not be deleted in remove process.
+also, if you are installing new version of a package, if conffile is changed in new version, will be replaced
+with old version. if you want to keep old version of conffile, use this option.
+.I --force|-f
+is a option to force install the package if that is blocked in security blacklist.
 
 .B list
 shows list of packages.
@@ -292,6 +309,12 @@ this is like depends but will not be installed by default.
 you can use
 .I --with-recommends
 option to also install recommended packages.
+.I without-scripts
+option is like `pkg install --without-scripts`.
+.I --target=[path]
+option is like `pkg install --target`.
+.I --keep-conffiles
+option is like `pkg install --keep-conffiles`
 
 .B upgrade
 upgrade all of packages. this command upgrades all of installed packages to latest available version.

@@ -28,6 +28,9 @@ Classes
         --reinstall: reinstall gived packages
         --download-only: only download packages. this helps you to only download packages and install them later
         --with-recommends: also install recommended packages
+        --keep-conffiles: `pkg install --keep-conffiles`
+        --without-scripts: `remove/install --without-scripts`
+        --target=[target-installation-path]: `pkg install --target`
 
     `run(self)`
     :   Run command

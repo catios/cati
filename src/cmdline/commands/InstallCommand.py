@@ -48,6 +48,9 @@ class InstallCommand(BaseCommand):
         --reinstall: reinstall gived packages
         --download-only: only download packages. this helps you to only download packages and install them later
         --with-recommends: also install recommended packages
+        --keep-conffiles: `pkg install --keep-conffiles`
+        --without-scripts: `remove/install --without-scripts`
+        --target=[target-installation-path]: `pkg install --target`
         """
         pass
 
@@ -61,6 +64,7 @@ class InstallCommand(BaseCommand):
                 '--reinstall': [False, False],
                 '--download-only': [False, False],
                 '--with-recommends': [False, False],
+                '--keep-conffiles': [False, False],
             },
             'max_args_count': None,
             'min_args_count': 1,
@@ -208,12 +212,22 @@ class InstallCommand(BaseCommand):
         if self.has_option('--download-only'):
             return 0
 
+        cati_pkg_cmd_options = []
+        remove_cmd_options = []
+        if self.has_option('--keep-conffiles'):
+            cati_pkg_cmd_options.append('--keep-conffiles')
+        if self.has_option('--target'):
+            cati_pkg_cmd_options.append('--target')
+        if self.has_option('--without-scripts'):
+            cati_pkg_cmd_options.append('--without-scripts')
+            remove_cmd_options.append('--without-scripts')
+
         # remove packages
         if calc.to_remove:
             pr.p('Removing packages...')
             package_names = [pkg.data['name'] for pkg in calc.to_remove]
             remove_cmd = RemoveCommand()
-            res = remove_cmd.handle(ArgParser.parse(['cati', 'remove', *package_names, '-y']))
+            res = remove_cmd.handle(ArgParser.parse(['cati', 'remove', *package_names, '-y', *remove_cmd_options]))
             if res != 0 and res != None:
                 pr.e(ansi.red + 'Failed to remove packages' + ansi.reset)
                 return res
@@ -221,7 +235,7 @@ class InstallCommand(BaseCommand):
         # install packages
         pr.p('Installing packages...')
         pkg_cmd = PkgCommand()
-        res = pkg_cmd.handle(ArgParser.parse(['cati', 'pkg', 'install', *downloaed_paths]))
+        res = pkg_cmd.handle(ArgParser.parse(['cati', 'pkg', 'install', *downloaed_paths, *cati_pkg_cmd_options]))
         if res != 0 and res != None:
             self.set_manual_installs(calc.to_install)
             pr.e(ansi.red + 'Failed to install packages' + ansi.reset)
