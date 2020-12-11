@@ -114,7 +114,9 @@ DESCRIPTION
 
        check checks system health and security. this command  checks  packages
        installation  health,  cati  database and something else. you can check
-       you system and packages health and security with this command
+       you system and packages health and security with this command.  you can
+       use  --autofix  option  of this command to automatically fix some prob‐
+       lems.
 
        repo manage repositories. you can list and edit and add cati  reposito‐
        ries.   repositories  are  a  place which cati loads packages list from

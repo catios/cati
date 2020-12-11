@@ -27,6 +27,7 @@ Classes
         Options:
         -q|--quiet: quiet output
         -v|--verbose: verbose output
+        --autofix: automatically fix problems by re-installing some packages
 
     `run(self)`
     :   Run command

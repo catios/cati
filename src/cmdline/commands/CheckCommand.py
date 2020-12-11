@@ -28,6 +28,7 @@ from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi, ArgParser
 from frontend.RootRequired import require_root_permission
 from cmdline.commands.StateCommand import StateCommand
+from cmdline.commands.InstallCommand import InstallCommand
 from cmdline.components import ReposListErrorShower
 from package.Pkg import Pkg
 from helpers.hash import calc_file_sha256
@@ -47,6 +48,7 @@ class CheckCommand(BaseCommand):
         Options:
         -q|--quiet: quiet output
         -v|--verbose: verbose output
+        --autofix: automatically fix problems by re-installing some packages
         """
         pass
 
@@ -59,6 +61,7 @@ class CheckCommand(BaseCommand):
                 '-q': [False, False],
                 '--verbose': [False, False],
                 '-v': [False, False],
+                '--autofix': [False, False],
             },
             'max_args_count': 0,
             'min_args_count': 0,
@@ -69,6 +72,10 @@ class CheckCommand(BaseCommand):
         
         # require root permission
         require_root_permission()
+
+        result_code = 0
+
+        packages_to_reinstall = []
 
         if not self.is_quiet():
             pr.p('Starting checking system health and security...')
@@ -103,9 +110,11 @@ class CheckCommand(BaseCommand):
         if dependency_problems or conflict_problems:
             for depend in dependency_problems:
                 pr.p(ansi.red + 'dependency problem for ' + depend[0].data['name'] + ': ' + depend[1] + ansi.reset)
+                packages_to_reinstall.append(depend[0])
             for conflict in conflict_problems:
                 pr.p(ansi.red + 'conflict problem for ' + conflict[0].data['name'] + ': ' + conflict[1] + ansi.reset)
-            return 1
+                packages_to_reinstall.append(conflict[0])
+            result_code = 1
         else:
             pr.p(ansi.green + 'There is not any conflict or dependnecy problem and everything is ok' + ansi.reset)
 
@@ -136,8 +145,9 @@ class CheckCommand(BaseCommand):
                     ])
         if staticfile_problems:
             for problem in staticfile_problems:
-                pr.p(ansi.red + 'staticfile problem in package ' + problem[0].data['name'] + ': ' + problem[1][1] + ': ' + problem[2])
-            return 1
+                pr.p(ansi.red + 'staticfile problem in package ' + problem[0].data['name'] + ': ' + problem[1][1] + ': ' + problem[2] + ansi.reset)
+                packages_to_reinstall.append(problem[0])
+            result_code = 1
         else:
             pr.p(ansi.green + 'all of static files are ok' + ansi.reset)
         
@@ -150,10 +160,13 @@ class CheckCommand(BaseCommand):
         pr.p(ansi.red, end='')
         ReposListErrorShower.show(repos)
         pr.p(ansi.reset, end='')
+        is_any_repo_error = False
         for repo in repos:
             if repo.syntax_errors:
-                return 1
-        pr.p(ansi.green + 'all of cati configuration files are ok' + ansi.reset)
+                is_any_repo_error = True
+                result_code = 1
+        if not is_any_repo_error:
+            pr.p(ansi.green + 'all of cati configuration files are ok' + ansi.reset)
 
         # check database files
         if not self.is_quiet():
@@ -178,5 +191,28 @@ class CheckCommand(BaseCommand):
         if database_problems:
             for problem in database_problems:
                 pr.p(ansi.red + 'database: ' + problem + ansi.reset)
-            return 1
-        pr.p(ansi.green + 'all of cati database is ok' + ansi.reset)
+            result_code = 1
+        else:
+            pr.p(ansi.green + 'all of cati database is ok' + ansi.reset)
+
+        if not self.is_quiet():
+            if packages_to_reinstall:
+                pr.p(ansi.blue + 'We suggest re-install this packages:')
+                for pkg in packages_to_reinstall:
+                    pr.p('- ' + pkg.data['name'])
+                if not self.has_option('--autofix'):
+                    pr.p('use --autofix option to re-install them or do this manually')
+                    pr.p(ansi.reset, end='')
+                else:
+                    pr.p(ansi.reset, end='')
+                    packages_names = [pkg.data['name'] for pkg in packages_to_reinstall]
+                    install_cmd = InstallCommand()
+                    args = ['cati', 'install', '--reinstall', *packages_names]
+                    cmd_str = ''
+                    for arg in args:
+                        cmd_str += arg + ' '
+                    cmd_str = cmd_str.strip()
+                    pr.p(cmd_str)
+                    return install_cmd.handle(ArgParser.parse(args))
+
+        return result_code
