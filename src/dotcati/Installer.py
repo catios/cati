@@ -124,14 +124,27 @@ class Installer:
         for lf in self.loaded_files:
             if not os.path.isdir(lf[1]):
                 for insf in all_installed_files:
-                    if insf[0] != pkg.data['name']:
+                    if insf[0].split(':', 1)[0] != pkg.data['name']:
                         if lf[0] == insf[2]:
                             insf_pkg = Pkg.load_last(insf[0])
                             if insf_pkg:
                                 insf[0] = insf[0] + ':' + insf_pkg.installed()
-                            raise FileConflictError(
-                                'package ' + pkg.data['name'] + ':' + pkg.data['version'] + ' and ' + insf[0] + ' both has file "' + lf[0] + '"'
-                            )
+                            # check package is in `replaces` list
+                            do_raise_error = True
+                            replaces_list = pkg.get_replaces()
+                            for rep in replaces_list:
+                                if Pkg.check_state(rep):
+                                    tmp_parts = rep.split(' ')
+                                    tmp_parts = tmp_parts[0].split('>')
+                                    tmp_parts = tmp_parts[0].split('<')
+                                    tmp_parts = tmp_parts[0].split('=')
+                                    tmp_parts = tmp_parts[0]
+                                    if tmp_parts == insf[0].split(':', 1)[0]:
+                                        do_raise_error = False
+                            if do_raise_error:
+                                raise FileConflictError(
+                                    'package ' + pkg.data['name'] + ':' + pkg.data['version'] + ' and ' + insf[0] + ' both has file "' + lf[0] + '"'
+                                )
 
         # copy loaded files
         self.copied_files = []
@@ -148,6 +161,8 @@ class Installer:
                         if f[0] in unremoved_conffiles:
                             self.copy_once_file(f)
                             unremoved_conffiles.pop(unremoved_conffiles.index(f[0]))
+                        else:
+                            self.copy_once_file(f)
                 else:
                     if ('d:' + f[0]) in old_files or ('cd:' + f[0]) in old_files:
                         if ('cd:' + f[0]) in old_files:

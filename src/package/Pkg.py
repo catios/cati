@@ -83,6 +83,13 @@ class Pkg:
         except:
             return []
 
+    def get_replaces(self) -> list:
+        """ Returns package replaces list """
+        try:
+            return self.data['replaces']
+        except:
+            return []
+
     def get_conffiles(self) -> list:
         """ Returns package conffiles list """
         try:

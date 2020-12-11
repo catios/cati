@@ -208,6 +208,9 @@ Classes
     `get_recommends(self) ‑> list`
     :   Returns package recommends list
 
+    `get_replaces(self) ‑> list`
+    :   Returns package replaces list
+
     `get_reverse_conflicts(self) ‑> list`
     :   Returns list of packages has conflicts with this package
         
