@@ -1,0 +1,335 @@
+.\" Cati manual page
+.\" This file is part of cati project
+.\" Copyright 2020 parsa shahmaleki <parsampsh@gmail.com>
+.TH cati 1 "6 December 2020" "Cati 0.1-dev" "Cati Manual"
+
+.SH NAME
+cati - Package Manager
+
+.SH SYNOPSIS
+.B cati
+{
+help [?
+.I command-name
+] |
+pkg [ show 
+.I pkg1.cati
+| build
+.I pkg1-dir
+| install 
+.I pkg1.cati
+]
+| list |
+remove
+.I pkg1 pkg2
+| show
+.I pkg1 pkg2=<version>
+| state [ --abort, --complete, -y|--yes ]
+| query
+.I "pkgx >= 4.5"
+| search
+.I "word"
+| files
+.I pkg1 pkg2
+ | finfo
+.I /path/to/file
+| rdepends
+.I pkg1 pkg2
+ | forget
+.I pkg1 pkg2=<version>
+| check |
+repo [-a|--add, -e|--edit, --scan] |
+update |
+autoremove |
+clear-cache |
+download 
+.I pkg1 --output=<out.cati>
+| install
+.I pkg1 pkg2
+| upgrade |
+full-upgrade}
+{--version, --help, -v|--verbose, -q|--quiet, --no-ansi}
+
+.SH DESCRIPTION
+.B cati
+is a package manager for UNIX systems. cati can install/remove/list and manage packages on system.
+also cati can load packages lists from repositories(local file repositories and http server repositories).
+cati is very simple and easy to use and also is powerful.
+
+.B help
+shows help.
+
+.B pkg
+work with .cati packages.
+this command is for
+.B show/install/build
+package files.
+to show package(s), you can run
+"cati pkg show pkg.cati /path/to/anotherpkg.cati"
+. also this command has options
+.I -f|--files
+to show package files list. for example
+"cati pkg show somepkg.cati --files"
+. this option shows list of package files.
+another subcommand is
+"cati pkg install"
+. you can install packages with this command
+"cati pkg install somepkg.cati anotherpkg.cati"
+. another command is
+.I build
+. with this command you can build .cati packages.
+"cati pkg build /path/to/pkgbuild-directory another-pkg-build-dir/".
+`pkg install` command has a option named
+.I --without-scripts.
+packages has some scripts while install/remove process. in installation process, if you don't want to run scripts,
+use this option.
+.I --target=[target-path]
+is other option for install command.
+this option sets target installation path. for example if a package has a file in `/usr/bin/myapp`, if you
+set `/some/dir` value on this option, that file will be installed in `/some/dir/usr/bin/myapp`.
+.I --keep-conffiles
+is other option.
+this option says to cati to keep old version of
+.B Config files.
+config files are a file in package which not be deleted in remove process.
+also, if you are installing new version of a package, if conffile is changed in new version, will be replaced
+with old version. if you want to keep old version of conffile, use this option.
+.I --force|-f
+is a option to force install the package if that is blocked in security blacklist.
+
+.B list
+shows list of packages.
+with this command you can see list of install/loaded packages list.
+"cati list [options]".
+this command has not argument but has some useful options.
+.I --installed
+only shows installed packages list.
+.I --installed-manual:
+only shows
+.B Manual
+installed packages list
+.I --author=[author-name or author-nameS splited by `|`]
+filters packages list by author name
+.I --maintainer=[maintainer-name or author-nameS splited by `|`]
+filters packages list by maintainer name
+.I --category=[category-name or category-nameS splited by `|`]
+filters packages list by category
+.I --search=[word]
+searches by packages name and description
+.I --upgradable
+shows list of upgradable packages
+
+.B remove
+removes packages. you can remove installed packages by this command. for example
+"cati remove somepkg".
+when you run this command, this asks you for continuing process interactive. if you want to say
+.B Yes
+non-interactive, you can use
+.I -y|--yes
+option.
+"cati remove somepkg anotherpkg -y".
+Remember that cati handles dependencies in remove process. means if
+.B pkga
+has dependency to
+.B pkgb
+and you are removing pkgb, also pkga will be remove because you removing that's dependency.
+also if you want to remove package conffiles(config files are some files will not be removed by default),
+you can use
+.I --conffiles
+option.
+also if you don't want to run package
+.B remove scripts
+you can use
+.I --without-scripts
+option
+.B (We Suggest do not do this. but maybe useful sometimes)
+.
+also if you want to force remove
+.B Essential packages(Essential packages are unremovable packages)
+you can use
+.I -f|--force
+option.
+
+.B show
+shows details of packages. for example
+"cati show somepkg anotherpkg".
+What's different between
+.B pkg show
+and
+.B show
+?
+actually, "pkg show" command shows a package as file,
+but "show" command shows packages information from repositories package lists.
+also you can set specify version for packages to show
+.B "cati show somepkg=1.6.3 anotherpkg".
+also if you want to see versions list of packages, you can use
+.I --versions
+option.
+.B "cati show somepkg --versions"
+
+.B state
+manages transactions state. what is transactions state? for example, if you are installing some packages and
+process is in progress, and your computer will be shutdown between the process. cati has a system named
+.B transactions state
+to continue undoned process in next boot. you can manage that with this command.
+when you type
+.B "cati state"
+cati shows undoned transactions.
+if you want to ignore undoned transactions, you can run
+.B "sudo cati state --abort"
+. if you want to complete undoned transactions, you can run
+.B "sudo cati state --complete"
+and process will be continued.
+also you have
+.I -y|--yes
+option for non-interactive confirmation.
+
+.B query
+checks a package query. what is package queries? package query is a string to check a package installation conditions.
+for example
+.I "pkgx > 2.6"
+is a package query. this query checks
+.I pkgx
+is installed and installed version is upper than
+.I 2.6
+. also there is
+.B >=, <, <=, =
+operations.
+this system is used for package dependencies and conflicts, but also you can check them with
+.B query
+command. for example
+.B "cati query pkga = 1.0"
+.
+
+.B search
+search between packages by name and description. for example
+.B "cati search <something>"
+. this command is alias of
+.B "cati list --search=<something>"
+.
+
+.B files
+shows files list of packages. for example
+.B "cati files somepkg anotherpkg"
+. also you can set specify version
+.B "cati files somepkg anotherpkg=7.3"
+. also there is option
+.I --installed
+to show list of all of installed files on system
+.B "cati files --installed"
+.
+
+.B finfo
+shows info about an file.
+for example
+.B "cati finfo /path/to/somefile"
+this will show
+.I /path/to/somefile
+file is for which package.
+
+.B rdepends
+shows reverse depends list of packages. actually this shows which packages has dependency to this packages.
+for example
+.B "cati rdepends somepkg anotherpkg=<specify-version>"
+
+.B forget
+forgets packages from packages list.
+actually, this command deletes a package or specify version of a package from packages list database.
+.B "cati forget somepkg anotherpkg=<specify-version>"
+
+.B check
+checks system health and security. this command checks packages installation health,
+cati database and something else. you can check you system and packages health and security with
+this command.
+you can use
+.I --autofix
+option of this command to automatically fix some problems.
+
+.B repo
+manage repositories. you can list and edit and add cati repositories.
+repositories are a place which cati loads packages list from them and installing packages
+from them.
+you can use
+.I -e|--edit
+option to open repositories config file.
+.B "cati repo --edit".
+also you can add new repo with
+.I --add|-a option.
+.B "cati repo --add <new-repo>".
+
+.B update
+updates list of available packages from repositories.
+
+.B autoremove
+remove unused automaticaly installed packages.
+if you installed
+.B pkgb
+and pkgb has dependency to
+.B pkgc
+and that is installed.
+when you remove pkgb, pkgc is not needed.
+this command removes all of automatic installed
+.B unused(means not any installed packages has not dependency to that)
+packages.
+you can use all of
+.B remove
+command options for this command
+
+.B clear-cache
+clears cache files.
+all of files in
+.I /var/cache/cati/
+
+.B download
+download packages from repositories.
+.B "cati download somepkg anotherpkg=<specify-version>".
+also you can use
+.I --output|-o
+option
+.B "cati download somepkg --output=<output-file>"
+to set downloaded file path.
+
+.B install
+installs packages.
+for example
+.B "cati install pkga pkgb=<specify-version>".
+this command calculates depends and conflicts and downloads packages from repositories and installs them.
+you can use
+.I -y|--yes
+option for non-interactive confirmation.
+also use
+.I --reinstall
+option to reinstall packages. for example
+.B "cati install pkga pkgb --reinstall".
+also you can use
+.I --download-only
+option to only download wanted packages.(will not install them and just download in cache)
+next if you run command again, packages already is downloaded and will be installed.
+you can use this to download packages and install them later.
+also packages has a property named
+.B Recommended packages
+this is like depends but will not be installed by default.
+you can use
+.I --with-recommends
+option to also install recommended packages.
+.I without-scripts
+option is like `pkg install --without-scripts`.
+.I --target=[path]
+option is like `pkg install --target`.
+.I --keep-conffiles
+option is like `pkg install --keep-conffiles`
+
+.B upgrade
+upgrade all of packages. this command upgrades all of installed packages to latest available version.
+you can use all of
+.B install
+command options for this command.
+
+.B full-upgrade
+update, upgrade and autoremove system
+
+.SH DIAGNOSTICS
+cati returns zero exit code when process is successful and returns exit code 1 when there is an error.
+
+.SH AUTHOR
+.B parsa shahmaleki <parsampsh@gmail.com>

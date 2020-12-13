@@ -3,7 +3,7 @@
 # cati.py
 #
 # the cati project
-# Copyright 2020 parsa mpsh <parsampsh@gmail.com>
+# Copyright 2020 parsa shahmaleki <parsampsh@gmail.com>
 #
 # This file is part of cati.
 #
@@ -21,6 +21,24 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-''' Cati main cli entry point '''
+""" Cati main cli entry point """
 
-print('hello world cati!')
+import sys
+from cmdline import kernel, pr, ansi
+from frontend import HealthChecker
+
+# check cati installation health
+def cati_installation_is_corrupt(filepath: str, filetype: str):
+    """
+    Will run when cati installation is corrupt
+    shows error to user
+    """
+    pr.e(ansi.red + 'Cati installation is corrupt. to repair it, just run cati with root access' + ansi.reset)
+    pr.exit(1)
+
+if __name__ == '__main__':
+    HealthChecker.check({
+        'failed_to_repair': cati_installation_is_corrupt,
+    })
+    # handle cli
+    kernel.handle(sys.argv[:])
