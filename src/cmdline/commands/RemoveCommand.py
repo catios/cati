@@ -131,9 +131,9 @@ class RemoveCommand(BaseCommand):
             except:
                 pass
 
-        if not self.has_option('--force') or self.has_option('-f'):
+        if not self.has_option('--force') and not self.has_option('-f'):
             for pkg in essential_packages:
-                pr.p(ansi.red + 'Package "' + pkg.data['name'] + ' is a essential package and cannot be remove. use --force|-f option to force remove them' + ansi.reset)
+                pr.p(ansi.red + 'Package "' + pkg.data['name'] + '" is a essential package and cannot be remove. use --force|-f option to force remove them' + ansi.reset)
             if essential_packages:
                 return 1
 

@@ -5,12 +5,12 @@
 - [Command Line Manual](cli-manual.txt)
 - [Deb and RPM Packages support](deb-and-rpm-packages-support.md)
 - [Cati Files and Directories Structure](files-and-dirs-structure.md)
+- [Repositories](repositories.md)
 - [Configurations](configurations.md)
 
 ### Package Maintainer Guides
 - [Dotcati Packages](dotcati-packages.md)
 - [Package Query Syntax](package-query.md)
-- [Cati Repositories](repositories.md)
 - [Security Blacklist](security-blacklist.md)
 - [Version channels](version-channels.md)
 - [Distribution Guide](distro-guide.md)
