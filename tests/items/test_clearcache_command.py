@@ -28,8 +28,4 @@ class test_clearcache_command(TestCore):
     """ Test test_clearcache_command """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('clear-cache', []), 0)
-
-        self.refresh_env()

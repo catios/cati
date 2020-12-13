@@ -29,8 +29,6 @@ class test_repo_command(TestCore):
     """ Test test_repo_command """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('repo'), 0)
 
         f = open(self.env() + '/etc/cati/repos.list', 'w')
@@ -94,5 +92,3 @@ class test_repo_command(TestCore):
         self.refresh_env()
 
         self.assert_equals(self.run_command('repo', ['--scan', 'repository/test-repository']), 0)
-
-        self.refresh_env()

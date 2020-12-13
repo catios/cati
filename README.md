@@ -8,11 +8,11 @@ some features of cati:
 - Cati has all in one. You don't need to have package manager, dependency manager and graphical interface separated
 - Cati repositories structure is simple and also smart and powerful
 - Cati packages format is `.cati`, also cati supports `.deb` and `.rpm` packages alongside `.cati` packages
-- Cati has a useful graphical interface
 - Cati has some tools to check your system health and keep that secure
+- Cati has a graphical interface(comming soon...)
 
 ## Authors
-cati writed by [parsampsh](https://github.com/parsampsh) and [contributors](https://github.com/catios/cati/graphs/contributors)
+cati written by [parsampsh](https://github.com/parsampsh) and [contributors](https://github.com/catios/cati/graphs/contributors)
 
 ## License
 cati [licensed](/LICENSE) under GPL-v3
@@ -29,7 +29,7 @@ read cati security policy in [here](/SECURITY.md).
 ## Installation
 
 ### dependencies
-before compile and install cati install the cati dev-dependencies:
+before compile and install cati, install the cati dev-dependencies:
 
 - `python3 (>= 3.6)`
 - `pip3`

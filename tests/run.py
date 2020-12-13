@@ -79,7 +79,9 @@ def run():
     for test in orig_tests:
         test_name = test.get_name()
         print('\t[' + str(count + 1) + '/' + str(len(orig_tests)) + ']\t' + test_name.replace('_', ' ') + ': ', end='', flush=True)
+        test.refresh_env()
         test.run()
+        test.refresh_env()
         print(ansi.green + 'PASS' + ansi.reset)
         count += 1
     

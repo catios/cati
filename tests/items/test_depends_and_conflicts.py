@@ -29,8 +29,6 @@ class test_depends_and_conflicts(TestCore):
     """ Test test_depends_and_conflicts """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('pkg', [
             'install',
             'repository/test-repository/testpkgb-1.0.cati'
@@ -119,5 +117,3 @@ class test_depends_and_conflicts(TestCore):
             'install',
             'repository/test-repository/testpkg-with-file-depend.cati'
         ]), 1)
-
-        self.refresh_env()

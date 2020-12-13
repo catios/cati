@@ -28,8 +28,6 @@ class test_security_blacklist(TestCore):
     """ Test test_security_blacklist """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('pkg', [
             'install',
             'repository/test-repository/some-malware.cati'
@@ -57,5 +55,3 @@ class test_security_blacklist(TestCore):
             '--force',
             'repository/test-repository/some-malware.cati'
         ]), 0)
-
-        self.refresh_env()

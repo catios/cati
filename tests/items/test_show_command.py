@@ -28,8 +28,6 @@ class test_show_command(TestCore):
     """ Test test_show_command """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('show', ['gfdgfhghgfh']), 1)
 
         self.assert_equals(self.run_command('pkg', [
@@ -51,5 +49,3 @@ class test_show_command(TestCore):
 
         self.assert_equals(self.run_command('show', ['testpkgc=2.0']), 0)
         self.assert_equals(self.run_command('show', ['testpkgc=1.0']), 1)
-
-        self.refresh_env()

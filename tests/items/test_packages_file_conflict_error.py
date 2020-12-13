@@ -28,8 +28,6 @@ class test_packages_file_conflict_error(TestCore):
     """ Test test_packages_file_conflict_error """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('pkg', [
             'install',
             'repository/test-repository/testpkg-with-file-conflict-a.cati'
@@ -70,5 +68,3 @@ class test_packages_file_conflict_error(TestCore):
             'install',
             'repository/test-repository/testpkg-with-file-conflict-b-replaces.cati'
         ]), 0)
-
-        self.refresh_env()

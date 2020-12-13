@@ -30,8 +30,6 @@ class test_forget_command(TestCore):
     """ Test test_forget_command """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('pkg', [
             'install',
             'repository/test-repository/testpkgc-1.0.cati'
@@ -93,5 +91,3 @@ class test_forget_command(TestCore):
 
         self.assert_true(not os.path.isfile(self.env() + '/var/lib/cati/lists/testpkgc/2.0-all'))
         self.assert_true(os.path.isfile(self.env() + '/var/lib/cati/lists/testpkgc/2.0-alpha-all'))
-
-        self.refresh_env()

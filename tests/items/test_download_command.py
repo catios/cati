@@ -29,8 +29,6 @@ class test_download_command(TestCore):
     """ Test test_download_command """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.disable_raising()
         try:
             self.assert_equals(self.run_command('download', ['gfdgghgf']), 1)
@@ -57,5 +55,3 @@ class test_download_command(TestCore):
         except:
             pass
         self.enable_raising()
-
-        self.refresh_env()

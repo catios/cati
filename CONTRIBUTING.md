@@ -48,7 +48,7 @@ make all
 ./src/cati.py
 ```
 
-every thing is ready!
+every thing is ready for coding!
 
 ## branch
 also send pull requests to `master` branch.

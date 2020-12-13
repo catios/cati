@@ -30,8 +30,6 @@ class test_channel_system(TestCore):
     """ Test test_channel_system """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         repo_path = os.getcwd() + '/repository/test-channels'
 
         self.assert_equals(self.run_command('repo', ['--scan', repo_path]), 0)
@@ -74,5 +72,3 @@ class test_channel_system(TestCore):
         self.assert_equals(self.run_command('upgrade', ['-y']), 0)
         pkg = Pkg.load_last('channelpkg')
         self.assert_equals(pkg.installed(), '1.0')
-
-        self.refresh_env()

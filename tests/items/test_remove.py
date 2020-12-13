@@ -29,9 +29,6 @@ class test_remove(TestCore):
     """ Test test_remove """
     def run(self):
         """ Run test """
-
-        self.refresh_env()
-
         self.assert_equals(self.run_command('pkg', [
             'install',
             'repository/test-repository/testpkg10.cati'
@@ -97,5 +94,3 @@ class test_remove(TestCore):
         ]), 0)
 
         self.assert_true(not Pkg.is_installed('essential-package'))
-
-        self.refresh_env()

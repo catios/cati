@@ -30,8 +30,6 @@ class test_state_system(TestCore):
     """ Test test_state_system """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('pkg', [
             'install',
             'repository/test-repository/testpkgc-2.0.cati'
@@ -70,5 +68,3 @@ class test_state_system(TestCore):
         self.assert_equals(self.run_command('state', ['--complete']), 0)
         self.assert_equals(self.run_command('state'), 0)
         self.assert_true(not Pkg.is_installed('testpkgc'))
-
-        self.refresh_env()

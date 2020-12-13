@@ -28,8 +28,6 @@ class test_staticfile_system(TestCore):
     """ Test test_staticfile_system """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('pkg', [
             'install',
             'repository/test-repository/staticfile-pkg.cati',
@@ -43,5 +41,3 @@ class test_staticfile_system(TestCore):
             content,
             'd0083d8df0fbb4a4bf8ba6c85a8155abd392314fe99b2b61cefe476a46a9af32@/usr/bin/test-cati-file'
         )
-
-        self.refresh_env()

@@ -31,7 +31,6 @@ class test_dotcati_builder(TestCore):
     """ Test test_dotcati_builder """
     def run(self):
         """ Run test """
-
         self.assert_equals(self.run_command(
         	'pkg',
         	[

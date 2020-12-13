@@ -29,8 +29,6 @@ class test_package_any_script(TestCore):
     """ Test test_package_any_script """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('pkg', [
             'install',
             'repository/test-repository/testpkg-with-any-script.cati'
@@ -82,5 +80,3 @@ class test_package_any_script(TestCore):
 
         self.assert_true(os.path.isfile('temp'))
         os.remove('temp')
-
-        self.refresh_env()

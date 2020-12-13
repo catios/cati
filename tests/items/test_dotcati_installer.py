@@ -70,5 +70,3 @@ class test_dotcati_installer(TestCore):
 
         self.assert_true(not os.path.isfile(self.env() + '/etc/testpkg-with-file-conflict/test.txt'))
         self.assert_true(os.path.isfile(self.env() + '/app/etc/testpkg-with-file-conflict/test.txt'))
-
-        self.refresh_env()

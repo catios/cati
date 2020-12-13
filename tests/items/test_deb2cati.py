@@ -28,11 +28,7 @@ class test_deb2cati(TestCore):
     """ Test test_deb2cati """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('pkg', [
             'show',
             'tests/test-packages/test-deb-pkg.deb'
         ]), 0)
-
-        self.refresh_env()

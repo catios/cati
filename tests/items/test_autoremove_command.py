@@ -29,8 +29,6 @@ class test_autoremove_command(TestCore):
     """ Test test_autoremove_command """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('autoremove', []), 0)
 
         self.assert_equals(self.run_command('pkg', [
@@ -97,5 +95,3 @@ class test_autoremove_command(TestCore):
         self.assert_true(not Pkg.is_installed('testpkg11'))
         self.assert_true(not Pkg.is_installed('testpkg10'))
         self.assert_true(not Pkg.is_installed('testpkg9'))
-
-        self.refresh_env()

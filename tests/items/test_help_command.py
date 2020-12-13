@@ -28,7 +28,7 @@ class test_help_command(TestCore):
     """ Test test_help_command """
     def run(self):
         """ Run test """
-        # just an smooking test for help command
+        # just a smooking test for help command
         self.assert_equals(self.run_command('help'), 0)
         self.assert_equals(self.run_command('help', ['-v']), 0)
         self.assert_equals(self.run_command('help', ['--version']), 0)

@@ -28,8 +28,6 @@ class test_files_command(TestCore):
     """ Test test_files_command """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('files', ['gfdgfhghgfh']), 1)
 
         self.assert_equals(self.run_command('pkg', [
@@ -58,5 +56,3 @@ class test_files_command(TestCore):
         self.assert_equals(self.run_command('files', ['--installed']), 0)
         self.assert_equals(self.run_command('files', ['--installed', '-q']), 0)
         self.assert_equals(self.run_command('files', ['--installed', '--quiet']), 0)
-
-        self.refresh_env()

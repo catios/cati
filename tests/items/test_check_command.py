@@ -29,8 +29,6 @@ class test_check_command(TestCore):
     """ Test test_check_command """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('check', []), 0)
 
         self.assert_equals(self.run_command('pkg', [
@@ -99,5 +97,3 @@ class test_check_command(TestCore):
         f.close()
 
         self.assert_equals(self.run_command('check', []), 0)
-
-        self.refresh_env()

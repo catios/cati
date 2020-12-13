@@ -27,9 +27,7 @@ from TestCore import TestCore
 class test_installation_sys_arch_check(TestCore):
     """ Test test_installation_sys_arch_check """
     def run(self):
-        """ Run test """
-        self.refresh_env()
-        
+        """ Run test """        
         self.assert_equals(self.run_command('pkg', [
             'install',
             'repository/test-repository/invalid-arch.cati'
@@ -43,5 +41,3 @@ class test_installation_sys_arch_check(TestCore):
             'install',
             'repository/test-repository/invalid-arch.cati'
         ]), 0)
-
-        self.refresh_env()

@@ -29,8 +29,6 @@ class test_conffile_system(TestCore):
     """ Test test_conffile_system """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('pkg', [
             'install',
             'repository/test-repository/conffile-pkg.cati'
@@ -171,5 +169,3 @@ class test_conffile_system(TestCore):
         content = f.read().strip()
         f.close()
         self.assert_equals(content, '')
-
-        self.refresh_env()

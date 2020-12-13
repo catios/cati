@@ -1,9 +1,9 @@
 <?php
 
 /*
-Cati repository server side script
-@author parsa mpsh <parsampsh@gmail.com>
-*/
+ * Cati repository server side script
+ * @author parsa mpsh <parsampsh@gmail.com>
+ */
 
 class Crawler{
     protected $scaned_packages = [];

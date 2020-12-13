@@ -28,8 +28,6 @@ class test_query_command(TestCore):
     """ Test test_query_command """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('query', [
             'somepackagenotfound'
         ]), 1)
@@ -62,5 +60,3 @@ class test_query_command(TestCore):
         self.assert_equals(self.run_command('query', [
             'testpkgc > 2.0'
         ]), 1)
-
-        self.refresh_env()

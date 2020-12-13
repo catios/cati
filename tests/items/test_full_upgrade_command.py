@@ -28,8 +28,4 @@ class test_full_upgrade_command(TestCore):
     """ Test test_full_upgrade_command """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('full-upgrade', []), 0)
-
-        self.refresh_env()

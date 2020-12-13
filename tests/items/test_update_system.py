@@ -30,8 +30,6 @@ class test_update_system(TestCore):
     """ Test test_update_system """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('update'), 0)
 
         self.assert_equals(self.run_command('repo', ['--scan', 'repository/test-repository']), 0)
@@ -74,5 +72,3 @@ class test_update_system(TestCore):
         except:
             print('Packages count:', pkg_count)
             raise
-
-        self.refresh_env()

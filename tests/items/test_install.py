@@ -30,8 +30,6 @@ class test_install(TestCore):
     """ Test test_install """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         repo1 = "file://" + os.getcwd() + '/repository name=test arch=all pkg=cati'
         repo2 = "file://" + os.getcwd() + '/repository name=test arch=i386 pkg=cati'
 
@@ -95,5 +93,3 @@ class test_install(TestCore):
         self.assert_true(Pkg.is_installed('testpkgr'))
         self.assert_true(Pkg.is_installed('testpkgc'))
         self.assert_true(Pkg.is_installed('testpkg11'))
-
-        self.refresh_env()

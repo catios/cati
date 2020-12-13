@@ -28,8 +28,6 @@ class test_rdepends_command(TestCore):
     """ Test test_rdepends_command """
     def run(self):
         """ Run test """
-        self.refresh_env()
-
         self.assert_equals(self.run_command('rdepends', [
             'fgghfghfghf',
         ]), 1)
@@ -59,5 +57,3 @@ class test_rdepends_command(TestCore):
         self.assert_equals(self.run_command('rdepends', [
             'testpkg11', 'testpkg10', '--quiet'
         ]), 0)
-
-        self.refresh_env()
