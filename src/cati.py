@@ -37,6 +37,7 @@ def cati_installation_is_corrupt(filepath: str, filetype: str):
     pr.exit(1)
 
 if __name__ == '__main__':
+    # check the installation health
     HealthChecker.check({
         'failed_to_repair': cati_installation_is_corrupt,
     })
