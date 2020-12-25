@@ -65,7 +65,7 @@ _cati_forget()
 
 _cati_check()
 {
-	COMPREPLY=($(compgen -W "--help -q --quiet -v --verbose" -- "$thecur"))
+	COMPREPLY=($(compgen -W "--help -q --quiet -v --verbose --autofix" -- "$thecur"))
 }
 
 _cati_repo()
