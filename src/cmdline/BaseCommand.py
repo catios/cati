@@ -179,7 +179,7 @@ class BaseCommand:
         Returns: (str)
         """
         return """Cati package manager [""" + cati_version + """]
-Copyright 2020 parsa mpsh - GPL-3
+Copyright 2020-2021 parsa mpsh - GPL-3
 Usage: cati [command] [options] [args]"""
 
     def help_full(self, with_general_help=True) -> str:
