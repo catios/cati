@@ -9,7 +9,7 @@ Commands:
 
 header_text = """#
 # the cati project
-# Copyright 2020 parsa shahmaleki <parsampsh@gmail.com>
+# Copyright 2020-2021 parsa shahmaleki <parsampsh@gmail.com>
 #
 # This file is part of cati.
 #
