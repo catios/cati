@@ -110,6 +110,7 @@ class Pkg:
         Returns:
             list[Pkg]: list of packages has dependency to this package
         """
+        # TODO : sync this algorithm with new reverse depend/conflict storing
         reverse_depends = []
         for pkg in self.all_list()['list']:
             if pkg.installed():
@@ -133,6 +134,7 @@ class Pkg:
         
         Returns:
             list[Pkg]: list of packages has conflict with this package"""
+        # TODO : sync this algorithm with new reverse depend/conflict storing
         reverse_conflicts_list = []
         for pkg in self.installed_list()['list']:
             conflicts = pkg.get_conflicts()
