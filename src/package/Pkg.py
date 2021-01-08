@@ -111,8 +111,9 @@ class Pkg:
             list[Pkg]: list of packages has dependency to this package
         """
         # TODO : sync this algorithm with new reverse depend/conflict storing
+        rd_pkgs = self.all_list()['list']
         reverse_depends = []
-        for pkg in self.all_list()['list']:
+        for pkg in rd_pkgs:
             if pkg.installed():
                 pkg = Pkg.load_version(pkg.data['name'], pkg.installed())
             for dep in pkg.get_depends():
@@ -135,8 +136,9 @@ class Pkg:
         Returns:
             list[Pkg]: list of packages has conflict with this package"""
         # TODO : sync this algorithm with new reverse depend/conflict storing
+        rc_pkgs = self.installed_list()['list']
         reverse_conflicts_list = []
-        for pkg in self.installed_list()['list']:
+        for pkg in rc_pkgs:
             conflicts = pkg.get_conflicts()
             for conflict in conflicts:
                 result = Pkg.check_state(conflict, {'install': [
