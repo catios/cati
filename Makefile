@@ -19,7 +19,7 @@ headers:
 
 ### compile		compile program with pyinstaller
 compile: all
-	$(PY) -m PyInstaller cati/__main__.py --onefile
+	$(PY) -m PyInstaller cati/__main__.py --onefile --name cati
 
 ### install		installs program on system
 install: ./dist/cati
