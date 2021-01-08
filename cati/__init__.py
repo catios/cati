@@ -1,7 +1,6 @@
 #
 # __init__.py
 #
-#
 # the cati project
 # Copyright 2020-2021 parsa shahmaleki <parsampsh@gmail.com>
 #
