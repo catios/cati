@@ -23,16 +23,16 @@
 """ Install command """
 
 import os
-from cmdline.BaseCommand import BaseCommand
-from package.Pkg import Pkg
-from frontend import RootRequired, Env
-from cmdline import pr, ansi, ArgParser
-from transaction.Calculator import Calculator
-from cmdline.components import TransactionShower
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.package.Pkg import Pkg
+from cati.frontend import RootRequired, Env
+from cati.cmdline import pr, ansi, ArgParser
+from cati.transaction.Calculator import Calculator
+from cati.cmdline.components import TransactionShower
 from .DownloadCommand import DownloadCommand
 from .RemoveCommand import RemoveCommand
 from .PkgCommand import PkgCommand
-from helpers.hash import calc_file_sha256, calc_file_md5
+from cati.helpers.hash import calc_file_sha256, calc_file_md5
 
 class InstallCommand(BaseCommand):
     """ Install command """

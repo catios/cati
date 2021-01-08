@@ -27,12 +27,12 @@ import json
 import time
 import hashlib
 from .ArchiveModel import BaseArchive
-from frontend import Env, Temp, SysArch, SecurityBlacklist
+from cati.frontend import Env, Temp, SysArch, SecurityBlacklist
 from . import ListUpdater
-from package.Pkg import Pkg
+from cati.package.Pkg import Pkg
 from .exceptions import DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist, FileConflictError
-from transaction.BaseTransaction import BaseTransaction
-from helpers.hash import calc_file_sha256, calc_file_sha512, calc_file_md5
+from cati.transaction.BaseTransaction import BaseTransaction
+from cati.helpers.hash import calc_file_sha256, calc_file_sha512, calc_file_md5
 
 class Installer:
     """ Dotcati package installer """

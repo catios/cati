@@ -87,7 +87,7 @@ class SetHeaders:
         only_file_name = fname.split('/')[-1]
         new_content = '#\n# ' + only_file_name + '\n#\n' + new_content
 
-        if fname == 'cati/cati.py' or fname == 'tests/run.py' or fname == 'tests/make_test.py':
+        if fname == 'cati/__main__.py' or fname == 'tests/run.py' or fname == 'tests/make_test.py':
             new_content = '#!/usr/bin/env python3\n' + new_content
 
         f = open(fname, 'w')

@@ -24,9 +24,9 @@
 
 import os
 import shutil
-from cmdline.kernel import commands
-from cmdline import ArgParser
-from frontend import Env, HealthChecker
+from cati.cmdline.kernel import commands
+from cati.cmdline import ArgParser
+from cati.frontend import Env, HealthChecker
 
 class TestCore:
     """ Testing system core """

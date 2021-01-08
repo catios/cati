@@ -6,7 +6,7 @@ Functions
 ---------
 
     
-`index_reverse_depends_and_conflicts(pkg: package.Pkg.Pkg)`
+`index_reverse_depends_and_conflicts(pkg: cati.package.Pkg.Pkg)`
 :   Packages have `depends` and `conflicts`
     But also they have `Reverse` depends and conflicts
     Reverse d/c should be indexed because loading them real time is so big process

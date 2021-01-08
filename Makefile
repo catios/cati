@@ -19,7 +19,7 @@ headers:
 
 ### compile		compile program with pyinstaller
 compile: all
-	@PYTHONPATH='$(shell pwd)/src' $(PY) -m PyInstaller cati/cati.py --onefile
+	@PYTHONPATH='$(shell pwd)/cati' $(PY) -m PyInstaller cati/cati.py --onefile
 
 ### install		installs program on system
 install: ./dist/cati
@@ -40,7 +40,7 @@ main: compile
 
 ### pylint		check code with pylint
 pylint:
-	@$(PY) -m pylint $(shell find src -type f -name "*.py") | grep -v "(invalid-name)" > pylint.out
+	@$(PY) -m pylint $(shell find cati -type f -name "*.py") | grep -v "(invalid-name)" > pylint.out
 
 ### docs		generates api documentation
 docs:

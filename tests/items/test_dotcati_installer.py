@@ -25,8 +25,8 @@
 from TestCore import TestCore
 import os
 import json
-from package.Pkg import Pkg
-from frontend import Env
+from cati.package.Pkg import Pkg
+from cati.frontend import Env
 
 class test_dotcati_installer(TestCore):
     """ Test test_dotcati_installer """

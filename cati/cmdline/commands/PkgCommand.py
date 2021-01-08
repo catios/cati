@@ -23,17 +23,17 @@
 """ Pkg command to work with .cati archives """
 
 import os
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi
-from dotcati.Builder import Builder
-from dotcati.Installer import Installer
-from dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist, FileConflictError
-from dotcati.ArchiveModel import archive_factory, BaseArchive
-from frontend.RootRequired import require_root_permission
-from frontend import Env
-from package.exceptions import CannotReadFileException
-from cmdline.components import PackageShower, StateContentShower
-from transaction.BaseTransaction import BaseTransaction
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi
+from cati.dotcati.Builder import Builder
+from cati.dotcati.Installer import Installer
+from cati.dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist, FileConflictError
+from cati.dotcati.ArchiveModel import archive_factory, BaseArchive
+from cati.frontend.RootRequired import require_root_permission
+from cati.frontend import Env
+from cati.package.exceptions import CannotReadFileException
+from cati.cmdline.components import PackageShower, StateContentShower
+from cati.transaction.BaseTransaction import BaseTransaction
 
 class PkgCommand(BaseCommand):
     """ Pkg command to work with .cati archives """

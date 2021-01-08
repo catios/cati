@@ -22,14 +22,14 @@
 
 """ Remove command """
 
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi
-from cmdline.components import TransactionShower, StateContentShower
-from package.Pkg import Pkg
-from transaction.Calculator import Calculator
-from transaction.runners.Remove import Remove
-from transaction.BaseTransaction import BaseTransaction
-from frontend.RootRequired import require_root_permission
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi
+from cati.cmdline.components import TransactionShower, StateContentShower
+from cati.package.Pkg import Pkg
+from cati.transaction.Calculator import Calculator
+from cati.transaction.runners.Remove import Remove
+from cati.transaction.BaseTransaction import BaseTransaction
+from cati.frontend.RootRequired import require_root_permission
 
 class RemoveCommand(BaseCommand):
     """ Remove command """

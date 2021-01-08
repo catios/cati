@@ -24,8 +24,8 @@
 
 import os
 import json
-from dotcati.ArchiveModel import archive_factory
-from helpers.hash import calc_file_sha256, calc_file_md5
+from cati.dotcati.ArchiveModel import archive_factory
+from cati.helpers.hash import calc_file_sha256, calc_file_md5
 
 def scan(directory: str):
     """

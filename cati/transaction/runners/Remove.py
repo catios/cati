@@ -24,9 +24,9 @@
 
 import os
 import shutil
-from transaction.BaseTransaction import BaseTransaction
-from package.Pkg import Pkg
-from frontend import Env
+from cati.transaction.BaseTransaction import BaseTransaction
+from cati.package.Pkg import Pkg
+from cati.frontend import Env
 
 class Remove(BaseTransaction):
     """ Remove transaction """

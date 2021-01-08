@@ -29,7 +29,7 @@ and calculates all of operations needed to be done
 (actualy, includes dependencies, conflicts...)
 """
 
-from package.Pkg import Pkg
+from cati.package.Pkg import Pkg
 
 class Calculator:
     """ Transaction calculator """

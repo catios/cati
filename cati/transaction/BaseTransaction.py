@@ -27,8 +27,8 @@ transactions are install/remove/upgrade/downgrade operations.
 """
 
 import os
-from package.Pkg import Pkg
-from frontend import Env
+from cati.package.Pkg import Pkg
+from cati.frontend import Env
 from .Calculator import Calculator
 
 class BaseTransaction:

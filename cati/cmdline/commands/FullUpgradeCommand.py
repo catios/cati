@@ -22,9 +22,9 @@
 
 """ FullUpgrade command """
 
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi, ArgParser
-from package.Pkg import Pkg
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi, ArgParser
+from cati.package.Pkg import Pkg
 from .AutoremoveCommand import AutoremoveCommand
 from .UpdateCommand import UpdateCommand
 from .UpgradeCommand import UpgradeCommand

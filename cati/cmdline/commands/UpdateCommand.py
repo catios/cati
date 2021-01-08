@@ -26,14 +26,14 @@ import os
 import time
 import random
 import json
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi
-from cmdline.components import ReposListErrorShower, DownloadProgress
-from repo.Repo import Repo
-from frontend import Env, RootRequired
-from dotcati.PackageJsonValidator import PackageJsonValidator
-from dotcati import ListUpdater
-from package.Pkg import Pkg
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi
+from cati.cmdline.components import ReposListErrorShower, DownloadProgress
+from cati.repo.Repo import Repo
+from cati.frontend import Env, RootRequired
+from cati.dotcati.PackageJsonValidator import PackageJsonValidator
+from cati.dotcati import ListUpdater
+from cati.package.Pkg import Pkg
 
 class UpdateCommand(BaseCommand):
     """ Update command """

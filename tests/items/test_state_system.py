@@ -23,8 +23,8 @@
 """ Test test_state_system """
 
 from TestCore import TestCore
-from frontend import Env
-from package.Pkg import Pkg
+from cati.frontend import Env
+from cati.package.Pkg import Pkg
 
 class test_state_system(TestCore):
     """ Test test_state_system """

@@ -22,15 +22,15 @@
 
 """ State command """
 
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi
-from cmdline.components import StateContentShower
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi
+from cati.cmdline.components import StateContentShower
 from .RemoveCommand import RemoveCommand
 from .PkgCommand import PkgCommand
-from cmdline import ArgParser
-from transaction.BaseTransaction import BaseTransaction
-from frontend.RootRequired import require_root_permission
-from dotcati.ArchiveModel import archive_factory
+from cati.cmdline import ArgParser
+from cati.transaction.BaseTransaction import BaseTransaction
+from cati.frontend.RootRequired import require_root_permission
+from cati.dotcati.ArchiveModel import archive_factory
 
 class StateCommand(BaseCommand):
     """ State command """

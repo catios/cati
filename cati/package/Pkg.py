@@ -24,11 +24,11 @@
 
 import os
 import json
-from frontend import Env
-from frontend.SysArch import sys_arch
+from cati.frontend import Env
+from cati.frontend.SysArch import sys_arch
 from .exceptions import CannotReadFileException
 from packaging import version
-from helpers.hash import calc_file_sha256
+from cati.helpers.hash import calc_file_sha256
 
 class Pkg:
     """ Package model """

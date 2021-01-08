@@ -23,7 +23,7 @@
 """ Test test_repo_command """
 
 from TestCore import TestCore
-from repo.Repo import Repo
+from cati.repo.Repo import Repo
 
 class test_repo_command(TestCore):
     """ Test test_repo_command """

@@ -45,7 +45,7 @@ virtualenv --version
 make --version
 ```
 
-### compile and install
+### Installation
 
 to compile and install cati on your system, do the following steps:
 

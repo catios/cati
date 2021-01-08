@@ -22,8 +22,8 @@
 
 """ Search command """
 
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi, ArgParser
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi, ArgParser
 from .ListCommand import ListCommand
 
 class SearchCommand(BaseCommand):

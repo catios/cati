@@ -23,7 +23,7 @@
 """ Test test_autoremove_command """
 
 from TestCore import TestCore
-from package.Pkg import Pkg
+from cati.package.Pkg import Pkg
 
 class test_autoremove_command(TestCore):
     """ Test test_autoremove_command """

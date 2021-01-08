@@ -22,9 +22,9 @@
 
 """ List command """
 
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi
-from package.Pkg import Pkg
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi
+from cati.package.Pkg import Pkg
 
 class ListCommand(BaseCommand):
     """ List command """

@@ -10,7 +10,7 @@ Classes
 
     ### Ancestors (in MRO)
 
-    * repo.drivers.BaseDriver.BaseDriver
+    * cati.repo.drivers.BaseDriver.BaseDriver
 
     ### Methods
 

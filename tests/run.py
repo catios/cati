@@ -29,11 +29,11 @@ import time
 import shutil
 import subprocess
 
-# add `src` directory to python path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/cati')
+# add parent directory to python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/')
 
-from cmdline import ansi, pr
-from frontend import RootRequired, Env, HealthChecker, Temp, SysArch
+from cati.cmdline import ansi, pr
+from cati.frontend import RootRequired, Env, HealthChecker, Temp, SysArch
 
 # keep testing start time
 testing_start_time = time.time()

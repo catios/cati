@@ -28,7 +28,7 @@ import tarfile
 from .exceptions import InvalidPackageDirException
 from .ArchiveModel import archive_factory
 from .PackageJsonValidator import PackageJsonValidator
-from frontend import Temp
+from cati.frontend import Temp
 
 class Builder:
     """ Cati package builder """

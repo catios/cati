@@ -24,8 +24,8 @@
 
 import os
 import json
-from repo.drivers.BaseDriver import BaseDriver
-from repo.DirCrawler import DirCrawler
+from cati.repo.drivers.BaseDriver import BaseDriver
+from cati.repo.DirCrawler import DirCrawler
 
 class File(BaseDriver):
     """ repo file driver """

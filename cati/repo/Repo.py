@@ -24,7 +24,7 @@
 
 import os
 import json
-from frontend import SysArch, Env
+from cati.frontend import SysArch, Env
 from .drivers.File import File as FileDriver
 from .drivers.Http import Http as HttpDriver
 

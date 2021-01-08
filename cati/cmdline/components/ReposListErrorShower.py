@@ -22,7 +22,7 @@
 
 """ shows repo config errors from list of repos """
 
-from cmdline import pr
+from cati.cmdline import pr
 
 def show(repos: list):
     """

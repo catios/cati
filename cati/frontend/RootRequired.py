@@ -24,7 +24,7 @@
 
 import os
 import sys
-from cmdline import pr, ansi
+from cati.cmdline import pr, ansi
 from . import Env
 
 is_testing = False

@@ -23,8 +23,8 @@
 """ Finfo command """
 
 import os
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi
 
 class FinfoCommand(BaseCommand):
     """ Finfo command """

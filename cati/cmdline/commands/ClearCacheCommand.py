@@ -23,9 +23,9 @@
 """ ClearCache command """
 
 import os
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi
-from frontend import Env, RootRequired
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi
+from cati.frontend import Env, RootRequired
 
 class ClearCacheCommand(BaseCommand):
     """ ClearCache command """

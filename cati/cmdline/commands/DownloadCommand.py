@@ -24,10 +24,10 @@
 
 import os
 import shutil
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi
-from cmdline.components import DownloadProgress
-from package.Pkg import Pkg
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi
+from cati.cmdline.components import DownloadProgress
+from cati.package.Pkg import Pkg
 
 class DownloadCommand(BaseCommand):
     """ Download command """

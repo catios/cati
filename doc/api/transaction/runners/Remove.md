@@ -10,12 +10,12 @@ Classes
 
     ### Ancestors (in MRO)
 
-    * transaction.BaseTransaction.BaseTransaction
+    * cati.transaction.BaseTransaction.BaseTransaction
 
     ### Static methods
 
-    `add_to_unremoved_conffiles(pkg: package.Pkg.Pkg, filepath: str)`
+    `add_to_unremoved_conffiles(pkg: cati.package.Pkg.Pkg, filepath: str)`
     :   Adds filepath to list of unremoved conffiles
 
-    `run(pkg: package.Pkg.Pkg, events: dict, remove_conffiles=False, run_scripts=True)`
+    `run(pkg: cati.package.Pkg.Pkg, events: dict, remove_conffiles=False, run_scripts=True)`
     :   Remove pkg

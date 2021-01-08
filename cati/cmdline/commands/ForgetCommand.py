@@ -25,11 +25,11 @@
 import os
 import shutil
 import glob
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi
-from package.Pkg import Pkg
-from frontend import Env, RootRequired
-from dotcati import ListUpdater
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi
+from cati.package.Pkg import Pkg
+from cati.frontend import Env, RootRequired
+from cati.dotcati import ListUpdater
 
 class ForgetCommand(BaseCommand):
     """ Forget command """

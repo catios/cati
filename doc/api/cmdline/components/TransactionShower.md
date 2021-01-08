@@ -6,7 +6,7 @@ Functions
 ---------
 
     
-`show(calc: transaction.Calculator.Calculator)`
+`show(calc: cati.transaction.Calculator.Calculator)`
 :   shows transactions from `Calculator` object.
     
     Args:

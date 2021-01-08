@@ -22,8 +22,8 @@
 
 """ CLI transactions list shower """
 
-from transaction.Calculator import Calculator
-from cmdline import ansi, pr
+from cati.transaction.Calculator import Calculator
+from cati.cmdline import ansi, pr
 
 def show(calc: Calculator):
     """

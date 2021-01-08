@@ -22,9 +22,9 @@
 
 """ Help command """
 
-from cmdline.BaseCommand import BaseCommand
-from cmdline import kernel, ansi, pr
-from frontend.Version import version as cati_version
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import kernel, ansi, pr
+from cati.frontend.Version import version as cati_version
 
 class HelpCommand(BaseCommand):
     """ Help command """

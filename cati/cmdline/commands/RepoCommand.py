@@ -23,12 +23,12 @@
 """ Repo command """
 
 import os
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi
-from repo.Repo import Repo
-from repo import Scanner
-from cmdline.components import ReposListErrorShower
-from frontend import Env, RootRequired
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi
+from cati.repo.Repo import Repo
+from cati.repo import Scanner
+from cati.cmdline.components import ReposListErrorShower
+from cati.frontend import Env, RootRequired
 
 class RepoCommand(BaseCommand):
     """ Repo command """

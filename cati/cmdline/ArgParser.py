@@ -22,7 +22,7 @@
 
 """ Cli argument parser """
 
-from cmdline import ansi
+from cati.cmdline import ansi
 
 def parse(args: list) -> dict:
     """

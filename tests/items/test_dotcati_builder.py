@@ -25,7 +25,7 @@
 from TestCore import TestCore
 
 import os
-from dotcati.ArchiveModel import archive_factory
+from cati.dotcati.ArchiveModel import archive_factory
 
 class test_dotcati_builder(TestCore):
     """ Test test_dotcati_builder """

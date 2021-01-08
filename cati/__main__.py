@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# cati.py
+# __main__.py
 #
 # the cati project
 # Copyright 2020-2021 parsa shahmaleki <parsampsh@gmail.com>
@@ -24,8 +24,10 @@
 """ Cati main cli entry point """
 
 import sys
-from cmdline import kernel, pr, ansi
-from frontend import HealthChecker
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/')
+from cati.cmdline import kernel, pr, ansi
+from cati.frontend import HealthChecker
 
 # check cati installation health
 def cati_installation_is_corrupt(filepath: str, filetype: str):

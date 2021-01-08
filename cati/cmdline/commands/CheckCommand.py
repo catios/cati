@@ -24,16 +24,16 @@
 
 import os
 import json
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi, ArgParser
-from frontend.RootRequired import require_root_permission
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi, ArgParser
+from cati.frontend.RootRequired import require_root_permission
 from .StateCommand import StateCommand
 from .InstallCommand import InstallCommand
-from cmdline.components import ReposListErrorShower
-from package.Pkg import Pkg
-from helpers.hash import calc_file_sha256
-from frontend import Env
-from repo.Repo import Repo
+from cati.cmdline.components import ReposListErrorShower
+from cati.package.Pkg import Pkg
+from cati.helpers.hash import calc_file_sha256
+from cati.frontend import Env
+from cati.repo.Repo import Repo
 
 class CheckCommand(BaseCommand):
     """ Check command """

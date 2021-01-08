@@ -23,7 +23,7 @@
 """ Print handling in cli """
 
 import sys
-from frontend import Temp
+from cati.frontend import Temp
 
 is_testing = False
 """

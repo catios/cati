@@ -26,9 +26,9 @@ import os
 import sys
 import shutil
 import json
-from frontend import Temp
-from cmdline.commands import PkgCommand
-from cmdline import ArgParser
+from cati.frontend import Temp
+from cati.cmdline.commands import PkgCommand
+from cati.cmdline import ArgParser
 
 def convert_depends_list(debian_depends_control_value: str) -> list:
     """

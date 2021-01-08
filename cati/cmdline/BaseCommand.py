@@ -24,7 +24,7 @@
 
 import sys
 from . import pr
-from frontend.Version import version as cati_version
+from cati.frontend.Version import version as cati_version
 from .commands import HelpCommand
 from . import ArgParser
 

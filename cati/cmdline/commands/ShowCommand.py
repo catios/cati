@@ -22,10 +22,10 @@
 
 """ Show command """
 
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi
-from package.Pkg import Pkg
-from cmdline.components import PackageShower
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi
+from cati.package.Pkg import Pkg
+from cati.cmdline.components import PackageShower
 
 class ShowCommand(BaseCommand):
     """ Show command """

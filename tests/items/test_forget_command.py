@@ -24,7 +24,7 @@
 
 import os
 from TestCore import TestCore
-from package.Pkg import Pkg
+from cati.package.Pkg import Pkg
 
 class test_forget_command(TestCore):
     """ Test test_forget_command """

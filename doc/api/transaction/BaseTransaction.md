@@ -10,10 +10,6 @@ Classes
 `BaseTransaction()`
 :   Transaction base model
 
-    ### Descendants
-
-    * transaction.runners.Remove.Remove
-
     ### Static methods
 
     `add_to_state(calc: transaction.Calculator.Calculator)`

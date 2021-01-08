@@ -8,10 +8,6 @@ Classes
 `Pkg(data: dict)`
 :   Package model
 
-    ### Descendants
-
-    * dotcati.ArchiveModel.BaseArchive
-
     ### Static methods
 
     `all_list()`

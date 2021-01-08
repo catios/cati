@@ -24,8 +24,8 @@
 
 import os
 import requests
-from repo.drivers.BaseDriver import BaseDriver
-from frontend import Temp
+from cati.repo.drivers.BaseDriver import BaseDriver
+from cati.frontend import Temp
 
 class Http(BaseDriver):
     """ repo http driver """

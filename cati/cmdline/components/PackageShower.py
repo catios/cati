@@ -24,8 +24,8 @@
 Package shower cli component
 """
 
-from cmdline import ansi, pr
-from package.Pkg import Pkg
+from cati.cmdline import ansi, pr
+from cati.package.Pkg import Pkg
 
 def show(data: dict):
     """
