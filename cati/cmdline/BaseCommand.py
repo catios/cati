@@ -23,10 +23,10 @@
 """ Cmdline command model base """
 
 import sys
-from cmdline import pr
+from . import pr
 from frontend.Version import version as cati_version
-from cmdline.commands import HelpCommand
-from cmdline import ArgParser
+from .commands import HelpCommand
+from . import ArgParser
 
 class BaseCommand:
     """ Cmdline command model base """

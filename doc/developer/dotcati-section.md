@@ -1,5 +1,5 @@
 # Dotcati section
-this document is for `src/dotcati` section.
+this document is for `cati/dotcati` section.
 
 ## archive_factory
 this function is factory to load `.cati` file object.
@@ -14,7 +14,7 @@ pkg = archive_factory('/path/to/package.cati', 'r') # first argument is file pat
 # ...
 ```
 
-you can see another functions of archive model in `src/dotcati/ArchiveModel.py`
+you can see another functions of archive model in `cati/dotcati/ArchiveModel.py`
 
 ## Builder
 this class is dotcati package builder.

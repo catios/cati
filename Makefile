@@ -19,7 +19,7 @@ headers:
 
 ### compile		compile program with pyinstaller
 compile: all
-	@PYTHONPATH='$(shell pwd)/src' $(PY) -m PyInstaller src/cati.py --onefile
+	@PYTHONPATH='$(shell pwd)/src' $(PY) -m PyInstaller cati/cati.py --onefile
 
 ### install		installs program on system
 install: ./dist/cati
@@ -46,7 +46,7 @@ pylint:
 docs:
 	@rm -rf doc/api
 	@printf 'Generating doc... '
-	@PYTHONPATH='$(shell pwd)/src' $(PY) -m pdoc frontend package transaction cmdline repo helpers dotcati --output-dir doc/api --skip-errors &> /dev/null
+	@PYTHONPATH='$(shell pwd)/cati' $(PY) -m pdoc frontend package transaction cmdline repo helpers dotcati --output-dir doc/api --skip-errors &> /dev/null
 	@echo "#### This api documentation is auto generated from docstrings with pdoc" > doc/api/README.md
 	-@MANWIDTH=80 man -a -l etc/manpages/cati.1 > doc/cli-manual.txt
 	@printf '\033[32mFinished\033[0m\n'

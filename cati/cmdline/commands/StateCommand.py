@@ -25,8 +25,8 @@
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi
 from cmdline.components import StateContentShower
-from cmdline.commands.RemoveCommand import RemoveCommand
-from cmdline.commands.PkgCommand import PkgCommand
+from .RemoveCommand import RemoveCommand
+from .PkgCommand import PkgCommand
 from cmdline import ArgParser
 from transaction.BaseTransaction import BaseTransaction
 from frontend.RootRequired import require_root_permission

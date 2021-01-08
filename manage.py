@@ -87,7 +87,7 @@ class SetHeaders:
         only_file_name = fname.split('/')[-1]
         new_content = '#\n# ' + only_file_name + '\n#\n' + new_content
 
-        if fname == 'src/cati.py' or fname == 'tests/run.py' or fname == 'tests/make_test.py':
+        if fname == 'cati/cati.py' or fname == 'tests/run.py' or fname == 'tests/make_test.py':
             new_content = '#!/usr/bin/env python3\n' + new_content
 
         f = open(fname, 'w')
@@ -95,8 +95,8 @@ class SetHeaders:
         f.close()
 
 if sys.argv[1] == 'update-headers':
-    # get files list in src/ folder and set header of them
-    files_list = SetHeaders('src/').files_list
+    # get files list in cati/ folder and set header of them
+    files_list = SetHeaders('cati/').files_list
     for f in files_list:
         SetHeaders.set_once_file_header(f)
 

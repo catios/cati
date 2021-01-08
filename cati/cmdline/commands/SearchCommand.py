@@ -24,7 +24,7 @@
 
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi, ArgParser
-from cmdline.commands.ListCommand import ListCommand
+from .ListCommand import ListCommand
 
 class SearchCommand(BaseCommand):
     """ Search command """

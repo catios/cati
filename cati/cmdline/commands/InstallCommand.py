@@ -29,9 +29,9 @@ from frontend import RootRequired, Env
 from cmdline import pr, ansi, ArgParser
 from transaction.Calculator import Calculator
 from cmdline.components import TransactionShower
-from cmdline.commands.DownloadCommand import DownloadCommand
-from cmdline.commands.RemoveCommand import RemoveCommand
-from cmdline.commands.PkgCommand import PkgCommand
+from .DownloadCommand import DownloadCommand
+from .RemoveCommand import RemoveCommand
+from .PkgCommand import PkgCommand
 from helpers.hash import calc_file_sha256, calc_file_md5
 
 class InstallCommand(BaseCommand):

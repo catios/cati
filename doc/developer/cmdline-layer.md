@@ -1,9 +1,9 @@
 # Cmdline layer
 
-the command line layer in cati is in `src/cmdline` folder.
+the command line layer in cati is in `cati/cmdline` folder.
 
 ### commands
-cli commands are in `src/cmdline/commands` folder.
+cli commands are in `cati/cmdline/commands` folder.
 
 command template:
 
@@ -73,10 +73,10 @@ pr.p('hello', end=' ') # use `end` argument
 
 ### listing commands
 
-if you create a command in `src/cmdline/commands`, that command will not include in program.
+if you create a command in `cati/cmdline/commands`, that command will not include in program.
 you should add created command to list of commands
 
-to do this, you should open `src/cmdline/kernel.py`.
+to do this, you should open `cati/cmdline/kernel.py`.
 next, import your command in that:
 
 ```python

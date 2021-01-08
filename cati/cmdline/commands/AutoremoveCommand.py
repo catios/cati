@@ -25,7 +25,7 @@
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi, ArgParser
 from package.Pkg import Pkg
-from cmdline.commands.RemoveCommand import RemoveCommand
+from .RemoveCommand import RemoveCommand
 
 class AutoremoveCommand(BaseCommand):
     """ Autoremove command """

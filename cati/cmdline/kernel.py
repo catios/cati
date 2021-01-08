@@ -23,28 +23,28 @@
 """ Kernel of cli handler """
 
 import sys
-from cmdline import ArgParser, pr
-from cmdline.commands.HelpCommand import HelpCommand
-from cmdline.commands.PkgCommand import PkgCommand
-from cmdline.commands.ListCommand import ListCommand
-from cmdline.commands.RemoveCommand import RemoveCommand
-from cmdline.commands.ShowCommand import ShowCommand
-from cmdline.commands.StateCommand import StateCommand
-from cmdline.commands.QueryCommand import QueryCommand
-from cmdline.commands.SearchCommand import SearchCommand
-from cmdline.commands.FilesCommand import FilesCommand
-from cmdline.commands.FinfoCommand import FinfoCommand
-from cmdline.commands.RDependsCommand import RDependsCommand
-from cmdline.commands.ForgetCommand import ForgetCommand
-from cmdline.commands.CheckCommand import CheckCommand
-from cmdline.commands.RepoCommand import RepoCommand
-from cmdline.commands.UpdateCommand import UpdateCommand
-from cmdline.commands.AutoremoveCommand import AutoremoveCommand
-from cmdline.commands.ClearCacheCommand import ClearCacheCommand
-from cmdline.commands.DownloadCommand import DownloadCommand
-from cmdline.commands.InstallCommand import InstallCommand
-from cmdline.commands.UpgradeCommand import UpgradeCommand
-from cmdline.commands.FullUpgradeCommand import FullUpgradeCommand
+from . import ArgParser, pr
+from .commands.HelpCommand import HelpCommand
+from .commands.PkgCommand import PkgCommand
+from .commands.ListCommand import ListCommand
+from .commands.RemoveCommand import RemoveCommand
+from .commands.ShowCommand import ShowCommand
+from .commands.StateCommand import StateCommand
+from .commands.QueryCommand import QueryCommand
+from .commands.SearchCommand import SearchCommand
+from .commands.FilesCommand import FilesCommand
+from .commands.FinfoCommand import FinfoCommand
+from .commands.RDependsCommand import RDependsCommand
+from .commands.ForgetCommand import ForgetCommand
+from .commands.CheckCommand import CheckCommand
+from .commands.RepoCommand import RepoCommand
+from .commands.UpdateCommand import UpdateCommand
+from .commands.AutoremoveCommand import AutoremoveCommand
+from .commands.ClearCacheCommand import ClearCacheCommand
+from .commands.DownloadCommand import DownloadCommand
+from .commands.InstallCommand import InstallCommand
+from .commands.UpgradeCommand import UpgradeCommand
+from .commands.FullUpgradeCommand import FullUpgradeCommand
 
 commands = {
     'help': HelpCommand,

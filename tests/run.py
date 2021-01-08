@@ -30,7 +30,7 @@ import shutil
 import subprocess
 
 # add `src` directory to python path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/src')
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/cati')
 
 from cmdline import ansi, pr
 from frontend import RootRequired, Env, HealthChecker, Temp, SysArch

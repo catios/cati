@@ -45,7 +45,7 @@ pip3 install -r requirements.txt
 make all
 
 # run for test
-./src/cati.py
+./cati/cati.py
 ```
 
 every thing is ready for coding!

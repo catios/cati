@@ -1,5 +1,5 @@
 # Frontend tools
-there is some tools in `src/frontend` folder.
+there is some tools in `cati/frontend` folder.
 this tools are releated to host
 
 ## Env
@@ -127,4 +127,4 @@ Temp.clean()
 ```
 
 ## Version
-the `src/frontend/Version.py` file keeps cati installation version in `version` variable.
+the `cati/frontend/Version.py` file keeps cati installation version in `version` variable.

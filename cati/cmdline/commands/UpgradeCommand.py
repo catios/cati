@@ -25,7 +25,7 @@
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi, ArgParser
 from package.Pkg import Pkg
-from cmdline.commands.InstallCommand import InstallCommand
+from .InstallCommand import InstallCommand
 
 class UpgradeCommand(BaseCommand):
     """ Upgrade command """

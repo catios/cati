@@ -25,9 +25,9 @@
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi, ArgParser
 from package.Pkg import Pkg
-from cmdline.commands.AutoremoveCommand import AutoremoveCommand
-from cmdline.commands.UpdateCommand import UpdateCommand
-from cmdline.commands.UpgradeCommand import UpgradeCommand
+from .AutoremoveCommand import AutoremoveCommand
+from .UpdateCommand import UpdateCommand
+from .UpgradeCommand import UpgradeCommand
 
 class FullUpgradeCommand(BaseCommand):
     """ FullUpgrade command """

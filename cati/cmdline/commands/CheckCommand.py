@@ -27,8 +27,8 @@ import json
 from cmdline.BaseCommand import BaseCommand
 from cmdline import pr, ansi, ArgParser
 from frontend.RootRequired import require_root_permission
-from cmdline.commands.StateCommand import StateCommand
-from cmdline.commands.InstallCommand import InstallCommand
+from .StateCommand import StateCommand
+from .InstallCommand import InstallCommand
 from cmdline.components import ReposListErrorShower
 from package.Pkg import Pkg
 from helpers.hash import calc_file_sha256
