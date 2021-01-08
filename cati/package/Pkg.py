@@ -26,7 +26,7 @@ import os
 import json
 from frontend import Env
 from frontend.SysArch import sys_arch
-from package.exceptions import CannotReadFileException
+from .exceptions import CannotReadFileException
 from packaging import version
 from helpers.hash import calc_file_sha256
 

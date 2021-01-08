@@ -26,9 +26,9 @@ import os
 import mimetypes
 import tarfile
 import json
-from dotcati.PackageJsonValidator import PackageJsonValidator
+from .PackageJsonValidator import PackageJsonValidator
 from package.Pkg import Pkg
-from dotcati import PkgConvertor
+from . import PkgConvertor
 
 class BaseArchive(Pkg):
     """ base archive for archive versions """

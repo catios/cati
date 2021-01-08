@@ -25,7 +25,7 @@
 import os
 import sys
 from cmdline import pr, ansi
-from frontend import Env
+from . import Env
 
 is_testing = False
 """

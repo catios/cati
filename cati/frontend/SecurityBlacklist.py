@@ -31,7 +31,7 @@ if package is in database, will not install and user will get error
 
 import os
 import json
-from frontend import Env
+from . import Env
 
 def get_list() -> list:
     """

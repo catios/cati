@@ -26,11 +26,11 @@ import os
 import json
 import time
 import hashlib
-from dotcati.ArchiveModel import BaseArchive
+from .ArchiveModel import BaseArchive
 from frontend import Env, Temp, SysArch, SecurityBlacklist
-from dotcati import ListUpdater
+from . import ListUpdater
 from package.Pkg import Pkg
-from dotcati.exceptions import DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist, FileConflictError
+from .exceptions import DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist, FileConflictError
 from transaction.BaseTransaction import BaseTransaction
 from helpers.hash import calc_file_sha256, calc_file_sha512, calc_file_md5
 

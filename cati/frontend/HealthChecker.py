@@ -23,7 +23,7 @@
 """ Checks cati installation health and repair """
 
 import os
-from frontend import Env
+from . import Env
 
 def repair_once_file(filepath: str, events: dict):
     """

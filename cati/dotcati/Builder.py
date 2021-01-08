@@ -25,9 +25,9 @@
 import os
 import json
 import tarfile
-from dotcati.exceptions import InvalidPackageDirException
-from dotcati.ArchiveModel import archive_factory
-from dotcati.PackageJsonValidator import PackageJsonValidator
+from .exceptions import InvalidPackageDirException
+from .ArchiveModel import archive_factory
+from .PackageJsonValidator import PackageJsonValidator
 from frontend import Temp
 
 class Builder:

@@ -25,8 +25,8 @@
 import os
 import json
 from frontend import SysArch, Env
-from repo.drivers.File import File as FileDriver
-from repo.drivers.Http import Http as HttpDriver
+from .drivers.File import File as FileDriver
+from .drivers.Http import Http as HttpDriver
 
 class Repo:
     """ Cati repository model """

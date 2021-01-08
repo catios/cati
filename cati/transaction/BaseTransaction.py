@@ -29,7 +29,7 @@ transactions are install/remove/upgrade/downgrade operations.
 import os
 from package.Pkg import Pkg
 from frontend import Env
-from transaction.Calculator import Calculator
+from .Calculator import Calculator
 
 class BaseTransaction:
     """ Transaction base model """
