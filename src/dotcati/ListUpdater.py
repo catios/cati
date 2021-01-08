@@ -22,7 +22,8 @@
 
 """ Database Packages list updater """
 
-import os, json
+import os
+import json
 from frontend.RootRequired import require_root_permission
 from frontend import Env
 from package.Pkg import Pkg
@@ -47,7 +48,7 @@ def update_indexes(events: dict):
         pkg_index = {}
         if os.path.isdir(Env.packages_lists('/' + pkg)):
             for version in os.listdir(Env.packages_lists('/' + pkg)):
-                if version != 'index':
+                if version not in ['index', 'reverse_depends', 'reverse_conflicts']:
                     if os.path.isfile(Env.packages_lists('/' + pkg + '/' + version)):
                         content = None
                         try:
@@ -82,5 +83,66 @@ def index_reverse_depends_and_conflicts(pkg: Pkg):
     Args:
         pkg (Pkg): changed/added package (reverse c/d will be set for that packages this package is related to them)
     """
-    # TODO : write this method
-    pass
+    # load the packages
+    depend_pkgs = []
+    conflict_pkgs = []
+    for depend in pkg.get_depends():
+        query_parts = Pkg.check_state(depend, only_parse=True)
+        for depth1 in query_parts:
+            for depth2 in depth1:
+                depend_pkgs.append(depth2[0])
+    for conflict in pkg.get_conflicts():
+        query_parts = Pkg.check_state(conflict, only_parse=True)
+        for depth1 in query_parts:
+            for depth2 in depth1:
+                conflict_pkgs.append(depth2[0])
+
+    # set reverse depends/conflicts for found packages
+    for p in depend_pkgs:
+        f_path = Env.packages_lists('/' + p + '/reverse_depends')
+        current_list = None
+        try:
+            if not os.path.isdir(Env.packages_lists('/' + p)):
+                os.mkdir(Env.packages_lists('/' + p))
+            if not os.path.isfile(f_path):
+                current_list = []
+            else:
+                f = open(f_path, 'r')
+                current_list = [item.strip() for item in f.read().strip().split('\n') if item.strip() != '']
+                f.close()
+            if not pkg.data['name'] in current_list:
+                current_list.append(pkg.data['name'])
+            # write new list
+            new_list_str = ''
+            for item in current_list:
+                new_list_str += item + '\n'
+            new_list_str = new_list_str.strip()
+            f = open(f_path, 'w')
+            f.write(new_list_str)
+            f.close()
+        except:
+            pass
+    for p in conflict_pkgs:
+        f_path = Env.packages_lists('/' + p + '/reverse_conflicts')
+        current_list = None
+        try:
+            if not os.path.isdir(Env.packages_lists('/' + p)):
+                os.mkdir(Env.packages_lists('/' + p))
+            if not os.path.isfile(f_path):
+                current_list = []
+            else:
+                f = open(f_path, 'r')
+                current_list = [item.strip() for item in f.read().strip().split('\n') if item.strip() != '']
+                f.close()
+            if not pkg.data['name'] in current_list:
+                current_list.append(pkg.data['name'])
+            # write new list
+            new_list_str = ''
+            for item in current_list:
+                new_list_str += item + '\n'
+            new_list_str = new_list_str.strip()
+            f = open(f_path, 'w')
+            f.write(new_list_str)
+            f.close()
+        except:
+            pass

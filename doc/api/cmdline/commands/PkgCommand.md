@@ -56,7 +56,7 @@ Classes
     :   installs once package
         is called from install sub command
 
-    `invalid_json_data_event(self, path)`
+    `invalid_json_data_event(self, path, content)`
     :   index updater invalid_json_data event
         will pass to installer and installer passes this to index updater
 

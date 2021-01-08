@@ -110,8 +110,18 @@ class Pkg:
         Returns:
             list[Pkg]: list of packages has dependency to this package
         """
-        # TODO : sync this algorithm with new reverse depend/conflict storing
-        rd_pkgs = self.all_list()['list']
+        try:
+            rd_pkgs_list_f = open(Env.packages_lists('/' + self.data['name'] + '/reverse_depends'), 'r')
+            rd_pkgs_list = rd_pkgs_list_f.read().strip().split('\n')
+            rd_pkgs_list_f.close()
+        except:
+            rd_pkgs_list = []
+        rd_pkgs = []
+        for item in rd_pkgs_list:
+            if Pkg.is_installed(item):
+                rd_pkgs.append(Pkg.load_version(item, Pkg.installed_version(item)))
+            else:
+                rd_pkgs.append(Pkg.load_last(item))
         reverse_depends = []
         for pkg in rd_pkgs:
             if pkg.installed():
@@ -135,10 +145,18 @@ class Pkg:
         
         Returns:
             list[Pkg]: list of packages has conflict with this package"""
-        # TODO : sync this algorithm with new reverse depend/conflict storing
-        rc_pkgs = self.installed_list()['list']
+        try:
+            rd_pkgs_list_f = open(Env.packages_lists('/' + self.data['name'] + '/reverse_conflicts'), 'r')
+            rd_pkgs_list = rd_pkgs_list_f.read().strip().split('\n')
+            rd_pkgs_list_f.close()
+        except:
+            rd_pkgs_list = []
+        rd_pkgs = []
+        for item in rd_pkgs_list:
+            if Pkg.is_installed(item):
+                rd_pkgs.append(Pkg.load_version(item, Pkg.installed_version(item)))
         reverse_conflicts_list = []
-        for pkg in rc_pkgs:
+        for pkg in rd_pkgs:
             conflicts = pkg.get_conflicts()
             for conflict in conflicts:
                 result = Pkg.check_state(conflict, {'install': [
@@ -488,7 +506,7 @@ class Pkg:
 
         return Pkg(content_json)
 
-    def check_state(query_string: str, virtual=None, get_false_pkg=False, get_false_pkg_next=0, get_true_pkg=False, get_true_pkg_next=0) -> bool:
+    def check_state(query_string: str, virtual=None, get_false_pkg=False, get_false_pkg_next=0, get_true_pkg=False, get_true_pkg_next=0, only_parse=False) -> bool:
         """
         Checks package state by query string.
 
@@ -614,6 +632,9 @@ class Pkg:
                     z += 1
                 j += 1
             i += 1
+
+        if only_parse:
+            return orig_parts
 
         # check query
         for tmp in orig_parts:
