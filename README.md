@@ -47,7 +47,7 @@ make --version
 
 ### Installation
 
-to compile and install cati on your system, do the following steps:
+#### Installing via Compiling Cati
 
 ```bash
 git clone https://github.com/catios/cati.git
@@ -60,6 +60,13 @@ python3 -m pip install -r requirements.txt
 
 # compile and install
 make -j4 # use `-jN` option to speed up build process
+```
+
+now, built execultable binary is created in `dist/cati`. you can run this by `./dist/cati`.
+
+Also You can install this by running:
+
+```bash
 sudo make install clean
 ```
 
@@ -67,4 +74,22 @@ now you can run cati in termianl:
 
 ```bash
 cati
+```
+
+#### Running without compiling
+You can run Cati with python interpreter:
+
+```bash
+git clone https://github.com/catios/cati.git
+cd cati
+
+# install dependencies
+virtualenv venv -p python3
+source venv/bin/activate
+python3 -m pip install -r requirements.txt
+
+# run cati (argument `cati` points to `cati/` directory)
+python3 cati
+# OR
+./cati/__main__.py
 ```

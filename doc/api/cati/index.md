@@ -1,5 +1,5 @@
-Namespace cati
-==============
+Module cati
+===========
 
 Sub-modules
 -----------
@@ -10,3 +10,15 @@ Sub-modules
 * cati.package
 * cati.repo
 * cati.transaction
+
+Functions
+---------
+
+    
+`cati_installation_is_corrupt(filepath: str, filetype: str)`
+:   Will run when cati installation is corrupt
+    shows error to user
+
+    
+`run()`
+:

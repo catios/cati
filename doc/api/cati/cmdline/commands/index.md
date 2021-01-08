@@ -11,6 +11,7 @@ Sub-modules
 * cati.cmdline.commands.FinfoCommand
 * cati.cmdline.commands.ForgetCommand
 * cati.cmdline.commands.FullUpgradeCommand
+* cati.cmdline.commands.HelpCommand
 * cati.cmdline.commands.InstallCommand
 * cati.cmdline.commands.ListCommand
 * cati.cmdline.commands.PkgCommand

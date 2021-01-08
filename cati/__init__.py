@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
 #
-# __main__.py
+# __init__.py
+#
 #
 # the cati project
 # Copyright 2020-2021 parsa shahmaleki <parsampsh@gmail.com>
@@ -21,12 +21,23 @@
 # along with cati.  If not, see <https://www.gnu.org/licenses/>.
 ##################################################
 
-""" Cati main cli entry point """
-
-import os
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/')
-import cati
+from cati.cmdline import kernel, pr, ansi
+from cati.frontend import HealthChecker
 
-if __name__ == '__main__':
-    cati.run()
+# check cati installation health
+def cati_installation_is_corrupt(filepath: str, filetype: str):
+    """
+    Will run when cati installation is corrupt
+    shows error to user
+    """
+    pr.e(ansi.red + 'Cati installation is corrupt. to repair it, just run cati with root access' + ansi.reset)
+    pr.exit(1)
+
+def run():
+    # check the installation health
+    HealthChecker.check({
+        'failed_to_repair': cati_installation_is_corrupt,
+    })
+    # handle cli
+    kernel.handle(sys.argv[:])
