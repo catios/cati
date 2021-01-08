@@ -25,6 +25,7 @@
 import os, json
 from frontend.RootRequired import require_root_permission
 from frontend import Env
+from package.Pkg import Pkg
 
 def update_indexes(events: dict):
     """
@@ -70,3 +71,16 @@ def update_indexes(events: dict):
         f_index = open(Env.packages_lists('/' + pkg + '/index'), 'w')
         f_index.write(json.dumps(pkg_index))
         f_index.close()
+
+def index_reverse_depends_and_conflicts(pkg: Pkg):
+    """
+    Packages have `depends` and `conflicts`
+    But also they have `Reverse` depends and conflicts
+    Reverse d/c should be indexed because loading them real time is so big process
+    We index them in a place, and when a package is added/changed, this function should be called
+
+    Args:
+        pkg (Pkg): changed/added package (reverse c/d will be set for that packages this package is related to them)
+    """
+    # TODO : write this method
+    pass

@@ -33,6 +33,7 @@ from repo.Repo import Repo
 from frontend import Env, RootRequired
 from dotcati.PackageJsonValidator import PackageJsonValidator
 from dotcati import ListUpdater
+from package.Pkg import Pkg
 
 class UpdateCommand(BaseCommand):
     """ Update command """
@@ -146,6 +147,7 @@ class UpdateCommand(BaseCommand):
                     f = open(Env.packages_lists('/' + pkg['name'] + '/' + pkg['version'] + '-' + pkg['arch']), 'w')
                     f.write(json.dumps(pkg))
                     f.close()
+                    ListUpdater.index_reverse_depends_and_conflicts(Pkg(pkg))
                 except:
                     pr.e(ansi.red + 'error while adding ' + pkg['name'] + ':' + pkg['version'] + ':' + pkg['arch'] + ansi.reset)
             else:

@@ -495,3 +495,4 @@ class Installer:
         lists_f.write(json.dumps(tmp_pkg_data))
         lists_f.close()
         ListUpdater.update_indexes(index_updater_events)
+        ListUpdater.index_reverse_depends_and_conflicts(pkg)

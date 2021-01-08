@@ -6,6 +6,16 @@ Functions
 ---------
 
     
+`index_reverse_depends_and_conflicts(pkg: package.Pkg.Pkg)`
+:   Packages have `depends` and `conflicts`
+    But also they have `Reverse` depends and conflicts
+    Reverse d/c should be indexed because loading them real time is so big process
+    We index them in a place, and when a package is added/changed, this function should be called
+    
+    Args:
+        pkg (Pkg): changed/added package (reverse c/d will be set for that packages this package is related to them)
+
+    
 `update_indexes(events: dict)`
 :   This function loads available versions of a package and index them in index file
     and do this action for all of packages in lists.
