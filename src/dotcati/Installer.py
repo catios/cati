@@ -330,6 +330,9 @@ class Installer:
         if not pkg.data['arch'] in SysArch.allowed_archs():
             return installer_events['arch_error'](pkg)
 
+        # add package data to lists
+        self.add_package_to_lists(pkg, index_updater_events)
+
         # check package dependencies and conflicts
         try:
             self.check_dep_and_conf(pkg)
@@ -348,9 +351,6 @@ class Installer:
             self.old_conffiles = [item.strip().split('@') for item in tmp]
         except:
             pass
-
-        # add package data to lists
-        self.add_package_to_lists(pkg, index_updater_events)
 
         # extract package in a temp place
         temp_dir = Temp.make_dir()
