@@ -350,53 +350,7 @@ class Installer:
             pass
 
         # add package data to lists
-        if not os.path.isdir(Env.packages_lists('/' + pkg.data['name'])):
-            os.mkdir(Env.packages_lists('/' + pkg.data['name']))
-
-        lists_path = Env.packages_lists('/' + pkg.data['name'] + '/' + pkg.data['version'] + '-' + pkg.data['arch'])
-
-        try:
-            lists_f = open(lists_path, 'r')
-            old_repo = json.loads(lists_f.read())['repo']
-            lists_f.close()
-        except:
-            old_repo = 'Local'
-
-        try:
-            lists_f = open(lists_path, 'r')
-            old_file_path = json.loads(lists_f.read())['file_path']
-            lists_f.close()
-        except:
-            old_file_path = False
-
-        try:
-            lists_f = open(lists_path, 'r')
-            old_file_sha256 = json.loads(lists_f.read())['file_sha256']
-            lists_f.close()
-        except:
-            old_file_sha256 = False
-
-        try:
-            lists_f = open(lists_path, 'r')
-            old_file_md5 = json.loads(lists_f.read())['file_md5']
-            lists_f.close()
-        except:
-            old_file_md5 = False
-
-        lists_f = open(lists_path, 'w')
-        pkg.data['repo'] = old_repo
-        if old_file_path != False:
-            pkg.data['file_path'] = old_file_path
-        tmp_pkg_data = pkg.data
-        if old_file_md5:
-            tmp_pkg_data['file_md5'] = old_file_md5
-        if old_file_sha256:
-            tmp_pkg_data['file_sha256'] = old_file_sha256
-        tmp_pkg_data['files'] = ['/' + member[6:] for member in pkg.members() if member[:6] == 'files/']
-        lists_f.write(json.dumps(tmp_pkg_data))
-        lists_f.close()
-
-        ListUpdater.update_indexes(index_updater_events)
+        self.add_package_to_lists(pkg, index_updater_events)
 
         # extract package in a temp place
         temp_dir = Temp.make_dir()
@@ -492,3 +446,52 @@ class Installer:
 
         # call package installed event
         installer_events['package_installed'](pkg)
+
+    def add_package_to_lists(self, pkg: Pkg, index_updater_events: dict):
+        """
+        Adds the package information to database
+        
+        Args:
+            pkg (Pkg): the package
+            index_updater_events (dict): events for index updater
+        """
+        if not os.path.isdir(Env.packages_lists('/' + pkg.data['name'])):
+            os.mkdir(Env.packages_lists('/' + pkg.data['name']))
+        lists_path = Env.packages_lists('/' + pkg.data['name'] + '/' + pkg.data['version'] + '-' + pkg.data['arch'])
+        try:
+            lists_f = open(lists_path, 'r')
+            old_repo = json.loads(lists_f.read())['repo']
+            lists_f.close()
+        except:
+            old_repo = 'Local'
+        try:
+            lists_f = open(lists_path, 'r')
+            old_file_path = json.loads(lists_f.read())['file_path']
+            lists_f.close()
+        except:
+            old_file_path = False
+        try:
+            lists_f = open(lists_path, 'r')
+            old_file_sha256 = json.loads(lists_f.read())['file_sha256']
+            lists_f.close()
+        except:
+            old_file_sha256 = False
+        try:
+            lists_f = open(lists_path, 'r')
+            old_file_md5 = json.loads(lists_f.read())['file_md5']
+            lists_f.close()
+        except:
+            old_file_md5 = False
+        lists_f = open(lists_path, 'w')
+        pkg.data['repo'] = old_repo
+        if old_file_path != False:
+            pkg.data['file_path'] = old_file_path
+        tmp_pkg_data = pkg.data
+        if old_file_md5:
+            tmp_pkg_data['file_md5'] = old_file_md5
+        if old_file_sha256:
+            tmp_pkg_data['file_sha256'] = old_file_sha256
+        tmp_pkg_data['files'] = ['/' + member[6:] for member in pkg.members() if member[:6] == 'files/']
+        lists_f.write(json.dumps(tmp_pkg_data))
+        lists_f.close()
+        ListUpdater.update_indexes(index_updater_events)

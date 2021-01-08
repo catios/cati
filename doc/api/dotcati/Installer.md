@@ -10,6 +10,13 @@ Classes
 
     ### Methods
 
+    `add_package_to_lists(self, pkg: package.Pkg.Pkg, index_updater_events: dict)`
+    :   Adds the package information to database
+        
+        Args:
+            pkg (Pkg): the package
+            index_updater_events (dict): events for index updater
+
     `check_dep_and_conf(self, pkg: dotcati.ArchiveModel.BaseArchive)`
     :   Checks package dependencies and conflicts.
         
