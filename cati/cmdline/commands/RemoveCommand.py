@@ -25,9 +25,9 @@
 from cati.cmdline.BaseCommand import BaseCommand
 from cati.cmdline import pr, ansi
 from cati.cmdline.components import TransactionShower, StateContentShower
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 from cati.transaction.Calculator import Calculator
-from cati.transaction.runners.Remove import Remove
+from cati.transaction.Remove import Remove
 from cati.transaction.BaseTransaction import BaseTransaction
 from cati.frontend.RootRequired import require_root_permission
 

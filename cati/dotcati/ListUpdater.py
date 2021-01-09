@@ -26,7 +26,7 @@ import os
 import json
 from cati.frontend.RootRequired import require_root_permission
 from cati.frontend import Env
-from cati.package.Pkg import Pkg
+from .Pkg import Pkg
 
 def update_indexes(events: dict):
     """

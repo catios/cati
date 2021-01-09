@@ -27,11 +27,10 @@ from cati.cmdline.BaseCommand import BaseCommand
 from cati.cmdline import pr, ansi
 from cati.dotcati.Builder import Builder
 from cati.dotcati.Installer import Installer
-from cati.dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist, FileConflictError
+from cati.dotcati.exceptions import InvalidPackageDirException, InvalidPackageFileException, DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist, FileConflictError, CannotReadFileException
 from cati.dotcati.ArchiveModel import archive_factory, BaseArchive
 from cati.frontend.RootRequired import require_root_permission
 from cati.frontend import Env
-from cati.package.exceptions import CannotReadFileException
 from cati.cmdline.components import PackageShower, StateContentShower
 from cati.transaction.BaseTransaction import BaseTransaction
 

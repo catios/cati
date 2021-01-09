@@ -24,7 +24,7 @@
 
 from cati.cmdline.BaseCommand import BaseCommand
 from cati.cmdline import pr, ansi, ArgParser
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 from .InstallCommand import InstallCommand
 
 class UpgradeCommand(BaseCommand):

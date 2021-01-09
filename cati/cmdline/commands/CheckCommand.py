@@ -30,7 +30,7 @@ from cati.frontend.RootRequired import require_root_permission
 from .StateCommand import StateCommand
 from .InstallCommand import InstallCommand
 from cati.cmdline.components import ReposListErrorShower
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 from cati.helpers.hash import calc_file_sha256
 from cati.frontend import Env
 from cati.repo.Repo import Repo

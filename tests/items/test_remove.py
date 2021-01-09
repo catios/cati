@@ -23,7 +23,7 @@
 """ Test test_remove """
 
 from TestCore import TestCore
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 
 class test_remove(TestCore):
     """ Test test_remove """

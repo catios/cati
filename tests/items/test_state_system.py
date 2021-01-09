@@ -24,7 +24,7 @@
 
 from TestCore import TestCore
 from cati.frontend import Env
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 
 class test_state_system(TestCore):
     """ Test test_state_system """

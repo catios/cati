@@ -29,7 +29,7 @@ import hashlib
 from .ArchiveModel import BaseArchive
 from cati.frontend import Env, Temp, SysArch, SecurityBlacklist
 from . import ListUpdater
-from cati.package.Pkg import Pkg
+from .Pkg import Pkg
 from .exceptions import DependencyError, ConflictError, PackageScriptError, PackageIsInSecurityBlacklist, FileConflictError
 from cati.transaction.BaseTransaction import BaseTransaction
 from cati.helpers.hash import calc_file_sha256, calc_file_sha512, calc_file_md5

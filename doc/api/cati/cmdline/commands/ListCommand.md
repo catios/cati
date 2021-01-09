@@ -34,5 +34,5 @@ Classes
     `run(self)`
     :   Run command
 
-    `show_once(self, package: cati.package.Pkg.Pkg)`
+    `show_once(self, package: cati.dotcati.Pkg.Pkg)`
     :   show once item in loaded packages list

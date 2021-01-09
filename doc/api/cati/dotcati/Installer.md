@@ -10,7 +10,7 @@ Classes
 
     ### Methods
 
-    `add_package_to_lists(self, pkg: cati.package.Pkg.Pkg, index_updater_events: dict)`
+    `add_package_to_lists(self, pkg: cati.dotcati.Pkg.Pkg, index_updater_events: dict)`
     :   Adds the package information to database
         
         Args:

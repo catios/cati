@@ -24,7 +24,7 @@
 
 import os
 from cati.cmdline.BaseCommand import BaseCommand
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 from cati.frontend import RootRequired, Env
 from cati.cmdline import pr, ansi, ArgParser
 from cati.transaction.Calculator import Calculator

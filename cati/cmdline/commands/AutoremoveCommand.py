@@ -24,7 +24,7 @@
 
 from cati.cmdline.BaseCommand import BaseCommand
 from cati.cmdline import pr, ansi, ArgParser
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 from .RemoveCommand import RemoveCommand
 
 class AutoremoveCommand(BaseCommand):

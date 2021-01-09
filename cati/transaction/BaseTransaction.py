@@ -27,7 +27,7 @@ transactions are install/remove/upgrade/downgrade operations.
 """
 
 import os
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 from cati.frontend import Env
 from .Calculator import Calculator
 

@@ -32,14 +32,14 @@ Classes
     ### Ancestors (in MRO)
 
     * cati.dotcati.ArchiveModel.BaseArchive
-    * cati.package.Pkg.Pkg
+    * cati.dotcati.Pkg.Pkg
 
 `BaseArchive(file_path: str, type_str: str)`
 :   base archive for archive versions
 
     ### Ancestors (in MRO)
 
-    * cati.package.Pkg.Pkg
+    * cati.dotcati.Pkg.Pkg
 
     ### Descendants
 

@@ -5,6 +5,14 @@ Dotcati section exceptions
 Classes
 -------
 
+`CannotReadFileException(*args, **kwargs)`
+:   Common base class for all non-exit exceptions.
+
+    ### Ancestors (in MRO)
+
+    * builtins.Exception
+    * builtins.BaseException
+
 `ConflictError(*args, **kwargs)`
 :   Common base class for all non-exit exceptions.
 

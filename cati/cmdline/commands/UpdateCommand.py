@@ -33,7 +33,7 @@ from cati.repo.Repo import Repo
 from cati.frontend import Env, RootRequired
 from cati.dotcati.PackageJsonValidator import PackageJsonValidator
 from cati.dotcati import ListUpdater
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 
 class UpdateCommand(BaseCommand):
     """ Update command """

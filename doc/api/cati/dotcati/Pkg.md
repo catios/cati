@@ -1,4 +1,4 @@
-Module cati.package.Pkg
+Module cati.dotcati.Pkg
 =======================
 Package model
 

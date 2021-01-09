@@ -24,7 +24,7 @@
 
 import os
 from TestCore import TestCore
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 
 class test_install(TestCore):
     """ Test test_install """

@@ -27,7 +27,7 @@ import mimetypes
 import tarfile
 import json
 from .PackageJsonValidator import PackageJsonValidator
-from cati.package.Pkg import Pkg
+from .Pkg import Pkg
 from . import PkgConvertor
 
 class BaseArchive(Pkg):

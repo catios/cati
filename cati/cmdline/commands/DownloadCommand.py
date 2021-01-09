@@ -27,7 +27,7 @@ import shutil
 from cati.cmdline.BaseCommand import BaseCommand
 from cati.cmdline import pr, ansi
 from cati.cmdline.components import DownloadProgress
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 
 class DownloadCommand(BaseCommand):
     """ Download command """

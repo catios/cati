@@ -17,7 +17,7 @@ Classes
     `config(self) ‑> dict`
     :   Define and config this command
 
-    `dir_is_not_empty_event(self, pkg: cati.package.Pkg.Pkg, f: str)`
+    `dir_is_not_empty_event(self, pkg: cati.dotcati.Pkg.Pkg, f: str)`
     :   will run as package remover event when remover wants to remove a directory
         but that dir is not empty. this event shows a warning to user
 
@@ -32,10 +32,10 @@ Classes
         --without-scripts: do not run package scripts in remove process
         --force|-f: force remove essential packages
 
-    `package_remove_finished_event(self, pkg: cati.package.Pkg.Pkg)`
+    `package_remove_finished_event(self, pkg: cati.dotcati.Pkg.Pkg)`
     :   will run as package remover event when package remove process finished
 
-    `removing_package_event(self, pkg: cati.package.Pkg.Pkg)`
+    `removing_package_event(self, pkg: cati.dotcati.Pkg.Pkg)`
     :   will run as package remover event while starting removing a package
 
     `run(self)`

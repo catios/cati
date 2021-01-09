@@ -25,7 +25,7 @@ Package shower cli component
 """
 
 from cati.cmdline import ansi, pr
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 
 def show(data: dict):
     """

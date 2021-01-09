@@ -7,7 +7,6 @@ Sub-modules
 * cati.dotcati
 * cati.frontend
 * cati.helpers
-* cati.package
 * cati.repo
 * cati.transaction
 

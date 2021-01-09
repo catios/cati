@@ -24,7 +24,7 @@
 
 from cati.cmdline.BaseCommand import BaseCommand
 from cati.cmdline import pr, ansi
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 from cati.cmdline.components import PackageShower
 
 class ShowCommand(BaseCommand):

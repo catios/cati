@@ -12,7 +12,7 @@ Classes
 
     ### Descendants
 
-    * cati.transaction.runners.Remove.Remove
+    * cati.transaction.Remove.Remove
 
     ### Static methods
 

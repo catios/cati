@@ -27,9 +27,9 @@ import shutil
 import glob
 from cati.cmdline.BaseCommand import BaseCommand
 from cati.cmdline import pr, ansi
-from cati.package.Pkg import Pkg
 from cati.frontend import Env, RootRequired
 from cati.dotcati import ListUpdater
+from cati.dotcati.Pkg import Pkg
 
 class ForgetCommand(BaseCommand):
     """ Forget command """

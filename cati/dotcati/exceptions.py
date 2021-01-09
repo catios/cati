@@ -42,3 +42,6 @@ class PackageIsInSecurityBlacklist(Exception):
 
 class FileConflictError(Exception):
     pass
+
+class CannotReadFileException(Exception):
+    pass

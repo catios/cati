@@ -25,7 +25,7 @@
 import os
 import shutil
 from cati.transaction.BaseTransaction import BaseTransaction
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 from cati.frontend import Env
 
 class Remove(BaseTransaction):

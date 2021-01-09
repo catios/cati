@@ -25,7 +25,7 @@
 from TestCore import TestCore
 import os
 import json
-from cati.package.Pkg import Pkg
+from cati.dotcati.Pkg import Pkg
 from cati.frontend import Env
 
 class test_dotcati_installer(TestCore):
