@@ -11,8 +11,8 @@ command template:
 
 """ Some command """
 
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi
 
 # commands should be a class and extends from BaseCommand
 class SomeCommand(BaseCommand):
@@ -57,7 +57,7 @@ class SomeCommand(BaseCommand):
 we never use `print` function directly in commands. we use `pr` module insead of that:
 
 ```python
-from cmdline import pr
+from cati.cmdline import pr
 
 # ...
 
@@ -82,7 +82,7 @@ next, import your command in that:
 ```python
 # ...
 
-from cmdline.commands.YourCommand import YourCommand
+from cati.cmdline.commands.YourCommand import YourCommand
 
 # ...
 ```
@@ -114,8 +114,8 @@ for example:
 
 """ Some command """
 
-from cmdline.BaseCommand import BaseCommand
-from cmdline import pr, ansi
+from cati.cmdline.BaseCommand import BaseCommand
+from cati.cmdline import pr, ansi
 
 # commands should be a class and extends from BaseCommand
 class SomeCommand(BaseCommand):
@@ -179,7 +179,7 @@ for example:
 ```python
 # ...
 
-from cmdline import ansi
+from cati.cmdline import ansi
 
 pr.p(ansi.green + 'hello' + ansi.reset) # output is an green `hello`
 

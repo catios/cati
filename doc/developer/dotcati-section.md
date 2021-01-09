@@ -7,7 +7,7 @@ this function is factory to load `.cati` file object.
 ```python
 # ...
 
-from dotcati.ArchiveModel import archive_factory
+from cati.dotcati.ArchiveModel import archive_factory
 
 pkg = archive_factory('/path/to/package.cati', 'r') # first argument is file path and second argument is open type
 
@@ -22,7 +22,7 @@ this class is dotcati package builder.
 ```python
 # ...
 
-from dotcati.Builder import Builder
+from cati.dotcati.Builder import Builder
 
 builder = Builder()
 output = builder.build('/path/to/package/dir')
@@ -39,7 +39,7 @@ this module gets package information as json (`data.json`) and validate fields i
 ```python
 # ...
 
-from dotcati.PackageJsonValidator import PackageJsonValidator
+from cati.dotcati.PackageJsonValidator import PackageJsonValidator
 
 PackageJsonValidator.validate(data) # output is boolean
 
@@ -54,7 +54,7 @@ this module loads list of versions of a package and list them and put created li
 ```python
 # ...
 
-from dotcati.ListUpdater import ListUpdater
+from cati.dotcati.ListUpdater import ListUpdater
 
 ListUpdater.update_indexes(events)
 
@@ -69,7 +69,7 @@ this module installs a dotcati package.
 ```python
 # ...
 
-from dotcati.Installer import Installer
+from cati.dotcati.Installer import Installer
 
 installer = Installer()
 installer.install(pkg_archive, index_updater_events={}, installer_events={})

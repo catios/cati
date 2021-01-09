@@ -9,7 +9,7 @@ this is created to we use this to get some specify paths and do not write that p
 ```python
 # ...
 
-from frontend import Env
+from cati.frontend import Env
 
 Env.base_path() # base path of environment (default is '/')
 
@@ -32,7 +32,7 @@ this module checks cati installation health
 ```python
 # ...
 
-from frontend import HealthChecker
+from cati.frontend import HealthChecker
 
 # checks all of cati files and directories and if there is some problems, repair them
 HealthChecker.check({})
@@ -48,8 +48,8 @@ look at this example:
 ```python
 # ...
 
-from cmdline import pr
-from frontend import HealthChecker
+from cati.cmdline import pr
+from cati.frontend import HealthChecker
 
 def failed_to_repair():
     # this function will run when cati installation is corrupt
@@ -72,7 +72,7 @@ this module has a function to check root access
 ```python
 # ...
 
-from frontend.RootRequired import require_root_permission
+from cati.frontend.RootRequired import require_root_permission
 
 # when you run this function, this tool checks root access
 # if user has not root access, program will show an cli error and exits
@@ -99,7 +99,7 @@ this module has a function to return system architecture:
 ```python
 # ...
 
-from frontend import SysArch
+from cati.frontend import SysArch
 
 arch = SysArch.sys_arch() # returns system architecture
 
@@ -112,7 +112,7 @@ this module is for handling temp files:
 ```python
 # ...
 
-from frontend import Temp
+from cati.frontend import Temp
 
 # creates a temp directory and returns path of that
 Temp.make_dir()
