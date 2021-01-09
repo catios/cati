@@ -40,7 +40,7 @@ uninstall: /usr/bin/cati
 
 ### clean		clear build files
 clean:
-	@rm dist/ build/ *.spec -rf
+	@rm dist/ build/ *.spec *.egg-info -rf
 	@echo -e "\033[32mall of build files cleared successfuly\033[0m"
 
 main: compile
