@@ -1,5 +1,5 @@
-Namespace cati.frontend
-=======================
+Module cati.frontend
+====================
 
 Sub-modules
 -----------

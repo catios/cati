@@ -1,5 +1,5 @@
-Namespace cati.transaction.runners
-==================================
+Module cati.transaction.runners
+===============================
 
 Sub-modules
 -----------

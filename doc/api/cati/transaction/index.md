@@ -1,5 +1,5 @@
-Namespace cati.transaction
-==========================
+Module cati.transaction
+=======================
 
 Sub-modules
 -----------

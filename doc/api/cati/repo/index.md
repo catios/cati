@@ -1,5 +1,5 @@
-Namespace cati.repo
-===================
+Module cati.repo
+================
 
 Sub-modules
 -----------

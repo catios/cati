@@ -1,5 +1,5 @@
-Namespace cati.cmdline.components
-=================================
+Module cati.cmdline.components
+==============================
 
 Sub-modules
 -----------

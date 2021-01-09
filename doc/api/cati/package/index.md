@@ -1,5 +1,5 @@
-Namespace cati.package
-======================
+Module cati.package
+===================
 
 Sub-modules
 -----------

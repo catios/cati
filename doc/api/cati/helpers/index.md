@@ -1,5 +1,5 @@
-Namespace cati.helpers
-======================
+Module cati.helpers
+===================
 
 Sub-modules
 -----------

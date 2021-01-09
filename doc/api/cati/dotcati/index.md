@@ -1,5 +1,5 @@
-Namespace cati.dotcati
-======================
+Module cati.dotcati
+===================
 
 Sub-modules
 -----------

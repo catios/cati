@@ -47,6 +47,21 @@ make --version
 
 ### Installation
 
+#### Installing via pip
+You can install cati with pip:
+
+```bash
+pip3 install cati
+```
+
+now you can run it:
+
+```bash
+cati
+# OR
+python3 -m cati
+```
+
 #### Installing via Compiling Cati
 
 ```bash

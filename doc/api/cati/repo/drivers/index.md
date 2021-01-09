@@ -1,5 +1,5 @@
-Namespace cati.repo.drivers
-===========================
+Module cati.repo.drivers
+========================
 
 Sub-modules
 -----------
