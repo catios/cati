@@ -23,6 +23,7 @@
 import sys
 from cati.cmdline import kernel, pr, ansi
 from cati.frontend import HealthChecker
+from cati.frontend.Version import version as __version__
 
 # check cati installation health
 def cati_installation_is_corrupt(filepath: str, filetype: str):
