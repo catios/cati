@@ -420,7 +420,8 @@ class Pkg:
                             pkg = Pkg.load_from_index(index_json, item)
                             packages.append(pkg)
                         except:
-                            errors.append('faild to load package "' + item + '"')
+                            if not (os.path.isfile(Env.packages_lists('/' + item + '/reverse_depends')) or os.path.isfile(Env.packages_lists('/' + item + '/reverse_conflicts'))):
+                                errors.append('faild to load package "' + item + '"')
                     except:
                         errors.append('invalid json content in "' + Env.packages_lists('/' + item + '/index') + '"')
                 except:
