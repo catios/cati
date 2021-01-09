@@ -1,7 +1,7 @@
 SHELL = bash
 
 .DEFAULT_GOAL := main
-.PHONY := headers compile install main clean pylint test all docs help
+.PHONY := headers compile install main clean pylint test all docs help uninstall
 
 PY = python3
 MANAGE = $(PY) ./manage.py
@@ -30,6 +30,13 @@ install: ./dist/cati
 	@cp ./etc/manpages/cati.1 /usr/share/man/man1/cati.1
 	@echo -e "\033[32mCati installed successfuly\033[0m"
 	@$(INSTALLATION_PATH)
+
+### uninstall   removes cati from your system(not removes configuration and database)
+uninstall: /usr/bin/cati
+	@rm $(INSTALLATION_PATH)
+	@rm /usr/share/bash-completion/completions/cati
+	@rm /usr/share/man/man1/cati.1
+	@echo -e "\033[32mCati REMOVED successfuly\033[0m"
 
 ### clean		clear build files
 clean:

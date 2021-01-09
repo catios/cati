@@ -91,6 +91,12 @@ now you can run cati in termianl:
 cati
 ```
 
+If you want to remove it, use `make uninstall`:
+
+```bash
+sudo make uninstall
+```
+
 #### Running without compiling
 You can run Cati with python interpreter:
 
