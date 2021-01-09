@@ -47,7 +47,7 @@ make --version
 
 ### Installation
 
-#### Installing via pip
+#### Installing via pip (Not recommended, use source installation for better installation)
 You can install cati with pip:
 
 ```bash
