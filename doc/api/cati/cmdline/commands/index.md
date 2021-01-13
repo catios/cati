@@ -14,6 +14,7 @@ Sub-modules
 * cati.cmdline.commands.HelpCommand
 * cati.cmdline.commands.InstallCommand
 * cati.cmdline.commands.ListCommand
+* cati.cmdline.commands.MeowCommand
 * cati.cmdline.commands.PkgCommand
 * cati.cmdline.commands.QueryCommand
 * cati.cmdline.commands.RDependsCommand

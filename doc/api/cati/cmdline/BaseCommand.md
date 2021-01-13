@@ -21,6 +21,7 @@ Classes
     * cati.cmdline.commands.HelpCommand.HelpCommand
     * cati.cmdline.commands.InstallCommand.InstallCommand
     * cati.cmdline.commands.ListCommand.ListCommand
+    * cati.cmdline.commands.MeowCommand.MeowCommand
     * cati.cmdline.commands.PkgCommand.PkgCommand
     * cati.cmdline.commands.QueryCommand.QueryCommand
     * cati.cmdline.commands.RDependsCommand.RDependsCommand

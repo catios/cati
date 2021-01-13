@@ -1,6 +1,19 @@
 # Cati package manager
 cati is a package manager for GNU/Linux/UNIX systems. cati is written in python
 
+```
+               /\       /\            * * * * * * * * * * * * * *
+               | |_____| |            * Meow.....! I am Cati!   *
+              |  --   --  |       ....* I can manage your       *
+             |  { { * } }  | ..../    * Packages!               *
+              |           |           *                         *
+     __________|         |            * * * * * * * * * * * * * *
+    /                     |
+   /                      |
+__/_  __  _________  _   _|
+    |_| |_|       |_| |_|
+```
+
 ## Why cati?
 some features of cati:
 

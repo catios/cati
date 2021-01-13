@@ -45,6 +45,7 @@ from .commands.DownloadCommand import DownloadCommand
 from .commands.InstallCommand import InstallCommand
 from .commands.UpgradeCommand import UpgradeCommand
 from .commands.FullUpgradeCommand import FullUpgradeCommand
+from .commands.MeowCommand import MeowCommand
 
 commands = {
     'help': HelpCommand,
@@ -68,6 +69,7 @@ commands = {
     'install': InstallCommand,
     'upgrade': UpgradeCommand,
     'full-upgrade': FullUpgradeCommand,
+    'meow': MeowCommand,
 }
 """
 a dictonary from list of subcommands.

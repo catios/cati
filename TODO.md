@@ -1,4 +1,3 @@
 # TODO
 
-- [ ] add command `meow`
-- [ ] create graphical interface
+- [ ] create cati-store graphical interface
