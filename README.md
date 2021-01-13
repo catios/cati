@@ -62,6 +62,8 @@ cati
 python3 -m cati
 ```
 
+Installation via pip for normal usage is not recommended, But when you need to use this? When you are writing a program that needs to do something about Cati package manager, Installing Cati with pip allows you to use Cati APIs in Python programs.
+
 #### Installing via Compiling Cati
 
 ```bash
