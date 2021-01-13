@@ -87,7 +87,11 @@ class UpdateCommand(BaseCommand):
         for repo in repos:
             if repo.successful_loaded:
                 if repo.test():
-                    orig_repos.append(repo)
+                    if not repo.is_disable:
+                        orig_repos.append(repo)
+                    else:
+                        if not self.is_quiet():
+                            self.message('Warning: ignoring repository "' + repo.name + '" because this is disable')
                 else:
                     pr.e(ansi.red + 'Cannot make connection to repo "' + repo.full_string + '"' + ansi.reset)
 

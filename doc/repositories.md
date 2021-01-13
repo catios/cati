@@ -69,6 +69,8 @@ they are repo config options.
 
 `priority=<number>` sets priority of the repo between another repos. for example if we have 2 repos and package firefox version 83 is in both of them, cati consider which of them as `firefox=83`? package of that repo with much priority will consider as `firefox=83`. priority number is reverse. for example priority `2` is upper than `10`. default priority is `1`.
 
+`disable=1` disables the repo. also you can comment the repository in configuration file, but this is better way to disabling repositories.
+
 so, with this options we have this strcuture:
 
 ```

@@ -44,6 +44,7 @@ class Repo:
         self.arch = [SysArch.sys_arch()]
         self.channel = ['default']
         self.priority = 1
+        self.is_disable = False
         self.name = None
 
         for item in config:
@@ -69,6 +70,8 @@ class Repo:
                             pass
                     elif parts[0] == 'name':
                         self.name = parts[1]
+                    elif parts[0] == 'disable':
+                            self.is_disable = True
                     else:
                         self.syntax_errors.append('unknow option `' + parts[0] + '`')
 

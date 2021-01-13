@@ -117,4 +117,7 @@ class RepoCommand(BaseCommand):
         ReposListErrorShower.show(repos)
         for repo in repos:
             if repo.successful_loaded:
-                pr.p(repo.name + ': ' + repo.url + ' pkg=' + repo.get_pkg_str() + ' arch=' + repo.get_arch_str() + ' channel=' + repo.get_channel_str())
+                is_disable = ''
+                if repo.is_disable:
+                    is_disable = ' (Disabled)'
+                pr.p(repo.name + ': ' + repo.url + ' pkg=' + repo.get_pkg_str() + ' arch=' + repo.get_arch_str() + ' channel=' + repo.get_channel_str() + is_disable)
