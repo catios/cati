@@ -3,7 +3,7 @@
 # Copyright parsa shahmaleki <parsampsh@gmail.com>
 # Under the GPL-v3
 
-_CATI_MAIN_COMMANDS="help pkg list remove show state query search files finfo rdepends forget check repo update autoremove clear-cache download install upgrade full-upgrade"
+_CATI_MAIN_COMMANDS="help pkg list remove show state query search files finfo rdepends forget check repo update autoremove clear-cache download install upgrade full-upgrade meow"
 _CATI_GENERAL_OPTIONS="--no-ansi"
 
 _cati_help()
@@ -152,6 +152,7 @@ _cati() {
 		install) _cati_install;;
 		upgrade) _cati_upgrade;;
 		full-upgrade) _cati_full_upgrade;;
+		meow) ;;
 	esac
 }
 
