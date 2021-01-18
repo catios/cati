@@ -63,3 +63,10 @@ also that is recommended to run this command to finally check in the end of inst
 ```bash
 cati check
 ```
+
+If above command returned non-zero code, you installer can try `--autofix` option to fix some problems automatic
+(This action needs to get back repository, so we recommend don't delete installer repo before this step and delete them after this):
+
+```bash
+cati check --autofix
+```
