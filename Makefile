@@ -55,7 +55,7 @@ docs:
 	@printf 'Generating doc... '
 	@PYTHONPATH='$(shell pwd)' $(PY) -m pdoc cati --output-dir doc/api --skip-errors &> /dev/null
 	@echo "#### This api documentation is auto generated from docstrings with pdoc" > doc/api/README.md
-	-@MANWIDTH=80 man -a -l etc/manpages/cati.1 > doc/cli-manual.txt
+	-@MANWIDTH=80 man etc/manpages/cati.1 > doc/cli-manual.txt
 	@printf '\033[32mFinished\033[0m\n'
 
 ### test		run tests
