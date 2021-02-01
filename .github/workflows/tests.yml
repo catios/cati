@@ -28,10 +28,10 @@ jobs:
     - name: Install dependencies
       run: pip3 install -r requirements.txt
     - name: Run tests
-      run: make all -j4
+      run: make all
     - name: Test Build
       run: |
-        make -j4
+        make
         sudo ./dist/cati
 
     name: ${{ matrix.os }} with python ${{ matrix.python }}
