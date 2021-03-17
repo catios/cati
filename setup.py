@@ -6,7 +6,7 @@ f.close()
 
 setuptools.setup(
     name="cati",
-    version="0.1-alpha3",
+    version="0.1-alpha5",
     author="parsa shahmaleki",
     author_email="parsampsh@gmail.com",
     description="The Cati Unix Package manager",
