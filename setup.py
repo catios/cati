@@ -1,4 +1,5 @@
 import setuptools
+from cati.frontend import Version
 
 f = open('README.md', 'r')
 long_description = f.read()
@@ -6,7 +7,7 @@ f.close()
 
 setuptools.setup(
     name="cati",
-    version="0.1-alpha5",
+    version=Version.version,
     author="parsa shahmaleki",
     author_email="parsampsh@gmail.com",
     description="The Cati Unix Package manager",
