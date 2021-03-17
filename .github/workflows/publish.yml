@@ -1,0 +1,31 @@
+name: publish
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  publish:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install requirements
+      run: |
+        python -m pip install -r requirements.txt
+        python -m pip install twine wheel
+    - name: Running Tests
+      run: |
+        make test
+    - name: Publish
+      run: |
+        python setup.py sdist bdist_wheel
+        python -m twine upload dist/* -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
+
+    name: Publish
