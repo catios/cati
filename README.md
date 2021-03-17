@@ -60,11 +60,11 @@ make --version
 
 ### Installation
 
-#### Installing via pip (Not recommended, use source installation for better installation)
+#### Installing via pip
 You can install cati with pip:
 
 ```bash
-pip3 install cati
+sudo pip3 install cati
 ```
 
 now you can run it:
@@ -75,9 +75,9 @@ cati
 python3 -m cati
 ```
 
-Installation via pip for normal usage is not recommended, But when you need to use this? When you are writing a program that needs to do something about Cati package manager, Installing Cati with pip allows you to use Cati APIs in Python programs.
+##### NOTE: surely run pip install using `sudo`
 
-#### Installing via Compiling Cati
+#### Installing via Compiling the source code (Not recommended)
 
 ```bash
 git clone https://github.com/catios/cati.git
