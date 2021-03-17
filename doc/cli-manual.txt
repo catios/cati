@@ -169,4 +169,4 @@ DIAGNOSTICS
 AUTHOR
        parsa shahmaleki <parsampsh@gmail.com>
 
-Cati 0.1-alpha3                 6 December 2020                        cati(1)
+Cati 0.1-alpha6                 6 December 2020                        cati(1)
