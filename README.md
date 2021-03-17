@@ -41,26 +41,7 @@ read cati security policy in [here](/SECURITY.md).
 
 ## Installation
 
-### dependencies
-before compile and install cati, install the cati dev-dependencies:
-
-- `python3 (>= 3.6)`
-- `pip3`
-- `virtualenv`
-- `make`
-
-to check them you can use the following commands:
-
-```bash
-python3 --version
-python3 -m pip --version
-virtualenv --version
-make --version
-```
-
-### Installation
-
-#### Installing via pip
+### Installing via pip
 You can install cati with pip:
 
 ```bash
@@ -77,7 +58,25 @@ python3 -m cati
 
 ##### NOTE: surely run pip install using `sudo`
 
-#### Installing via Compiling the source code (Not recommended)
+### Installing via Compiling the source code (Not recommended)
+
+before compile and install cati, install the cati dev-dependencies:
+
+- `python3 (>= 3.6)`
+- `pip3`
+- `virtualenv`
+- `make`
+
+to check them you can use the following commands:
+
+```bash
+python3 --version
+python3 -m pip --version
+virtualenv --version
+make --version
+```
+
+then:
 
 ```bash
 git clone https://github.com/catios/cati.git
@@ -112,7 +111,7 @@ If you want to remove it, use `make uninstall`:
 sudo make uninstall
 ```
 
-#### Running without compiling
+### Running without compiling
 You can run Cati with python interpreter:
 
 ```bash
