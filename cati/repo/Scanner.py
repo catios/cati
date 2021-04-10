@@ -37,10 +37,11 @@ def scan(directory: str):
     for item in os.listdir(directory):
         if os.path.isfile(directory + '/' + item):
             if item.split('.')[-1] in ['cati', 'deb', 'rpm']:
-                try:
-                    scan_once(directory + '/' + item)
-                except:
-                    pass
+                if not item.endswith('.cati.deb') and not item.endswith('.cati.rpm'):
+                    try:
+                        scan_once(directory + '/' + item)
+                    except:
+                        pass
         else:
             scan(directory + '/' + item)
 
