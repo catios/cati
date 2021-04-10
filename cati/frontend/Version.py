@@ -22,7 +22,7 @@
 
 """ This file keeps cati version """
 
-version = 'v0.1-alpha7'
+version = 'v0.1-alpha8'
 """
 str: cati version
 """
